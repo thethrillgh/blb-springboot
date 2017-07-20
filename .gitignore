@@ -10,6 +10,7 @@ local.properties
 .loadpath
 .recommenders
 .project
+.classpath
 
 # Locally stored "Eclipse launch configurations"
 *.launch
