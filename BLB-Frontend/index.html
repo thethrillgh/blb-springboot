@@ -1,0 +1,93 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body ng-app="blb" ng-controller="mainController" layout="column">
+        <md-toolbar class="bg-blue" layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <i class="material-icons md-36 menu" ng-click="openSidenav()">menu</i>
+                <p class="header">Putnam BLB</p>
+            </div>
+            <div class="searchbox" layout="row" layout-align="start center" flex>
+                
+            </div>
+            <md-menu id="nomargin">
+              <i ng-click="openMenu($mdMenu, $event)" class="material-icons md-36 me" md-menu-origin>account_circle</i>
+              <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button ng-click="redial($event)">
+                    <md-icon md-font-set="material-icons" class="md-24" md-menu-align-target>person_pin</md-icon>
+                    Personal Info
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="redial($event)">
+                    <md-icon md-font-set="material-icons" class="md-24" md-menu-align-target>account_balance</md-icon>
+                    Holdings
+                  </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                  <md-button ng-click="redial($event)">
+                    <md-icon md-font-set="material-icons" class="md-24" md-menu-align-target>payment</md-icon>
+                    Wallet
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+        </md-toolbar>
+        <div class="container" layout="row" flex>
+            <md-sidenav class="bg-white md-whiteframe-6dp" md-component-id="left">
+                <md-list>
+                    <md-list-item>
+                        <md-button class="fill">
+                            <md-icon md-svg-src="assets/avatar-1.svg" class="avatar"></md-icon>
+                            Derek McMaster
+                        </md-button>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-button>
+                            <md-icon md-svg-src="assets/avatar-4.svg" class="avatar"></md-icon>
+                            Danny Katz
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+            </md-sidenav>
+            <md-content class="bg-white" id="content" flex layout-padding>
+<!--
+                <md-icon md-svg-src="assets/avatar-1.svg" class="avatar"></md-icon>
+                <h2>Derek McMaster</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tempor ornare elit, a sollicitudin magna tempus nec. Ut nec venenatis tortor, non commodo libero. Nullam commodo viverra finibus. Nulla iaculis, velit non tempor feugiat, magna ex scelerisque odio, quis maximus justo dui vel lectus. Aenean rhoncus, nisl non tempus suscipit, velit libero pharetra elit, vitae convallis nibh erat quis ante. Praesent iaculis ac velit in fermentum. Fusce id ligula sodales, cursus purus id, elementum diam. Phasellus eu elit neque. Donec non tempor sem, non tincidunt metus. Vestibulum faucibus pharetra pretium. Sed gravida, est sed porta venenatis, lorem purus vehicula risus, at bibendum augue lacus in felis. Etiam convallis tellus eu turpis ultricies laoreet. Donec ultricies elit enim. Pellentesque ut lectus sit amet ante sagittis elementum eu ut lacus.
+
+In euismod mollis hendrerit. Morbi non sapien lobortis, laoreet dolor eu, tempor elit. Integer quis est sed ex posuere consequat eget eget nisi. Suspendisse metus arcu, placerat ut fermentum non, tempor ac justo. Cras eu magna ut tellus feugiat dignissim a et leo. Sed ligula tellus, venenatis a molestie at, iaculis vitae orci. Sed in rhoncus arcu. In ex orci, vulputate at consequat sit amet, luctus at magna. Phasellus ac congue massa.
+
+Mauris purus neque, consectetur non nunc id, posuere vestibulum nibh. Donec et leo in nunc tempus hendrerit. Integer accumsan a metus eu pellentesque. Maecenas pharetra diam fermentum, vehicula dolor ac, cursus lectus. Nam congue faucibus diam a lobortis. Fusce lacinia, elit nec tristique fringilla, justo justo blandit velit, et suscipit magna ipsum in leo. Aliquam consectetur molestie mi, a commodo sapien dictum in. Sed nec pulvinar sapien, a bibendum felis. Donec a eleifend eros.
+
+Vestibulum luctus a ipsum nec efficitur. Mauris nec ligula eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat enim eu lectus pellentesque, sed dapibus urna rhoncus. Maecenas sit amet quam rhoncus, fringilla diam sed, elementum sem. Nam sed magna tortor. Vivamus nec velit eu neque mollis convallis. Suspendisse viverra accumsan nisl et hendrerit. Suspendisse id placerat nunc. Praesent aliquet nisi lacus, ut sagittis nisl vestibulum in. Integer vitae augue cursus dui pharetra lobortis eget sed urna.
+
+Nam tempor aliquam odio non commodo. Aenean libero lorem, sodales facilisis rutrum non, laoreet non eros. Sed facilisis nec lacus a vehicula. Vivamus sit amet risus quis nibh aliquam elementum ac eu purus. Morbi pellentesque vestibulum nibh ut rhoncus. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec diam tellus, pellentesque sit amet tincidunt eu, rhoncus vitae libero. Vestibulum nec odio sit amet nisi consequat tincidunt ac sed erat. Donec sapien arcu, bibendum ut tempor sed, rutrum vitae ante. Fusce aliquam a odio at vulputate. Morbi sed sem aliquet, convallis risus nec, maximus neque.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tempor ornare elit, a sollicitudin magna tempus nec. Ut nec venenatis tortor, non commodo libero. Nullam commodo viverra finibus. Nulla iaculis, velit non tempor feugiat, magna ex scelerisque odio, quis maximus justo dui vel lectus. Aenean rhoncus, nisl non tempus suscipit, velit libero pharetra elit, vitae convallis nibh erat quis ante. Praesent iaculis ac velit in fermentum. Fusce id ligula sodales, cursus purus id, elementum diam. Phasellus eu elit neque. Donec non tempor sem, non tincidunt metus. Vestibulum faucibus pharetra pretium. Sed gravida, est sed porta venenatis, lorem purus vehicula risus, at bibendum augue lacus in felis. Etiam convallis tellus eu turpis ultricies laoreet. Donec ultricies elit enim. Pellentesque ut lectus sit amet ante sagittis elementum eu ut lacus.
+
+In euismod mollis hendrerit. Morbi non sapien lobortis, laoreet dolor eu, tempor elit. Integer quis est sed ex posuere consequat eget eget nisi. Suspendisse metus arcu, placerat ut fermentum non, tempor ac justo. Cras eu magna ut tellus feugiat dignissim a et leo. Sed ligula tellus, venenatis a molestie at, iaculis vitae orci. Sed in rhoncus arcu. In ex orci, vulputate at consequat sit amet, luctus at magna. Phasellus ac congue massa.
+
+Mauris purus neque, consectetur non nunc id, posuere vestibulum nibh. Donec et leo in nunc tempus hendrerit. Integer accumsan a metus eu pellentesque. Maecenas pharetra diam fermentum, vehicula dolor ac, cursus lectus. Nam congue faucibus diam a lobortis. Fusce lacinia, elit nec tristique fringilla, justo justo blandit velit, et suscipit magna ipsum in leo. Aliquam consectetur molestie mi, a commodo sapien dictum in. Sed nec pulvinar sapien, a bibendum felis. Donec a eleifend eros.
+
+Vestibulum luctus a ipsum nec efficitur. Mauris nec ligula eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat enim eu lectus pellentesque, sed dapibus urna rhoncus. Maecenas sit amet quam rhoncus, fringilla diam sed, elementum sem. Nam sed magna tortor. Vivamus nec velit eu neque mollis convallis. Suspendisse viverra accumsan nisl et hendrerit. Suspendisse id placerat nunc. Praesent aliquet nisi lacus, ut sagittis nisl vestibulum in. Integer vitae augue cursus dui pharetra lobortis eget sed urna.
+
+Nam tempor aliquam odio non commodo. Aenean libero lorem, sodales facilisis rutrum non, laoreet non eros. Sed facilisis nec lacus a vehicula. Vivamus sit amet risus quis nibh aliquam elementum ac eu purus. Morbi pellentesque vestibulum nibh ut rhoncus. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec diam tellus, pellentesque sit amet tincidunt eu, rhoncus vitae libero. Vestibulum nec odio sit amet nisi consequat tincidunt ac sed erat. Donec sapien arcu, bibendum ut tempor sed, rutrum vitae ante. Fusce aliquam a odio at vulputate. Morbi sed sem aliquet, convallis risus nec, maximus neque.</p>
+-->
+            </md-content>
+        </div>
+        
+        
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-animate/angular-animate.js"></script>
+        <script src="node_modules/angular-aria/angular-aria.js"></script>
+        <script src="node_modules/angular-material/angular-material.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
