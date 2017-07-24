@@ -1,56 +1,13 @@
-body{
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+body, html {
+    height: 100%;
 }
 
-.bg-blue{
-    background-color: #2980B9;
-}
-
-.bg-white{
-    background-color: #ECF0F1
-}
-
-.avatar{
-    position: relative;
-    width: 128px;
-    height: 128px;
-    border: 1px soldi #ddd;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    margin: 0px;
-    vertical-align: middle;
-    zoom: 0.70;
-    transform: translateZ(0);
-    -webkit-transform: scale(0.70);
-    -moz-transform: scale(0.70);
-}
-
-.avatar1{
-    position: relative;
-    width: 108px;
-    height: 108px;
-    border: 1px soldi #ddd;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    margin: 0px;
-    vertical-align: middle;
-    zoom: 0.70;
-    transform: translateZ(0);
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.70);
-}
-
-.header{
-    font-size: 26px;
-    padding-left: 20px;
-    font-weight: 500;
-}
-
-#nomargin{
-    margin: 0;
+.bg{ 
+    background-image: url("assets/bg2.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .md-18 { font-size: 18px; }
@@ -58,34 +15,37 @@ body{
 .md-36 { font-size: 36px; }
 .md-48 { font-size: 48px; }
 
-.me{
-    padding-right: 10px;
-    cursor: pointer;
+.toolbar{
+    height: 48px;
 }
 
-md-toolbar{
-    height: 48px;
-    background-color: red;
+.logo{
+    padding-left: 10px;
+}
+
+.landing_text{
+    font-size: 44px;
+    letter-spacing: -1px;
+    font-weight: 100;
+    margin: 0;
+    margin-top: 80px;
+}
+
+.landing_text2{
+    font-size: 17px;
+    letter-spacing: .06vmax;
+    font-weight: 100;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.startButton{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
 }
 
 .menu{
-    padding-left: 10px;
-    cursor: pointer;
-}
-
-.searchbox{
-    height: 40px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    background-color: white;
-    max-width: 420px;
-    margin-right: 10px;
-    margin-left: 10px;
-    
-}
-
-.searchitem{
-    margin-top: 10px;
+   cursor: pointer;
+   margin-right: 10px;
 }
