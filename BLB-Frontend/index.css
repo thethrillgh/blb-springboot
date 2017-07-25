@@ -93,3 +93,9 @@ body, html {
     padding-left: 35px;
     padding-right: 35px;
 }
+
+.logo_img{
+    height: 40px;
+    object-fit: contain;
+    width: 200px;
+}

@@ -28,7 +28,9 @@ var mainController = function($scope, $mdDialog, $mdMenu, $mdSidenav){
 };
 
 var loginController = function($scope, $state){
-    
+    $scope.loginForm = function(){
+        
+    }
 }
 
 var signUpController = function($scope, $state){

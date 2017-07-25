@@ -5,7 +5,7 @@
 <div layout="column" layout-align="center center">
     <p class="login_header grey">Login</p>
     <p class="sub_header">New to BLB? <span class="sign_up" ui-sref="signup">Sign Up</span></p>
-    <form name="loginForm" layout="column">
+    <form name="loginForm" layout="column" ng-submit="loginForm()">
         <md-input-container class="md-accent login_input">
             <label class="login_label">Email</label>
             <input ng-model="email" required type="email" md-select-on-focus>
