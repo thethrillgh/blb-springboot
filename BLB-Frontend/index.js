@@ -28,8 +28,10 @@ var mainController = function($scope, $mdDialog, $mdMenu, $mdSidenav){
 };
 
 var loginController = function($scope, $state){
-    $scope.loginForm = function(){
-        
+    $scope.login = function(form){
+        if(form){
+            $state.go('dashboard')
+        }
     }
 }
 
@@ -38,7 +40,9 @@ var signUpController = function($scope, $state){
 }
 
 var dashboardController = function($scope, $state){
-    
+    $scope.reload = function(){
+        $state.reload();
+    }
 }
 
  var routingConfig = function($stateProvider, $urlRouterProvider){

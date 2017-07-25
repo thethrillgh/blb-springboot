@@ -1,0 +1,34 @@
+.profile_icon{
+    color: #2196F3;   
+}
+
+.profile_icon:hover, .dashboard_action:hover{
+    color: black;
+}
+
+.dashboard_action{
+    font-size: 250px;
+    margin: 0;
+}
+
+.da1{
+    color: #2196F3;
+}
+
+.da2{
+    color: #F57F17
+}
+
+.dashboard_action_container{
+    margin-top: 100px;
+}
+
+.dashboard_action_text{
+    text-align: center;
+    font-size: 40px;
+    margin: 0;
+}
+
+.dac{
+    margin-right: 110px;
+}

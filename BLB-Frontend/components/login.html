@@ -1,11 +1,11 @@
 <md-toolbar layout layout-align="space-between center" class="toolbar md-primary md-hue-1">
-    <p class="logo" ui-sref="landing">Putnam BLB</p>
+    <img ui-sref="landing" class="logo_img" src="../assets/logos.png">
     <i class="material-icons md-36 menu" ui-sref="landing">close</i>
 </md-toolbar>
 <div layout="column" layout-align="center center">
     <p class="login_header grey">Login</p>
     <p class="sub_header">New to BLB? <span class="sign_up" ui-sref="signup">Sign Up</span></p>
-    <form name="loginForm" layout="column" ng-submit="loginForm()">
+    <form name="loginForm" layout="column" ng-submit="login(loginForm.$valid)">
         <md-input-container class="md-accent login_input">
             <label class="login_label">Email</label>
             <input ng-model="email" required type="email" md-select-on-focus>
@@ -16,7 +16,7 @@
         </md-input-container>
         <md-input-container class="md-accent login_input">
             <label class="login_label">Password</label>
-            <input ng-model="password" required type="password">
+            <input ng-model="password" minlength="7" required type="password">
         </md-input-container>
         <md-button class="md-accent md-raised portal_button" type="submit">Log In</md-button>
     </form>

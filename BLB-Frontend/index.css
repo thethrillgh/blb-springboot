@@ -97,5 +97,7 @@ body, html {
 .logo_img{
     height: 40px;
     object-fit: contain;
-    width: 200px;
+    width: 88px;
+    cursor: pointer;
+    margin-left: 18px;
 }
