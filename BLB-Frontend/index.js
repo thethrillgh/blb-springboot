@@ -30,7 +30,12 @@ var mainController = function($scope, $mdDialog, $mdMenu, $mdSidenav){
 var loginController = function($scope, $state){
     
 }
+
 var signUpController = function($scope, $state){
+    
+}
+
+var dashboardController = function($scope, $state){
     
 }
 
@@ -51,6 +56,11 @@ var signUpController = function($scope, $state){
                 templateUrl: 'components/signup.html',
                 controller: "signUpController",
             })
+            .state('dashboard', {
+                url: '/dashboard',
+                templateUrl: 'components/dashboard.html',
+                controller: 'dashboardController'
+            })
         $urlRouterProvider.otherwise('/landing');
     }
 
@@ -59,6 +69,7 @@ angular.module('blb')
     .controller('mainController', mainController)
     .controller('loginController', loginController)
     .controller('signUpController', signUpController)
+    .controller('dashboardController', dashboardController)
     .config(function($mdThemingProvider){
         
         $mdThemingProvider.theme('default')
