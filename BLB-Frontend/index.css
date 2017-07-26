@@ -20,7 +20,8 @@ body, html {
 }
 
 .logo{
-    padding-left: 10px;
+    padding-left: 20px;
+    cursor: pointer;
 }
 
 .landing_text{
@@ -47,5 +48,56 @@ body, html {
 
 .menu{
    cursor: pointer;
-   margin-right: 10px;
+   margin-right: 20px;
+}
+
+.menu_sign_in{
+    margin-right: 20px;
+}
+
+.grey{
+    color: #20303c;
+}
+
+.login_header{
+    font-size: 56px;
+    margin: 0;
+    margin-bottom: 17px;
+    margin-top: 20px;
+}
+
+.login_input{
+    width: 300px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.login_label{
+    font-size: 20px;
+    color: #162d3d !important;
+    letter-spacing: 2px;
+}
+
+.sub_header{
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 22px;
+}
+
+.sign_up{
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.portal_button{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.logo_img{
+    height: 40px;
+    object-fit: contain;
+    width: 88px;
+    cursor: pointer;
+    margin-left: 18px;
 }
