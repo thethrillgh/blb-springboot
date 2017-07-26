@@ -48,7 +48,7 @@ var dashboardController = function($scope, $state){
  var routingConfig = function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('landing', {
-                url: '/landing',
+                url: '/',
                 templateUrl: 'components/landing.html',
                 controller: "mainController"
             })
@@ -67,7 +67,12 @@ var dashboardController = function($scope, $state){
                 templateUrl: 'components/dashboard.html',
                 controller: 'dashboardController'
             })
-        $urlRouterProvider.otherwise('/landing');
+            .state('profile', {
+                url: '/profile',
+                templateUrl: 'components/profile.html',
+                controller: 'profileController'
+            })
+        $urlRouterProvider.otherwise('/');
     }
 
 
@@ -86,5 +91,8 @@ angular.module('blb')
             .accentPalette('blue')
             .warnPalette('red')
     })
-    .config(routingConfig);
+    .config(routingConfig)
+    .config(["$locationProvider", function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    }]);
     
