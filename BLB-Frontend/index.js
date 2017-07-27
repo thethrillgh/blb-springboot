@@ -5,26 +5,7 @@ var apiService = function(){
 };
 
 var mainController = function($scope, $mdDialog, $mdMenu, $mdSidenav){
-    var originatorEv;
-    $scope.openMenu = function($mdMenu, ev) {
-      originatorEv = ev;
-      $mdMenu.open(ev);
-    };
-    $scope.redial = function(){
-      $mdDialog.show(
-        $mdDialog.alert()
-          .targetEvent(originatorEv)
-          .clickOutsideToClose(true)
-          .parent('body')
-          .title('Suddenly, a redial')
-          .textContent('You are broke, re-evaluate your life!, No seriously, go ahead and check')
-          .ok('Close')
-      );
-    };
-    originatorEv = null;
-    $scope.openSidenav = function(){
-        $mdSidenav('left').toggle();
-    }
+    
 };
 
 var loginController = function($scope, $state){
@@ -42,6 +23,18 @@ var signUpController = function($scope, $state){
 var dashboardController = function($scope, $state){
     $scope.reload = function(){
         $state.reload();
+    }
+}
+
+var profileController = function($scope, $state){
+    $scope.currentNavItem = $state.current.name.split('.')[1];
+    $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
+    'WY').split(' ').map(function(state) {
+        return {abbrev: state};
+      });
+    $scope.logout = function(){
+        $state.go('landing');
     }
 }
 
@@ -72,6 +65,26 @@ var dashboardController = function($scope, $state){
                 templateUrl: 'components/profile.html',
                 controller: 'profileController'
             })
+            .state('profile.account', {
+                url: '/account',
+                templateUrl: 'components/account/account.html',
+                controller: 'profileController'
+            })
+            .state('profile.address', {
+                url: '/address',
+                templateUrl: 'components/account/address.html',
+                controller: 'profileController'
+            })
+            .state('profile.password', {
+                url: '/password',
+                templateUrl: 'components/account/password.html',
+                controller: 'profileController'
+            })
+            .state('profile.wallet', {
+                url: '/wallet',
+                templateUrl: 'components/account/wallet.html',
+                controller: 'profileController'
+            })
         $urlRouterProvider.otherwise('/');
     }
 
@@ -81,6 +94,7 @@ angular.module('blb')
     .controller('loginController', loginController)
     .controller('signUpController', signUpController)
     .controller('dashboardController', dashboardController)
+    .controller('profileController', profileController)
     .config(function($mdThemingProvider){
         
         $mdThemingProvider.theme('default')
@@ -91,8 +105,5 @@ angular.module('blb')
             .accentPalette('blue')
             .warnPalette('red')
     })
-    .config(routingConfig)
-    .config(["$locationProvider", function($locationProvider) {
-        $locationProvider.html5Mode(true);
-    }]);
+    .config(routingConfig);
     

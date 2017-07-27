@@ -95,9 +95,13 @@ body, html {
 }
 
 .logo_img{
-    height: 40px;
+    height: 35px;
     object-fit: contain;
-    width: 88px;
+    width: 35;
     cursor: pointer;
     margin-left: 18px;
+}
+
+md-toolbar{
+    min-height: 50px !important;
 }
