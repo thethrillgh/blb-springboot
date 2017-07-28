@@ -1,10 +1,15 @@
 angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages']);
 
-var apiService = function(){
-    return [];
+var apiService = function($http){
+    var userData = function(){
+    return $http.get("data.json")
+    }
+    return {
+        userData: userData
+    };
 };
 
-var mainController = function($scope, $mdDialog, $mdMenu, $mdSidenav){
+var mainController = function($scope, $state){
     
 };
 
@@ -26,7 +31,7 @@ var dashboardController = function($scope, $state){
     }
 }
 
-var profileController = function($scope, $state){
+var profileController = function($scope, $state, apiService){
     $scope.currentNavItem = $state.current.name.split('.')[1];
     $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
@@ -35,7 +40,11 @@ var profileController = function($scope, $state){
       });
     $scope.logout = function(){
         $state.go('landing');
-    }
+    };
+    apiService.userData().then(function(data){
+        console.log(data.data)
+    })
+    
 }
 
  var routingConfig = function($stateProvider, $urlRouterProvider){
@@ -95,6 +104,7 @@ angular.module('blb')
     .controller('signUpController', signUpController)
     .controller('dashboardController', dashboardController)
     .controller('profileController', profileController)
+    .service('apiService', apiService)
     .config(function($mdThemingProvider){
         
         $mdThemingProvider.theme('default')
