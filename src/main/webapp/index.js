@@ -14,7 +14,7 @@ var apiService = function($http){
 };
 
 var mainController = function($scope, $state){
-
+    
 };
 
 var loginController = function($scope, $state){
@@ -26,7 +26,7 @@ var loginController = function($scope, $state){
 }
 
 var signUpController = function($scope, $state){
-
+    
 }
 
 var dashboardController = function($scope, $state){
@@ -48,7 +48,7 @@ var profileController = function($scope, $state, apiService){
     apiService.accounts().then(function(data){
         console.log(data.data)
     })
-
+    
 }
 
  var routingConfig = function($stateProvider, $urlRouterProvider){
@@ -110,13 +110,16 @@ angular.module('blb')
     .controller('profileController', profileController)
     .service('apiService', apiService)
     .config(function($mdThemingProvider){
-
+        
         $mdThemingProvider.theme('default')
             .primaryPalette('grey', {
                 'hue-1': '50',
                 'hue-2': '900'
             })
-            .accentPalette('blue')
+            .accentPalette('blue', {
+                'hue-1': '900'
+            })
             .warnPalette('red')
     })
     .config(routingConfig);
+    

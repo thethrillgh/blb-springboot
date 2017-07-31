@@ -11,3 +11,26 @@
     margin-right: 3px;
     cursor: pointer;
 }
+
+.dashboard_padding{
+    background-color: #e9edf2;
+}
+
+.header{
+    color: #0D47A1;
+    margin: 0;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.qheader{
+    color: #868686;
+    font-size: 14px;
+    margin: 0;
+    margin: 10px 0 0 0;
+}
+
+.padding{
+    margin: 0 0 0 20px;
+}

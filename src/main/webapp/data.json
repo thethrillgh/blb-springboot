@@ -1,0 +1,37 @@
+{
+   "fname": "Dirk",
+   "lname": "McMaster",
+   "address": {
+      "street": "10 Paris St",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02128"
+   },
+   "phone_number": "6178349190",
+   "email": "dmcmaster@putnam.com",
+   "ssn": "1234567890",
+   "wallet": {
+      "balance": "20,000",
+      "bank_account": {
+         "routing_number": "012012020120",
+         "account_number": "1021212",
+         "type": 0
+      }
+   },
+   "portfolio": {
+      "bonds": [
+         {
+            "type": "0",
+            "cusip": "121212",
+            "date": "asasasas",
+            "quantity": 10
+         },
+         {
+            "type": "1",
+            "cusip": "121212",
+            "date": "asasas",
+            "quantity": 20
+         }
+      ]
+   }
+}

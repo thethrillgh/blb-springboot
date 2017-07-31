@@ -1,0 +1,31 @@
+<md-toolbar layout layout-align="space-between center" class="toolbar md-primary md-hue-1">
+    <img ui-sref="landing" class="logo_img" src="assets/logos.png">
+    <i class="material-icons md-36 menu" ui-sref="landing">close</i>
+</md-toolbar>
+<div layout="column" layout-align="center center">
+    <p class="login_header grey">Sign Up</p>
+    <p class="sub_header">Already have a BLB account? <span class="sign_up" ui-sref="login">Log In</span></p>
+    <form name="signupForm" layout="column">
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Username</label>
+            <input ng-model="username" required type="text" md-select-on-focus>
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Email</label>
+            <input ng-model="email" required type="email">
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">SSN</label>
+            <input ng-model="ssn" required type="password" size="4">
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Password</label>
+            <input ng-model="password" minlength="7" required type="password">
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Confirm Password</label>
+            <input ng-model="password_confirm" ng-pattern="{{password}}" required type="password">
+        </md-input-container>
+        <md-button class="md-accent md-raised portal_button" type="submit">Sign Up</md-button>
+    </form>
+</div>

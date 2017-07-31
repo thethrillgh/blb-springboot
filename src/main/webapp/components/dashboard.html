@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="components/dashboard.css">
 <md-toolbar layout layout-align="space-between center" class="md-primary md-hue-1" id="toolbar">
-    <img ng-click="reload()" class="logo_img" src="assets/logos.png">
+    <img ui-sref="dashboard" class="logo_img" src="assets/logos.png">
     <div layout="row" layout-align="center center">
         <div layout="row" layout-align="center center">
             <p class="username">Statements</p>
@@ -33,6 +33,30 @@
         </div>
     </div>
 </md-toolbar>
-<div layout="column" layout-padding>
-    <p>Welcome</p>
+<div layout="column" class="dashboard_padding" flex>
+    <h3 class="header">Welcome Back!</h3>
+    <div layout="row" layout-align="space-between start">
+        <div layout="column" class="padding">
+            <p class="qheader">Quick Links:</p>
+            <p>Account Statements</p>
+            <p>My profile</p>
+            <p>Help</p>
+            <p>About BLB</p>
+        </div>
+        <div layout="row">
+            <div layout="column">
+                <p>Account Balance</p>
+                <p>$5400.00 USD</p>
+                <p>Add Funds</p>
+            </div>
+            <div layout="column">
+                <p>Top Performing Bond Today</p>
+                <div layout="row">
+                    <p>US T 5/8 10yr</p>
+                    <p>5.76 +0.9 (4%)</p>
+                    <i class="material-icons md-36 menu profile_icon">info</i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
