@@ -13,23 +13,17 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-    client:
-        enabled: true
-    instance:
-        appname: blb
-        instanceId: blb:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: blb
+        name: buylocalbonds
     jackson:
         serialization.write_dates_as_timestamps: false
     cache:
         type: none
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:blb;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:buylocalbonds;DB_CLOSE_DELAY=-1
         name:
         username:
         password:
@@ -92,11 +86,9 @@ jhipster:
         from: test@localhost
         base-url: http://127.0.0.1:8080
     security:
-        authentication:
-            jwt:
-                secret: dc0a4bc32786aa3998bf272bf06b9fcfd9415b33
-                # Token is valid 24 hours
-                token-validity-in-seconds: 86400
+        remember-me:
+            # security key (this key should be unique for your application, and kept secret)
+            key: 105af2844e9e3ec845e2803e1dc2e45322116aa8
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         logs: # Reports Dropwizard metrics in the logs

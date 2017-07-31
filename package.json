@@ -1,7 +1,7 @@
 {
-  "name": "blb",
+  "name": "buylocalbonds",
   "version": "0.0.0",
-  "description": "Description for blb",
+  "description": "Description for buylocalbonds",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

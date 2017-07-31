@@ -1,31 +1,33 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.putnam.blb"
+      "packageName": "com.putnam"
     },
     "jhipsterVersion": "4.6.2",
-    "baseName": "blb",
-    "packageName": "com.putnam.blb",
-    "packageFolder": "com/putnam/blb",
+    "baseName": "buylocalbonds",
+    "packageName": "com.putnam",
+    "packageFolder": "com/putnam",
     "serverPort": "8080",
-    "authenticationType": "jwt",
-    "hibernateCache": "no",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
     "clusteredHttpSession": false,
     "websocket": false,
     "databaseType": "sql",
-    "devDatabaseType": "mysql",
-    "prodDatabaseType": "mysql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
     "searchEngine": false,
     "messageBroker": false,
-    "serviceDiscoveryType": "eureka",
+    "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSocialSignIn": false,
-    "jwtSecretKey": "dc0a4bc32786aa3998bf272bf06b9fcfd9415b33",
+    "rememberMeKey": "105af2844e9e3ec845e2803e1dc2e45322116aa8",
     "clientFramework": "angular1",
     "useSass": false,
     "clientPackageManager": "yarn",
     "applicationType": "monolith",
-    "testFrameworks": [],
+    "testFrameworks": [
+      "cucumber"
+    ],
     "jhiPrefix": "jhi",
     "enableTranslation": false
   }

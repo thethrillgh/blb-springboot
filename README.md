@@ -1,4 +1,4 @@
-# blb
+# buylocalbonds
 This application was generated using JHipster 4.6.2, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.6.2](https://jhipster.github.io/documentation-archive/v4.6.2).
 
 ## Development
@@ -34,7 +34,7 @@ For further instructions on how to develop with JHipster, have a look at [Using 
 
 ## Building for production
 
-To optimize the blb application for production, run:
+To optimize the buylocalbonds application for production, run:
 
     ./mvnw -Pprod clean package
 
@@ -66,13 +66,13 @@ For more information, refer to the [Running tests page][].
 ## Using Docker to simplify development (optional)
 
 You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-For example, to start a mysql database in a docker container, run:
+For example, to start a postgresql database in a docker container, run:
 
-    docker-compose -f src/main/docker/mysql.yml up -d
+    docker-compose -f src/main/docker/postgresql.yml up -d
 
 To stop it and remove the container, run:
 
-    docker-compose -f src/main/docker/mysql.yml down
+    docker-compose -f src/main/docker/postgresql.yml down
 
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
@@ -93,7 +93,6 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [JHipster 4.6.2 archive]: https://jhipster.github.io/documentation-archive/v4.6.2
 
 [Using JHipster in development]: https://jhipster.github.io/documentation-archive/v4.6.2/development/
-[Service Discovery and Configuration with the JHipster-Registry]: https://jhipster.github.io/documentation-archive/v4.6.2/microservices-architecture/#jhipster-registry
 [Using Docker and Docker-Compose]: https://jhipster.github.io/documentation-archive/v4.6.2/docker-compose
 [Using JHipster in production]: https://jhipster.github.io/documentation-archive/v4.6.2/production/
 [Running tests page]: https://jhipster.github.io/documentation-archive/v4.6.2/running-tests/
