@@ -2,10 +2,14 @@ angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages']);
 
 var apiService = function($http){
     var userData = function(){
-    return $http.get("data.json")
+        return $http.get("data.json")
+    }
+    var accounts = function(){
+        return $http.get("/api/users")
     }
     return {
-        userData: userData
+        userData: userData,
+        accounts: accounts
     };
 };
 
@@ -41,7 +45,7 @@ var profileController = function($scope, $state, apiService){
     $scope.logout = function(){
         $state.go('landing');
     };
-    apiService.userData().then(function(data){
+    apiService.accounts().then(function(data){
         console.log(data.data)
     })
     
