@@ -1,0 +1,107 @@
+body, html {
+    height: 100%;
+}
+
+.bg{ 
+    background-image: url("assets/bg2.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.md-18 { font-size: 18px; }
+.md-24 { font-size: 24px; }
+.md-36 { font-size: 36px; }
+.md-48 { font-size: 48px; }
+
+.toolbar{
+    height: 48px;
+}
+
+.logo{
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.landing_text{
+    font-size: 44px;
+    letter-spacing: -1px;
+    font-weight: 100;
+    margin: 0;
+    margin-top: 80px;
+}
+
+.landing_text2{
+    font-size: 17px;
+    letter-spacing: .06vmax;
+    font-weight: 100;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.startButton{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+}
+
+.menu{
+   cursor: pointer;
+   margin-right: 20px;
+}
+
+.menu_sign_in{
+    margin-right: 20px;
+}
+
+.grey{
+    color: #20303c;
+}
+
+.login_header{
+    font-size: 56px;
+    margin: 0;
+    margin-bottom: 17px;
+    margin-top: 20px;
+}
+
+.login_input{
+    width: 300px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.login_label{
+    font-size: 20px;
+    color: #162d3d !important;
+    letter-spacing: 2px;
+}
+
+.sub_header{
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 22px;
+}
+
+.sign_up{
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.portal_button{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.logo_img{
+    height: 28px;
+    object-fit: contain;
+    width: 35;
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+md-toolbar{
+    min-height: 50px !important;
+}
