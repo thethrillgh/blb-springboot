@@ -28,9 +28,51 @@
     color: #868686;
     font-size: 14px;
     margin: 0;
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .padding{
     margin: 0 0 0 20px;
+}
+
+.links{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.link0{
+    margin-top: 5px;
+}
+
+.boxHeight{
+    height: 115px;
+}
+
+.box1, .box2{
+    background-color: white;
+}
+
+.box1{
+    width: 200px;
+    margin-right: 20px;
+}
+
+.box2{
+    width: 400px;
+    margin-right: 20px;
+}
+
+.box1 > p, .box2 > p, .marginO{
+    margin: 0;
+}
+
+.boxHeader{
+    color: #0D47A1;
+    margin: 0;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
