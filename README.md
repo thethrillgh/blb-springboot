@@ -16,7 +16,7 @@ For a version list of technologies used refer to the pom.xml file in the git rep
 
 ####################################################
 
-To set up the prject on a new device:
+To set up the project on a new device:
 
   1. Download jhipster and dependencies required for jhipster to run (node.js, gulp, yeoman, yarn, maven, etc.)
     - refer to << https://jhipster.github.io/ >> for complete dependency list
