@@ -109,3 +109,12 @@
     color: gray;
     cursor: pointer;
 }
+
+.tableHeader{
+    color: #0D47A1; 
+}
+
+.table{
+    margin-left: 15px;
+    margin-right: 15px;
+}

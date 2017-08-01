@@ -1,14 +1,14 @@
-angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages']);
+angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table']);
 
 var apiService = function($http){
-    var userData = function(){
-        return $http.get("data.json")
+    var getBonds = function(){
+        return $http.get("bond.json")
     }
     var accounts = function(){
         return $http.get("/api/users")
     }
     return {
-        userData: userData,
+        getBonds: getBonds,
         accounts: accounts
     };
 };
@@ -29,14 +29,94 @@ var signUpController = function($scope, $state){
     
 }
 
-var bondController = function($scope, $state){
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds){
+  $scope.bonds = bonds.data;
+  $scope.selected = [];
+  $scope.limitOptions = [3, 5, 10, 15];
+  
+  $scope.options = {
+    rowSelection: false,
+    multiSelect: false,
+    autoSelect: true,
+    decapitate: false,
+    largeEditDialog: false,
+    boundaryLinks: false,
+    limitSelect: true,
+    pageSelect: true
+  };
+  
+  $scope.query = {
+    order: 'cusip',
+    limit: 5,
+    page: 1
+  };
+  
+  $scope.editComment = function (event, dessert) {
+    event.stopPropagation(); // in case autoselect is enabled
     
-}
-
-var dashboardController = function($scope, $state){
-    $scope.reload = function(){
-        $state.reload();
+    var editDialog = {
+      modelValue: dessert.comment,
+      placeholder: 'Add a comment',
+      save: function (input) {
+        if(input.$modelValue === 'Donald Trump') {
+          input.$invalid = true;
+          return $q.reject();
+        }
+        if(input.$modelValue === 'Bernie Sanders') {
+          return dessert.comment = 'FEEL THE BERN!'
+        }
+        dessert.comment = input.$modelValue;
+      },
+      targetEvent: event,
+      title: 'Add a comment',
+      validators: {
+        'md-maxlength': 30
+      }
+    };
+    
+    var promise;
+    
+    if($scope.options.largeEditDialog) {
+      promise = $mdEditDialog.large(editDialog);
+    } else {
+      promise = $mdEditDialog.small(editDialog);
     }
+    
+    promise.then(function (ctrl) {
+      var input = ctrl.getInput();
+      
+      input.$viewChangeListeners.push(function () {
+        input.$setValidity('test', input.$modelValue !== 'test');
+      });
+    });
+  };
+  
+  $scope.toggleLimitOptions = function () {
+    $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
+  };
+  
+  $scope.getTypes = function () {
+    return ['Candy', 'Ice cream', 'Other', 'Pastry'];
+  };
+  
+  $scope.loadStuff = function () {
+    $scope.promise = $timeout(function () {
+      // loading
+    }, 2000);
+  }
+  
+  $scope.logItem = function (item) {
+    console.log(item.name, 'was selected');
+  };
+  
+  $scope.logOrder = function (order) {
+    console.log('order: ', order);
+  };
+  
+  $scope.logPagination = function (page, limit) {
+    console.log('page: ', page);
+    console.log('limit: ', limit);
+  }
 }
 
 var profileController = function($scope, $state, apiService){
@@ -75,12 +155,12 @@ var profileController = function($scope, $state, apiService){
             .state('dashboard', {
                 url: '/dashboard',
                 templateUrl: 'components/dashboard.html',
-                controller: 'dashboardController'
-            })
-            .state('bond', {
-                url: '/bond',
-                templateUrl: 'components/bond.html',
-                controller: 'bondController'
+                controller: 'dashboardController',
+                resolve: {
+                    bonds: function(apiService){
+                        return apiService.getBonds();
+                    }
+                }
             })
             .state('profile', {
                 url: '/profile',
@@ -117,7 +197,6 @@ angular.module('blb')
     .controller('signUpController', signUpController)
     .controller('dashboardController', dashboardController)
     .controller('profileController', profileController)
-    .controller('bondController', bondController)
     .service('apiService', apiService)
     .config(function($mdThemingProvider){
         
