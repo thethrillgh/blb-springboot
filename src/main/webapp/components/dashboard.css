@@ -28,9 +28,84 @@
     color: #868686;
     font-size: 14px;
     margin: 0;
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .padding{
     margin: 0 0 0 20px;
+}
+
+.links{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.link0{
+    margin-top: 5px;
+}
+
+.boxHeight{
+    height: 115px;
+}
+
+.box1, .box2{
+    background-color: white;
+}
+
+.box1{
+    width: 200px;
+    margin-right: 40px;
+}
+
+.box2{
+    width: 400px;
+    margin-right: 20px;
+}
+
+.box1 > p, .box2 > p, .marginO{
+    margin: 0;
+}
+
+.boxHeader{
+    color: #0D47A1;
+    margin: 0;
+    font-size: 20px;
+    margin: 15px 0 15px 10px !important;
+    letter-spacing: -1px;
+}
+
+.value{
+    font-weight: 900;
+    font-size: 18px;
+    margin: 0 0 6px 10px !important;
+    letter-spacing: 1.5px;
+}
+
+.add_funds{
+    font-size: 14px;
+    margin-left: 10px !important;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.add_funds:hover, .infoh:hover{
+    color: black;
+}
+
+.value1{
+    margin: 0 15px 0 15px !important;
+    font-size: 20px;
+    color: green;
+}
+
+.value2{
+    font-size: 15px !important;
+}
+
+.info{
+    color: gray;
+    cursor: pointer;
 }
