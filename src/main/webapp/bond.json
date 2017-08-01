@@ -1,0 +1,629 @@
+{
+  "Columns": [
+     {
+        "moodyRating": {
+           "ratingText": "NR",
+           "ratingNumber": 24
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C66586",
+        "issueIdentifier": "TVC.CY",
+        "descriptionOfIssuer": "TENNESSEE VALLEY AUTH",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.15,
+        "maturityDate": "01/15/2038",
+        "price": 142.8408,
+        "yield": 3.26699,
+        "tradeDate": "07/12/2017",
+        "symbol": "TVC.CY",
+        "cusip": "880591CP5",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "NR",
+           "ratingNumber": 24
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C65649",
+        "issueIdentifier": "TVC.CG",
+        "descriptionOfIssuer": "TENNESSEE VALLEY AUTH",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.25,
+        "maturityDate": "12/15/2017",
+        "price": 101.807,
+        "yield": 1.35994,
+        "tradeDate": "07/31/2017",
+        "symbol": "TVC.CG",
+        "cusip": "880591CU4",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aa2",
+           "ratingNumber": 3
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA-",
+           "ratingNumber": 4
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C374901",
+        "issueIdentifier": "FMCC3669516",
+        "descriptionOfIssuer": "FEDERAL HOME LN MTG CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 5,
+        "maturityDate": "12/14/2018",
+        "price": 104.976,
+        "yield": null,
+        "tradeDate": "07/20/2017",
+        "symbol": "FMCC3669516",
+        "cusip": "3134A4ZZ0",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Zero",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C99667",
+        "issueIdentifier": "FMCC3678725",
+        "descriptionOfIssuer": "FEDERAL HOME LN MTG CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 0,
+        "maturityDate": "08/15/2027",
+        "price": 77,
+        "yield": null,
+        "tradeDate": "06/21/2017",
+        "symbol": "FMCC3678725",
+        "cusip": "3134A3D29",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C98951",
+        "issueIdentifier": "FHLN.CS",
+        "descriptionOfIssuer": "FEDERAL HOME LN BKS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 7,
+        "maturityDate": "08/26/2019",
+        "price": 111.645,
+        "yield": 1.53422,
+        "tradeDate": "06/22/2017",
+        "symbol": "FHLN.CS",
+        "cusip": "3133M9TG7",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "1",
+        "debtOrAssetClass": "Treasury",
+        "securityId": "C98691",
+        "issueIdentifier": "",
+        "descriptionOfIssuer": "UNITED STATES TREAS BDS",
+        "subproductType": "",
+        "couponRate": 6.125,
+        "maturityDate": "08/15/2029",
+        "price": null,
+        "yield": null,
+        "tradeDate": "",
+        "symbol": "",
+        "cusip": "912810FJ2",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Zero",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C98136",
+        "issueIdentifier": "FMCC3678721",
+        "descriptionOfIssuer": "FEDERAL HOME LN MTG CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 0,
+        "maturityDate": "12/14/2029",
+        "price": 69.161,
+        "yield": null,
+        "tradeDate": "06/20/2017",
+        "symbol": "FMCC3678721",
+        "cusip": "3134A3ZU3",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9605",
+        "issueIdentifier": "FNCC.RY",
+        "descriptionOfIssuer": "FINANCING CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 8.6,
+        "maturityDate": "09/26/2019",
+        "price": 115.488,
+        "yield": 1.54225,
+        "tradeDate": "06/26/2017",
+        "symbol": "FNCC.RY",
+        "cusip": "317705AP6",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9604",
+        "issueIdentifier": "FNCC.MH",
+        "descriptionOfIssuer": "FINANCING CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 9.6,
+        "maturityDate": "12/27/2018",
+        "price": null,
+        "yield": null,
+        "tradeDate": "",
+        "symbol": "FNCC.MH",
+        "cusip": "317705AK7",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9603",
+        "issueIdentifier": "FNCC.KV",
+        "descriptionOfIssuer": "FINANCING CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 9.9,
+        "maturityDate": "12/06/2018",
+        "price": null,
+        "yield": null,
+        "tradeDate": "",
+        "symbol": "FNCC.KV",
+        "cusip": "317705AJ0",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9602",
+        "issueIdentifier": "FNCC.CR",
+        "descriptionOfIssuer": "FINANCING CORP",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 9.4,
+        "maturityDate": "02/08/2018",
+        "price": 104.198,
+        "yield": 1.2651,
+        "tradeDate": "07/31/2017",
+        "symbol": "FNCC.CR",
+        "cusip": "317705AD3",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C95674",
+        "issueIdentifier": "FFCD.AW",
+        "descriptionOfIssuer": "FEDERAL FARM CR BKS CONS SYSTEMWIDE MEDI",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.65,
+        "maturityDate": "06/14/2019",
+        "price": 109.816,
+        "yield": 1.40302,
+        "tradeDate": "07/18/2017",
+        "symbol": "FFCD.AW",
+        "cusip": "31331R6Y6",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C95425",
+        "issueIdentifier": "FHLN.CO",
+        "descriptionOfIssuer": "FEDERAL HOME LN BKS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.535,
+        "maturityDate": "06/03/2019",
+        "price": 108.89278,
+        "yield": 1.62705,
+        "tradeDate": "07/27/2017",
+        "symbol": "FHLN.CO",
+        "cusip": "3133M8YS7",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C94775",
+        "issueIdentifier": "FNMA.OG",
+        "descriptionOfIssuer": "FEDERAL NATL MTG ASSN",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.25,
+        "maturityDate": "05/15/2029",
+        "price": 135.692,
+        "yield": 2.69528,
+        "tradeDate": "07/31/2017",
+        "symbol": "FNMA.OG",
+        "cusip": "31359MEU3",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Variable",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C93156",
+        "issueIdentifier": "",
+        "descriptionOfIssuer": "TENNESSEE VALLEY AUTH",
+        "subproductType": "",
+        "couponRate": 4.15,
+        "maturityDate": "05/01/2029",
+        "price": null,
+        "yield": null,
+        "tradeDate": "",
+        "symbol": "",
+        "cusip": "880591409",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C92787",
+        "issueIdentifier": "FHLN.CK",
+        "descriptionOfIssuer": "FEDERAL HOME LN BKS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 6.1,
+        "maturityDate": "04/29/2019",
+        "price": 109.432,
+        "yield": 1.31289,
+        "tradeDate": "04/27/2017",
+        "symbol": "FHLN.CK",
+        "cusip": "3133M8NB6",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9192",
+        "issueIdentifier": "FNMA.FB",
+        "descriptionOfIssuer": "FEDERAL NATL MTG ASSN MEDIUM TERM NTS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 7.93,
+        "maturityDate": "02/14/2025",
+        "price": 136.422,
+        "yield": 2.73671,
+        "tradeDate": "04/10/2017",
+        "symbol": "FNMA.FB",
+        "cusip": "31364A7K2",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9180",
+        "issueIdentifier": "FNMA.FA",
+        "descriptionOfIssuer": "FEDERAL NATL MTG ASSN MEDIUM TERM NTS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 8.28,
+        "maturityDate": "01/10/2025",
+        "price": 139.881,
+        "yield": 2.41784,
+        "tradeDate": "07/17/2017",
+        "symbol": "FNMA.FA",
+        "cusip": "31364A6J6",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "AA+",
+           "ratingNumber": 2
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "2",
+        "debtOrAssetClass": "Agency",
+        "securityId": "C9174",
+        "issueIdentifier": "FNMA.EZ",
+        "descriptionOfIssuer": "FEDERAL NATL MTG ASSN MEDIUM TERM NTS",
+        "subproductType": "Agency Debt Bond",
+        "couponRate": 8.43,
+        "maturityDate": "11/18/2024",
+        "price": 137.405,
+        "yield": 2.7598,
+        "tradeDate": "07/17/2017",
+        "symbol": "FNMA.EZ",
+        "cusip": "31364A5M0",
+        "callable": ""
+     },
+     {
+        "moodyRating": {
+           "ratingText": "Aaa",
+           "ratingNumber": 1
+        },
+        "fitchRating": {
+           "ratingText": null,
+           "ratingNumber": null
+        },
+        "standardAndPoorRating": {
+           "ratingText": "",
+           "ratingNumber": 0
+        },
+        "couponType": "Fixed",
+        "priceChange": null,
+        "priceChangePercent": null,
+        "codeDebtOrAssetClass": "1",
+        "debtOrAssetClass": "Treasury",
+        "securityId": "C91472",
+        "issueIdentifier": "",
+        "descriptionOfIssuer": "UNITED STATES TREAS INFLATION INDEXED BDS",
+        "subproductType": "",
+        "couponRate": 3.875,
+        "maturityDate": "04/15/2029",
+        "price": null,
+        "yield": null,
+        "tradeDate": "",
+        "symbol": "",
+        "cusip": "912810FH6",
+        "callable": ""
+     }
+  ],
+  "Rows": 20,
+  "Count": 14431,
+  "hasData": true,
+  "errorMsg": null,
+  "LatestDate": null
+}
