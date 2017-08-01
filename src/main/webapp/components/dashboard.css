@@ -57,7 +57,7 @@
 
 .box1{
     width: 200px;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .box2{
@@ -73,6 +73,39 @@
     color: #0D47A1;
     margin: 0;
     font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 15px 0 15px 10px !important;
+    letter-spacing: -1px;
+}
+
+.value{
+    font-weight: 900;
+    font-size: 18px;
+    margin: 0 0 6px 10px !important;
+    letter-spacing: 1.5px;
+}
+
+.add_funds{
+    font-size: 14px;
+    margin-left: 10px !important;
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.add_funds:hover, .infoh:hover{
+    color: black;
+}
+
+.value1{
+    margin: 0 15px 0 15px !important;
+    font-size: 20px;
+    color: green;
+}
+
+.value2{
+    font-size: 15px !important;
+}
+
+.info{
+    color: gray;
+    cursor: pointer;
 }
