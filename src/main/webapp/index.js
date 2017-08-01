@@ -29,6 +29,10 @@ var signUpController = function($scope, $state){
     
 }
 
+var bondController = function($scope, $state){
+    
+}
+
 var dashboardController = function($scope, $state){
     $scope.reload = function(){
         $state.reload();
@@ -73,6 +77,11 @@ var profileController = function($scope, $state, apiService){
                 templateUrl: 'components/dashboard.html',
                 controller: 'dashboardController'
             })
+            .state('bond', {
+                url: '/bond',
+                templateUrl: 'components/bond.html',
+                controller: 'bondController'
+            })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'components/profile.html',
@@ -108,6 +117,7 @@ angular.module('blb')
     .controller('signUpController', signUpController)
     .controller('dashboardController', dashboardController)
     .controller('profileController', profileController)
+    .controller('bondController', bondController)
     .service('apiService', apiService)
     .config(function($mdThemingProvider){
         
