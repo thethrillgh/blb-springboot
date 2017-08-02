@@ -1,4 +1,4 @@
-angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table']);
+angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table', 'gridshore.c3js.chart']);
 
 var apiService = function($http){
     var getBonds = function(){
@@ -7,9 +7,13 @@ var apiService = function($http){
     var accounts = function(){
         return $http.get("/api/users")
     }
+    var yieldData = function(){
+        return $http.get("test.json")
+    }
     return {
         getBonds: getBonds,
-        accounts: accounts
+        accounts: accounts,
+        yieldData: yieldData
     };
 };
 
@@ -29,15 +33,22 @@ var signUpController = function($scope, $state){
     
 }
 
-var bondController = function($scope, $state){
+var bondController = function($scope, $state, $stateParams){
+    console.log($stateParams)
+//    var current = bonds.data.forEach(function(data){
+//        console.log(data.data)
+//    })
     
 }
 
 
 var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds){
+  $scope.go = function(id){
+        $state.go('bond', {obj: id})
+    }
   $scope.bonds = bonds.data;
   $scope.selected = [];
-  $scope.limitOptions = [3, 5, 10, 15];
+  $scope.limitOptions = [5, 10, 15];
   
   $scope.options = {
     rowSelection: false,
@@ -100,13 +111,14 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
   };
   
-  $scope.getTypes = function () {
-    return ['Candy', 'Ice cream', 'Other', 'Pastry'];
-  };
-  
   $scope.loadStuff = function () {
     $scope.promise = $timeout(function () {
       // loading
+        $scope.query = {
+            order: 'cusip',
+            limit: 5,
+            page: 1
+        };
     }, 2000);
   }
   
@@ -154,8 +166,16 @@ var profileController = function($scope, $state, apiService){
             })
             .state('bond', {
                 url: '/bond',
+                params: {
+                  obj: null
+                },
                 templateUrl: 'components/bond.html',
-                controller: 'bondController'
+                controller: 'bondController',
+                resolve: {
+                    bonds: function(apiService){
+                        return apiService.getBonds();
+                    }
+                }
             })
             .state('signup', {
                 url: '/signup',
