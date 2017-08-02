@@ -1,4 +1,4 @@
-angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table', 'gridshore.c3js.chart']);
+angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table']);
 
 var apiService = function($http){
     var getBonds = function(){
@@ -33,11 +33,34 @@ var signUpController = function($scope, $state){
     
 }
 
-var bondController = function($scope, $state, $stateParams){
-    console.log($stateParams)
-//    var current = bonds.data.forEach(function(data){
-//        console.log(data.data)
-//    })
+var bondController = function($scope, $state, $stateParams, bonds){
+    $scope.data = bonds.data.data;
+    var yieldPercent = Array.from($scope.data, function(data){
+        return data.value
+    });
+    var tradeTime = Array.from($scope.data, function(data){
+        return data.tradeTime.split(" ")[0];
+    });
+    yieldPercent.unshift('Date');
+    var test2 = ['data2', 50, 20, 10, 40, 15, 25];
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            type: 'area-spline',
+          columns: [
+            yieldPercent
+          ]
+        }
+    });
+    
+    $scope.load = function(){
+        chart.load({
+  	unload: true,
+  	columns: [
+    	test2
+    ] 
+	});
+    }
     
 }
 
@@ -67,46 +90,6 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     page: 1
   };
   
-  $scope.editComment = function (event, dessert) {
-    event.stopPropagation(); // in case autoselect is enabled
-    
-    var editDialog = {
-      modelValue: dessert.comment,
-      placeholder: 'Add a comment',
-      save: function (input) {
-        if(input.$modelValue === 'Donald Trump') {
-          input.$invalid = true;
-          return $q.reject();
-        }
-        if(input.$modelValue === 'Bernie Sanders') {
-          return dessert.comment = 'FEEL THE BERN!'
-        }
-        dessert.comment = input.$modelValue;
-      },
-      targetEvent: event,
-      title: 'Add a comment',
-      validators: {
-        'md-maxlength': 30
-      }
-    };
-    
-    var promise;
-    
-    if($scope.options.largeEditDialog) {
-      promise = $mdEditDialog.large(editDialog);
-    } else {
-      promise = $mdEditDialog.small(editDialog);
-    }
-    
-    promise.then(function (ctrl) {
-      var input = ctrl.getInput();
-      
-      input.$viewChangeListeners.push(function () {
-        input.$setValidity('test', input.$modelValue !== 'test');
-      });
-    });
-  };
-  
   $scope.toggleLimitOptions = function () {
     $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
   };
@@ -123,16 +106,16 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   }
   
   $scope.logItem = function (item) {
-    console.log(item.name, 'was selected');
+//    console.log(item.name, 'was selected');
   };
   
   $scope.logOrder = function (order) {
-    console.log('order: ', order);
+//    console.log('order: ', order);
   };
   
   $scope.logPagination = function (page, limit) {
-    console.log('page: ', page);
-    console.log('limit: ', limit);
+//    console.log('page: ', page);
+//    console.log('limit: ', limit);
   }
 }
 
@@ -173,7 +156,7 @@ var profileController = function($scope, $state, apiService){
                 controller: 'bondController',
                 resolve: {
                     bonds: function(apiService){
-                        return apiService.getBonds();
+                        return apiService.yieldData();
                     }
                 }
             })
