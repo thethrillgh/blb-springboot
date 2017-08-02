@@ -1,0 +1,148 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myBondLabel">Create or edit a Bond</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.bond.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.bond.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cusip">Cusip</label>
+            <input type="text" class="form-control" name="cusip" id="field_cusip"
+                    ng-model="vm.bond.cusip"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_isOwned">Is Owned</label>
+                <input type="checkbox" name="isOwned" id="field_isOwned"
+                          ng-model="vm.bond.isOwned"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sandpRating">Sandp Rating</label>
+            <input type="text" class="form-control" name="sandpRating" id="field_sandpRating"
+                    ng-model="vm.bond.sandpRating"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_moodyRating">Moody Rating</label>
+            <input type="text" class="form-control" name="moodyRating" id="field_moodyRating"
+                    ng-model="vm.bond.moodyRating"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fitchRating">Fitch Rating</label>
+            <input type="text" class="form-control" name="fitchRating" id="field_fitchRating"
+                    ng-model="vm.bond.fitchRating"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_couponType">Coupon Type</label>
+            <input type="text" class="form-control" name="couponType" id="field_couponType"
+                    ng-model="vm.bond.couponType"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yieldChange">Yield Change</label>
+            <input type="number" class="form-control" name="yieldChange" id="field_yieldChange"
+                    ng-model="vm.bond.yieldChange"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yieldChangePercent">Yield Change Percent</label>
+            <input type="number" class="form-control" name="yieldChangePercent" id="field_yieldChangePercent"
+                    ng-model="vm.bond.yieldChangePercent"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_debtOrAssetClass">Debt Or Asset Class</label>
+            <input type="text" class="form-control" name="debtOrAssetClass" id="field_debtOrAssetClass"
+                    ng-model="vm.bond.debtOrAssetClass"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_securityId">Security Id</label>
+            <input type="text" class="form-control" name="securityId" id="field_securityId"
+                    ng-model="vm.bond.securityId"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_issuerId">Issuer Id</label>
+            <input type="text" class="form-control" name="issuerId" id="field_issuerId"
+                    ng-model="vm.bond.issuerId"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_issuerDescrip">Issuer Descrip</label>
+            <input type="text" class="form-control" name="issuerDescrip" id="field_issuerDescrip"
+                    ng-model="vm.bond.issuerDescrip"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_productType">Product Type</label>
+            <input type="text" class="form-control" name="productType" id="field_productType"
+                    ng-model="vm.bond.productType"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_couponRate">Coupon Rate</label>
+            <input type="number" class="form-control" name="couponRate" id="field_couponRate"
+                    ng-model="vm.bond.couponRate"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_maturityDate">Maturity Date</label>
+                <div class="input-group">
+                    <input id="field_maturityDate" type="text" class="form-control" name="maturityDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.bond.maturityDate" is-open="vm.datePickerOpenStatus.maturityDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('maturityDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_marketPrice">Market Price</label>
+            <input type="number" class="form-control" name="marketPrice" id="field_marketPrice"
+                    ng-model="vm.bond.marketPrice"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_faceValue">Face Value</label>
+            <input type="number" class="form-control" name="faceValue" id="field_faceValue"
+                    ng-model="vm.bond.faceValue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bondSymbol">Bond Symbol</label>
+            <input type="text" class="form-control" name="bondSymbol" id="field_bondSymbol"
+                    ng-model="vm.bond.bondSymbol"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_callable">Callable</label>
+                <input type="checkbox" name="callable" id="field_callable"
+                          ng-model="vm.bond.callable"/>
+        </div>
+
+        <div class="form-group">
+            <label for="field_order">Order</label>
+            <select class="form-control" id="field_order" name="order" ng-model="vm.bond.orderId" ng-options="order.id as order.id for order in vm.orders"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

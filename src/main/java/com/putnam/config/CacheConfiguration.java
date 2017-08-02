@@ -42,6 +42,13 @@ public class CacheConfiguration {
             cm.createCache(com.putnam.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.putnam.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.putnam.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.putnam.domain.UserAccount.class.getName(), jcacheConfiguration);
+            cm.createCache(com.putnam.domain.UserAccount.class.getName() + ".orders", jcacheConfiguration);
+            cm.createCache(com.putnam.domain.UserAddress.class.getName(), jcacheConfiguration);
+            cm.createCache(com.putnam.domain.BankAcct.class.getName(), jcacheConfiguration);
+            cm.createCache(com.putnam.domain.Order.class.getName(), jcacheConfiguration);
+            cm.createCache(com.putnam.domain.Order.class.getName() + ".assocBonds", jcacheConfiguration);
+            cm.createCache(com.putnam.domain.Bond.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

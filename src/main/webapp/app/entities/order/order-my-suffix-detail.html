@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Order</span> {{vm.order.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Order Time Stamp</span></dt>
+        <dd>
+            <span>{{vm.order.orderTimeStamp | date:'medium'}}</span>
+        </dd>
+        <dt><span>Trade Date</span></dt>
+        <dd>
+            <span>{{vm.order.tradeDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Transaction Amount</span></dt>
+        <dd>
+            <span>{{vm.order.transactionAmount}}</span>
+        </dd>
+        <dt><span>Num Bonds Purchased</span></dt>
+        <dd>
+            <span>{{vm.order.numBondsPurchased}}</span>
+        </dd>
+        <dt><span>Assoc Acct</span></dt>
+        <dd>
+            <a ui-sref="user-account-my-suffix-detail({id:vm.order.assocAcctId})">{{vm.order.assocAcctId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="order-my-suffix-detail.edit({id:vm.order.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

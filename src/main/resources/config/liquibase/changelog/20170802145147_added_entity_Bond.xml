@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Bond.
+    -->
+    <changeSet id="20170802145147-1" author="jhipster">
+        <createTable tableName="bond">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cusip" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="is_owned" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sandp_rating" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="moody_rating" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fitch_rating" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="coupon_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="yield_change" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="yield_change_percent" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="debt_or_asset_class" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="security_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="issuer_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="issuer_descrip" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="product_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="coupon_rate" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="maturity_date" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="market_price" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="face_value" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bond_symbol" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="callable" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="order_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+</databaseChangeLog>

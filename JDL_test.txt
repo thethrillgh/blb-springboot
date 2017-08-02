@@ -1,113 +1,95 @@
 entity UserAccount {
-	AcctID Long
-    FirstName String
-    LastName String
-    PhoneNum String
-    AcctEmail String
-    AcctPassword String
-    AcctSSN String
-    PassSalt String
+	acctID Long
+    firstName String
+    lastName String
+    phoneNum String
+    acctEmail String
+    acctPassword String
+    acctSSN String
+    ssnLastFour String
+    passSalt String //may need binary blob
+    userAddress UserAddress
+    assocBankAccount BankAcct
+    acctBalance Double
 }
 
-entity Address {
-	AssocAcct UserAccount
+entity UserAddress {
+	assocAcct UserAccount
     streetAddress String,
 	city String,
 	state String,
     postalCode String
 }
 
-entity BackAcct {
-	AssocAcct UserAccount
-    AcctNum String required
-    RoutingNum String required
+entity BankAcct {
+	assocAcct UserAccount
+    acctNum String
+    routingNum String
     //AcctType either S for savings or C for checking
-    AcctType String required
+    acctType String
 }
 
 entity Order {
-
+	assocAcct UserAccount
+    assocBond Bond
+    orderTimeStamp ZonedDateTime
+    tradeDate LocalDate
+    transactionAmount Double
+    numBondsPurchased Integer
 }
 
-/**
- * The Employee entity.
- */
-entity Employee {
-	/**
-	* The firstname attribute.
-	*/
-	firstName String,
-	lastName String,
-	email String,
-	phoneNumber String,
-	hireDate ZonedDateTime,
-	salary Long,
-	commissionPct Long
-}
-
-entity Job {
-	jobTitle String,
-	minSalary Long,
-	maxSalary Long
-}
-
-entity JobHistory {
-	startDate ZonedDateTime,
-	endDate ZonedDateTime,
-	language Language
-}
-
-enum Language {
-    FRENCH, ENGLISH, SPANISH
+entity Bond {
+	cusip String
+    isOwned Boolean
+    sandpRating String
+    moodyRating String
+    fitchRating String
+    couponType String
+    yieldChange Double
+    yieldChangePercent Double
+    debtOrAssetClass String //T or corp
+    securityId String
+    issuerId String
+    issuerDescrip String
+    productType String
+    couponRate Double
+    maturityDate LocalDate // YYYY-MM-DD
+    marketPrice Double
+    faceValue Double
+    bondSymbol String
+    callable Boolean // 0 = No, 1 = Yes
 }
 
 relationship OneToOne {
-	Country{region} to Region
+	UserAccount{userAddress} to UserAddress{assocAcct},
+    UserAccount{assocBankAccount} to BankAcct{assocAccount}
+
 }
 
-relationship OneToOne {
-	Location{country} to Country
-}
-
-relationship OneToOne {
-	Department{location} to Location
-}
-
-relationship ManyToMany {
-	Job{task(title)} to Task{job}
-}
-
-// defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Employee{job} to Job,
-	/**
-	* A relationship
-	*/
-	Department{employee} to
-	/**
-	* Another side of the same relationship
-	*/
-	Employee
+	UserAccount to Order{assocAcct},
+    Order{assocBond} to Bond
 }
 
-relationship ManyToOne {
-	Employee{manager} to Employee
+enum MoodyRatings {
+	AAA, AA, A, BAA, BA, B, CAA, CA, C
 }
 
-// defining multiple oneToOne relationships
-relationship OneToOne {
-	JobHistory{job} to Job,
-	JobHistory{department} to Department,
-	JobHistory{employee} to Employee
+enum StandardAndPoorRatings {
+	AAA, AA, A, BBB, BB, B, CCC, CC, C, D
 }
 
-// Set pagination options
-paginate JobHistory, Employee with infinite-scroll
-paginate Job with pagination
+enum FitchRatings {
+	AAA, AA, A, BBB, BB, B, CCC, CC, C, D
+}
 
 dto * with mapstruct
 
+paginate Order with pagination
+
+paginate Bond with infinite-scroll
+
 // Set service options to all except few
-service all with serviceImpl except Employee, Job
+service all with serviceImpl
 // Set an angular suffix
 angularSuffix * with mySuffix

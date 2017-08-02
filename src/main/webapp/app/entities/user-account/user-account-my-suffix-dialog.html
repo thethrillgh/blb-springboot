@@ -1,0 +1,98 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUserAccountLabel">Create or edit a User Account</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.userAccount.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.userAccount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_acctID">Acct ID</label>
+            <input type="number" class="form-control" name="acctID" id="field_acctID"
+                    ng-model="vm.userAccount.acctID"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="vm.userAccount.firstName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="vm.userAccount.lastName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phoneNum">Phone Num</label>
+            <input type="text" class="form-control" name="phoneNum" id="field_phoneNum"
+                    ng-model="vm.userAccount.phoneNum"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_acctEmail">Acct Email</label>
+            <input type="text" class="form-control" name="acctEmail" id="field_acctEmail"
+                    ng-model="vm.userAccount.acctEmail"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_acctPassword">Acct Password</label>
+            <input type="text" class="form-control" name="acctPassword" id="field_acctPassword"
+                    ng-model="vm.userAccount.acctPassword"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_acctSSN">Acct SSN</label>
+            <input type="text" class="form-control" name="acctSSN" id="field_acctSSN"
+                    ng-model="vm.userAccount.acctSSN"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_ssnLastFour">Ssn Last Four</label>
+            <input type="text" class="form-control" name="ssnLastFour" id="field_ssnLastFour"
+                    ng-model="vm.userAccount.ssnLastFour"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_passSalt">Pass Salt</label>
+            <input type="text" class="form-control" name="passSalt" id="field_passSalt"
+                    ng-model="vm.userAccount.passSalt"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_acctBalance">Acct Balance</label>
+            <input type="number" class="form-control" name="acctBalance" id="field_acctBalance"
+                    ng-model="vm.userAccount.acctBalance"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label for="field_userAddress">User Address</label>
+            <select class="form-control" id="field_userAddress" name="userAddress" ng-model="vm.userAccount.userAddressId" ng-options="userAddress.id as userAddress.id for userAddress in vm.useraddresses | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_assocBankAccount">Assoc Bank Account</label>
+            <select class="form-control" id="field_assocBankAccount" name="assocBankAccount" ng-model="vm.userAccount.assocBankAccountId" ng-options="bankAcct.id as bankAcct.id for bankAcct in vm.assocbankaccounts | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

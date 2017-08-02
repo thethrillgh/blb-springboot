@@ -1,0 +1,99 @@
+
+<div>
+    <h2><span>Bond</span> {{vm.bond.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Cusip</span></dt>
+        <dd>
+            <span>{{vm.bond.cusip}}</span>
+        </dd>
+        <dt><span>Is Owned</span></dt>
+        <dd>
+            <span>{{vm.bond.isOwned}}</span>
+        </dd>
+        <dt><span>Sandp Rating</span></dt>
+        <dd>
+            <span>{{vm.bond.sandpRating}}</span>
+        </dd>
+        <dt><span>Moody Rating</span></dt>
+        <dd>
+            <span>{{vm.bond.moodyRating}}</span>
+        </dd>
+        <dt><span>Fitch Rating</span></dt>
+        <dd>
+            <span>{{vm.bond.fitchRating}}</span>
+        </dd>
+        <dt><span>Coupon Type</span></dt>
+        <dd>
+            <span>{{vm.bond.couponType}}</span>
+        </dd>
+        <dt><span>Yield Change</span></dt>
+        <dd>
+            <span>{{vm.bond.yieldChange}}</span>
+        </dd>
+        <dt><span>Yield Change Percent</span></dt>
+        <dd>
+            <span>{{vm.bond.yieldChangePercent}}</span>
+        </dd>
+        <dt><span>Debt Or Asset Class</span></dt>
+        <dd>
+            <span>{{vm.bond.debtOrAssetClass}}</span>
+        </dd>
+        <dt><span>Security Id</span></dt>
+        <dd>
+            <span>{{vm.bond.securityId}}</span>
+        </dd>
+        <dt><span>Issuer Id</span></dt>
+        <dd>
+            <span>{{vm.bond.issuerId}}</span>
+        </dd>
+        <dt><span>Issuer Descrip</span></dt>
+        <dd>
+            <span>{{vm.bond.issuerDescrip}}</span>
+        </dd>
+        <dt><span>Product Type</span></dt>
+        <dd>
+            <span>{{vm.bond.productType}}</span>
+        </dd>
+        <dt><span>Coupon Rate</span></dt>
+        <dd>
+            <span>{{vm.bond.couponRate}}</span>
+        </dd>
+        <dt><span>Maturity Date</span></dt>
+        <dd>
+            <span>{{vm.bond.maturityDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Market Price</span></dt>
+        <dd>
+            <span>{{vm.bond.marketPrice}}</span>
+        </dd>
+        <dt><span>Face Value</span></dt>
+        <dd>
+            <span>{{vm.bond.faceValue}}</span>
+        </dd>
+        <dt><span>Bond Symbol</span></dt>
+        <dd>
+            <span>{{vm.bond.bondSymbol}}</span>
+        </dd>
+        <dt><span>Callable</span></dt>
+        <dd>
+            <span>{{vm.bond.callable}}</span>
+        </dd>
+        <dt><span>Order</span></dt>
+        <dd>
+            <a ui-sref="order-my-suffix-detail({id:vm.bond.orderId})">{{vm.bond.orderId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="bond-my-suffix-detail.edit({id:vm.bond.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

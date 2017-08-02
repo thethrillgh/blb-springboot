@@ -1,0 +1,70 @@
+<div>
+    <h2>Orders</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="order-my-suffix.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Order
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderTimeStamp"><span>Order Time Stamp</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tradeDate"><span>Trade Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="transactionAmount"><span>Transaction Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numBondsPurchased"><span>Num Bonds Purchased</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assocAcctId"><span>Assoc Acct</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in vm.orders track by order.id">
+                    <td><a ui-sref="order-my-suffix-detail({id:order.id})">{{order.id}}</a></td>
+                    <td>{{order.orderTimeStamp | date:'medium'}}</td>
+                        <td>{{order.tradeDate | date:'mediumDate'}}</td>
+                    <td>{{order.transactionAmount}}</td>
+                    <td>{{order.numBondsPurchased}}</td>
+                    <td>
+                        <a ui-sref="user-account-my-suffix-detail({id:order.assocAcctId})">{{order.assocAcctId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="order-my-suffix-detail({id:order.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="order-my-suffix.edit({id:order.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="order-my-suffix.delete({id:order.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

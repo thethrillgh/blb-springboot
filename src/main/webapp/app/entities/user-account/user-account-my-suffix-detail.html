@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span>User Account</span> {{vm.userAccount.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Acct ID</span></dt>
+        <dd>
+            <span>{{vm.userAccount.acctID}}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+            <span>{{vm.userAccount.firstName}}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+            <span>{{vm.userAccount.lastName}}</span>
+        </dd>
+        <dt><span>Phone Num</span></dt>
+        <dd>
+            <span>{{vm.userAccount.phoneNum}}</span>
+        </dd>
+        <dt><span>Acct Email</span></dt>
+        <dd>
+            <span>{{vm.userAccount.acctEmail}}</span>
+        </dd>
+        <dt><span>Acct Password</span></dt>
+        <dd>
+            <span>{{vm.userAccount.acctPassword}}</span>
+        </dd>
+        <dt><span>Acct SSN</span></dt>
+        <dd>
+            <span>{{vm.userAccount.acctSSN}}</span>
+        </dd>
+        <dt><span>Ssn Last Four</span></dt>
+        <dd>
+            <span>{{vm.userAccount.ssnLastFour}}</span>
+        </dd>
+        <dt><span>Pass Salt</span></dt>
+        <dd>
+            <span>{{vm.userAccount.passSalt}}</span>
+        </dd>
+        <dt><span>Acct Balance</span></dt>
+        <dd>
+            <span>{{vm.userAccount.acctBalance}}</span>
+        </dd>
+        <dt><span>User Address</span></dt>
+        <dd>
+            <a ui-sref="user-address-my-suffix-detail({id:vm.userAccount.userAddressId})">{{vm.userAccount.userAddressId}}</a>
+        </dd>
+        <dt><span>Assoc Bank Account</span></dt>
+        <dd>
+            <a ui-sref="bank-acct-my-suffix-detail({id:vm.userAccount.assocBankAccountId})">{{vm.userAccount.assocBankAccountId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-account-my-suffix-detail.edit({id:vm.userAccount.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
