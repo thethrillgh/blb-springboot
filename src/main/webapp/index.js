@@ -29,6 +29,11 @@ var signUpController = function($scope, $state){
     
 }
 
+var bondController = function($scope, $state){
+    
+}
+
+
 var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds){
   $scope.bonds = bonds.data;
   $scope.selected = [];
@@ -147,6 +152,11 @@ var profileController = function($scope, $state, apiService){
                 templateUrl: 'components/login.html',
                 controller: "loginController",
             })
+            .state('bond', {
+                url: '/bond',
+                templateUrl: 'components/bond.html',
+                controller: 'bondController'
+            })
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'components/signup.html',
@@ -197,6 +207,7 @@ angular.module('blb')
     .controller('signUpController', signUpController)
     .controller('dashboardController', dashboardController)
     .controller('profileController', profileController)
+    .controller('bondController', bondController)
     .service('apiService', apiService)
     .config(function($mdThemingProvider){
         

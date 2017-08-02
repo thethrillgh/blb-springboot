@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="components/bond.css">
+<md-toolbar layout layout-align="space-between center" class="md-primary md-hue-1" id="toolbar">
+    <img ui-sref="dashboard" class="logo_img" src="assets/logos.png">
+    <div layout="row" layout-align="center center">
+        <div layout="row" layout-align="center center">
+            <p class="username">Statements</p>
+            <i class="material-icons md-36 menu profile_icon">account_balance_wallet</i>
+        </div>
+        <div layout="row" layout-align="center center">
+            <p class="username">Explore</p>
+            <i class="material-icons md-36 menu profile_icon">search</i>
+        </div>
+        <div layout="row" layout-align="center center">
+            <p class="username">Dirk McMaster</p>
+            <md-menu>
+                <i class="material-icons md-36 menu profile_icon" ng-click="$mdMenu.open()">account_circle</i>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ui-sref="profile.account">
+                            <md-icon md-font-set="material-icons" class="md-24" md-menu-align-target>settings</md-icon>
+                            Account Settings
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item>
+                        <md-button ng-click="logout()">
+                            <md-icon md-font-set="material-icons" class="md-24" md-menu-align-target>exit_to_app</md-icon>
+                            Log Out
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </div>
+</md-toolbar>
+<div layout="column" class="dashboard_padding" flex>
+</div> 
