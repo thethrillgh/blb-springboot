@@ -44,14 +44,18 @@ public class UserAccountResource {
     @PostMapping("/user-accounts")
     @Timed
     public ResponseEntity<UserAccount> createUserAccount(@RequestBody UserAccount userAccount) throws URISyntaxException {
-        log.debug("REST request to save UserAccount : {}", userAccount);
-        if (userAccount.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userAccount cannot already have an ID")).body(null);
-        }
-        UserAccount result = userAccountRepository.save(userAccount);
-        return ResponseEntity.created(new URI("/api/user-accounts/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+
+        System.out.println(userAccount.toString());
+        // log.debug("REST request to save UserAccount : {}", userAccount);
+        // if (userAccount.getId() != null) {
+        //     return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userAccount cannot already have an ID")).body(null);
+        // }
+        // UserAccount result = userAccountRepository.save(userAccount);
+        // return ResponseEntity.created(new URI("/api/user-accounts/" + result.getId()))
+        //     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+        //     .body(result);
+
+        return new ResponseEntity<String>("accepted", HttpStatus.OK);
     }
 
     /**
