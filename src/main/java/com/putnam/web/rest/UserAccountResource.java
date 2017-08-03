@@ -56,7 +56,7 @@ public class UserAccountResource {
         //     .body(result);
         return ResponseEntity.created(new URI("/api/user-accounts/" + userAccount.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, userAccount.getId().toString()))
-            .body(result);
+            .body(userAccount);
     }
 
     /**
