@@ -29,6 +29,8 @@ public class UserAccountResource {
 
     private final UserAccountService userAccountService;
 
+    private static final String CHECK_ERROR_MESSAGE = "Incorrect password";
+
     public UserAccountResource(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
     }
@@ -48,6 +50,7 @@ public class UserAccountResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userAccount cannot already have an ID")).body(null);
         }
         UserAccountDTO result = userAccountService.save(userAccountDTO);
+        System.out.println(result.toString());
         return ResponseEntity.created(new URI("/api/user-accounts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
