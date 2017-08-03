@@ -54,8 +54,9 @@ public class UserAccountResource {
         // return ResponseEntity.created(new URI("/api/user-accounts/" + result.getId()))
         //     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
         //     .body(result);
-
-        return new ResponseEntity<String>("accepted", HttpStatus.OK);
+        return ResponseEntity.created(new URI("/api/user-accounts/" + userAccount.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, userAccount.getId().toString()))
+            .body(result);
     }
 
     /**
