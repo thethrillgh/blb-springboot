@@ -15,3 +15,68 @@
 .dashboard_padding{
     background-color: #e9edf2;
 }
+
+.box1{
+    height: 75px;
+    background-color: rgba(255,255,255,0.4);
+    margin: 20px;
+}
+
+.box1.padding{
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.box1.padding > div > p{
+    margin: 0;
+}
+
+.box1header{
+    color: #0D47A1;
+    font-size: 18px;
+    margin-bottom: 10px !important;
+}
+
+.box1.padding.nocolor{
+    background-color: inherit;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card{
+    padding: 15px;
+    height: 160px;
+    width: 260px;
+}
+
+.card > p{
+    margin: 0;
+}
+
+.cHeader1{
+    color: #0D47A1;
+    font-size: 18px;
+/*    margin-bottom: 7px !important;*/
+}
+
+.cHeader2{
+    color: #868686;
+    font-size: 14px;
+    margin-bottom: 5px !important;
+}
+
+.cHeader3{
+    font-weight: bolder;
+    font-size: 18px;
+    text-align: center;
+}
+
+.cHeader4{
+    font-size: 13px;
+    color: #2196F3;
+    text-align: center;
+}

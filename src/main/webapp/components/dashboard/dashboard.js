@@ -6,6 +6,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
         $state.go('bond', {obj: id})
     }
   $scope.bonds = bonds.data;
+  $scope.bondRows  = bonds.data.Rows         
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
   

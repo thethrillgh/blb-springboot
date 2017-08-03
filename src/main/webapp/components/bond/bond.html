@@ -34,6 +34,55 @@
     </div>
 </md-toolbar>
 <div layout="column" class="dashboard_padding" flex>
-    <div id="chart"></div>
-    <md-button class="md-raised md-accent" ng-click="load()">LOAD</md-button>
+    <div layout="row" layout-align="space-between start" class="box1 padding">
+        <div>
+            <p class="box1header">CUSIP</p>
+            <p class="box1header" style="margin-bottom: 0 !important; color: black">{{detail.cusip}}</p>
+        </div>
+        <div>
+            <p class="box1header">Type</p>
+            <p class="box1header" style="margin-bottom: 0 !important; color: black">{{detail.couponType}}</p>
+        </div>
+        <div>
+            <p class="box1header">Issuer: <span style="color: black;">{{detail.issueIdentifier}}</span></p>
+            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black;">{{detail.tradeDate}}</span></p>
+        </div>
+        <div>
+            <p class="box1header">Available Quantity:  <span style="color: black;">10000</span></p>
+            <p class="box1header" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black;">100</span></p>
+        </div>
+    </div>
+    <div layout="row" layout-align="space-between start" class="box1 padding nocolor">
+        <md-card class="card">
+            <p class="cHeader1">Coupon</p>
+            <p class="cHeader2">Face Value</p>
+            <p class="cHeader3">1000</p>
+            <p class="cHeader4">USD</p>
+            <p>Purchased</p>
+            <p>$1050 | Nov 07 2016 | 8:00 PM</p>
+       </md-card>
+        <md-card class="card">
+            <p class="cHeader1">Earnings</p>
+            <p class="cHeader2">Interest Rate</p>
+            <p class="cHeader3">1.4%</p>
+            <p class="cHeader4">semi-anually</p>
+            <p>Current Yield</p>
+            <p>2.986</p>
+       </md-card>
+        <md-card class="card">
+            <p class="cHeader1">Maturity</p>
+            <p class="cHeader2">Maturity Date</p>
+            <p class="cHeader3">Dec 15, 2020</p>
+            <p class="cHeader4">Next Coupon Date</p>
+            <p>Nov 07, 2017</p>
+       </md-card>
+        <md-card class="card">
+            <p class="cHeader1">Bond Rating</p>
+            <p class="cHeader2">S&amp;P</p>
+            <p class="cHeader3">AAA</p>
+            <p class="cHeader4">Issuer</p>
+            <p>America Bank</p>
+       </md-card>
+    </div>
+<!--    <div id="chart"></div>-->
 </div> 
