@@ -68,8 +68,7 @@
     ],
     "changelogDate": "20170802145143",
     "entityTableName": "user_account",
-    "dto": "mapstruct",
+    "dto": "no",
     "pagination": "no",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "no"
 }

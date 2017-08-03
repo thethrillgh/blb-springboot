@@ -25,8 +25,7 @@
     ],
     "changelogDate": "20170802145145",
     "entityTableName": "bank_acct",
-    "dto": "mapstruct",
+    "dto": "no",
     "pagination": "no",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "no"
 }

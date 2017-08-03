@@ -4,9 +4,6 @@ import com.putnam.BuylocalbondsApp;
 
 import com.putnam.domain.UserAccount;
 import com.putnam.repository.UserAccountRepository;
-import com.putnam.service.UserAccountService;
-import com.putnam.service.dto.UserAccountDTO;
-import com.putnam.service.mapper.UserAccountMapper;
 import com.putnam.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -74,12 +71,6 @@ public class UserAccountResourceIntTest {
     private UserAccountRepository userAccountRepository;
 
     @Autowired
-    private UserAccountMapper userAccountMapper;
-
-    @Autowired
-    private UserAccountService userAccountService;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -98,7 +89,7 @@ public class UserAccountResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        UserAccountResource userAccountResource = new UserAccountResource(userAccountService);
+        UserAccountResource userAccountResource = new UserAccountResource(userAccountRepository);
         this.restUserAccountMockMvc = MockMvcBuilders.standaloneSetup(userAccountResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -137,10 +128,9 @@ public class UserAccountResourceIntTest {
         int databaseSizeBeforeCreate = userAccountRepository.findAll().size();
 
         // Create the UserAccount
-        UserAccountDTO userAccountDTO = userAccountMapper.toDto(userAccount);
         restUserAccountMockMvc.perform(post("/api/user-accounts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAccountDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAccount)))
             .andExpect(status().isCreated());
 
         // Validate the UserAccount in the database
@@ -166,12 +156,11 @@ public class UserAccountResourceIntTest {
 
         // Create the UserAccount with an existing ID
         userAccount.setId(1L);
-        UserAccountDTO userAccountDTO = userAccountMapper.toDto(userAccount);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restUserAccountMockMvc.perform(post("/api/user-accounts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAccountDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAccount)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -253,11 +242,10 @@ public class UserAccountResourceIntTest {
             .ssnLastFour(UPDATED_SSN_LAST_FOUR)
             .passSalt(UPDATED_PASS_SALT)
             .acctBalance(UPDATED_ACCT_BALANCE);
-        UserAccountDTO userAccountDTO = userAccountMapper.toDto(updatedUserAccount);
 
         restUserAccountMockMvc.perform(put("/api/user-accounts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAccountDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedUserAccount)))
             .andExpect(status().isOk());
 
         // Validate the UserAccount in the database
@@ -282,12 +270,11 @@ public class UserAccountResourceIntTest {
         int databaseSizeBeforeUpdate = userAccountRepository.findAll().size();
 
         // Create the UserAccount
-        UserAccountDTO userAccountDTO = userAccountMapper.toDto(userAccount);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restUserAccountMockMvc.perform(put("/api/user-accounts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAccountDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAccount)))
             .andExpect(status().isCreated());
 
         // Validate the UserAccount in the database
@@ -325,28 +312,5 @@ public class UserAccountResourceIntTest {
         assertThat(userAccount1).isNotEqualTo(userAccount2);
         userAccount1.setId(null);
         assertThat(userAccount1).isNotEqualTo(userAccount2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(UserAccountDTO.class);
-        UserAccountDTO userAccountDTO1 = new UserAccountDTO();
-        userAccountDTO1.setId(1L);
-        UserAccountDTO userAccountDTO2 = new UserAccountDTO();
-        assertThat(userAccountDTO1).isNotEqualTo(userAccountDTO2);
-        userAccountDTO2.setId(userAccountDTO1.getId());
-        assertThat(userAccountDTO1).isEqualTo(userAccountDTO2);
-        userAccountDTO2.setId(2L);
-        assertThat(userAccountDTO1).isNotEqualTo(userAccountDTO2);
-        userAccountDTO1.setId(null);
-        assertThat(userAccountDTO1).isNotEqualTo(userAccountDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(userAccountMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(userAccountMapper.fromId(null)).isNull();
     }
 }

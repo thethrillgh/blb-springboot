@@ -4,9 +4,6 @@ import com.putnam.BuylocalbondsApp;
 
 import com.putnam.domain.BankAcct;
 import com.putnam.repository.BankAcctRepository;
-import com.putnam.service.BankAcctService;
-import com.putnam.service.dto.BankAcctDTO;
-import com.putnam.service.mapper.BankAcctMapper;
 import com.putnam.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,12 +50,6 @@ public class BankAcctResourceIntTest {
     private BankAcctRepository bankAcctRepository;
 
     @Autowired
-    private BankAcctMapper bankAcctMapper;
-
-    @Autowired
-    private BankAcctService bankAcctService;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +68,7 @@ public class BankAcctResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BankAcctResource bankAcctResource = new BankAcctResource(bankAcctService);
+        BankAcctResource bankAcctResource = new BankAcctResource(bankAcctRepository);
         this.restBankAcctMockMvc = MockMvcBuilders.standaloneSetup(bankAcctResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -109,10 +100,9 @@ public class BankAcctResourceIntTest {
         int databaseSizeBeforeCreate = bankAcctRepository.findAll().size();
 
         // Create the BankAcct
-        BankAcctDTO bankAcctDTO = bankAcctMapper.toDto(bankAcct);
         restBankAcctMockMvc.perform(post("/api/bank-accts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bankAcctDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bankAcct)))
             .andExpect(status().isCreated());
 
         // Validate the BankAcct in the database
@@ -131,12 +121,11 @@ public class BankAcctResourceIntTest {
 
         // Create the BankAcct with an existing ID
         bankAcct.setId(1L);
-        BankAcctDTO bankAcctDTO = bankAcctMapper.toDto(bankAcct);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restBankAcctMockMvc.perform(post("/api/bank-accts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bankAcctDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bankAcct)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -197,11 +186,10 @@ public class BankAcctResourceIntTest {
             .acctNum(UPDATED_ACCT_NUM)
             .routingNum(UPDATED_ROUTING_NUM)
             .acctType(UPDATED_ACCT_TYPE);
-        BankAcctDTO bankAcctDTO = bankAcctMapper.toDto(updatedBankAcct);
 
         restBankAcctMockMvc.perform(put("/api/bank-accts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bankAcctDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedBankAcct)))
             .andExpect(status().isOk());
 
         // Validate the BankAcct in the database
@@ -219,12 +207,11 @@ public class BankAcctResourceIntTest {
         int databaseSizeBeforeUpdate = bankAcctRepository.findAll().size();
 
         // Create the BankAcct
-        BankAcctDTO bankAcctDTO = bankAcctMapper.toDto(bankAcct);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restBankAcctMockMvc.perform(put("/api/bank-accts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bankAcctDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bankAcct)))
             .andExpect(status().isCreated());
 
         // Validate the BankAcct in the database
@@ -262,28 +249,5 @@ public class BankAcctResourceIntTest {
         assertThat(bankAcct1).isNotEqualTo(bankAcct2);
         bankAcct1.setId(null);
         assertThat(bankAcct1).isNotEqualTo(bankAcct2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(BankAcctDTO.class);
-        BankAcctDTO bankAcctDTO1 = new BankAcctDTO();
-        bankAcctDTO1.setId(1L);
-        BankAcctDTO bankAcctDTO2 = new BankAcctDTO();
-        assertThat(bankAcctDTO1).isNotEqualTo(bankAcctDTO2);
-        bankAcctDTO2.setId(bankAcctDTO1.getId());
-        assertThat(bankAcctDTO1).isEqualTo(bankAcctDTO2);
-        bankAcctDTO2.setId(2L);
-        assertThat(bankAcctDTO1).isNotEqualTo(bankAcctDTO2);
-        bankAcctDTO1.setId(null);
-        assertThat(bankAcctDTO1).isNotEqualTo(bankAcctDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(bankAcctMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(bankAcctMapper.fromId(null)).isNull();
     }
 }

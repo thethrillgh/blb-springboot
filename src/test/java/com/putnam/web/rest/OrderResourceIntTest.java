@@ -4,9 +4,6 @@ import com.putnam.BuylocalbondsApp;
 
 import com.putnam.domain.Order;
 import com.putnam.repository.OrderRepository;
-import com.putnam.service.OrderService;
-import com.putnam.service.dto.OrderDTO;
-import com.putnam.service.mapper.OrderMapper;
 import com.putnam.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -62,12 +59,6 @@ public class OrderResourceIntTest {
     private OrderRepository orderRepository;
 
     @Autowired
-    private OrderMapper orderMapper;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -86,7 +77,7 @@ public class OrderResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        OrderResource orderResource = new OrderResource(orderService);
+        OrderResource orderResource = new OrderResource(orderRepository);
         this.restOrderMockMvc = MockMvcBuilders.standaloneSetup(orderResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -119,10 +110,9 @@ public class OrderResourceIntTest {
         int databaseSizeBeforeCreate = orderRepository.findAll().size();
 
         // Create the Order
-        OrderDTO orderDTO = orderMapper.toDto(order);
         restOrderMockMvc.perform(post("/api/orders")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(order)))
             .andExpect(status().isCreated());
 
         // Validate the Order in the database
@@ -142,12 +132,11 @@ public class OrderResourceIntTest {
 
         // Create the Order with an existing ID
         order.setId(1L);
-        OrderDTO orderDTO = orderMapper.toDto(order);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOrderMockMvc.perform(post("/api/orders")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(order)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -211,11 +200,10 @@ public class OrderResourceIntTest {
             .tradeDate(UPDATED_TRADE_DATE)
             .transactionAmount(UPDATED_TRANSACTION_AMOUNT)
             .numBondsPurchased(UPDATED_NUM_BONDS_PURCHASED);
-        OrderDTO orderDTO = orderMapper.toDto(updatedOrder);
 
         restOrderMockMvc.perform(put("/api/orders")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedOrder)))
             .andExpect(status().isOk());
 
         // Validate the Order in the database
@@ -234,12 +222,11 @@ public class OrderResourceIntTest {
         int databaseSizeBeforeUpdate = orderRepository.findAll().size();
 
         // Create the Order
-        OrderDTO orderDTO = orderMapper.toDto(order);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restOrderMockMvc.perform(put("/api/orders")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(order)))
             .andExpect(status().isCreated());
 
         // Validate the Order in the database
@@ -277,28 +264,5 @@ public class OrderResourceIntTest {
         assertThat(order1).isNotEqualTo(order2);
         order1.setId(null);
         assertThat(order1).isNotEqualTo(order2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(OrderDTO.class);
-        OrderDTO orderDTO1 = new OrderDTO();
-        orderDTO1.setId(1L);
-        OrderDTO orderDTO2 = new OrderDTO();
-        assertThat(orderDTO1).isNotEqualTo(orderDTO2);
-        orderDTO2.setId(orderDTO1.getId());
-        assertThat(orderDTO1).isEqualTo(orderDTO2);
-        orderDTO2.setId(2L);
-        assertThat(orderDTO1).isNotEqualTo(orderDTO2);
-        orderDTO1.setId(null);
-        assertThat(orderDTO1).isNotEqualTo(orderDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(orderMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(orderMapper.fromId(null)).isNull();
     }
 }

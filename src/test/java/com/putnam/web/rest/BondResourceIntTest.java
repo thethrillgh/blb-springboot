@@ -4,9 +4,6 @@ import com.putnam.BuylocalbondsApp;
 
 import com.putnam.domain.Bond;
 import com.putnam.repository.BondRepository;
-import com.putnam.service.BondService;
-import com.putnam.service.dto.BondDTO;
-import com.putnam.service.mapper.BondMapper;
 import com.putnam.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -103,12 +100,6 @@ public class BondResourceIntTest {
     private BondRepository bondRepository;
 
     @Autowired
-    private BondMapper bondMapper;
-
-    @Autowired
-    private BondService bondService;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -127,7 +118,7 @@ public class BondResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BondResource bondResource = new BondResource(bondService);
+        BondResource bondResource = new BondResource(bondRepository);
         this.restBondMockMvc = MockMvcBuilders.standaloneSetup(bondResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -175,10 +166,9 @@ public class BondResourceIntTest {
         int databaseSizeBeforeCreate = bondRepository.findAll().size();
 
         // Create the Bond
-        BondDTO bondDTO = bondMapper.toDto(bond);
         restBondMockMvc.perform(post("/api/bonds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bondDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bond)))
             .andExpect(status().isCreated());
 
         // Validate the Bond in the database
@@ -213,12 +203,11 @@ public class BondResourceIntTest {
 
         // Create the Bond with an existing ID
         bond.setId(1L);
-        BondDTO bondDTO = bondMapper.toDto(bond);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restBondMockMvc.perform(post("/api/bonds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bondDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bond)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -327,11 +316,10 @@ public class BondResourceIntTest {
             .faceValue(UPDATED_FACE_VALUE)
             .bondSymbol(UPDATED_BOND_SYMBOL)
             .callable(UPDATED_CALLABLE);
-        BondDTO bondDTO = bondMapper.toDto(updatedBond);
 
         restBondMockMvc.perform(put("/api/bonds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bondDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedBond)))
             .andExpect(status().isOk());
 
         // Validate the Bond in the database
@@ -365,12 +353,11 @@ public class BondResourceIntTest {
         int databaseSizeBeforeUpdate = bondRepository.findAll().size();
 
         // Create the Bond
-        BondDTO bondDTO = bondMapper.toDto(bond);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restBondMockMvc.perform(put("/api/bonds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(bondDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(bond)))
             .andExpect(status().isCreated());
 
         // Validate the Bond in the database
@@ -408,28 +395,5 @@ public class BondResourceIntTest {
         assertThat(bond1).isNotEqualTo(bond2);
         bond1.setId(null);
         assertThat(bond1).isNotEqualTo(bond2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(BondDTO.class);
-        BondDTO bondDTO1 = new BondDTO();
-        bondDTO1.setId(1L);
-        BondDTO bondDTO2 = new BondDTO();
-        assertThat(bondDTO1).isNotEqualTo(bondDTO2);
-        bondDTO2.setId(bondDTO1.getId());
-        assertThat(bondDTO1).isEqualTo(bondDTO2);
-        bondDTO2.setId(2L);
-        assertThat(bondDTO1).isNotEqualTo(bondDTO2);
-        bondDTO1.setId(null);
-        assertThat(bondDTO1).isNotEqualTo(bondDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(bondMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(bondMapper.fromId(null)).isNull();
     }
 }

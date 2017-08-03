@@ -1,0 +1,84 @@
+entity UserAccount {
+	acctID Long
+    firstName String
+    lastName String
+    phoneNum String
+    acctEmail String
+    acctPassword String
+    acctSSN String
+    ssnLastFour String
+    passSalt String //may need binary blob
+    acctBalance Double
+}
+
+entity UserAddress {
+    streetAddress String,
+	city String,
+	state String,
+    postalCode String
+}
+
+entity BankAcct {
+    acctNum String
+    routingNum String
+    //AcctType either S for savings or C for checking
+    acctType String
+}
+
+entity Order {
+    orderTimeStamp ZonedDateTime
+    tradeDate LocalDate
+    transactionAmount Double
+    numBondsPurchased Integer
+}
+
+entity Bond {
+	cusip String
+    isOwned Boolean
+    sandpRating String
+    moodyRating String
+    fitchRating String
+    couponType String
+    yieldChange Double
+    yieldChangePercent Double
+    debtOrAssetClass String //T or corp
+    securityId String
+    issuerId String
+    issuerDescrip String
+    productType String
+    couponRate Double
+    maturityDate LocalDate // YYYY-MM-DD
+    marketPrice Double
+    faceValue Double
+    bondSymbol String
+    callable Boolean // 0 = No, 1 = Yes
+}
+
+relationship OneToOne {
+	UserAccount{userAddress} to UserAddress{assocAcct},
+    UserAccount{assocBankAccount} to BankAcct{assocAccount}
+
+}
+
+relationship OneToMany {
+	UserAccount to Order{assocAcct},
+    Order{assocBond} to Bond
+}
+
+enum MoodyRatings {
+	AAA, AA, A, BAA, BA, B, CAA, CA, C
+}
+
+enum StandardAndPoorRatings {
+	AAA, AA, A, BBB, BB, B, CCC, CC, C, D
+}
+
+enum FitchRatings {
+	AAA, AA, A, BBB, BB, B, CCC, CC, C, D
+}
+
+paginate Order with pagination
+
+paginate Bond with infinite-scroll
+
+// Set service options to all except few

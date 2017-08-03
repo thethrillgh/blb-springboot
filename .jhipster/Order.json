@@ -34,8 +34,7 @@
     ],
     "changelogDate": "20170802145146",
     "entityTableName": "order",
-    "dto": "mapstruct",
+    "dto": "no",
     "pagination": "pagination",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "no"
 }

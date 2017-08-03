@@ -4,9 +4,6 @@ import com.putnam.BuylocalbondsApp;
 
 import com.putnam.domain.UserAddress;
 import com.putnam.repository.UserAddressRepository;
-import com.putnam.service.UserAddressService;
-import com.putnam.service.dto.UserAddressDTO;
-import com.putnam.service.mapper.UserAddressMapper;
 import com.putnam.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -56,12 +53,6 @@ public class UserAddressResourceIntTest {
     private UserAddressRepository userAddressRepository;
 
     @Autowired
-    private UserAddressMapper userAddressMapper;
-
-    @Autowired
-    private UserAddressService userAddressService;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +71,7 @@ public class UserAddressResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        UserAddressResource userAddressResource = new UserAddressResource(userAddressService);
+        UserAddressResource userAddressResource = new UserAddressResource(userAddressRepository);
         this.restUserAddressMockMvc = MockMvcBuilders.standaloneSetup(userAddressResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -113,10 +104,9 @@ public class UserAddressResourceIntTest {
         int databaseSizeBeforeCreate = userAddressRepository.findAll().size();
 
         // Create the UserAddress
-        UserAddressDTO userAddressDTO = userAddressMapper.toDto(userAddress);
         restUserAddressMockMvc.perform(post("/api/user-addresses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAddressDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAddress)))
             .andExpect(status().isCreated());
 
         // Validate the UserAddress in the database
@@ -136,12 +126,11 @@ public class UserAddressResourceIntTest {
 
         // Create the UserAddress with an existing ID
         userAddress.setId(1L);
-        UserAddressDTO userAddressDTO = userAddressMapper.toDto(userAddress);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restUserAddressMockMvc.perform(post("/api/user-addresses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAddressDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAddress)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -205,11 +194,10 @@ public class UserAddressResourceIntTest {
             .city(UPDATED_CITY)
             .state(UPDATED_STATE)
             .postalCode(UPDATED_POSTAL_CODE);
-        UserAddressDTO userAddressDTO = userAddressMapper.toDto(updatedUserAddress);
 
         restUserAddressMockMvc.perform(put("/api/user-addresses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAddressDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedUserAddress)))
             .andExpect(status().isOk());
 
         // Validate the UserAddress in the database
@@ -228,12 +216,11 @@ public class UserAddressResourceIntTest {
         int databaseSizeBeforeUpdate = userAddressRepository.findAll().size();
 
         // Create the UserAddress
-        UserAddressDTO userAddressDTO = userAddressMapper.toDto(userAddress);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restUserAddressMockMvc.perform(put("/api/user-addresses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userAddressDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(userAddress)))
             .andExpect(status().isCreated());
 
         // Validate the UserAddress in the database
@@ -271,28 +258,5 @@ public class UserAddressResourceIntTest {
         assertThat(userAddress1).isNotEqualTo(userAddress2);
         userAddress1.setId(null);
         assertThat(userAddress1).isNotEqualTo(userAddress2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(UserAddressDTO.class);
-        UserAddressDTO userAddressDTO1 = new UserAddressDTO();
-        userAddressDTO1.setId(1L);
-        UserAddressDTO userAddressDTO2 = new UserAddressDTO();
-        assertThat(userAddressDTO1).isNotEqualTo(userAddressDTO2);
-        userAddressDTO2.setId(userAddressDTO1.getId());
-        assertThat(userAddressDTO1).isEqualTo(userAddressDTO2);
-        userAddressDTO2.setId(2L);
-        assertThat(userAddressDTO1).isNotEqualTo(userAddressDTO2);
-        userAddressDTO1.setId(null);
-        assertThat(userAddressDTO1).isNotEqualTo(userAddressDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(userAddressMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(userAddressMapper.fromId(null)).isNull();
     }
 }

@@ -88,8 +88,7 @@
     ],
     "changelogDate": "20170802145147",
     "entityTableName": "bond",
-    "dto": "mapstruct",
+    "dto": "no",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "no"
 }
