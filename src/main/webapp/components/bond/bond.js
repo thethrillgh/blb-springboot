@@ -1,5 +1,6 @@
-var bondController = function($scope, $state, $stateParams, bonds){
-    $scope.data = bonds.data.data;
+var bondController = function($scope, $state, $stateParams, bonds, apiService){
+    $scope.detail = $stateParams.obj;
+    $scope.data = bonds.data;
     var yieldPercent = Array.from($scope.data, function(data){
         return data.value
     });
@@ -44,6 +45,10 @@ var bondController = function($scope, $state, $stateParams, bonds){
             ] 
         });
     }
+    
+//    apiService.user().then(function(data){
+//        console.log(data)
+//    })
     
 }
 

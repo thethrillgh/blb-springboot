@@ -97,7 +97,7 @@
                   <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
 <!--                    <td md-cell>{{bonds.symbol}}</td>-->
                     <td md-cell ng-click="go(bonds)">{{bonds.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.subproductType}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.debtOrAssetClass}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.descriptionOfIssuer}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.couponRate}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.maturityDate}}</td>
@@ -109,7 +109,7 @@
               </table>
             </md-table-container>
 
-            <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{bonds.Rows}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+            <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{bondRows}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
           
             
           </md-card>
