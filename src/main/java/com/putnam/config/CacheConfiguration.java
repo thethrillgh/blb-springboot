@@ -37,11 +37,11 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            cm.createCache(com.putnam.domain.User.class.getName(), jcacheConfiguration);
-            cm.createCache(com.putnam.domain.Authority.class.getName(), jcacheConfiguration);
-            cm.createCache(com.putnam.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(com.putnam.domain.PersistentToken.class.getName(), jcacheConfiguration);
-            cm.createCache(com.putnam.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            // cm.createCache(com.putnam.domain.User.class.getName(), jcacheConfiguration);
+            // cm.createCache(com.putnam.domain.Authority.class.getName(), jcacheConfiguration);
+            // cm.createCache(com.putnam.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            // cm.createCache(com.putnam.domain.PersistentToken.class.getName(), jcacheConfiguration);
+            // cm.createCache(com.putnam.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             cm.createCache(com.putnam.domain.UserAccount.class.getName(), jcacheConfiguration);
             cm.createCache(com.putnam.domain.UserAccount.class.getName() + ".orders", jcacheConfiguration);
             cm.createCache(com.putnam.domain.UserAddress.class.getName(), jcacheConfiguration);
