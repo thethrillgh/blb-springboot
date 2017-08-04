@@ -46,9 +46,9 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
         });
     }
     
-//    apiService.user().then(function(data){
-//        console.log(data)
-//    })
+    apiService.user().then(function(data){
+        console.log(data)
+    })
     
 }
 
