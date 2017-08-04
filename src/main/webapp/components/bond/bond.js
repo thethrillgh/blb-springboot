@@ -1,6 +1,6 @@
 var bondController = function($scope, $state, $stateParams, bonds, apiService){
     $scope.detail = $stateParams.obj;
-    $scope.data = bonds.data;
+    $scope.data = bonds.data.data;
     var yieldPercent = Array.from($scope.data, function(data){
         return data.value
     });
@@ -14,28 +14,38 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
     yieldPercent.unshift('yield');
     tradeTime.unshift('date');
     var test2 = ['data2', 50, 20, 10, 40, 15, 25];
-    var chart = c3.generate({
-        bindto: '#chart',
-        data: {
-            xFormat: '%m%d%y',
-            xs: {
-                'yield': 'date',
+    setTimeout(function(){
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                xFormat: '%m%d%y',
+                xs: {
+                    'yield': 'date',
+                },
+                columns: [
+                    tradeTime,
+                    yieldPercent
+                ],
+                type: 'area-spline'
             },
-            columns: [
-                tradeTime,
-                yieldPercent
-            ]
-        },
-        axis: {
-            x: {
-                type: 'timeseries',
-                tick: {
-                    format: "%m-%d-%y",
-                    values: tick
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: "%m-%d-%y",
+                        values: tick
+                    }
                 }
+            },
+            legend: {
+                show: false
+            },
+            title: {
+                text: "Yield"
             }
-        }
-    });
+        });
+    }, 200);
+    
     
     $scope.load = function(){
         chart.load({
@@ -45,11 +55,6 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
             ] 
         });
     }
-    
-    apiService.user().then(function(data){
-        console.log(data)
-    })
-    
 }
 
 angular.module('blb').controller('bondController', bondController)
