@@ -12,7 +12,7 @@
     cursor: pointer;
 }
 
-.dashboard_padding{
+.dashboard_padding, body{
     background-color: #e9edf2;
 }
 
@@ -21,7 +21,7 @@
     background-color: rgba(255,255,255,0.4);
     margin: 20px;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .box1.padding{
@@ -44,7 +44,7 @@
     background-color: inherit;
     padding: 0;
     margin-top: 0;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -55,7 +55,16 @@
     width: 310px;
 }
 
-.card > p{
+.card2{
+    padding: 15px;
+    height: 286px;
+    width: 500px;
+    background-color: rgba(255,255,255,0.4);
+    margin: auto;
+    margin-top: 30px;
+}
+
+.card > p, .card2 > div > p{
     margin: 0;
 }
 
@@ -101,9 +110,37 @@
 }
 
 .row2{
-    height: 170px;
+    height: 150px;
 }
 
 .cHeader1.market{
     margin-left: 10px !important;
+}
+
+.cHeader3.nocenter{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #868686;
+    font-weight: normal;
+}
+
+.cHeader1.card3{
+    text-align: center;
+}
+
+.sell{
+    margin-bottom: 0; 
+}
+
+.cHeader1.card3.bottom{
+    margin-bottom: 10px;
+}
+
+.cHeader1.card3.bottom.top{
+    margin-top: 30px;
+}
+
+.cHeader3.nocenter.top{
+    margin-top: 42px;
 }
