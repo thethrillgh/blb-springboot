@@ -16,6 +16,13 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
     var test2 = ['data2', 50, 20, 10, 40, 15, 25];
     setTimeout(function(){
         var chart = c3.generate({
+            title: {
+                text: 'My Line Chart',
+                y: 100
+              },
+            padding: {
+              bottom: 20  
+            },
             bindto: '#chart',
             data: {
                 xFormat: '%m%d%y',
@@ -34,6 +41,16 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
                     tick: {
                         format: "%m-%d-%y",
                         values: tick
+                    },
+                    label: {
+                        text: 'Trade Date',
+                        position: 'outer-right'
+                    }
+                },
+                y: {
+                    label: {
+                        text: 'Yield %',
+                        position: 'outer-right'
                     }
                 }
             },
@@ -44,6 +61,13 @@ var bondController = function($scope, $state, $stateParams, bonds, apiService){
                 text: "Yield"
             }
         });
+        d3.select("svg").append("text")
+            .attr("x", 300 )
+            .attr("y", 10)
+            .style("text-anchor", "middle")
+            .style('font-size', '2em')
+            .style("dominant-baseline", "central")
+            .text("Yield");
     }, 200);
     
     
