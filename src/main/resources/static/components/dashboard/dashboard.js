@@ -56,4 +56,11 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   }
 };
 
-angular.module('blb').controller('dashboardController', dashboardController);
+var myfilter = function(
+    return function(data){
+        
+    })
+
+angular.module('blb')
+    .controller('dashboardController', dashboardController)
+    .filer('myfilter', myfilter);
