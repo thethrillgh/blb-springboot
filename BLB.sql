@@ -85,17 +85,6 @@ CREATE TABLE "bondorder" (
   FOREIGN KEY ("bondid") REFERENCES bond("bondid")
 );
 
-DROP TABLE IF EXISTS "address" CASCADE;
-CREATE TABLE "address" (
-  "id" BIGSERIAL PRIMARY KEY,
-  "streetaddress" VARCHAR,
-  "city" VARCHAR,
-  "state" VARCHAR,
-  "postalcode" VARCHAR,
-  "userid" BIGSERIAL,
-  FOREIGN KEY ("userid") REFERENCES useraccount("userid")
-);
-
 
 INSERT INTO bond(cusip,issuer,issuedate,type,interestrate,maturitydate,quantity,creditrating,callable,coupontype,bid,ask,yieldbid,yieldask,marketprice,marketyield,facevalue)
 VALUES
@@ -119,3 +108,14 @@ VALUES
 ('912834ZV8','US TREASURY',2017-04-27,'30YR',8.28,2047-04-27,500,'AA+',FALSE,'FIXED',98.89792714,100.8252333,8.372268499,8.212229945,99.86158021,8.292249222,10000),
 ('912876B00','US TREASURY',2017-04-10,'30YR',8.43,2047-04-10,10000,'AA-',FALSE,'FIXED',100.1168588,101.5648883,8.420160306,8.300112508,100.8408735,8.360136407,10000),
 ('912888F88','US TREASURY',2017-07-17,'30YR',3.875,2047-07-17,10000,'AA+',FALSE,'FIXED',99.19046513,99.71578142,3.906625496,3.886044862,99.45312328,3.896335179,10000);
+
+INSERT INTO useraccount(firstname,lastname,phonenum,acctemail,acctpass,acctssn,ssnlastfour,passsalt,streetaddress,city,state,postalcode,acctbalance)
+VALUES
+('Donald','Trump','12024561111','yourefired@putin.com','IvankasoHawt666','123456789','6789',NULL,'1600 Pensylvania Ave','Washington','DC','20500',0.1),
+('Dirk','Sweetprince','18002453875','dirk.mcdirkface@yahoo.com','iLikeSalmon1994','928648372','8372',NULL,'2 Dinkleburg Cir','Boston','MA','01002',75.09),
+('Doug','Dimmadome','19982976649','ownrdimsdaledimdom@cn.com','TimmyTurner23','938777475','7475',NULL,'1 Dimmadome Rd','Dimsdale','ME','74837',10000000.45),
+('Matt','Puck','15087749933','floozies.currencies.life@aol.com','BigBoobzlol69','837374938','4938',NULL,'14 Floozy Ln','Currency','TX','19288',20),
+('Ana','Vara Berra','18273648594','imfromvenezuela@bing.com','SalsaSalsaJAJA2','111648342','8342',NULL,'2133 Jaja Dr','Hoboken','NJ','07030',47563.22),
+('Dani','Cats','18004737737','Iwenttodartmouth@dc.com','IwenttoanIVY333','398573874','3874',NULL,'1 Webster Ave','Hanover','NH','83838',101010.4),
+('Sammy','Groot','18009999999','Iwishiwenttodartmouth@umass.com','Password1234','111223333','3333',NULL,'1 Lonely Ln','Bumblefuck','MA','12345',0),
+('Yusiff','Hamis','38484848848','imfromghana@centre.com','FutbolScoccer94','234534533','4533',NULL,'18 Main St','Danville','KY','28282',7.77);
