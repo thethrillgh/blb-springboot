@@ -8,14 +8,14 @@ var apiService = function($http){
     var yieldData = function(){
         return $http.get("test.json")
     }
-    var user = function(){
-        return $http.post("/api/user-accounts", {a: 123})
+    var mybonds = function(){
+        return $http.get("/findall")
     }
     return {
         getBonds: getBonds,
         accounts: accounts,
         yieldData: yieldData,
-        user: user
+        mybonds: mybonds
     };
 };
 
