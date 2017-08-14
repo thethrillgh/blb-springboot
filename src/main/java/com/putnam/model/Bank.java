@@ -40,4 +40,15 @@ public class Bank implements Serializable {
         this.accttype = accttype;
     }
 
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "user=" + user +
+                ", ID=" + ID +
+                ", acctnum='" + acctnum + '\'' +
+                ", routingnum='" + routingnum + '\'' +
+                ", accttype='" + accttype + '\'' +
+                '}';
+    }
+
 }
