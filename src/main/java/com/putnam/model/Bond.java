@@ -14,27 +14,6 @@ import javax.persistence.Table;
 @Table(name = "bond")
 public class Bond implements Serializable {
 	
-	public Bond(String cusip, String issuer, String issuedate, String type, Double interestrate, String maturitydate,
-			int quantity, String creditrating, String callable, String coupontype, Double bid, Double ask,
-			Double yieldbid, Double yieldask, Double marketprice, Double marketyield) {
-		this.cusip = cusip;
-		this.issuer = issuer;
-		this.issuedate = issuedate;
-		this.type = type;
-		this.interestrate = interestrate;
-		this.maturitydate = maturitydate;
-		this.quantity = quantity;
-		this.creditrating = creditrating;
-		this.callable = callable;
-		this.coupontype = coupontype;
-		this.bid = bid;
-		this.ask = ask;
-		this.yieldbid = yieldbid;
-		this.yieldask = yieldask;
-		this.marketprice = marketprice;
-		this.marketyield = marketyield;
-	}
-
 	@OneToMany(mappedBy = "bond")
 	private Collection<BondOrder> orders; 
  
@@ -75,6 +54,58 @@ public class Bond implements Serializable {
 	
 	@Column(name = "bid")
 	private Double bid;
+	
+	@Column(name = "ask")
+	private Double ask;
+	
+	@Column(name = "yieldbid")
+	private Double yieldbid;
+	
+	@Column(name = "yieldask")
+	private Double yieldask;
+	
+	@Column(name = "marketprice")
+	private Double marketprice;
+	
+	@Column(name = "marketyield")
+	private Double marketyield;
+	
+	@Column(name = "facevalue")
+	private Double facevalue;
+	
+	public Bond(String cusip, String issuer, String issuedate, String type, Double interestrate, String maturitydate,
+			int quantity, String creditrating, String callable, String coupontype, Double bid, Double ask,
+			Double yieldbid, Double yieldask, Double marketprice, Double marketyield, Double facevalue) {
+		super();
+		this.cusip = cusip;
+		this.issuer = issuer;
+		this.issuedate = issuedate;
+		this.type = type;
+		this.interestrate = interestrate;
+		this.maturitydate = maturitydate;
+		this.quantity = quantity;
+		this.creditrating = creditrating;
+		this.callable = callable;
+		this.coupontype = coupontype;
+		this.bid = bid;
+		this.ask = ask;
+		this.yieldbid = yieldbid;
+		this.yieldask = yieldask;
+		this.marketprice = marketprice;
+		this.marketyield = marketyield;
+		this.facevalue = facevalue;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Bond [orders=" + orders + ", bondid=" + bondid + ", cusip=" + cusip + ", issuer=" + issuer
+				+ ", issuedate=" + issuedate + ", type=" + type + ", interestrate=" + interestrate + ", maturitydate="
+				+ maturitydate + ", quantity=" + quantity + ", creditrating=" + creditrating + ", callable=" + callable
+				+ ", coupontype=" + coupontype + ", bid=" + bid + ", ask=" + ask + ", yieldbid=" + yieldbid
+				+ ", yieldask=" + yieldask + ", marketprice=" + marketprice + ", marketyield=" + marketyield
+				+ ", facevalue=" + facevalue + "]";
+	}
 	
 	public Collection<BondOrder> getOrders() {
 		return orders;
@@ -259,38 +290,10 @@ public class Bond implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	@Column(name = "ask")
-	private Double ask;
-	
-	@Column(name = "yieldbid")
-	private Double yieldbid;
-	
-	@Column(name = "yieldask")
-	private Double yieldask;
-	
-	@Column(name = "marketprice")
-	private Double marketprice;
-	
-	@Column(name = "marketyield")
-	private Double marketyield;
 	
 	
 	protected Bond() {
 		
 	}
-
-
-	@Override
-	public String toString() {
-		return "Bond [cusip=" + cusip + ", issuer=" + issuer + ", issuedate=" + issuedate + ", type=" + type
-				+ ", interestrate=" + interestrate + ", maturitydate=" + maturitydate + ", quantity=" + quantity
-				+ ", creditrating=" + creditrating + ", callable=" + callable + ", coupontype=" + coupontype + ", bid="
-				+ bid + ", ask=" + ask + ", yieldbid=" + yieldbid + ", yieldask=" + yieldask + ", marketprice="
-				+ marketprice + ", marketyield=" + marketyield + "]";
-	}
-	
-	
-
 	
 }

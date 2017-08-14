@@ -11,11 +11,16 @@ var apiService = function($http){
     var mybonds = function(){
         return $http.get("/findall")
     }
+    var login = function(data){
+        return $http.post("/login", data)
+    }
+    
     return {
         getBonds: getBonds,
         accounts: accounts,
         yieldData: yieldData,
-        mybonds: mybonds
+        mybonds: mybonds,
+        login: login
     };
 };
 
