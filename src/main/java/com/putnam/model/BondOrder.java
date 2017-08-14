@@ -27,36 +27,149 @@ public class BondOrder implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
  
-	@Column(name = "orderTimeStamp")
-	private LocalTime orderTimeStamp;
+	@Column(name = "ordertimestamp")
+	private LocalTime ordertimestamp;
 
-	@Column(name = "tradeDate")
-	private Date tradeDate;
+	@Column(name = "tradedate")
+	private Date tradedate;
 	
-	@Column(name = "settlementDate")
-	private Date settlementDate;
+	@Column(name = "settlementdate")
+	private Date settlementdate;
+
+	@Column(name = "transactionamt")
+	private double transactionamt;
 	
-	@Column(name = "transactionAmt")
-	private Double transactionAmt;
+	@Column(name = "accruedinterest")
+	private double accruedinterest;
 	
-	@Column(name = "accruedInterest")
-	private Double accruedInterest;
-	
-	@Column(name = "numBondsPurchased")
-	private int numBondsPurchased;
+	@Column(name = "numBondspurchased")
+	private int numBondspurchased;
+
+	@Column(name = "userid")
+	private long userid;
+
+	@Column(name = "bondid")
+	private long bondid;
 	
 	protected BondOrder() {
 		
 	}
 	
-	public BondOrder(LocalTime orderTimeStamp, Date tradeDate, Date settlementDate, Double transactionAmt,
-			Double accruedInterest, int numBondsPurchased) {
-		this.orderTimeStamp = orderTimeStamp;
-		this.tradeDate = tradeDate;
-		this.settlementDate = settlementDate;
-		this.transactionAmt = transactionAmt;
-		this.accruedInterest = accruedInterest;
-		this.numBondsPurchased = numBondsPurchased;
+	public BondOrder(LocalTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
+			double accruedinterest, int numBondspurchased, long userid, long bondid) {
+		this.ordertimestamp = ordertimestamp;
+		this.tradedate = tradedate;
+		this.settlementdate = settlementdate;
+		this.transactionamt = transactionamt;
+		this.accruedinterest = accruedinterest;
+		this.numBondspurchased = numBondspurchased;
+		this.userid = userid;
+		this.bondid = bondid;
+	}
+
+	public Bond getBond() {
+		return bond;
+	}
+
+	public void setBond(Bond bond) {
+		this.bond = bond;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public long getID() {
+		return ID;
+	}
+
+	public void setID(long ID) {
+		this.ID = ID;
+	}
+
+	public LocalTime getOrdertimestamp() {
+		return ordertimestamp;
+	}
+
+	public void setOrdertimestamp(LocalTime ordertimestamp) {
+		this.ordertimestamp = ordertimestamp;
+	}
+
+	public Date getTradedate() {
+		return tradedate;
+	}
+
+	public void setTradedate(Date tradedate) {
+		this.tradedate = tradedate;
+	}
+
+	public Date getSettlementdate() {
+		return settlementdate;
+	}
+
+	public void setSettlementdate(Date settlementdate) {
+		this.settlementdate = settlementdate;
+	}
+
+	public Double getTransactionamt() {
+		return transactionamt;
+	}
+
+	public void setTransactionamt(Double transactionamt) {
+		this.transactionamt = transactionamt;
+	}
+
+	public Double getAccruedinterest() {
+		return accruedinterest;
+	}
+
+	public void setAccruedinterest(Double accruedinterest) {
+		this.accruedinterest = accruedinterest;
+	}
+
+	public int getNumBondspurchased() {
+		return numBondspurchased;
+	}
+
+	public void setNumBondspurchased(int numBondspurchased) {
+		this.numBondspurchased = numBondspurchased;
+	}
+
+	public long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
+
+	public long getBondid() {
+		return bondid;
+	}
+
+	public void setBondid(long bondid) {
+		this.bondid = bondid;
+	}
+
+	@Override
+	public String toString() {
+		return "BondOrder{" +
+				"bond=" + bond +
+				", user=" + user +
+				", ID=" + ID +
+				", ordertimestamp=" + ordertimestamp +
+				", tradedate=" + tradedate +
+				", settlementdate=" + settlementdate +
+				", transactionamt=" + transactionamt +
+				", accruedinterest=" + accruedinterest +
+				", numBondspurchased=" + numBondspurchased +
+				", userid=" + userid +
+				", bondid=" + bondid +
+				'}';
 	}
 	
 }

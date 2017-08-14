@@ -56,8 +56,8 @@ CREATE TABLE "bondhistory" (
 	"yieldbid" DOUBLE PRECISION,
 	"yieldask" DOUBLE PRECISION,
 	"changeprice" DOUBLE PRECISION,
-	"userid" BIGSERIAL,
-  	FOREIGN KEY ("userid") REFERENCES useraccount("userid")
+	"cusip" VARCHAR,
+  	FOREIGN KEY ("cusip") REFERENCES bond("cusip")
 );
 
 DROP TABLE IF EXISTS "bankaccount" CASCADE;
@@ -79,8 +79,8 @@ CREATE TABLE "bondorder" (
   "transactionamt" DOUBLE PRECISION,
   "accruedinterest" DOUBLE PRECISION,
   "numbondspurchased" INTEGER,
-  "userid" BIGSERIAL,
-  "bondid" BIGSERIAL,
+  "userid" LONG,
+  "bondid" LONG,
   FOREIGN KEY ("userid") REFERENCES useraccount("userid"),
   FOREIGN KEY ("bondid") REFERENCES bond("bondid")
 );
