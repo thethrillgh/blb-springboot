@@ -87,7 +87,7 @@ public class BondOrder implements Serializable {
 		return id;
 	}
 
-	public void setID(long ID) {
+	public void setID(long id) {
 		this.id = id;
 	}
 
