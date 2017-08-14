@@ -10,5 +10,5 @@ import com.putnam.model.BondOrder;
 @Transactional
 @Repository
 public interface BondOrderRepository extends CrudRepository<BondOrder, Long>{
-    public BondOrder findByBondOrderid(long id);
+    public BondOrder findById(long id);
 }

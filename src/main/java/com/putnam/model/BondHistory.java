@@ -2,20 +2,20 @@ package com.putnam.model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name="bondhistory")
 public class BondHistory implements Serializable {
 
-    @ManyToOne
+	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
     private Bond bond;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ID;
+    private long id;
 
     @Column(name = "time")
     private LocalTime time;
@@ -69,11 +69,11 @@ public class BondHistory implements Serializable {
     }
 
     public long getID() {
-        return ID;
+        return id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setID(long id) {
+        this.id = id;
     }
 
     public double getBid() {
@@ -128,7 +128,7 @@ public class BondHistory implements Serializable {
     public String toString() {
         return "BondHistory{" +
                 "bond=" + bond +
-                ", ID=" + ID +
+                ", id=" + id +
                 ", time=" + time +
                 ", bid=" + bid +
                 ", ask=" + ask +

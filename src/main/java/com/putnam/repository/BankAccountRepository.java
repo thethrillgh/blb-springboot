@@ -10,5 +10,5 @@ import com.putnam.model.Bank;
 @Transactional
 @Repository
 public interface BankAccountRepository extends CrudRepository<Bank, Long>{
-    public Bank findByBankid(long id);
+    public Bank findById(long id);
 }

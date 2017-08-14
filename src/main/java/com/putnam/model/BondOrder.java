@@ -25,7 +25,7 @@ public class BondOrder implements Serializable {
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ID;
+	private long id;
  
 	@Column(name = "ordertimestamp")
 	private LocalTime ordertimestamp;
@@ -84,11 +84,11 @@ public class BondOrder implements Serializable {
 	}
 
 	public long getID() {
-		return ID;
+		return id;
 	}
 
 	public void setID(long ID) {
-		this.ID = ID;
+		this.id = id;
 	}
 
 	public LocalTime getOrdertimestamp() {
@@ -160,7 +160,7 @@ public class BondOrder implements Serializable {
 		return "BondOrder{" +
 				"bond=" + bond +
 				", user=" + user +
-				", ID=" + ID +
+				", id=" + id +
 				", ordertimestamp=" + ordertimestamp +
 				", tradedate=" + tradedate +
 				", settlementdate=" + settlementdate +

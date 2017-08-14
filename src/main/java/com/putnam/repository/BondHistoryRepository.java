@@ -10,5 +10,5 @@ import com.putnam.model.BondHistory;
 @Transactional
 @Repository
 public interface BondHistoryRepository extends CrudRepository<BondHistory, Long>{
-    public BondHistory findByBondHistoryid(long id);
+    public BondHistory findById(long id);
 }

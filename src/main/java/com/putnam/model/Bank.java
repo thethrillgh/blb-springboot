@@ -19,7 +19,7 @@ public class Bank implements Serializable {
     private static final long serialVersionUID = -3009157732242241606L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ID;
+    private long id;
 
     @Column(name = "acctnum")
     private String acctnum;
@@ -40,15 +40,12 @@ public class Bank implements Serializable {
         this.accttype = accttype;
     }
 
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "user=" + user +
-                ", ID=" + ID +
-                ", acctnum='" + acctnum + '\'' +
-                ", routingnum='" + routingnum + '\'' +
-                ", accttype='" + accttype + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Bank [user=" + user + ", id=" + id + ", acctnum=" + acctnum + ", routingnum=" + routingnum
+				+ ", accttype=" + accttype + "]";
+	}
+
+
 
 }
