@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.putnam.model.Bond;
 import com.putnam.model.User;
 import com.putnam.repository.BondRepository;
+import com.putnam.repository.UserRepository;
 import com.putnam.response.Response;
 
 @RestController
 public class Controller {	
 	@Autowired
 	BondRepository bondRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 	
 	
 	@RequestMapping("/save")
@@ -26,7 +30,8 @@ public class Controller {
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public Response login(@RequestBody User user) {
-		return new Response("Done", user);
+		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
+		return new Response("Done", result);
 		
 	}
 	
