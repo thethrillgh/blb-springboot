@@ -21,23 +21,23 @@ public class Bank implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ID;
 
-    @Column(name = "AcctNum")
-    private String AcctNum;
+    @Column(name = "acctnum")
+    private String acctnum;
 
-    @Column(name = "RoutingNum")
-    private String RoutingNum;
+    @Column(name = "routingnum")
+    private String routingnum;
 
-    @Column(name = "AcctType")
-    private String AcctType;
+    @Column(name = "accttype")
+    private String accttype;
 
     protected Bank() {
 
     }
 
-    public Bank(String acctNum, String routingNum, String acctType) {
-        this.AcctNum = acctNum;
-        this.RoutingNum = routingNum;
-        this.AcctType = acctType;
+    public Bank(String acctnum, String routingnum, String accttype) {
+        this.acctnum = acctnum;
+        this.routingnum = routingnum;
+        this.accttype = accttype;
     }
 
 }
