@@ -1,38 +1,24 @@
 package com.putnam.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.putnam.model.Bond;
-import com.putnam.model.User;
 import com.putnam.repository.BondRepository;
-import com.putnam.repository.UserRepository;
 import com.putnam.response.Response;
 
 @RestController
-public class Controller {	
+public class BondController {	
 	@Autowired
 	BondRepository bondRepo;
-	
-	@Autowired
-	UserRepository userRepo;
-	
+
 	
 	@RequestMapping("/save")
 	public String process(){
 		bondRepo.save(new Bond("912821100","US TREASURY","05/15/2017","1YR",6.15,"05/15/2018",10000,"AA+","NO","FIXED",100.778343,101.4596284,6.102501603,6.061524272,101.1189857,6.082012938, 10.09));
 		return "Done";
-	}
-	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public Response login(@RequestBody User user) {
-		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
-		return new Response("Done", result);
-		
 	}
 	
 	
