@@ -12,13 +12,13 @@ import com.putnam.model.User;
 public class TestUserAccounts {
 
     @BeforeClass
-    public void beforeTests(){
+    public static void beforeTests(){
         //Eventually add logging into tests
         System.out.print("\n\n<<<<<<<<<< START User Account Entity Object Test Suite >>>>>>>>>>\n\n");
     }
 
     @AfterClass
-    public void afterTests(){
+    public static void afterTests(){
         System.out.print("\n\n<<<<<<<<<< END User Account Entity Object Test Suite >>>>>>>>>>\n\n");
     }
 
