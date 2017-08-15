@@ -50,10 +50,6 @@ public class Bank implements Serializable {
         this.user = user;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public long getId() {
         return id;
     }
