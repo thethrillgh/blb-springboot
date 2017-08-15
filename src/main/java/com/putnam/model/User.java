@@ -55,7 +55,7 @@ public class User implements Serializable {
 	private String postalcode;
 	
 	@Column(name = "acctbalance")
-	private Double acctbalance;
+	private double acctbalance;
 	
 	protected User() {
 		super();
@@ -63,7 +63,7 @@ public class User implements Serializable {
 	
 	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
 			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
-			Double acctbalance) {
+			double acctbalance) {
 		this();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -193,11 +193,11 @@ public class User implements Serializable {
 		this.postalcode = postalcode;
 	}
 
-	public Double getAcctbalance() {
+	public double getAcctbalance() {
 		return acctbalance;
 	}
 
-	public void setAcctbalance(Double acctbalance) {
+	public void setAcctbalance(double acctbalance) {
 		this.acctbalance = acctbalance;
 	}
 }

@@ -111,4 +111,130 @@ public class TestUserAccounts {
 
         assertEquals("111223333", user.getAcctssn());
     }
+
+    @Test
+    public void testAcctSSNLastFour(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("7766", user.getSsnlastfour());
+
+        assertNotEquals("3333", user.getSsnlastfour());
+
+        user.setSsnlastfour("3333");
+
+        assertNotEquals("7766", user.getSsnlastfour());
+
+        assertEquals("3333", user.getSsnlastfour());
+    }
+
+    @Test
+    public void testPassSalt(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("AAAAAAAAAAAAAAAA", user.getPasssalt());
+
+        assertNotEquals("BBBBBBBBBBBBBBBB", user.getPasssalt());
+
+        user.setPasssalt("BBBBBBBBBBBBBBBB");
+
+        assertNotEquals("AAAAAAAAAAAAAAAA", user.getPasssalt());
+
+        assertEquals("BBBBBBBBBBBBBBBB", user.getPasssalt());
+    }
+
+    @Test
+    public void testStreetAddress(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("4 Main Street", user.getStreetaddress());
+
+        assertNotEquals("10 School Street", user.getStreetaddress());
+
+        user.setStreetaddress("10 School Street");
+
+        assertNotEquals("4 Main Street", user.getStreetaddress());
+
+        assertEquals("10 School Street", user.getStreetaddress());
+    }
+
+    @Test
+    public void testCity(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("Boston", user.getCity());
+
+        assertNotEquals("Cambridge", user.getCity());
+
+        user.setCity("Cambridge");
+
+        assertNotEquals("Boston", user.getCity());
+
+        assertEquals("Cambridge", user.getCity());
+    }
+
+    @Test
+    public void testState(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("MA", user.getState());
+
+        assertNotEquals("CA", user.getState());
+
+        user.setState("CA");
+
+        assertNotEquals("MA", user.getState());
+
+        assertEquals("CA", user.getState());
+    }
+
+    @Test
+    public void testPostalCode(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals("02129", user.getPostalcode());
+
+        assertNotEquals("01752", user.getPostalcode());
+
+        user.setPostalcode("01752");
+
+        assertNotEquals("02129", user.getPostalcode());
+
+        assertEquals("01752", user.getPostalcode());
+    }
+
+    @Test
+    public void testAcctBal(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertEquals(100.0, user.getAcctbalance(), 0.00);
+
+        assertNotEquals(50.0, user.getAcctbalance() , 0.00);
+
+        user.setAcctbalance(50.0);
+
+        assertNotEquals(100.0, user.getAcctbalance(), 0.00);
+
+        assertEquals(50.0, user.getAcctbalance(), 0.00);
+    }
+
+    @Test
+    public void testUserId(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        assertNotNull( (Long) user.getUserid());
+
+        user.setUserid(10);
+
+        assertEquals(10, user.getUserid(), 0.00);
+
+    }
+
+    @Test
+    public void testToString(){
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+
+        String obj = user.toString();
+
+        assertNotNull(obj);
+    }
 }

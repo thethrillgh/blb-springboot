@@ -1,6 +1,7 @@
 package com.putnam.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +47,5 @@ public class Bank implements Serializable {
 		return "Bank [user=" + user + ", id=" + id + ", acctnum=" + acctnum + ", routingnum=" + routingnum
 				+ ", accttype=" + accttype + "]";
 	}
-
-
 
 }
