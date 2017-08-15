@@ -73,14 +73,14 @@ CREATE TABLE "bankaccount" (
 DROP TABLE IF EXISTS "bondorder" CASCADE;
 CREATE TABLE "bondorder" (
   "id" BIGSERIAL PRIMARY KEY,
-  "ordertimestamp" TIMESTAMPTZ,
+  "ordertimestamp" TIMESTAMP,
   "tradedate" VARCHAR NOT NULL,
   "settlementdate" VARCHAR NOT NULL,
   "transactionamt" DOUBLE PRECISION,
   "accruedinterest" DOUBLE PRECISION,
   "numbondspurchased" INTEGER,
-  "userid" LONG,
-  "bondid" LONG,
+  "userid" BIGINT,
+  "bondid" BIGINT,
   FOREIGN KEY ("userid") REFERENCES useraccount("userid"),
   FOREIGN KEY ("bondid") REFERENCES bond("bondid")
 );
