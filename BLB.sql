@@ -79,8 +79,8 @@ CREATE TABLE "bondorder" (
   "transactionamt" DOUBLE PRECISION,
   "accruedinterest" DOUBLE PRECISION,
   "numbondspurchased" INTEGER,
-  "userid" BIGINT,
-  "bondid" BIGINT,
+  "userid" BIGSERIAL,
+  "bondid" BIGSERIAL,
   FOREIGN KEY ("userid") REFERENCES useraccount("userid"),
   FOREIGN KEY ("bondid") REFERENCES bond("bondid")
 );
