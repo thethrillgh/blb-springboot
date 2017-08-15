@@ -41,7 +41,51 @@ public class Bank implements Serializable {
         this.accttype = accttype;
     }
 
-	@Override
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getAcctnum() {
+        return acctnum;
+    }
+
+    public void setAcctnum(String acctnum) {
+        this.acctnum = acctnum;
+    }
+
+    public String getRoutingnum() {
+        return routingnum;
+    }
+
+    public void setRoutingnum(String routingnum) {
+        this.routingnum = routingnum;
+    }
+
+    public String getAccttype() {
+        return accttype;
+    }
+
+    public void setAccttype(String accttype) {
+        this.accttype = accttype;
+    }
+
+    @Override
 	public String toString() {
 		return "Bank [user=" + user + ", id=" + id + ", acctnum=" + acctnum + ", routingnum=" + routingnum
 				+ ", accttype=" + accttype + "]";
