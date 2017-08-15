@@ -72,11 +72,16 @@ public class Bond implements Serializable {
 	
 	@Column(name = "facevalue")
 	private Double facevalue;
-	
+
+
+	protected Bond() {
+		super();
+	}
+
 	public Bond(String cusip, String issuer, String issuedate, String type, Double interestrate, String maturitydate,
 			int quantity, String creditrating, String callable, String coupontype, Double bid, Double ask,
 			Double yieldbid, Double yieldask, Double marketprice, Double marketyield, Double facevalue) {
-		super();
+		this();
 		this.cusip = cusip;
 		this.issuer = issuer;
 		this.issuedate = issuedate;
@@ -289,11 +294,6 @@ public class Bond implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-	
-	
-	protected Bond() {
-		
 	}
 	
 }

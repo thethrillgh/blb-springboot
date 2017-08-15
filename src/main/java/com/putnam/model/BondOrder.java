@@ -52,11 +52,12 @@ public class BondOrder implements Serializable {
 	private long bondid;
 	
 	protected BondOrder() {
-		
+		super();
 	}
 	
 	public BondOrder(LocalTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
 			double accruedinterest, int numBondspurchased, long userid, long bondid) {
+		this();
 		this.ordertimestamp = ordertimestamp;
 		this.tradedate = tradedate;
 		this.settlementdate = settlementdate;

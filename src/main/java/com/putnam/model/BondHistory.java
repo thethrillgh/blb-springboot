@@ -39,10 +39,12 @@ public class BondHistory implements Serializable {
     private String cusip;
 
 
-    public BondHistory() {
+    protected BondHistory() {
+        super();
     }
 
     public BondHistory(LocalTime time, double bid, double ask, double yieldbid, double yieldask, double changeprice, String cusip){
+        this();
         this.time = time;
         this.bid = bid;
         this.ask = ask;

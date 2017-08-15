@@ -31,10 +31,11 @@ public class Bank implements Serializable {
     private String accttype;
 
     protected Bank() {
-
+        super();
     }
 
     public Bank(String acctnum, String routingnum, String accttype) {
+        this();
         this.acctnum = acctnum;
         this.routingnum = routingnum;
         this.accttype = accttype;
