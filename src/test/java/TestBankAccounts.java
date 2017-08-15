@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.putnam.model.User;
 
 /**
- * JUnit Test class for the User Entity Object
+ * JUnit Test class for the Bank Entity Object
  */
 public class TestBankAccounts {
 
