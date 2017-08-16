@@ -70,7 +70,7 @@ public class Bond implements Serializable {
 	
 	@Column(name = "marketyield")
 	private double marketyield;
-	
+
 	@Column(name = "facevalue")
 	private double facevalue;
 
@@ -292,9 +292,13 @@ public class Bond implements Serializable {
 		this.marketyield = marketyield;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public double getFacevalue() {
+		return facevalue;
 	}
+
+	public void setFacevalue(double facevalue) {
+		this.facevalue = facevalue;
+	}
+
 	
 }

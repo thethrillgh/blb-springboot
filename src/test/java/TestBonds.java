@@ -128,6 +128,7 @@ public class TestBonds {
 
         assertNotEquals("FIXED", bond.getCoupontype());
     }
+
     @Test
     public void testBid(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
@@ -138,6 +139,7 @@ public class TestBonds {
 
         assertNotEquals(100.778343, bond.getBid(),0.00);
     }
+
     @Test
     public void testAsk(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
@@ -153,26 +155,56 @@ public class TestBonds {
     public void testYieldBid(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
+        assertEquals(6.102501603, bond.getYieldbid(),0.00);
+
+        bond.setYieldbid(7.5);
+
+        assertNotEquals(6.102501603, bond.getYieldbid(),0.00);
     }
+
     @Test
     public void testYieldAsk(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
+        assertEquals(6.061524272, bond.getYieldask(),0.00);
+
+        bond.setYieldask(7.5);
+
+        assertNotEquals(6.061524272, bond.getYieldask(),0.00);
     }
+
     @Test
     public void testMarketPrice(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
+        assertEquals(101.1189857, bond.getMarketprice(),0.00);
+
+        bond.setMarketprice(103.1);
+
+        assertNotEquals(101.1189857, bond.getMarketprice(),0.00);
     }
-    public void testMArketYield(){
+
+    @Test
+    public void testMarketYield(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
+        assertEquals(6.082012938, bond.getMarketyield(),0.00);
+
+        bond.setMarketyield(7.5);
+
+        assertNotEquals(6.082012938, bond.getMarketyield(),0.00);
     }
     @Test
     public void testFaceVal(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
+        assertEquals(100, bond.getFacevalue(),0.00);
+
+        bond.setFacevalue(200);
+
+        assertNotEquals(100, bond.getFacevalue(),0.00);
     }
+
     @Test
     public void testToString(){
         Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
@@ -182,4 +214,18 @@ public class TestBonds {
         assertNotNull(obj);
 
     }
+
+    @Test
+    public void testIdNums(){
+        Bond bond = new Bond("123456XY78", "Treasury", LocalDate.of(2017, Month.AUGUST, 10), "5YR", 4.30, LocalDate.of(2023, Month.AUGUST, 10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        long id = bond.getBondid();
+
+        assertNotNull(id);
+
+        bond.setBondid(100);
+
+        assertEquals(100, bond.getBondid());
+    }
+
 }
