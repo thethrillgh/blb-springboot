@@ -1,4 +1,6 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds){
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, $stateParams){
+  $scope.user = $stateParams.obj.data;
+  console.log($scope.user);
   $scope.logout = function(){
         $state.go('landing');
     };

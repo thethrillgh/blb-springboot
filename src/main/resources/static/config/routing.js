@@ -30,6 +30,9 @@
             })
             .state('dashboard', {
                 url: '/dashboard',
+                params: {
+                    obj: null
+                },
                 templateUrl: 'components/dashboard/dashboard.html',
                 controller: 'dashboardController',
                 resolve: {
