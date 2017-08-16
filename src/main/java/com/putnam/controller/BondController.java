@@ -11,6 +11,7 @@ import com.putnam.response.Response;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Date;
 
 @RestController
 public class BondController {	
@@ -20,7 +21,7 @@ public class BondController {
 	
 	@RequestMapping("/save")
 	public String process(){
-		bondRepo.save(new Bond("912821100","US TREASURY",LocalDate.of(2017, Month.AUGUST, 10),"1YR",6.15,LocalDate.of(2023, Month.AUGUST, 10),10000,"AA+","NO","FIXED",100.778343,101.4596284,6.102501603,6.061524272,101.1189857,6.082012938, 10.09));
+		bondRepo.save(new Bond("912821100","US TREASURY",new Date(2017, 8, 10),"1YR",6.15,new Date(2023, 8, 10),10000,"AA+","NO","FIXED",100.778343,101.4596284,6.102501603,6.061524272,101.1189857,6.082012938, 10.09));
 		return "Done";
 	}
 	
