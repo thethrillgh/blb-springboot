@@ -2,14 +2,9 @@ import static org.junit.Assert.*;
 
 import com.putnam.model.Bond;
 import com.putnam.model.BondHistory;
-import com.putnam.model.BondOrder;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.Date;
 
 /**
@@ -33,7 +28,8 @@ public class TestBondHistory {
         Date time = new Date(2017, 8, 17, 12, 30);
         Date time2 = new Date(2019, 8, 20, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(time, bondHistory.getTime());
 
@@ -50,7 +46,8 @@ public class TestBondHistory {
     public void testBid(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(100.0, bondHistory.getBid(), 0.00);
 
@@ -67,7 +64,8 @@ public class TestBondHistory {
     public void testAsk(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(145.0, bondHistory.getAsk(), 0.00);
 
@@ -84,7 +82,8 @@ public class TestBondHistory {
     public void testYieldBid(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(35.0, bondHistory.getYieldbid(), 0.00);
 
@@ -101,7 +100,8 @@ public class TestBondHistory {
     public void testYieldAsk(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(45.0, bondHistory.getYieldask(), 0.00);
 
@@ -118,7 +118,8 @@ public class TestBondHistory {
     public void testChangePrice(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals(3.7, bondHistory.getChangeprice(), 0.00);
 
@@ -135,7 +136,8 @@ public class TestBondHistory {
     public void testCusip(){
         Date time = new Date(2017, 8, 17, 12, 30);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         assertEquals("123456XY78", bondHistory.getCusip());
 
@@ -157,7 +159,7 @@ public class TestBondHistory {
         Bond bond = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
         Bond bond2 = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        BondHistory bondHistory = new BondHistory(time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
 
         bondHistory.setBond(bond);
 
@@ -172,4 +174,17 @@ public class TestBondHistory {
         assertEquals(bond2, bondHistory.getBond());
     }
 
+    @Test
+    public void testId() {
+        Date time = new Date(2017, 8, 17, 12, 30);
+
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        BondHistory bondHistory = new BondHistory(bond, time, 100.0, 145.0, 35.0, 45.0, 3.7, "123456XY78");
+
+        assertNotNull(bondHistory.getId());
+
+        bondHistory.setId(12344567890L);
+
+        assertNotNull(bondHistory.getId());
+    }
 }
