@@ -1,7 +1,8 @@
 package com.putnam.model;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -22,7 +23,7 @@ public class BondHistory implements Serializable {
     private long id;
 
     @Column(name = "time")
-    private LocalTime time;
+    private Date time;
 
     @Column(name = "bid")
     private double bid;
@@ -47,139 +48,70 @@ public class BondHistory implements Serializable {
         super();
     }
 
-    public BondHistory(LocalTime time, double bid, double ask, double yieldbid, double yieldask, double changeprice, String cusip){
-        this();
-        this.time = time;
-        this.bid = bid;
-        this.ask = ask;
-        this.yieldbid = yieldbid;
-        this.yieldask = yieldask;
-        this.changeprice = changeprice;
-        this.cusip = cusip;
-    }
-
 	public Bond getBond() {
 		return bond;
 	}
-
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
-
-	public void setBond(Bond bond) {
-		this.bond = bond;
-	}
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 
 	public long getId() {
 		return id;
 	}
 
-    public void setID(long id) {
-        this.id = id;
-    }
-
 	public void setId(long id) {
 		this.id = id;
 	}
 
-    public void setBid(double bid) {
-        this.bid = bid;
-    }
-
-	public LocalTime getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-    public void setAsk(double ask) {
-        this.ask = ask;
-    }
-
-	public void setTime(LocalTime time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
-
-    public void setYieldbid(double yieldbid) {
-        this.yieldbid = yieldbid;
-    }
 
 	public double getBid() {
 		return bid;
 	}
 
-    public void setYieldask(double yieldask) {
-        this.yieldask = yieldask;
-    }
-
 	public void setBid(double bid) {
 		this.bid = bid;
 	}
-
-    public void setChangeprice(double changeprice) {
-        this.changeprice = changeprice;
-    }
 
 	public double getAsk() {
 		return ask;
 	}
 
-    public void setCusip(String cusip) {
-        this.cusip = cusip;
-    }
-
 	public void setAsk(double ask) {
 		this.ask = ask;
 	}
-
 
 	public double getYieldbid() {
 		return yieldbid;
 	}
 
-
 	public void setYieldbid(double yieldbid) {
 		this.yieldbid = yieldbid;
 	}
-
 
 	public double getYieldask() {
 		return yieldask;
 	}
 
-
 	public void setYieldask(double yieldask) {
 		this.yieldask = yieldask;
 	}
-
 
 	public double getChangeprice() {
 		return changeprice;
 	}
 
-
 	public void setChangeprice(double changeprice) {
 		this.changeprice = changeprice;
 	}
 
-
-	public String getCusip() {
-		return cusip;
-	}
-
-
-	public void setCusip(String cusip) {
-		this.cusip = cusip;
-	}
-
-
-	public BondHistory(Bond bond, long id, LocalTime time, double bid, double ask, double yieldbid, double yieldask,
+	public BondHistory(Bond bond, Date time, double bid, double ask, double yieldbid, double yieldask,
 			double changeprice, String cusip) {
 		super();
 		this.bond = bond;
-		this.id = id;
 		this.time = time;
 		this.bid = bid;
 		this.ask = ask;
@@ -188,6 +120,20 @@ public class BondHistory implements Serializable {
 		this.changeprice = changeprice;
 		this.cusip = cusip;
 	}
+
+	public String getCusip() {
+		return cusip;
+	}
+
+	public void setCusip(String cusip) {
+		this.cusip = cusip;
+	}
+
+	public void setBond(Bond bond) {
+		this.bond = bond;
+	}
+	
+	
 
     
 }

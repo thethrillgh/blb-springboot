@@ -1,7 +1,6 @@
 package com.putnam.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -66,7 +65,7 @@ public class BondOrder implements Serializable {
 		
 	}
 	
-	public BondOrder(LocalTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
+	public BondOrder(Date ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
 			double accruedinterest, int numBondspurchased, long userid, long bondid) {
 		this.ordertimestamp = ordertimestamp;
 		this.tradedate = tradedate;
