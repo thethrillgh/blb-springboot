@@ -1,6 +1,7 @@
 package com.putnam.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class BondOrder implements Serializable {
 	private long id;
  
 	@Column(name = "ordertimestamp")
-	private LocalTime ordertimestamp;
+	private LocalDateTime ordertimestamp;
 
 	@Column(name = "tradedate")
 	private Date tradedate;
@@ -55,8 +56,8 @@ public class BondOrder implements Serializable {
 		super();
 	}
 	
-	public BondOrder(LocalTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
-			double accruedinterest, int numBondspurchased, long userid, long bondid) {
+	public BondOrder(LocalDateTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
+			double accruedinterest, int numBondspurchased) {
 		this();
 		this.ordertimestamp = ordertimestamp;
 		this.tradedate = tradedate;
@@ -64,8 +65,6 @@ public class BondOrder implements Serializable {
 		this.transactionamt = transactionamt;
 		this.accruedinterest = accruedinterest;
 		this.numBondspurchased = numBondspurchased;
-		this.userid = userid;
-		this.bondid = bondid;
 	}
 
 	public Bond getBond() {
@@ -92,11 +91,11 @@ public class BondOrder implements Serializable {
 		this.id = id;
 	}
 
-	public LocalTime getOrdertimestamp() {
+	public LocalDateTime getOrdertimestamp() {
 		return ordertimestamp;
 	}
 
-	public void setOrdertimestamp(LocalTime ordertimestamp) {
+	public void setOrdertimestamp(LocalDateTime ordertimestamp) {
 		this.ordertimestamp = ordertimestamp;
 	}
 
@@ -168,8 +167,6 @@ public class BondOrder implements Serializable {
 				", transactionamt=" + transactionamt +
 				", accruedinterest=" + accruedinterest +
 				", numBondspurchased=" + numBondspurchased +
-				", userid=" + userid +
-				", bondid=" + bondid +
 				'}';
 	}
 	

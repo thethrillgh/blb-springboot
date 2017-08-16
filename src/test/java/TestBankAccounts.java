@@ -15,12 +15,12 @@ public class TestBankAccounts {
     @BeforeClass
     public static void beforeTests(){
         //Eventually add logging into tests
-        System.out.print("\n\n<<<<<<<<<< START User Account Entity Object Test Suite >>>>>>>>>>\n\n");
+        System.out.print("\n\n<<<<<<<<<< START Bank Account Entity Object Test Suite >>>>>>>>>>\n\n");
     }
 
     @AfterClass
     public static void afterTests(){
-        System.out.print("\n\n<<<<<<<<<< END User Account Entity Object Test Suite >>>>>>>>>>\n\n");
+        System.out.print("\n\n<<<<<<<<<< END Bank Account Entity Object Test Suite >>>>>>>>>>\n\n");
     }
 
     @Test
@@ -66,5 +66,14 @@ public class TestBankAccounts {
         assertNotEquals("Checking", bank.getAccttype());
 
         assertEquals("Savings", bank.getAccttype());
+    }
+
+    @Test
+    public void testToString(){
+        Bank bank = new Bank("1234567890", "111222333", "Checking");
+
+        String obj = bank.toString();
+
+        assertNotNull(obj);
     }
 }

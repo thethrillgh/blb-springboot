@@ -1,18 +1,11 @@
-import static java.time.Month.AUGUST;
 import static org.junit.Assert.*;
 
-import com.putnam.model.Bank;
 import com.putnam.model.BondOrder;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
-
-import com.putnam.model.User;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.Year;
 import java.util.Date;
 
 /**
@@ -33,34 +26,36 @@ public class TestBondOrders {
 
     @Test
     public void testOrderTimeStamp() {
-        LocalTime now1 = LocalTime.now();
-        LocalTime now2 = now1.minusHours(1);
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
+        //settlement one week after
+        Date settlementDate = new Date(2017, 8, 17);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
-        assertEquals(now1, bondOrder.getOrdertimestamp());
+        assertEquals(LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0), bondOrder.getOrdertimestamp());
 
-        assertNotEquals(now2, bondOrder.getOrdertimestamp());
+        assertNotEquals(LocalDateTime.of(2017, Month.AUGUST, 25, 12, 0), bondOrder.getOrdertimestamp());
 
-        bondOrder.setOrdertimestamp(now2);
+        bondOrder.setOrdertimestamp(LocalDateTime.of(2017, Month.AUGUST, 25, 12, 0));
 
-        assertNotEquals(now1, bondOrder.getOrdertimestamp());
+        assertNotEquals(LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0), bondOrder.getOrdertimestamp());
 
-        assertEquals(now2, bondOrder.getOrdertimestamp());
+        assertEquals(LocalDateTime.of(2017, Month.AUGUST, 25, 12, 0), bondOrder.getOrdertimestamp());
     }
 
     @Test
     public void testTradeDate() {
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date tradeDate2 = new Date(2018, 3, 3);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertEquals(tradeDate, bondOrder.getTradedate());
 
@@ -75,13 +70,14 @@ public class TestBondOrders {
 
     @Test
     public void testSettlementDate() {
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
         Date settlementDate2 = new Date(20305, 3, 3);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertEquals(settlementDate, bondOrder.getSettlementdate());
 
@@ -96,12 +92,13 @@ public class TestBondOrders {
 
     @Test
     public void testTransactionAmt() {
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertEquals(100.0, bondOrder.getTransactionamt(), 0.00);
 
@@ -116,12 +113,13 @@ public class TestBondOrders {
 
     @Test
     public void testAccruedInterest() {
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertEquals(5.0, bondOrder.getAccruedinterest(), 0.00);
 
@@ -136,12 +134,13 @@ public class TestBondOrders {
 
     @Test
     public void testNumBondsPurchased() {
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertEquals(2, bondOrder.getNumBondspurchased(), 0.00);
 
@@ -157,12 +156,13 @@ public class TestBondOrders {
 
     @Test
     public void testUserId(){
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertNotNull( (Long) bondOrder.getUserid());
 
@@ -173,12 +173,13 @@ public class TestBondOrders {
 
     @Test
     public void testBondId(){
-        LocalTime now1 = LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(2017, Month.AUGUST, 16, 12, 0);
 
         Date tradeDate = new Date(2017, 8, 10);
         Date settlementDate = new Date(2025, 9, 1);
 
-        BondOrder bondOrder = new BondOrder(now1, tradeDate, settlementDate, 100.0, 5.0, 2, 3009157732242241606L, 1009157732242241606L);
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2);
 
         assertNotNull( (Long) bondOrder.getBondid());
 
