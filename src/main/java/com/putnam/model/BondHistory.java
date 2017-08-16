@@ -43,54 +43,92 @@ public class BondHistory implements Serializable {
     private String cusip;
 
 
-    public BondHistory() {
+    protected BondHistory() {
+        super();
     }
 
+    public BondHistory(LocalTime time, double bid, double ask, double yieldbid, double yieldask, double changeprice, String cusip){
+        this();
+        this.time = time;
+        this.bid = bid;
+        this.ask = ask;
+        this.yieldbid = yieldbid;
+        this.yieldask = yieldask;
+        this.changeprice = changeprice;
+        this.cusip = cusip;
+    }
 
 	public Bond getBond() {
 		return bond;
 	}
 
+    public void setBond(Bond bond) {
+        this.bond = bond;
+    }
 
 	public void setBond(Bond bond) {
 		this.bond = bond;
 	}
 
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 
 	public long getId() {
 		return id;
 	}
 
+    public void setID(long id) {
+        this.id = id;
+    }
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
+    public void setBid(double bid) {
+        this.bid = bid;
+    }
 
 	public LocalTime getTime() {
 		return time;
 	}
 
+    public void setAsk(double ask) {
+        this.ask = ask;
+    }
 
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
+    public void setYieldbid(double yieldbid) {
+        this.yieldbid = yieldbid;
+    }
 
 	public double getBid() {
 		return bid;
 	}
 
+    public void setYieldask(double yieldask) {
+        this.yieldask = yieldask;
+    }
 
 	public void setBid(double bid) {
 		this.bid = bid;
 	}
 
+    public void setChangeprice(double changeprice) {
+        this.changeprice = changeprice;
+    }
 
 	public double getAsk() {
 		return ask;
 	}
 
+    public void setCusip(String cusip) {
+        this.cusip = cusip;
+    }
 
 	public void setAsk(double ask) {
 		this.ask = ask;

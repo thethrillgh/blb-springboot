@@ -9,6 +9,9 @@ import com.putnam.model.Bond;
 import com.putnam.repository.BondRepository;
 import com.putnam.response.Response;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 @RestController
 public class BondController {	
 	@Autowired
@@ -17,7 +20,7 @@ public class BondController {
 	
 	@RequestMapping("/save")
 	public String process(){
-		bondRepo.save(new Bond("912821100","US TREASURY","05/15/2017","1YR",6.15,"05/15/2018",10000,"AA+","NO","FIXED",100.778343,101.4596284,6.102501603,6.061524272,101.1189857,6.082012938, 10.09));
+		bondRepo.save(new Bond("912821100","US TREASURY",LocalDate.of(2017, Month.AUGUST, 10),"1YR",6.15,LocalDate.of(2023, Month.AUGUST, 10),10000,"AA+","NO","FIXED",100.778343,101.4596284,6.102501603,6.061524272,101.1189857,6.082012938, 10.09));
 		return "Done";
 	}
 	

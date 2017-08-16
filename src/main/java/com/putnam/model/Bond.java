@@ -1,5 +1,6 @@
 package com.putnam.model;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -34,16 +35,16 @@ public class Bond implements Serializable {
 	private String issuer;
 	
 	@Column(name = "issuedate")
-	private String issuedate;
+	private LocalDate issuedate;
 	
 	@Column(name = "type")
 	private String type;
 	
 	@Column(name = "interestrate")
-	private Double interestrate;
+	private double interestrate;
 	
 	@Column(name = "maturitydate")
-	private String maturitydate;
+	private LocalDate maturitydate;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -58,30 +59,35 @@ public class Bond implements Serializable {
 	private String coupontype;
 	
 	@Column(name = "bid")
-	private Double bid;
+	private double bid;
 	
 	@Column(name = "ask")
-	private Double ask;
+	private double ask;
 	
 	@Column(name = "yieldbid")
-	private Double yieldbid;
+	private double yieldbid;
 	
 	@Column(name = "yieldask")
-	private Double yieldask;
+	private double yieldask;
 	
 	@Column(name = "marketprice")
-	private Double marketprice;
+	private double marketprice;
 	
 	@Column(name = "marketyield")
-	private Double marketyield;
-	
+	private double marketyield;
+
 	@Column(name = "facevalue")
-	private Double facevalue;
-	
-	public Bond(String cusip, String issuer, String issuedate, String type, Double interestrate, String maturitydate,
-			int quantity, String creditrating, String callable, String coupontype, Double bid, Double ask,
-			Double yieldbid, Double yieldask, Double marketprice, Double marketyield, Double facevalue) {
+	private double facevalue;
+
+
+	protected Bond() {
 		super();
+	}
+
+	public Bond(String cusip, String issuer, LocalDate issuedate, String type, double interestrate, LocalDate maturitydate,
+			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
+			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
+		this();
 		this.cusip = cusip;
 		this.issuer = issuer;
 		this.issuedate = issuedate;
@@ -152,12 +158,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public String getIssuedate() {
+	public LocalDate getIssuedate() {
 		return issuedate;
 	}
 
 
-	public void setIssuedate(String issuedate) {
+	public void setIssuedate(LocalDate issuedate) {
 		this.issuedate = issuedate;
 	}
 
@@ -172,22 +178,22 @@ public class Bond implements Serializable {
 	}
 
 
-	public Double getInterestrate() {
+	public double getInterestrate() {
 		return interestrate;
 	}
 
 
-	public void setInterestrate(Double interestrate) {
+	public void setInterestrate(double interestrate) {
 		this.interestrate = interestrate;
 	}
 
 
-	public String getMaturitydate() {
+	public LocalDate getMaturitydate() {
 		return maturitydate;
 	}
 
 
-	public void setMaturitydate(String maturitydate) {
+	public void setMaturitydate(LocalDate maturitydate) {
 		this.maturitydate = maturitydate;
 	}
 
@@ -232,73 +238,72 @@ public class Bond implements Serializable {
 	}
 
 
-	public Double getBid() {
+	public double getBid() {
 		return bid;
 	}
 
 
-	public void setBid(Double bid) {
+	public void setBid(double bid) {
 		this.bid = bid;
 	}
 
 
-	public Double getAsk() {
+	public double getAsk() {
 		return ask;
 	}
 
 
-	public void setAsk(Double ask) {
+	public void setAsk(double ask) {
 		this.ask = ask;
 	}
 
 
-	public Double getYieldbid() {
+	public double getYieldbid() {
 		return yieldbid;
 	}
 
 
-	public void setYieldbid(Double yieldbid) {
+	public void setYieldbid(double yieldbid) {
 		this.yieldbid = yieldbid;
 	}
 
 
-	public Double getYieldask() {
+	public double getYieldask() {
 		return yieldask;
 	}
 
 
-	public void setYieldask(Double yieldask) {
+	public void setYieldask(double yieldask) {
 		this.yieldask = yieldask;
 	}
 
 
-	public Double getMarketprice() {
+	public double getMarketprice() {
 		return marketprice;
 	}
 
 
-	public void setMarketprice(Double marketprice) {
+	public void setMarketprice(double marketprice) {
 		this.marketprice = marketprice;
 	}
 
 
-	public Double getMarketyield() {
+	public double getMarketyield() {
 		return marketyield;
 	}
 
 
-	public void setMarketyield(Double marketyield) {
+	public void setMarketyield(double marketyield) {
 		this.marketyield = marketyield;
 	}
 
+	public double getFacevalue() {
+		return facevalue;
+	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setFacevalue(double facevalue) {
+		this.facevalue = facevalue;
 	}
-	
-	
-	protected Bond() {
-		
-	}
+
 	
 }

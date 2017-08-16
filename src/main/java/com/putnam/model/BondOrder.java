@@ -3,6 +3,7 @@ package com.putnam.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,9 +55,27 @@ public class BondOrder implements Serializable {
 	
 	@Column(name = "numBondspurchased")
 	private int numBondspurchased;
+
+	@Column(name = "userid")
+	private long userid;
+
+	@Column(name = "bondid")
+	private long bondid;
 	
 	protected BondOrder() {
 		
+	}
+	
+	public BondOrder(LocalTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
+			double accruedinterest, int numBondspurchased, long userid, long bondid) {
+		this.ordertimestamp = ordertimestamp;
+		this.tradedate = tradedate;
+		this.settlementdate = settlementdate;
+		this.transactionamt = transactionamt;
+		this.accruedinterest = accruedinterest;
+		this.numBondspurchased = numBondspurchased;
+		this.userid = userid;
+		this.bondid = bondid;
 	}
 
 	public Bond getBond() {
@@ -143,7 +162,34 @@ public class BondOrder implements Serializable {
 		this.bond = bond;
 		this.user = user;
 	}
-	
-	
+
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
+
+	public long getBondid() {
+		return bondid;
+	}
+
+	public void setBondid(long bondid) {
+		this.bondid = bondid;
+	}
+
+	@Override
+	public String toString() {
+		return "BondOrder{" +
+				"bond=" + bond +
+				", user=" + user +
+				", id=" + id +
+				", ordertimestamp=" + ordertimestamp +
+				", tradedate=" + tradedate +
+				", settlementdate=" + settlementdate +
+				", transactionamt=" + transactionamt +
+				", accruedinterest=" + accruedinterest +
+				", numBondspurchased=" + numBondspurchased +
+				", userid=" + userid +
+				", bondid=" + bondid +
+				'}';
+	}
 	
 }
