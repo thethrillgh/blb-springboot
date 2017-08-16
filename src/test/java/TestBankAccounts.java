@@ -74,6 +74,26 @@ public class TestBankAccounts {
     }
 
     @Test
+    public void testUser() {
+        Bank bank = new Bank("1234567890", "111222333", "Checking", tuser);
+
+        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user2 = new User(new ArrayList<Bank>(), "Nancy", "Drew", "5082223409", "nancydrew@gmail.com", "password2", "022657788", "7766", "AAAAAAAAAAAAAAAA", "6 Main Street", "Boston", "MA", "02129", 200.0);
+
+        bank.setUser(user);
+
+        assertEquals(user, bank.getUser());
+
+        assertNotEquals(user2,  bank.getUser());
+
+        bank.setUser(user2);
+
+        assertNotEquals(user, bank.getUser());
+
+        assertEquals(user2, bank.getUser());
+    }
+
+    @Test
     public void testToString(){
         Bank bank = new Bank("1234567890", "111222333", "Checking", tuser);
 
