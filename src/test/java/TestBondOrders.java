@@ -23,14 +23,14 @@ public class TestBondOrders {
     @BeforeClass
     public static void beforeTests(){
         //Eventually add logging into tests
-        System.out.print("\n\n<<<<<<<<<< START User Account Entity Object Test Suite >>>>>>>>>>\n\n");
+        System.out.print("\n\n<<<<<<<<<< START Bond Orders Entity Object Test Suite >>>>>>>>>>\n\n");
         tuser = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
         tbond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
     }
 
     @AfterClass
     public static void afterTests(){
-        System.out.print("\n\n<<<<<<<<<< END User Account Entity Object Test Suite >>>>>>>>>>\n\n");
+        System.out.print("\n\n<<<<<<<<<< END Bond Orders Entity Object Test Suite >>>>>>>>>>\n\n");
     }
 
     @Test

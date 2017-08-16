@@ -66,6 +66,30 @@ public class User implements Serializable {
 	
 	@Column(name = "acctbalance")
 	private Double acctbalance;
+
+	protected User(){
+		super();
+	}
+
+	public User(List<Bank> bank, String firstname, String lastname, String phonenum,
+				String acctemail, String acctpass, String acctssn, String ssnlastfour, String passsalt,
+				String streetaddress, String city, String state, String postalcode, Double acctbalance) {
+		this();
+		this.bank = bank;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenum = phonenum;
+		this.acctemail = acctemail;
+		this.acctpass = acctpass;
+		this.acctssn = acctssn;
+		this.ssnlastfour = ssnlastfour;
+		this.passsalt = hashPassword(passsalt);
+		this.streetaddress = streetaddress;
+		this.city = city;
+		this.state = state;
+		this.postalcode = postalcode;
+		this.acctbalance = acctbalance;
+	}
 	
 	private static String hashPassword(String password) {		
 		return encoder.encode(password);
@@ -77,10 +101,6 @@ public class User implements Serializable {
 
 	public static boolean isMatchingPassword(String password, String passsalt) {
 		return encoder.matches(password, passsalt);
-	}
-	
-	protected User() {
-		
 	}
 
 	public List<Bank> getBank() {
@@ -203,25 +223,4 @@ public class User implements Serializable {
 		this.acctbalance = acctbalance;
 	}
 
-	public User(List<Bank> bank, String firstname, String lastname, String phonenum,
-			String acctemail, String acctpass, String acctssn, String ssnlastfour, String passsalt,
-			String streetaddress, String city, String state, String postalcode, Double acctbalance) {
-		super();
-		this.bank = bank;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.phonenum = phonenum;
-		this.acctemail = acctemail;
-		this.acctpass = acctpass;
-		this.acctssn = acctssn;
-		this.ssnlastfour = ssnlastfour;
-		this.passsalt = hashPassword(passsalt);
-		this.streetaddress = streetaddress;
-		this.city = city;
-		this.state = state;
-		this.postalcode = postalcode;
-		this.acctbalance = acctbalance;
-	}
-	
-	
 }
