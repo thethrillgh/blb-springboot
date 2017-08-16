@@ -8,9 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -167,4 +165,55 @@ public class TestBondOrders {
 
         assertNotNull(bondOrder.toString());
     }
+
+    @Test
+    public void testBond() {
+        Date ldt = new Date(2017, 8, 16);
+        Date tradeDate = new Date(2017, 8, 10);
+        Date settlementDate = new Date(2025, 9, 1);
+        Date issueDate = new Date(2017, 8, 10);
+
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+
+        Bond bond = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        Bond bond2 = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        bondOrder.setBond(bond);
+
+        assertEquals(bond, bondOrder.getBond());
+
+        assertNotEquals(bond2,  bondOrder.getBond());
+
+        bondOrder.setBond(bond2);
+
+        assertNotEquals(bond, bondOrder.getBond());
+
+        assertEquals(bond2, bondOrder.getBond());
+    }
+
+    @Test
+    public void testUser() {
+        Date ldt = new Date(2017, 8, 16);
+        Date tradeDate = new Date(2017, 8, 10);
+        Date settlementDate = new Date(2025, 9, 1);
+
+        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+
+        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user2 = new User(new ArrayList<Bank>(), "Nancy", "Drew", "5082223409", "nancydrew@gmail.com", "password2", "022657788", "7766", "AAAAAAAAAAAAAAAA", "6 Main Street", "Boston", "MA", "02129", 200.0);
+
+        bondOrder.setUser(user);
+
+        assertEquals(user, bondOrder.getUser());
+
+        assertNotEquals(user2,  bondOrder.getUser());
+
+        bondOrder.setUser(user2);
+
+        assertNotEquals(user, bondOrder.getUser());
+
+        assertEquals(user2, bondOrder.getUser());
+    }
+
+
 }
