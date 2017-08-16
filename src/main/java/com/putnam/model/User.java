@@ -70,8 +70,12 @@ public class User implements Serializable {
 	private static String hashPassword(String password) {		
 		return encoder.encode(password);
 	}
-	
-	public boolean isMatchingPassword(String password) {
+
+	public static String testHash(String pass){
+		return hashPassword(pass);
+	}
+
+	public static boolean isMatchingPassword(String password, String passsalt) {
 		return encoder.matches(password, passsalt);
 	}
 	
