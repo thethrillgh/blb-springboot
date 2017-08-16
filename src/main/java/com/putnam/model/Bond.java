@@ -1,7 +1,7 @@
 package com.putnam.model;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,7 +35,7 @@ public class Bond implements Serializable {
 	private String issuer;
 	
 	@Column(name = "issuedate")
-	private LocalDate issuedate;
+	private Date issuedate;
 	
 	@Column(name = "type")
 	private String type;
@@ -44,7 +44,7 @@ public class Bond implements Serializable {
 	private double interestrate;
 	
 	@Column(name = "maturitydate")
-	private LocalDate maturitydate;
+	private Date maturitydate;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -84,7 +84,7 @@ public class Bond implements Serializable {
 		super();
 	}
 
-	public Bond(String cusip, String issuer, LocalDate issuedate, String type, double interestrate, LocalDate maturitydate,
+	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
 			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
 			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
 		this();
@@ -158,12 +158,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public LocalDate getIssuedate() {
+	public Date getIssuedate() {
 		return issuedate;
 	}
 
 
-	public void setIssuedate(LocalDate issuedate) {
+	public void setIssuedate(Date issuedate) {
 		this.issuedate = issuedate;
 	}
 
@@ -188,12 +188,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public LocalDate getMaturitydate() {
+	public Date getMaturitydate() {
 		return maturitydate;
 	}
 
 
-	public void setMaturitydate(LocalDate maturitydate) {
+	public void setMaturitydate(Date maturitydate) {
 		this.maturitydate = maturitydate;
 	}
 
