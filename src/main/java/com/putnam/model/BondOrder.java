@@ -43,8 +43,8 @@ public class BondOrder implements Serializable {
 	@Column(name = "accruedinterest")
 	private double accruedinterest;
 	
-	@Column(name = "numBondspurchased")
-	private int numBondspurchased;
+	@Column(name = "numbondspurchased")
+	private int numbondspurchased;
 
 	@Column(name = "userid")
 	private long userid;
@@ -57,14 +57,14 @@ public class BondOrder implements Serializable {
 	}
 	
 	public BondOrder(LocalDateTime ordertimestamp, Date tradedate, Date settlementdate, double transactionamt,
-			double accruedinterest, int numBondspurchased) {
+			double accruedinterest, int numbondspurchased) {
 		this();
 		this.ordertimestamp = ordertimestamp;
 		this.tradedate = tradedate;
 		this.settlementdate = settlementdate;
 		this.transactionamt = transactionamt;
 		this.accruedinterest = accruedinterest;
-		this.numBondspurchased = numBondspurchased;
+		this.numbondspurchased = numbondspurchased;
 	}
 
 	public Bond getBond() {
@@ -132,11 +132,11 @@ public class BondOrder implements Serializable {
 	}
 
 	public int getNumBondspurchased() {
-		return numBondspurchased;
+		return numbondspurchased;
 	}
 
-	public void setNumBondspurchased(int numBondspurchased) {
-		this.numBondspurchased = numBondspurchased;
+	public void setNumBondspurchased(int numbondspurchased) {
+		this.numbondspurchased = numbondspurchased;
 	}
 
 	public long getUserid() {
@@ -166,7 +166,7 @@ public class BondOrder implements Serializable {
 				", settlementdate=" + settlementdate +
 				", transactionamt=" + transactionamt +
 				", accruedinterest=" + accruedinterest +
-				", numBondspurchased=" + numBondspurchased +
+				", numbondspurchased=" + numbondspurchased +
 				'}';
 	}
 	
