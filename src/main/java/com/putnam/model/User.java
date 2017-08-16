@@ -1,18 +1,28 @@
 package com.putnam.model;
 
 import java.io.Serializable;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "useraccount")
 public class User implements Serializable {
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private List<Bank> bank;
 
+	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,38 +65,26 @@ public class User implements Serializable {
 	private String postalcode;
 	
 	@Column(name = "acctbalance")
-	private double acctbalance;
+	private Double acctbalance;
+	
+	private static String hashPassword(String password) {		
+		return encoder.encode(password);
+	}
+	
+	public boolean isMatchingPassword(String password) {
+		return encoder.matches(password, passsalt);
+	}
 	
 	protected User() {
-		super();
+		
 	}
-	
-	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
-			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
-			double acctbalance) {
-		this();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.phonenum = phonenum;
-		this.acctemail = acctemail;
-		this.acctpass = acctpass;
-		this.acctssn = acctssn;
-		this.ssnlastfour = ssnlastfour;
-		this.passsalt = passsalt;
-		this.streetaddress = streetaddress;
-		this.city = city;
-		this.state = state;
-		this.postalcode = postalcode;
-		this.acctbalance = acctbalance;
+
+	public List<Bank> getBank() {
+		return bank;
 	}
-	
-	@Override
-	public String toString() {
-		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenum="
-				+ phonenum + ", acctemail=" + acctemail + ", acctpass=" + acctpass + ", acctssn=" + acctssn
-				+ ", ssnlastfour=" + ssnlastfour + ", passsalt=" + passsalt + ", streetaddress=" + streetaddress
-				+ ", city=" + city + ", state=" + state + ", postalcode=" + postalcode + ", acctbalance=" + acctbalance
-				+ "]";
+
+	public void setBank(List<Bank> bank) {
+		this.bank = bank;
 	}
 
 	public long getUserid() {
@@ -193,11 +191,33 @@ public class User implements Serializable {
 		this.postalcode = postalcode;
 	}
 
-	public double getAcctbalance() {
+	public Double getAcctbalance() {
 		return acctbalance;
 	}
 
-	public void setAcctbalance(double acctbalance) {
+	public void setAcctbalance(Double acctbalance) {
 		this.acctbalance = acctbalance;
 	}
+
+	public User(List<Bank> bank, String firstname, String lastname, String phonenum,
+			String acctemail, String acctpass, String acctssn, String ssnlastfour, String passsalt,
+			String streetaddress, String city, String state, String postalcode, Double acctbalance) {
+		super();
+		this.bank = bank;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenum = phonenum;
+		this.acctemail = acctemail;
+		this.acctpass = acctpass;
+		this.acctssn = acctssn;
+		this.ssnlastfour = ssnlastfour;
+		this.passsalt = hashPassword(passsalt);
+		this.streetaddress = streetaddress;
+		this.city = city;
+		this.state = state;
+		this.postalcode = postalcode;
+		this.acctbalance = acctbalance;
+	}
+	
+	
 }

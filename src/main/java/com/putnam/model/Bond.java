@@ -1,21 +1,26 @@
 package com.putnam.model;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "bond")
 public class Bond implements Serializable {
 	
-	@OneToMany(mappedBy = "bond")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Collection<BondOrder> orders; 
  
 	private static final long serialVersionUID = -3009157732242241606L;
@@ -30,7 +35,7 @@ public class Bond implements Serializable {
 	private String issuer;
 	
 	@Column(name = "issuedate")
-	private LocalDate issuedate;
+	private Date issuedate;
 	
 	@Column(name = "type")
 	private String type;
@@ -39,7 +44,7 @@ public class Bond implements Serializable {
 	private double interestrate;
 	
 	@Column(name = "maturitydate")
-	private LocalDate maturitydate;
+	private Date maturitydate;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -79,7 +84,7 @@ public class Bond implements Serializable {
 		super();
 	}
 
-	public Bond(String cusip, String issuer, LocalDate issuedate, String type, double interestrate, LocalDate maturitydate,
+	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
 			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
 			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
 		this();
@@ -153,12 +158,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public LocalDate getIssuedate() {
+	public Date getIssuedate() {
 		return issuedate;
 	}
 
 
-	public void setIssuedate(LocalDate issuedate) {
+	public void setIssuedate(Date issuedate) {
 		this.issuedate = issuedate;
 	}
 
@@ -183,12 +188,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public LocalDate getMaturitydate() {
+	public Date getMaturitydate() {
 		return maturitydate;
 	}
 
 
-	public void setMaturitydate(LocalDate maturitydate) {
+	public void setMaturitydate(Date maturitydate) {
 		this.maturitydate = maturitydate;
 	}
 

@@ -1,8 +1,11 @@
 package com.putnam.model;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.util.Date;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="bondhistory")
@@ -10,7 +13,9 @@ public class BondHistory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="bondid", nullable=false)
+    @JsonBackReference
     private Bond bond;
 
     @Id
@@ -18,7 +23,7 @@ public class BondHistory implements Serializable {
     private long id;
 
     @Column(name = "time")
-    private LocalTime time;
+    private Date time;
 
     @Column(name = "bid")
     private double bid;
@@ -43,101 +48,92 @@ public class BondHistory implements Serializable {
         super();
     }
 
-    public BondHistory(LocalTime time, double bid, double ask, double yieldbid, double yieldask, double changeprice, String cusip){
-        this();
-        this.time = time;
-        this.bid = bid;
-        this.ask = ask;
-        this.yieldbid = yieldbid;
-        this.yieldask = yieldask;
-        this.changeprice = changeprice;
-        this.cusip = cusip;
-    }
+	public Bond getBond() {
+		return bond;
+	}
 
-    public Bond getBond() {
-        return bond;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setBond(Bond bond) {
-        this.bond = bond;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public LocalTime getTime() {
-        return time;
-    }
+	public Date getTime() {
+		return time;
+	}
 
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
+	public void setTime(Date time) {
+		this.time = time;
+	}
 
-    public long getID() {
-        return id;
-    }
+	public double getBid() {
+		return bid;
+	}
 
-    public void setID(long id) {
-        this.id = id;
-    }
+	public void setBid(double bid) {
+		this.bid = bid;
+	}
 
-    public double getBid() {
-        return bid;
-    }
+	public double getAsk() {
+		return ask;
+	}
 
-    public void setBid(double bid) {
-        this.bid = bid;
-    }
+	public void setAsk(double ask) {
+		this.ask = ask;
+	}
 
-    public double getAsk() {
-        return ask;
-    }
+	public double getYieldbid() {
+		return yieldbid;
+	}
 
-    public void setAsk(double ask) {
-        this.ask = ask;
-    }
+	public void setYieldbid(double yieldbid) {
+		this.yieldbid = yieldbid;
+	}
 
-    public double getYieldbid() {
-        return yieldbid;
-    }
+	public double getYieldask() {
+		return yieldask;
+	}
 
-    public void setYieldbid(double yieldbid) {
-        this.yieldbid = yieldbid;
-    }
+	public void setYieldask(double yieldask) {
+		this.yieldask = yieldask;
+	}
 
-    public double getYieldask() {
-        return yieldask;
-    }
+	public double getChangeprice() {
+		return changeprice;
+	}
 
-    public void setYieldask(double yieldask) {
-        this.yieldask = yieldask;
-    }
+	public void setChangeprice(double changeprice) {
+		this.changeprice = changeprice;
+	}
 
-    public double getChangeprice() {
-        return changeprice;
-    }
+	public BondHistory(Bond bond, Date time, double bid, double ask, double yieldbid, double yieldask,
+			double changeprice, String cusip) {
+		super();
+		this.bond = bond;
+		this.time = time;
+		this.bid = bid;
+		this.ask = ask;
+		this.yieldbid = yieldbid;
+		this.yieldask = yieldask;
+		this.changeprice = changeprice;
+		this.cusip = cusip;
+	}
 
-    public void setChangeprice(double changeprice) {
-        this.changeprice = changeprice;
-    }
+	public String getCusip() {
+		return cusip;
+	}
 
-    public String getCusip() {
-        return cusip;
-    }
+	public void setCusip(String cusip) {
+		this.cusip = cusip;
+	}
 
-    public void setCusip(String cusip) {
-        this.cusip = cusip;
-    }
+	public void setBond(Bond bond) {
+		this.bond = bond;
+	}
+	
+	
 
-    @Override
-    public String toString() {
-        return "BondHistory{" +
-                "bond=" + bond +
-                ", id=" + id +
-                ", time=" + time +
-                ", bid=" + bid +
-                ", ask=" + ask +
-                ", yieldbid=" + yieldbid +
-                ", yieldask=" + yieldask +
-                ", changeprice=" + changeprice +
-                ", cusip='" + cusip + '\'' +
-                '}';
-    }
+    
 }

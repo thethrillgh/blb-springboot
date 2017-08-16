@@ -21,4 +21,11 @@ public class UserController {
 		return new Response("Done", result);
 		
 	}
+	
+	@RequestMapping(value="/user/findall", method = RequestMethod.GET)
+	public Response findall() {
+		Iterable<User> result = userRepo.findAll();
+		return new Response("Done", result);
+		
+	}
 }
