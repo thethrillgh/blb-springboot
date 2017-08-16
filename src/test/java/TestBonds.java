@@ -38,15 +38,15 @@ public class TestBonds {
     public void testIssueDate(){
         Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date d = new Date(2023, 8, 10);
+        Date d = new Date(2017, 8, 16);
 
         assertEquals(d, bond.getIssuedate());
 
-        Date d2 = new Date(2023, 8, 15);
+        Date d2 = new Date(2023, 8, 25);
 
         bond.setIssuedate(d2);
 
-        assertNotEquals(d, bond.getIssuedate());
+        assertEquals(new Date(2023, 8, 25), bond.getIssuedate());
     }
 
     @Test
@@ -75,15 +75,15 @@ public class TestBonds {
     public void testMaturity(){
         Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date d = new Date(2023, 8, 10);
+        Date d = new Date(2023, 8, 16);
 
         assertEquals(d, bond.getMaturitydate());
 
-        Date d2 = new Date(2023, 8, 15);
+        Date d2 = new Date(2023, 8, 25);
 
         bond.setMaturitydate(d2);
 
-        assertNotEquals(d, bond.getMaturitydate());
+        assertEquals(new Date(2023, 8, 25), bond.getMaturitydate());
     }
 
     @Test
