@@ -1,20 +1,26 @@
 package com.putnam.model;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "bond")
 public class Bond implements Serializable {
 	
-	@OneToMany(mappedBy = "bond")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Collection<BondOrder> orders; 
  
 	private static final long serialVersionUID = -3009157732242241606L;
@@ -29,16 +35,16 @@ public class Bond implements Serializable {
 	private String issuer;
 	
 	@Column(name = "issuedate")
-	private String issuedate;
+	private Date issuedate;
 	
 	@Column(name = "type")
 	private String type;
 	
 	@Column(name = "interestrate")
-	private Double interestrate;
+	private double interestrate;
 	
 	@Column(name = "maturitydate")
-	private String maturitydate;
+	private Date maturitydate;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -53,34 +59,34 @@ public class Bond implements Serializable {
 	private String coupontype;
 	
 	@Column(name = "bid")
-	private Double bid;
+	private double bid;
 	
 	@Column(name = "ask")
-	private Double ask;
+	private double ask;
 	
 	@Column(name = "yieldbid")
-	private Double yieldbid;
+	private double yieldbid;
 	
 	@Column(name = "yieldask")
-	private Double yieldask;
+	private double yieldask;
 	
 	@Column(name = "marketprice")
-	private Double marketprice;
+	private double marketprice;
 	
 	@Column(name = "marketyield")
-	private Double marketyield;
-	
+	private double marketyield;
+
 	@Column(name = "facevalue")
-	private Double facevalue;
+	private double facevalue;
 
 
 	protected Bond() {
 		super();
 	}
 
-	public Bond(String cusip, String issuer, String issuedate, String type, Double interestrate, String maturitydate,
-			int quantity, String creditrating, String callable, String coupontype, Double bid, Double ask,
-			Double yieldbid, Double yieldask, Double marketprice, Double marketyield, Double facevalue) {
+	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
+			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
+			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
 		this();
 		this.cusip = cusip;
 		this.issuer = issuer;
@@ -152,12 +158,12 @@ public class Bond implements Serializable {
 	}
 
 
-	public String getIssuedate() {
+	public Date getIssuedate() {
 		return issuedate;
 	}
 
 
-	public void setIssuedate(String issuedate) {
+	public void setIssuedate(Date issuedate) {
 		this.issuedate = issuedate;
 	}
 
@@ -172,22 +178,22 @@ public class Bond implements Serializable {
 	}
 
 
-	public Double getInterestrate() {
+	public double getInterestrate() {
 		return interestrate;
 	}
 
 
-	public void setInterestrate(Double interestrate) {
+	public void setInterestrate(double interestrate) {
 		this.interestrate = interestrate;
 	}
 
 
-	public String getMaturitydate() {
+	public Date getMaturitydate() {
 		return maturitydate;
 	}
 
 
-	public void setMaturitydate(String maturitydate) {
+	public void setMaturitydate(Date maturitydate) {
 		this.maturitydate = maturitydate;
 	}
 
@@ -232,68 +238,72 @@ public class Bond implements Serializable {
 	}
 
 
-	public Double getBid() {
+	public double getBid() {
 		return bid;
 	}
 
 
-	public void setBid(Double bid) {
+	public void setBid(double bid) {
 		this.bid = bid;
 	}
 
 
-	public Double getAsk() {
+	public double getAsk() {
 		return ask;
 	}
 
 
-	public void setAsk(Double ask) {
+	public void setAsk(double ask) {
 		this.ask = ask;
 	}
 
 
-	public Double getYieldbid() {
+	public double getYieldbid() {
 		return yieldbid;
 	}
 
 
-	public void setYieldbid(Double yieldbid) {
+	public void setYieldbid(double yieldbid) {
 		this.yieldbid = yieldbid;
 	}
 
 
-	public Double getYieldask() {
+	public double getYieldask() {
 		return yieldask;
 	}
 
 
-	public void setYieldask(Double yieldask) {
+	public void setYieldask(double yieldask) {
 		this.yieldask = yieldask;
 	}
 
 
-	public Double getMarketprice() {
+	public double getMarketprice() {
 		return marketprice;
 	}
 
 
-	public void setMarketprice(Double marketprice) {
+	public void setMarketprice(double marketprice) {
 		this.marketprice = marketprice;
 	}
 
 
-	public Double getMarketyield() {
+	public double getMarketyield() {
 		return marketyield;
 	}
 
 
-	public void setMarketyield(Double marketyield) {
+	public void setMarketyield(double marketyield) {
 		this.marketyield = marketyield;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public double getFacevalue() {
+		return facevalue;
 	}
+
+	public void setFacevalue(double facevalue) {
+		this.facevalue = facevalue;
+	}
+
 	
 }

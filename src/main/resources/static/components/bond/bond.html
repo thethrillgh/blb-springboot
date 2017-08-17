@@ -36,26 +36,49 @@
 <div layout="column" class="dashboard_padding" flex>
     <div layout="row" layout-align="space-between start" class="box1 padding">
         <div>
-            <p class="box1header">CUSIP</p>
+            <p class="box1header">CUSIP
+                <md-tooltip class="tooltip-mulitline">Identifier of the bond</md-tooltip>
+            </p>
             <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.cusip}}</p>
         </div>
         <div>
-            <p class="box1header">Type</p>
+            <p class="box1header">Type
+                <md-tooltip class="tooltip-mulitline">A Treasury Bond is one of four types of debt issued by the US Treasury.</br>
+                    It is a fixed interest US Government security with a maturity of more than 10 years.</br>
+                    The interest is paid off semi-anually.</br>
+                </md-tooltip>
+            </p>
             <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.couponType}}</p>
         </div>
         <div>
-            <p class="box1header">Issuer: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.issueIdentifier}}</span></p>
-            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.tradeDate}}</span></p>
+            <p class="box1header">Issuer: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.issueIdentifier}}</span>
+                <md-tooltip class="tooltip-multiline">The entity issuing the bond.</md-tooltip>
+            </p>
+            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.tradeDate}}</span>
+                <md-tooltip class="tooltip-multiline">The date in which the bonds were issued.</md-tooltip>
+            </p>
         </div>
         <div>
-            <p class="box1header">Available Quantity:  <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">10000</span></p>
-            <p class="box1header" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">100</span></p>
+            <p class="box1header">Available Quantity:  <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">10000</span>
+                <md-tooltip class="tooltip-multiline">The number of remaining bonds that have not been purchased.</md-tooltip>
+            </p>
+            <p class="box1header" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">100</span>
+                <md-tooltip class="tooltip-multiline">The number of bonds under this CUSIP that you own.</md-tooltip>
+            </p>
         </div>
     </div>
     <div layout="row" layout-align="space-between start" class="box1 padding nocolor row2">
         <md-card class="card">
-            <p class="cHeader1">Coupon</p>
-            <p class="cHeader2">Face Value</p>
+            <p class="cHeader1">Coupon
+                <md-tooltip class="tooltip-multiline">The annual interest rate paid on the bond.</br>
+                    This is expressed as a percentage of the face value.
+                </md-tooltip>
+            </p>
+            <p class="cHeader2">Face Value
+                <md-tooltip class="tooltip-multiline">The initial price of the bond.</br>
+                    This is the amount that will be paid back on the maturity date.
+                </md-tooltip>
+            </p>
             <p class="cHeader3">1000</p>
             <p class="cHeader4">USD</p>
             <p class="cHeader2">Purchased</p>
@@ -71,17 +94,29 @@
             </p>
        </md-card>
         <md-card class="card">
-            <p class="cHeader1">Maturity</p>
-            <p class="cHeader2">Maturity Date</p>
+            <p class="cHeader1">Maturity
+                <md-tooltip class="tooltip-multiline">The length of time until the bond is repaid.</md-tooltip>
+            </p>
+            <p class="cHeader2">Maturity Date
+                <md-tooltip class="tooltip-multiline">The date in which the bond will be fully matured.</md-tooltip>
+            </p>
             <p class="cHeader3">Dec 15, 2020</p>
-            <p class="cHeader4">Next Coupon Date</p>
+            <p class="cHeader4">Next Coupon Date
+                <md-tooltip class="tooltip-multiline">The date of the next interest payment from the </br>issuer to the owner of the bond.</md-tooltip>
+            </p>
             <p class="cHeader2 box3">Nov 07, 2017</p>
        </md-card>
         <md-card class="card">
-            <p class="cHeader1">Bond Rating</p>
+            <p class="cHeader1">Bond Rating
+                <md-tooltip class="tooltip-multiline">The likelihood of the issuer defaulting on the loan.</br>
+                    This ranges from AAA to BBB- for the </br>Standard and Poor's Rating System (S&P).</br>
+                    S&P is one of the leading bond rating agencies.
+                </md-tooltip>
+            </p>
             <p class="cHeader2">S&amp;P</p>
             <p class="cHeader3">AAA</p>
-            <p class="cHeader4">Issuer</p>
+            <p class="cHeader4">Issuer
+            </p>
             <p class="cHeader2 box3">America Bank</p>
        </md-card>
     </div>
@@ -98,11 +133,15 @@
                     <p class="cHeader1 card3">Offer Price</p>
                     <p class="cHeader3 nocenter">101-30+</p>
                     <p class="cHeader1 card3 bottom top">Principal</p>
-                    <p class="cHeader1 card3 bottom">Accrued Interest</p>
+                    <p class="cHeader1 card3 bottom">Accrued Interest
+                        <md-tooltip class="tooltip-multiline">Amount of interest earned since the last coupon date.</md-tooltip>
+                    </p>
                     <p class="cHeader1 card3 bottom">Total</p>
                 </div>
                 <div layout="column" layout="center center" flex>
-                    <p class="cHeader1 card3">Settlement Date</p>
+                    <p class="cHeader1 card3">Settlement Date
+                        <md-tooltip class="tooltip-multiline">The date in which the bond purchase will be complete</md-tooltip>
+                    </p>
                     <p class="cHeader3 nocenter">08/04/2017</p>
                     <md-button class="md-accent md-raised sell">SELL</md-button>
                     <p class="cHeader3 nocenter top">101,953.125</p>

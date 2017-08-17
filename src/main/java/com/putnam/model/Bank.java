@@ -1,20 +1,24 @@
 package com.putnam.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "bankaccount")
 public class Bank implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="userid", nullable=false)
+    @JsonBackReference
     private User user;
 
     private static final long serialVersionUID = -3009157732242241606L;
@@ -35,57 +39,45 @@ public class Bank implements Serializable {
         super();
     }
 
-    public Bank(String acctnum, String routingnum, String accttype) {
-        this();
+    public Bank(String acctnum, String routingnum, String accttype, User user) {
         this.acctnum = acctnum;
         this.routingnum = routingnum;
         this.accttype = accttype;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
         this.user = user;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getAcctnum() {
-        return acctnum;
-    }
-
-    public void setAcctnum(String acctnum) {
-        this.acctnum = acctnum;
-    }
-
-    public String getRoutingnum() {
-        return routingnum;
-    }
-
-    public void setRoutingnum(String routingnum) {
-        this.routingnum = routingnum;
-    }
-
-    public String getAccttype() {
-        return accttype;
-    }
-
-    public void setAccttype(String accttype) {
-        this.accttype = accttype;
-    }
-
-    @Override
-	public String toString() {
-		return "Bank [user=" + user + ", id=" + id + ", acctnum=" + acctnum + ", routingnum=" + routingnum
-				+ ", accttype=" + accttype + "]";
+	public User getUser() {
+		return user;
 	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getAcctnum() {
+		return acctnum;
+	}
+
+	public void setAcctnum(String acctnum) {
+		this.acctnum = acctnum;
+	}
+
+	public String getRoutingnum() {
+		return routingnum;
+	}
+
+	public void setRoutingnum(String routingnum) {
+		this.routingnum = routingnum;
+	}
+
+	public String getAccttype() {
+		return accttype;
+	}
+
+	public void setAccttype(String accttype) {
+		this.accttype = accttype;
+	}
+    
+    
 
 }

@@ -145,3 +145,7 @@
 .cHeader3.nocenter.top{
     margin-top: 42px;
 }
+
+.tooltip-multiline {
+  height: auto;
+}

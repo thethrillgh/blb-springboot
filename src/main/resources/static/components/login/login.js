@@ -7,9 +7,10 @@ var loginController = function($scope, $state, apiService){
                 acctpass: $scope.password
             }
             apiService.login(data).then(function(data){
-                console.log(data);
+                if(data.data.status=="Done"){
+                    $state.go('dashboard', {obj: data.data})
+                }
             })
-//            $state.go('dashboard')
         }
     }
 }
