@@ -6,7 +6,7 @@
 	<groupId>com.putnam</groupId>
 	<artifactId>blb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>blb</name>
 	<description>Buy Local Bonds</description>
