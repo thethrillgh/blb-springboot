@@ -1,7 +1,7 @@
 package com.putnam.model;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -20,8 +23,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Bond implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference
-	private Collection<BondOrder> orders; 
+	private List<BondOrder> orders; 
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JsonManagedReference(value="history")
+	private List<BondHistory> history; 
  
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
@@ -84,47 +93,24 @@ public class Bond implements Serializable {
 		super();
 	}
 
-	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
-			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
-			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
-		this();
-		this.cusip = cusip;
-		this.issuer = issuer;
-		this.issuedate = issuedate;
-		this.type = type;
-		this.interestrate = interestrate;
-		this.maturitydate = maturitydate;
-		this.quantity = quantity;
-		this.creditrating = creditrating;
-		this.callable = callable;
-		this.coupontype = coupontype;
-		this.bid = bid;
-		this.ask = ask;
-		this.yieldbid = yieldbid;
-		this.yieldask = yieldask;
-		this.marketprice = marketprice;
-		this.marketyield = marketyield;
-		this.facevalue = facevalue;
-	}
 
-
-	@Override
-	public String toString() {
-		return "Bond [orders=" + orders + ", bondid=" + bondid + ", cusip=" + cusip + ", issuer=" + issuer
-				+ ", issuedate=" + issuedate + ", type=" + type + ", interestrate=" + interestrate + ", maturitydate="
-				+ maturitydate + ", quantity=" + quantity + ", creditrating=" + creditrating + ", callable=" + callable
-				+ ", coupontype=" + coupontype + ", bid=" + bid + ", ask=" + ask + ", yieldbid=" + yieldbid
-				+ ", yieldask=" + yieldask + ", marketprice=" + marketprice + ", marketyield=" + marketyield
-				+ ", facevalue=" + facevalue + "]";
-	}
-	
-	public Collection<BondOrder> getOrders() {
+	public List<BondOrder> getOrders() {
 		return orders;
 	}
 
 
-	public void setOrders(Collection<BondOrder> orders) {
+	public void setOrders(List<BondOrder> orders) {
 		this.orders = orders;
+	}
+
+
+	public List<BondHistory> getHistory() {
+		return history;
+	}
+
+
+	public void setHistory(List<BondHistory> history) {
+		this.history = history;
 	}
 
 
@@ -297,11 +283,37 @@ public class Bond implements Serializable {
 		this.marketyield = marketyield;
 	}
 
+
 	public double getFacevalue() {
 		return facevalue;
 	}
 
+
 	public void setFacevalue(double facevalue) {
+		this.facevalue = facevalue;
+	}
+
+
+	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
+			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
+			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
+		super();
+		this.cusip = cusip;
+		this.issuer = issuer;
+		this.issuedate = issuedate;
+		this.type = type;
+		this.interestrate = interestrate;
+		this.maturitydate = maturitydate;
+		this.quantity = quantity;
+		this.creditrating = creditrating;
+		this.callable = callable;
+		this.coupontype = coupontype;
+		this.bid = bid;
+		this.ask = ask;
+		this.yieldbid = yieldbid;
+		this.yieldask = yieldask;
+		this.marketprice = marketprice;
+		this.marketyield = marketyield;
 		this.facevalue = facevalue;
 	}
 

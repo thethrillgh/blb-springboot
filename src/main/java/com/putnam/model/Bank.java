@@ -18,7 +18,7 @@ public class Bank implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid", nullable=false)
-    @JsonBackReference
+    @JsonBackReference 
     private User user;
 
     private static final long serialVersionUID = -3009157732242241606L;
@@ -52,6 +52,14 @@ public class Bank implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getAcctnum() {

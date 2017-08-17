@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -19,8 +22,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class User implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference
-	private List<Bank> bank;
+	private List<Bank> banks;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JsonManagedReference(value="orders")
+	private List<BondOrder> orders;
 
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	private static final long serialVersionUID = -3009157732242241606L;
@@ -83,12 +92,20 @@ public class User implements Serializable {
 		
 	}
 
-	public List<Bank> getBank() {
-		return bank;
+	public List<Bank> getBanks() {
+		return banks;
 	}
 
-	public void setBank(List<Bank> bank) {
-		this.bank = bank;
+	public void setBanks(List<Bank> banks) {
+		this.banks = banks;
+	}
+
+	public List<BondOrder> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<BondOrder> orders) {
+		this.orders = orders;
 	}
 
 	public long getUserid() {
@@ -167,6 +184,25 @@ public class User implements Serializable {
 		return streetaddress;
 	}
 
+	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
+			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
+			Double acctbalance) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenum = phonenum;
+		this.acctemail = acctemail;
+		this.acctpass = acctpass;
+		this.acctssn = acctssn;
+		this.ssnlastfour = ssnlastfour;
+		this.passsalt = passsalt;
+		this.streetaddress = streetaddress;
+		this.city = city;
+		this.state = state;
+		this.postalcode = postalcode;
+		this.acctbalance = acctbalance;
+	}
+
 	public void setStreetaddress(String streetaddress) {
 		this.streetaddress = streetaddress;
 	}
@@ -202,26 +238,7 @@ public class User implements Serializable {
 	public void setAcctbalance(Double acctbalance) {
 		this.acctbalance = acctbalance;
 	}
-
-	public User(List<Bank> bank, String firstname, String lastname, String phonenum,
-			String acctemail, String acctpass, String acctssn, String ssnlastfour, String passsalt,
-			String streetaddress, String city, String state, String postalcode, Double acctbalance) {
-		super();
-		this.bank = bank;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.phonenum = phonenum;
-		this.acctemail = acctemail;
-		this.acctpass = acctpass;
-		this.acctssn = acctssn;
-		this.ssnlastfour = ssnlastfour;
-		this.passsalt = hashPassword(passsalt);
-		this.streetaddress = streetaddress;
-		this.city = city;
-		this.state = state;
-		this.postalcode = postalcode;
-		this.acctbalance = acctbalance;
-	}
+	
 	
 	
 }

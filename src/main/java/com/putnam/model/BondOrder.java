@@ -28,7 +28,7 @@ public class BondOrder implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid", nullable=false)
-    @JsonBackReference
+    @JsonBackReference(value="orders")
 	private User user;
 	
 	private static final long serialVersionUID = -3009157732242241606L;
