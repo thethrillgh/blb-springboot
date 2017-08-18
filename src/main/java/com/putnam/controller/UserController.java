@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.putnam.model.User;
 import com.putnam.repository.UserRepository;
@@ -56,10 +57,19 @@ public class UserController {
 		return "Done";
 	}
 	
+
+	@RequestMapping(value="/user", method = RequestMethod.GET)
+	public User user(@RequestParam("id") long id, HttpServletRequest request) {
+//		if(id == (long) request.getSession().getAttribute(userSessionKey)) {
+			User user = userRepo.findByUserid(id);
+			return user;
+//		}
+//		return null;
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public Object logout(HttpServletRequest request){
-		return request.getSession().getAttribute(userSessionKey);
-//        request.getSession().invalidate();
-//		return "redirect:/";
+	public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+		return "redirect:/";
 	}
 }
