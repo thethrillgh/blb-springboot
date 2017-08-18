@@ -28,7 +28,7 @@ public class TestUserAccounts {
 
     @Test
     public void testFirstName(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("John", user.getFirstname());
 
@@ -43,7 +43,7 @@ public class TestUserAccounts {
 
     @Test
     public void testLastName(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("Doe", user.getLastname());
 
@@ -58,7 +58,7 @@ public class TestUserAccounts {
 
     @Test
     public void testPhoneNum(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("5089993453", user.getPhonenum());
 
@@ -73,7 +73,7 @@ public class TestUserAccounts {
 
     @Test
     public void testAcctEmail(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("johndoe@gmail.com", user.getAcctemail());
 
@@ -88,7 +88,7 @@ public class TestUserAccounts {
 
     @Test
     public void testAcctPass(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("password1", user.getAcctpass());
 
@@ -103,7 +103,7 @@ public class TestUserAccounts {
 
     @Test
     public void testAcctSSN(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("022657766", user.getAcctssn());
 
@@ -118,7 +118,7 @@ public class TestUserAccounts {
 
     @Test
     public void testAcctSSNLastFour(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("7766", user.getSsnlastfour());
 
@@ -133,7 +133,7 @@ public class TestUserAccounts {
 
     @Test
     public void testPassSalt(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertNotNull(user.getPasssalt());
 
@@ -141,7 +141,7 @@ public class TestUserAccounts {
 
     @Test
     public void testStreetAddress(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("4 Main Street", user.getStreetaddress());
 
@@ -156,7 +156,7 @@ public class TestUserAccounts {
 
     @Test
     public void testCity(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("Boston", user.getCity());
 
@@ -171,7 +171,7 @@ public class TestUserAccounts {
 
     @Test
     public void testState(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("MA", user.getState());
 
@@ -186,7 +186,7 @@ public class TestUserAccounts {
 
     @Test
     public void testPostalCode(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals("02129", user.getPostalcode());
 
@@ -201,7 +201,7 @@ public class TestUserAccounts {
 
     @Test
     public void testAcctBal(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertEquals(100.0, user.getAcctbalance(), 0.00);
 
@@ -216,7 +216,7 @@ public class TestUserAccounts {
 
     @Test
     public void testUserId(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         assertNotNull( (Long) user.getUserid());
 
@@ -228,7 +228,7 @@ public class TestUserAccounts {
 
     @Test
     public void testToString(){
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        User user = new User( "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
 
         String obj = user.toString();
 

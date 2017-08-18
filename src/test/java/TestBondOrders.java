@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.putnam.model.Bond;
 
-public class TestBonds {
+public class TestBondOrders {
 
     // Bond bond = new Bond("123456XY78", "Treasury", 2017-08-10), "5YR", 4.30, 2023-08-10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
     @Test
