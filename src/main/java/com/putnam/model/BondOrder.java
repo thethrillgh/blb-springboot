@@ -46,17 +46,34 @@ public class BondOrder implements Serializable {
 	@Column(name = "settlementdate")
 	private Date settlementdate;
 
-	@Column(name = "transactionamt")
-	private double transactionamt;
+	@Column(name = "principal")
+	private double principal;
 	
 	@Column(name = "accruedinterest")
 	private double accruedinterest;
+
+	@Column(name = "total")
+	private double total;
 	
-	@Column(name = "numBondspurchased")
-	private int numBondspurchased;
+	@Column(name = "numbondspurchased")
+	private int numbondspurchased;
 	
 	protected BondOrder() {
-		
+		super();
+	}
+
+	public BondOrder(Date ordertimestamp, Date tradedate, Date settlementdate,
+					 double principal, double accruedinterest, double total, int numbondspurchased, Bond bond, User user) {
+		this();
+		this.bond = bond;
+		this.user = user;
+		this.ordertimestamp = ordertimestamp;
+		this.tradedate = tradedate;
+		this.settlementdate = settlementdate;
+		this.principal = principal;
+		this.accruedinterest = accruedinterest;
+		this.total=total;
+		this.numbondspurchased = numbondspurchased;
 	}
 
 	public Bond getBond() {
@@ -99,12 +116,12 @@ public class BondOrder implements Serializable {
 		this.settlementdate = settlementdate;
 	}
 
-	public double getTransactionamt() {
-		return transactionamt;
+	public double getprincipal() {
+		return principal;
 	}
 
-	public void setTransactionamt(double transactionamt) {
-		this.transactionamt = transactionamt;
+	public void setprincipal(double principal) {
+		this.principal = principal;
 	}
 
 	public double getAccruedinterest() {
@@ -115,27 +132,20 @@ public class BondOrder implements Serializable {
 		this.accruedinterest = accruedinterest;
 	}
 
-	public int getNumBondspurchased() {
-		return numBondspurchased;
+	public double getTotal() {
+		return total;
 	}
 
-	public void setNumBondspurchased(int numBondspurchased) {
-		this.numBondspurchased = numBondspurchased;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
-	public BondOrder(Date ordertimestamp, Date tradedate, Date settlementdate,
-			double transactionamt, double accruedinterest, int numBondspurchased, Bond bond, User user) {
-		super();
-		this.bond = bond;
-		this.user = user;
-		this.ordertimestamp = ordertimestamp;
-		this.tradedate = tradedate;
-		this.settlementdate = settlementdate;
-		this.transactionamt = transactionamt;
-		this.accruedinterest = accruedinterest;
-		this.numBondspurchased = numBondspurchased;
+	public int getNumbondspurchased() {
+		return numbondspurchased;
 	}
-	
-	
+
+	public void setNumbondspurchased(int numbondspurchased) {
+		this.numbondspurchased = numbondspurchased;
+	}
 	
 }
