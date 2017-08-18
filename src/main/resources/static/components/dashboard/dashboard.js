@@ -1,7 +1,11 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user){
-  $scope.user = user.data;
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user, apiService){
+  $scope.user = user.data.data;
   $scope.logout = function(){
-        $state.go('landing');
+        apiService.logout().then(function(data){
+            if(data.status==200){
+                $state.go('landing');
+            }
+        });
     };
   $scope.go = function(id){
   //id of bond clicked

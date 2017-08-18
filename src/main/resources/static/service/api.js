@@ -15,7 +15,10 @@ var apiService = function($http){
         return $http.post("/login", data)
     }
     var user = function(){
-        return $http.get("/user?id="+localStorage.getItem("id"))
+        return $http.get("/user")
+    }
+    var logout = function(){
+        return $http.get("/logout")
     }
     
     return {
@@ -24,7 +27,8 @@ var apiService = function($http){
         yieldData: yieldData,
         mybonds: mybonds,
         login: login,
-        user: user
+        user: user,
+        logout: logout
     };
 };
 
