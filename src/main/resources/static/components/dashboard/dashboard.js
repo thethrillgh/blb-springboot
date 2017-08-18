@@ -4,6 +4,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
         $state.go('landing');
     };
   $scope.go = function(id){
+  //id of bond clicked
         $state.go('bond', {obj: id})
     }
   $scope.bonds = bonds.data;
