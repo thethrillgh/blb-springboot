@@ -16,20 +16,23 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "bond")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bondid")
 public class Bond implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+//	@JsonManagedReference
 	private List<BondOrder> orders; 
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference(value="history")
+//	@JsonManagedReference(value="history")
 	private List<BondHistory> history; 
  
 	private static final long serialVersionUID = -3009157732242241606L;

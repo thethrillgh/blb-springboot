@@ -8,7 +8,7 @@ var loginController = function($scope, $state, apiService){
             }
             apiService.login(data).then(function(data){
                 if(data.data.status=="Done"){
-                    localStorage.setItem("id", data.data.data.userid)
+                    localStorage.setItem("id", data.data.data.userid);
                     $state.go('dashboard');
                 }
             })

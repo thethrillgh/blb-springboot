@@ -15,20 +15,24 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "useraccount")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
 public class User implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+//	@JsonManagedReference
 	private List<Bank> banks;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference(value="orders")
+//	@JsonManagedReference(value="orders")
 	private List<BondOrder> orders;
 
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

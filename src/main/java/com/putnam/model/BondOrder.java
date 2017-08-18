@@ -16,25 +16,29 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "bondorder")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BondOrder implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bondid", nullable=false)
-    @JsonBackReference
+//    @JsonBackReference
 	private Bond bond;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid", nullable=false)
-    @JsonBackReference(value="orders")
+//    @JsonBackReference(value="orders")
 	private User user;
 	
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
  
 	@Column(name = "ordertimestamp", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -92,6 +96,14 @@ public class BondOrder implements Serializable {
 		this.user = user;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Date getOrdertimestamp() {
 		return ordertimestamp;
 	}
@@ -116,20 +128,12 @@ public class BondOrder implements Serializable {
 		this.settlementdate = settlementdate;
 	}
 
-	public double getprincipal() {
+	public double getPrincipal() {
 		return principal;
 	}
 
-	public void setprincipal(double principal) {
+	public void setPrincipal(double principal) {
 		this.principal = principal;
-	}
-
-	public double getAccruedinterest() {
-		return accruedinterest;
-	}
-
-	public void setAccruedinterest(double accruedinterest) {
-		this.accruedinterest = accruedinterest;
 	}
 
 	public double getTotal() {
@@ -147,5 +151,7 @@ public class BondOrder implements Serializable {
 	public void setNumbondspurchased(int numbondspurchased) {
 		this.numbondspurchased = numbondspurchased;
 	}
+
+	
 	
 }

@@ -6,16 +6,19 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="bondhistory")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BondHistory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bondid", nullable=false)
-    @JsonBackReference(value="history")
+//    @JsonBackReference(value="history")
     private Bond bond;
 
     @Id
