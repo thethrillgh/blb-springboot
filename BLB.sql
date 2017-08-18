@@ -78,7 +78,7 @@ CREATE TABLE "bondorder" (
   "settlementdate" VARCHAR NOT NULL,
   "principal" DOUBLE PRECISION,
   "accruedinterest" DOUBLE PRECISION,
-  "total" DOBULE PRECISION,
+  "total" DOUBLE PRECISION,
   "numbondspurchased" INTEGER,
   "userid" BIGSERIAL,
   "bondid" BIGSERIAL,

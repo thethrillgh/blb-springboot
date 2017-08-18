@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.putnam.model.User;
 import com.putnam.repository.UserRepository;
+import com.putnam.response.Failed;
 import com.putnam.response.Response;
 
 @RestController
@@ -59,17 +60,21 @@ public class UserController {
 	
 
 	@RequestMapping(value="/user", method = RequestMethod.GET)
-	public User user(@RequestParam("id") long id, HttpServletRequest request) {
-//		if(id == (long) request.getSession().getAttribute(userSessionKey)) {
-			User user = userRepo.findByUserid(id);
-			return user;
-//		}
-//		return null;
+	public Response user(HttpServletRequest request) {
+			User user = userRepo.findByUserid((long) request.getSession().getAttribute(userSessionKey));
+			if(user == null) {
+				return new Response("Failed",  new Failed("Unable to find user"));
+			}
+			return new Response("Done", user);
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request){
+	public void logout(HttpServletRequest request){
         request.getSession().invalidate();
-		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/session", method = RequestMethod.GET)
+	public Object session(HttpServletRequest request){
+		return request.getSession().getAttribute(userSessionKey);
 	}
 }

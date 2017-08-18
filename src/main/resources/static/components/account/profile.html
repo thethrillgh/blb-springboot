@@ -2,7 +2,7 @@
 <md-toolbar layout layout-align="space-between center" class="toolbar md-primary md-hue-1">
     <img ui-sref="dashboard" class="logo_img" src="assets/logos.png">
     <div layout="row" layout-align="center center">
-        <p class="username">Dirk McMaster</p>
+        <p class="username">{{user.firstname}} {{user.lastname}}</p>
         <md-menu>
             <i class="material-icons md-36 menu profile_icon" ng-click="$mdMenu.open()">account_circle</i>
             <md-menu-content width="4">

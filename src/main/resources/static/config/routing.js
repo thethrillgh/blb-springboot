@@ -45,8 +45,8 @@
                 url: '/profile',
                 templateUrl: 'components/account/profile.html',
                 resolve: {
-                    accounts: function(apiService){
-                        return apiService.accounts();
+                    user: function(apiService){
+                        return apiService.user();
                     }
                 },
                 controller: 'profileController'
