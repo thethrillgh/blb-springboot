@@ -1,219 +1,229 @@
 import static org.junit.Assert.*;
 
-import com.putnam.model.Bank;
-import com.putnam.model.Bond;
-import com.putnam.model.BondOrder;
-import com.putnam.model.User;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
 import org.junit.Test;
-
-
-import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * JUnit Test class for the User Entity Object
- */
-public class TestBondOrders {
+import com.putnam.model.Bond;
 
-    public static User tuser;
-    public static Bond tbond;
+public class TestBonds {
 
-    @BeforeClass
-    public static void beforeTests(){
-        //Eventually add logging into tests
-        System.out.print("\n\n<<<<<<<<<< START Bond Orders Entity Object Test Suite >>>>>>>>>>\n\n");
-        tuser = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
-        tbond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
-    }
+    // Bond bond = new Bond("123456XY78", "Treasury", 2017-08-10), "5YR", 4.30, 2023-08-10), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+    @Test
+    public void testCusip(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-    @AfterClass
-    public static void afterTests(){
-        System.out.print("\n\n<<<<<<<<<< END Bond Orders Entity Object Test Suite >>>>>>>>>>\n\n");
+        assertEquals("123456XY78", bond.getCusip());
+
+        bond.setCusip("654321YX87");
+
+        assertNotEquals("123456XY78", bond.getCusip());
     }
 
     @Test
-    public void testOrderTimeStamp() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testIssuer(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        //settlement one week after
-        Date settlementDate = new Date(2017, 8, 17);
+        assertEquals("Treasury", bond.getIssuer());
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        bond.setIssuer("Corporate");
 
-        assertEquals(new Date(2017, 8, 16), bondOrder.getOrdertimestamp());
+        assertNotEquals("Treasury", bond.getIssuer());
 
-        assertNotEquals(new Date(2017, 8, 25), bondOrder.getOrdertimestamp());
-
-        bondOrder.setOrdertimestamp(new Date(2017, 8, 25));
-
-        assertNotEquals(new Date(2017, 8, 16), bondOrder.getOrdertimestamp());
-
-        assertEquals(new Date(2017, 8, 25), bondOrder.getOrdertimestamp());
     }
 
     @Test
-    public void testTradeDate() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testIssueDate(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        Date tradeDate2 = new Date(2018, 3, 3);
-        Date settlementDate = new Date(2025, 9, 1);
+        Date d = new Date(2017, 8, 16);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        assertEquals(d, bond.getIssuedate());
 
-        assertEquals(tradeDate, bondOrder.getTradedate());
+        Date d2 = new Date(2023, 8, 25);
 
-        assertNotEquals(tradeDate2, bondOrder.getTradedate());
+        bond.setIssuedate(d2);
 
-        bondOrder.setTradedate(tradeDate2);
-
-        assertNotEquals(tradeDate, bondOrder.getTradedate());
-
-        assertEquals(tradeDate2, bondOrder.getTradedate());
+        assertEquals(new Date(2023, 8, 25), bond.getIssuedate());
     }
 
     @Test
-    public void testSettlementDate() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testType(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
-        Date settlementDate2 = new Date(20305, 3, 3);
+        assertEquals("5YR", bond.getType());
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        bond.setType("10YR");
 
-        assertEquals(settlementDate, bondOrder.getSettlementdate());
-
-        assertNotEquals(settlementDate2, bondOrder.getSettlementdate());
-
-        bondOrder.setSettlementdate(settlementDate2);
-
-        assertNotEquals(settlementDate, bondOrder.getSettlementdate());
-
-        assertEquals(settlementDate2, bondOrder.getSettlementdate());
+        assertNotEquals("5YR", bond.getType());
     }
 
     @Test
-    public void testTransactionAmt() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testInterest(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
+        assertEquals(4.30, bond.getInterestrate(), 0.00);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        bond.setInterestrate(5.20);
 
-        assertEquals(100.0, bondOrder.getTransactionamt(), 0.00);
-
-        assertNotEquals(200.0, bondOrder.getTransactionamt(), 0.00);
-
-        bondOrder.setTransactionamt(200.0);
-
-        assertNotEquals(100.0, bondOrder.getTransactionamt(), 0.00);
-
-        assertEquals(200.0, bondOrder.getTransactionamt(), 0.00);
+        assertNotEquals(4.30, bond.getInterestrate(), 0.00);
     }
 
     @Test
-    public void testAccruedInterest() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testMaturity(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
+        Date d = new Date(2023, 8, 16);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        assertEquals(d, bond.getMaturitydate());
 
-        assertEquals(5.0, bondOrder.getAccruedinterest(), 0.00);
+        Date d2 = new Date(2023, 8, 25);
 
-        assertNotEquals(2.3, bondOrder.getAccruedinterest(), 0.00);
+        bond.setMaturitydate(d2);
 
-        bondOrder.setAccruedinterest(2.3);
-
-        assertNotEquals(5.0, bondOrder.getAccruedinterest(), 0.00);
-
-        assertEquals(2.3, bondOrder.getAccruedinterest(), 0.00);
+        assertEquals(new Date(2023, 8, 25), bond.getMaturitydate());
     }
 
     @Test
-    public void testNumBondsPurchased() {
-        Date ldt = new Date(2017, 8, 16);
+    public void testquantity(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
+        assertEquals(10000000, bond.getQuantity(), 0.00);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        bond.setQuantity(10);
 
-        assertEquals(2, bondOrder.getNumBondspurchased(), 0.00);
-
-        assertNotEquals(10, bondOrder.getNumBondspurchased(), 0.00);
-
-        bondOrder.setNumBondspurchased(10);
-
-        assertNotEquals(2, bondOrder.getNumBondspurchased(), 0.00);
-
-        assertEquals(10, bondOrder.getNumBondspurchased(), 0.00);
+        assertNotEquals(10000000, bond.getQuantity(), 0.00);
     }
 
     @Test
-    public void testToString() {
-        Date ldt = new Date(2017, 8, 16);
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+    public void testCreditRate(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        assertNotNull(bondOrder.toString());
+        assertEquals("AAA", bond.getCreditrating());
+
+        bond.setCreditrating("C");
+
+        assertNotEquals("AAA", bond.getCreditrating());
     }
 
     @Test
-    public void testBond() {
-        Date ldt = new Date(2017, 8, 16);
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
-        Date issueDate = new Date(2017, 8, 10);
+    public void testCallable(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        assertEquals("No", bond.getCallable());
 
-        Bond bond = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
-        Bond bond2 = new Bond("123456XY78", "Treasury", issueDate, "5YR", 4.30, settlementDate, 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+        bond.setCallable("Yes");
 
-        bondOrder.setBond(bond);
-
-        assertEquals(bond, bondOrder.getBond());
-
-        assertNotEquals(bond2,  bondOrder.getBond());
-
-        bondOrder.setBond(bond2);
-
-        assertNotEquals(bond, bondOrder.getBond());
-
-        assertEquals(bond2, bondOrder.getBond());
+        assertNotEquals("No", bond.getCallable());
     }
 
     @Test
-    public void testUser() {
-        Date ldt = new Date(2017, 8, 16);
-        Date tradeDate = new Date(2017, 8, 10);
-        Date settlementDate = new Date(2025, 9, 1);
+    public void testCouponType(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
 
-        BondOrder bondOrder = new BondOrder(ldt, tradeDate, settlementDate, 100.0, 5.0, 2, tbond, tuser);
+        assertEquals("FIXED", bond.getCoupontype());
 
-        User user = new User(new ArrayList<Bank>(), "John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
-        User user2 = new User(new ArrayList<Bank>(), "Nancy", "Drew", "5082223409", "nancydrew@gmail.com", "password2", "022657788", "7766", "AAAAAAAAAAAAAAAA", "6 Main Street", "Boston", "MA", "02129", 200.0);
+        bond.setCoupontype("VARIABLE");
 
-        bondOrder.setUser(user);
-
-        assertEquals(user, bondOrder.getUser());
-
-        assertNotEquals(user2,  bondOrder.getUser());
-
-        bondOrder.setUser(user2);
-
-        assertNotEquals(user, bondOrder.getUser());
-
-        assertEquals(user2, bondOrder.getUser());
+        assertNotEquals("FIXED", bond.getCoupontype());
     }
 
+    @Test
+    public void testBid(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(100.778343, bond.getBid(),0.00);
+
+        bond.setBid(101.4);
+
+        assertNotEquals(100.778343, bond.getBid(),0.00);
+    }
+
+    @Test
+    public void testAsk(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(101.4596284, bond.getAsk(),0.00);
+
+        bond.setAsk(102.4);
+
+        assertNotEquals(101.4596284, bond.getAsk(),0.00);
+    }
+
+    @Test
+    public void testYieldBid(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(6.102501603, bond.getYieldbid(),0.00);
+
+        bond.setYieldbid(7.5);
+
+        assertNotEquals(6.102501603, bond.getYieldbid(),0.00);
+    }
+
+    @Test
+    public void testYieldAsk(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(6.061524272, bond.getYieldask(),0.00);
+
+        bond.setYieldask(7.5);
+
+        assertNotEquals(6.061524272, bond.getYieldask(),0.00);
+    }
+
+    @Test
+    public void testMarketPrice(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(101.1189857, bond.getMarketprice(),0.00);
+
+        bond.setMarketprice(103.1);
+
+        assertNotEquals(101.1189857, bond.getMarketprice(),0.00);
+    }
+
+    @Test
+    public void testMarketYield(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(6.082012938, bond.getMarketyield(),0.00);
+
+        bond.setMarketyield(7.5);
+
+        assertNotEquals(6.082012938, bond.getMarketyield(),0.00);
+    }
+    @Test
+    public void testFaceVal(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        assertEquals(100, bond.getFacevalue(),0.00);
+
+        bond.setFacevalue(200);
+
+        assertNotEquals(100, bond.getFacevalue(),0.00);
+    }
+
+    @Test
+    public void testToString(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        String obj = bond.toString();
+
+        assertNotNull(obj);
+
+    }
+
+    @Test
+    public void testIdNums(){
+        Bond bond = new Bond("123456XY78", "Treasury", new Date(2017, 8, 16), "5YR", 4.30, new Date(2023, 8, 16), 10000000, "AAA", "No", "FIXED", 100.778343, 101.4596284, 6.102501603, 6.061524272, 101.1189857, 6.082012938, 100);
+
+        long id = bond.getBondid();
+
+        assertNotNull(id);
+
+        bond.setBondid(100);
+
+        assertEquals(100, bond.getBondid());
+    }
 
 }
