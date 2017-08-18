@@ -52,8 +52,9 @@ public class BondOrder implements Serializable {
 
 	@Column(name = "principal")
 	private double principal;
-	
+
 	@Column(name = "accruedinterest")
+
 	private double accruedinterest;
 
 	@Column(name = "total")
@@ -152,6 +153,12 @@ public class BondOrder implements Serializable {
 		this.numbondspurchased = numbondspurchased;
 	}
 
-	
+	public double getAccruedinterest() {
+		return accruedinterest;
+	}
+
+	public void setAccruedinterest(double accruedinterest) {
+		this.accruedinterest = accruedinterest;
+	}
 	
 }

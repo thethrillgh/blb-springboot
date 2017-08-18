@@ -49,28 +49,37 @@ public class BondOrderController {
 		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, bond, user));
 	}
 
-	@RequestMapping(value = "/order/buy", method = RequestMethod.POST)
+	@RequestMapping(value = "/order/buy", method = RequestMethod.GET)
 	public Response buyBond(@RequestParam("id") long id, @RequestParam("quantity") int quant, HttpServletRequest req){
 		//ID in param is the bondID
 		Bond bondToBuy = bondRepo.findByBondid(id);
 
-		User buyer = userCont.getUserFromSession(req.getSession());
+		//User buyer = userCont.getUserFromSession(req.getSession());
+		long userid = (long) req.getSession().getAttribute("user_id");
+		User buyer = userRepo.findByUserid(userid);
 
-		double princ = bondToBuy.getMarketprice();
+		if(bondToBuy != null && buyer != null){
 
-		double totalPrincipal = princ * quant;
+			double princ = bondToBuy.getMarketprice();
 
-		Bond orderObj = new Bond(bondToBuy.getCusip(), bondToBuy.getIssuer(), bondToBuy.getIssuedate(), bondToBuy.getType(), bondToBuy.getInterestrate(), bondToBuy.getMaturitydate(), quant, bondToBuy.getCreditrating(), bondToBuy.getCallable(), bondToBuy.getCoupontype(), bondToBuy.getBid(), bondToBuy.getAsk(), bondToBuy.getYieldbid(), bondToBuy.getYieldask(), bondToBuy.getMarketprice(), bondToBuy.getMarketyield(), bondToBuy.getFacevalue());
+			double totalPrincipal = princ * quant;
 
-		double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), new Date());
+			//Bond orderObj = new Bond(bondToBuy.getCusip(), bondToBuy.getIssuer(), bondToBuy.getIssuedate(), bondToBuy.getType(), bondToBuy.getInterestrate(), bondToBuy.getMaturitydate(), quant, bondToBuy.getCreditrating(), bondToBuy.getCallable(), bondToBuy.getCoupontype(), bondToBuy.getBid(), bondToBuy.getAsk(), bondToBuy.getYieldbid(), bondToBuy.getYieldask(), bondToBuy.getMarketprice(), bondToBuy.getMarketyield(), bondToBuy.getFacevalue());
 
-		double orderTotal = totalPrincipal + interestOnPurchase;
+			//bondRepo.save(orderObj);
 
-		BondOrder order = new BondOrder(new Date(), new Date(), new Date(), totalPrincipal, interestOnPurchase, orderTotal, quant, orderObj, buyer);
+			double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), new Date());
 
-		bondOrderRepo.save(order);
+			double orderTotal = totalPrincipal + interestOnPurchase;
 
-		return new Response("Success", order);
+			BondOrder order = new BondOrder(new Date(), new Date(), new Date(), totalPrincipal, interestOnPurchase, orderTotal, quant, bondToBuy, buyer);
+
+			bondOrderRepo.save(order);
+
+			return new Response("Success", order);
+		}
+
+		return new Response("Fail", bondToBuy);
 	}
 
 	public int daysBetween(Date d1, Date d2){
