@@ -30,14 +30,14 @@
             })
             .state('dashboard', {
                 url: '/dashboard',
-                params: {
-                    obj: null
-                },
                 templateUrl: 'components/dashboard/dashboard.html',
                 controller: 'dashboardController',
                 resolve: {
                     bonds: function(apiService){
                         return apiService.getBonds();
+                    },
+                    user: function(apiService){
+                        return apiService.user();
                     }
                 }
             })

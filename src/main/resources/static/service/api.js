@@ -14,13 +14,17 @@ var apiService = function($http){
     var login = function(data){
         return $http.post("/login", data)
     }
+    var user = function(){
+        return $http.get("/user?id="+localStorage.getItem("id"))
+    }
     
     return {
         getBonds: getBonds,
         accounts: accounts,
         yieldData: yieldData,
         mybonds: mybonds,
-        login: login
+        login: login,
+        user: user
     };
 };
 
