@@ -18,10 +18,10 @@ def main(tname, dfile, num):
     flag = True
     for line in read_from:
         if flag:
-            write_to.write('INSERT INTO %s(time,'% tname+line.strip()+',cusip)\nVALUES\n')
+            write_to.write('INSERT INTO %s('% tname+line.strip()+')\nVALUES\n')
             flag = False
         else:
-            write_to.write('historyRepo.save(new BondHistory(bond, Date.valueOf(\"'+str(datetime.date(2017, 1, 1)+datetime.timedelta(days=ctr))+'\"),'+line.strip() + ',bond.getCusip()));\n')
+            write_to.write('('+line.strip() + '),\n')
             ctr+=1
 
     read_from.close()
