@@ -51,7 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value="/hash", method = RequestMethod.GET)
 	public String pass() {
-		User result = userRepo.findByUserid(2);
+		User result = userRepo.findByUserid(1);
 		result.setPasssalt("happy12345");
 		userRepo.save(result);
 		return "Done";
