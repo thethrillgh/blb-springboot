@@ -15,7 +15,7 @@ public class BondHistory implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bondid", nullable=false)
-    @JsonBackReference
+    @JsonBackReference(value="history")
     private Bond bond;
 
     @Id

@@ -30,9 +30,10 @@ public class UserController {
     }
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public Response login(@RequestBody User user) {
+	public Response login(@RequestBody User user, HttpSession session) {
 		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
 		if(User.isMatchingPassword(user.getAcctpass(), result.getPasssalt())) {
+			setUserInSession(session, result);
 			return new Response("Done", result);
 		}
 		else {
@@ -49,15 +50,16 @@ public class UserController {
 	
 	@RequestMapping(value="/hash", method = RequestMethod.GET)
 	public String pass() {
-		User result = userRepo.findByUserid(1);
+		User result = userRepo.findByUserid(2);
 		result.setPasssalt("happy12345");
 		userRepo.save(result);
 		return "Done";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request){
-        request.getSession().invalidate();
-		return "redirect:/";
+	public Object logout(HttpServletRequest request){
+		return request.getSession().getAttribute(userSessionKey);
+//        request.getSession().invalidate();
+//		return "redirect:/";
 	}
 }
