@@ -49,7 +49,7 @@ public class BondOrderController {
 		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, bond, user));
 	}
 
-	@RequestMapping(value = "/order/buy", method = RequestMethod.POST)
+	@RequestMapping(value = "/order/buy", method = RequestMethod.GET)
 	public Response buyBond(@RequestParam("id") long id, @RequestParam("quantity") int quant, HttpServletRequest req){
 		//ID in param is the bondID
 		Bond bondToBuy = bondRepo.findByBondid(id);
