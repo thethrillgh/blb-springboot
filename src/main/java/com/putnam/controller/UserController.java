@@ -43,6 +43,20 @@ public class UserController {
 		}		
 	}
 	
+	@RequestMapping(value="/signup", method = RequestMethod.POST)
+	public Response signup(@RequestBody User user) {
+		User prev = userRepo.findByAcctemail(user.getAcctemail());
+		if(userRepo.exists(prev.getUserid())) {
+			return new Response("Fail", new Failed("Email account already exists"));
+			
+		}
+		User newUser = new User(user);
+		newUser.setPasssalt(newUser.getAcctpass());
+		userRepo.save(newUser);
+		return new Response("Done", newUser);
+	}
+	
+	
 	@RequestMapping(value="/user/findall", method = RequestMethod.GET)
 	public Response findall() {
 		Iterable<User> result = userRepo.findAll();
