@@ -22,17 +22,17 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "useraccount")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
 public class User implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference
+	@JsonManagedReference(value="banks")
 	private List<Bank> banks;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference(value="orders")
+	@JsonManagedReference(value="userorders")
 	private List<BondOrder> orders;
 
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

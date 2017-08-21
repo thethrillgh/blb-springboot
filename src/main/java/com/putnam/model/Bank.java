@@ -16,12 +16,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "bankaccount")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Bank implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid", nullable=false)
-//    @JsonBackReference 
+    @JsonBackReference(value="banks") 
     private User user;
 
     private static final long serialVersionUID = -3009157732242241606L;
