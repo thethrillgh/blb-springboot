@@ -22,17 +22,17 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "bond")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bondid")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bondid")
 public class Bond implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference
+	@JsonManagedReference(value="bondorders")
 	private List<BondOrder> orders; 
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference(value="history")
+	@JsonManagedReference(value="bondhistory")
 	private List<BondHistory> history; 
  
 	private static final long serialVersionUID = -3009157732242241606L;

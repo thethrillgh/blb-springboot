@@ -2,6 +2,7 @@ package com.putnam.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.putnam.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,13 @@ public class BondOrderController {
 		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),50000.0,45.040,50045.040,50, bond, user));
 		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,305.780,100305.780,1000, bond, user));
 		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, bond, user));
+	}
+	
+	@RequestMapping(value="/order/all", method = RequestMethod.GET)
+	public String findAll() {
+		List<BondOrder> orders = (List<BondOrder>) bondOrderRepo.findAll();
+		String order = ((BondOrder) orders.get(0)).getBond().getCusip();
+		return order;
 	}
 
 	@RequestMapping(value = "/order/buy", method = RequestMethod.GET)
