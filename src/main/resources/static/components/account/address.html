@@ -2,22 +2,22 @@
     <div layout="row">
         <div layout="column" class="formbody">
             <md-input-container>
-                <label>First Name</label>
-                <input ng-model="user.fname" type="text" required>
+                <label>First name</label>
+                <input ng-model="user.firstname" type="text" required>
             </md-input-container>
             <md-input-container>
-                <label>Last Name</label>
-                <input ng-model="user.lname" required>
+                <label>Last name</label>
+                <input ng-model="user.lastname" required>
             </md-input-container>
             <md-input-container>
-                <label>Address</label>
-                <input ng-model="user.address">
+                <label>Street address</label>
+                <input ng-model="user.streetaddress">
             </md-input-container>
         </div>
         <div layout="column">
             <md-input-container>
-                <label>Postal Code</label>
-                <input name="postalCode" ng-model="user.postalCode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                <label>Postal code</label>
+                <input name="postalCode" ng-model="user.postalcode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
             </md-input-container>
             <md-input-container>
                  <label>City</label>
