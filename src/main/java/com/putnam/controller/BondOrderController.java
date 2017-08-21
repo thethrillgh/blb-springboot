@@ -54,7 +54,6 @@ public class BondOrderController {
 		//ID in param is the bondID
 		Bond bondToBuy = bondRepo.findByBondid(id);
 
-		//User buyer = userCont.getUserFromSession(req.getSession());
 		long userid = (long) req.getSession().getAttribute("user_id");
 		User buyer = userRepo.findByUserid(userid);
 
@@ -64,22 +63,42 @@ public class BondOrderController {
 
 			double totalPrincipal = princ * quant;
 
-			//Bond orderObj = new Bond(bondToBuy.getCusip(), bondToBuy.getIssuer(), bondToBuy.getIssuedate(), bondToBuy.getType(), bondToBuy.getInterestrate(), bondToBuy.getMaturitydate(), quant, bondToBuy.getCreditrating(), bondToBuy.getCallable(), bondToBuy.getCoupontype(), bondToBuy.getBid(), bondToBuy.getAsk(), bondToBuy.getYieldbid(), bondToBuy.getYieldask(), bondToBuy.getMarketprice(), bondToBuy.getMarketyield(), bondToBuy.getFacevalue());
-
-			//bondRepo.save(orderObj);
-
 			double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), new Date());
 
 			double orderTotal = totalPrincipal + interestOnPurchase;
 
-			BondOrder order = new BondOrder(new Date(), new Date(), new Date(), totalPrincipal, interestOnPurchase, orderTotal, quant, bondToBuy, buyer);
+			double newBalance = buyer.getAcctbalance() - orderTotal;
 
-			bondOrderRepo.save(order);
+			if(newBalance >= 0.00) {
 
-			return new Response("Success", order);
+				buyer.setAcctbalance(newBalance);
+
+				BondOrder order = new BondOrder(new Date(), new Date(), new Date(), totalPrincipal, interestOnPurchase, orderTotal, quant, bondToBuy, buyer);
+
+				bondOrderRepo.save(order);
+
+				return new Response("Success", order);
+			}
 		}
 
 		return new Response("Fail", bondToBuy);
+	}
+
+	@RequestMapping(value = "/order/sell", method = RequestMethod.GET)
+	public Response sellBond(@RequestParam("id") long id, @RequestParam("quantity") int quant, HttpServletRequest req){
+
+		//ID in param is the bondID
+		Bond bondToSell = bondRepo.findByBondid(id);
+
+		long userid = (long) req.getSession().getAttribute("user_id");
+
+		User buyer = userRepo.findByUserid(userid);
+
+		if(bondToSell != null && buyer != null){
+			return new Response("Success", new BondOrder());
+		}
+
+		return new Response("Fail", bondToSell);
 	}
 
 	public int daysBetween(Date d1, Date d2){
