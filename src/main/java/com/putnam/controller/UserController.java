@@ -68,6 +68,15 @@ public class UserController {
 			return new Response("Done", user);
 	}
 	
+	@RequestMapping(value="/userbonds", method = RequestMethod.GET)
+	public Response userBonds(HttpServletRequest request) {
+			User user = userRepo.findByUserid((long) request.getSession().getAttribute(userSessionKey));
+			if(user == null) {
+				return new Response("Failed",  new Failed("Unable to find user"));
+			}
+			return new Response("Done", user);
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request){
         request.getSession().invalidate();
