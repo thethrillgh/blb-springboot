@@ -96,6 +96,7 @@ public class User implements Serializable {
 		
 	}
 
+
 	public List<Bank> getBanks() {
 		return banks;
 	}
@@ -181,30 +182,11 @@ public class User implements Serializable {
 	}
 
 	public void setPasssalt(String passsalt) {
-		this.passsalt = hashPassword(passsalt);
+		this.passsalt = passsalt;
 	}
 
 	public String getStreetaddress() {
 		return streetaddress;
-	}
-
-	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
-			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
-			Double acctbalance) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.phonenum = phonenum;
-		this.acctemail = acctemail;
-		this.acctpass = acctpass;
-		this.acctssn = acctssn;
-		this.ssnlastfour = ssnlastfour;
-		this.passsalt = passsalt;
-		this.streetaddress = streetaddress;
-		this.city = city;
-		this.state = state;
-		this.postalcode = postalcode;
-		this.acctbalance = acctbalance;
 	}
 
 	public void setStreetaddress(String streetaddress) {
@@ -242,7 +224,41 @@ public class User implements Serializable {
 	public void setAcctbalance(Double acctbalance) {
 		this.acctbalance = acctbalance;
 	}
+
+	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
+			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
+			Double acctbalance) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenum = phonenum;
+		this.acctemail = acctemail;
+		this.acctpass = acctpass;
+		this.acctssn = acctssn;
+		this.ssnlastfour = ssnlastfour;
+		this.passsalt = passsalt;
+		this.streetaddress = streetaddress;
+		this.city = city;
+		this.state = state;
+		this.postalcode = postalcode;
+		this.acctbalance = acctbalance;
+	}
 	
-	
+	public User(User obj) {
+		super();
+		this.firstname = obj.getFirstname();
+		this.lastname = obj.getLastname();
+		this.phonenum = obj.getPhonenum();
+		this.acctemail = obj.getAcctemail();
+		this.acctpass = obj.getAcctpass();
+		this.acctssn = obj.getAcctssn();
+		this.ssnlastfour = obj.getSsnlastfour();
+		this.passsalt = obj.getPasssalt();
+		this.streetaddress = obj.getStreetaddress();
+		this.city = obj.getCity();
+		this.state = obj.getState();
+		this.postalcode = obj.getPostalcode();
+		this.acctbalance = obj.getAcctbalance();
+	}
 	
 }
