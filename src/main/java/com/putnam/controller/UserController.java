@@ -94,7 +94,7 @@ public class UserController {
 			if(user == null) {
 				return new Response("Failed",  new Failed("Unable to find user"));
 			}
-			return new Response("Done", user.getOrders().get(0).getBond());
+			return new Response("Done", user.getOrders().get(0));
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
