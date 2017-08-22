@@ -23,6 +23,9 @@ var apiService = function($http){
     var logout = function(){
         return $http.get("/logout")
     }
+    var portfolio = function(){
+        return $http.get("/portfolio")
+    }
 
     return {
         getBonds: getBonds,
@@ -33,7 +36,8 @@ var apiService = function($http){
         login: login,
         signup: signup,
         user: user,
-        logout: logout
+        logout: logout,
+        portfolio: portfolio
     };
 };
 
