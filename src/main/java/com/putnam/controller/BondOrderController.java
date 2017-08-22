@@ -26,8 +26,6 @@ public class BondOrderController {
 	
 	@Autowired
 	UserRepository userRepo;
-
-	UserController userCont;
 	
 	@Autowired
 	BondRepository bondRepo;
@@ -105,12 +103,12 @@ public class BondOrderController {
 	}
 
 	@RequestMapping(value = "/order/sell", method = RequestMethod.GET)
-	public Response sellBond(@RequestParam("id") long id, @RequestParam("quantity") int quant, HttpServletRequest req){
+	public Response sellBond(@RequestParam("bid") long bondid, @RequestParam("oid") long orderid, @RequestParam("quantity") int quant, HttpServletRequest req){
 		/**
 		 * Assumes sell functionality only exists on bonds in the user's portfolio with quantities
 		 */
 		//ID in param is the bondID
-		Bond bondToSell = bondRepo.findByBondid(id);
+		Bond bondToSell = bondRepo.findByBondid(bondid);
 
 		long userid = (long) req.getSession().getAttribute("user_id");
 
@@ -118,11 +116,14 @@ public class BondOrderController {
 
 		if(bondToSell != null && seller != null){
 
-			ArrayList<BondOrder> orders = bondOrderRepo.findByBondAndUser(bondToSell, seller);
+			//ArrayList<BondOrder> orders = bondOrderRepo.findByBondAndUser(bondToSell, seller);
+			BondOrder assocOrder = bondOrderRepo.findById(orderid);
 
-			if(orders != null && !orders.isEmpty()){ //could get around double check with instantiation?
+			if(assocOrder != null){
 
-				if(computeQuantityOwned(orders) >= quant) {
+				int numOwned = assocOrder.getNumbondspurchased();
+
+				if( numOwned >= quant) {
 
 					Date td = new Date();
 					Date sd = new Date();
@@ -147,6 +148,10 @@ public class BondOrderController {
 					double newBalance = seller.getAcctbalance() + orderTotal;
 
 					BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
+
+					assocOrder.setNumbondspurchased((numOwned - quant));
+
+					bondOrderRepo.save(assocOrder);
 
 					bondOrderRepo.save(order);
 
