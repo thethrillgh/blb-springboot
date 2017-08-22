@@ -10,7 +10,10 @@ public class PortfolioEntry implements Serializable {
     private BondOrder assocOrder;
 
     public PortfolioEntry(Bond bond, BondOrder order){
-        this.assocBond = bond;
+        //this.assocBond = bond;
+        //this.assocOrder = order;
+        this.assocBond = new Bond(bond.getCusip(), bond.getIssuer(), bond.getIssuedate(), bond.getType(),bond.getInterestrate(),bond.getMaturitydate(),bond.getQuantity(), bond.getCreditrating(),bond.getCallable(), bond.getCoupontype(),bond.getBid(), bond.getAsk(), bond.getYieldbid(), bond.getYieldask(), bond.getMarketprice(), bond.getMarketyield(), bond.getFacevalue());
+        this.assocBond.setBondid(bond.getBondid());
         this.assocOrder = order;
     }
 

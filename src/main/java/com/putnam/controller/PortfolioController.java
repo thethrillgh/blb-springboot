@@ -1,6 +1,7 @@
 package com.putnam.controller;
 
 import com.putnam.model.BondOrder;
+import com.putnam.model.Portfolio;
 import com.putnam.model.PortfolioEntry;
 import com.putnam.model.User;
 import com.putnam.repository.BondHistoryRepository;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class PortfolioController {
@@ -30,23 +32,41 @@ public class PortfolioController {
     BondOrderRepository bondOrderRepo;
 
     @Autowired
-    BondHistoryRepository bondHidtoryRepo;
+    BondHistoryRepository bondHistoryRepo;
 
     @RequestMapping(value = "/portfolio", method = RequestMethod.GET)
     public Response returnPortfolio(HttpServletRequest req){
-
+/**
+ * dont need history or orders just bond info and order for that bond
+ */
         //Get the User Object
         long userid = (long) req.getSession().getAttribute("user_id");
         User user = userRepo.findByUserid(userid);
 
-        ArrayList<PortfolioEntry> holdings = filterOrdersForPortfolio((ArrayList<BondOrder>) user.getOrders());
+        List<PortfolioEntry> holdings = new ArrayList<PortfolioEntry>();
 
-        //It failed
-        return new Response("Fail", new Object());
+        if(user != null){
+
+            holdings = filterOrdersForPortfolio(user.getOrders());
+
+            Portfolio userPortfolio = new Portfolio(holdings);
+
+            return new Response("Success", new Portfolio(holdings));
+        }
+
+        return new Response("Fail", new Portfolio(holdings));
     }
 
-    public ArrayList<PortfolioEntry> filterOrdersForPortfolio(ArrayList<BondOrder> orders){
+    public List<PortfolioEntry> filterOrdersForPortfolio(List<BondOrder> orders){
 
+        List<PortfolioEntry> buyOrders = new ArrayList<PortfolioEntry>();
+
+        for(BondOrder order : orders){
+            if(order.getTransactiontype().equalsIgnoreCase(BondOrder.BUY)){
+                buyOrders.add(new PortfolioEntry(order.getBond(), order));
+            }
+        }
+        return buyOrders;
     }
 
 }
