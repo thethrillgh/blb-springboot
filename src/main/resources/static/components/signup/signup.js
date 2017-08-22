@@ -6,7 +6,7 @@ var signUpController = function($scope, $state, apiService){
       });
     function toTitleCase(str){
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-    }
+    } 
     $scope.signup = function(form){
         console.log("clicked!!!");
         if(form){
