@@ -47,6 +47,9 @@
                             
                         }
                         return apiService.user(localStorage.getItem("id"));
+                    },
+                    portfolio: function(apiService){
+                        return apiService.portfolio();
                     }
                 }
             })

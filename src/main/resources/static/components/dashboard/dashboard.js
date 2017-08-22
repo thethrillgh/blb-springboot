@@ -1,5 +1,5 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user, apiService){
-  console.log(localStorage.getItem("id"), user)
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user, apiService, portfolio){
+  console.log(portfolio)
   $scope.user = user.data.data;
   $scope.logout = function(){
         apiService.logout().then(function(data){
