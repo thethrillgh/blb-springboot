@@ -182,7 +182,7 @@ public class User implements Serializable {
 	}
 
 	public void setPasssalt(String passsalt) {
-		this.passsalt = passsalt;
+		this.passsalt = hashPassword(passsalt);
 	}
 
 	public String getStreetaddress() {
