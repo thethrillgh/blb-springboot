@@ -5,7 +5,7 @@
 <div layout="column" layout-align="center center">
     <p class="login_header grey">Sign Up</p>
     <p class="sub_header">Already have a BLB account? <span class="sign_up" ui-sref="login">Log In</span></p>
-    <form name="signupForm" layout="column">
+    <form name="signupForm" ng-submit="signup(signupForm.$valid)" layout="column">
         <md-input-container class="md-accent login_input">
             <label class="login_label">First name</label>
             <input ng-model="firstname" required type="text" md-select-on-focus>
@@ -56,6 +56,6 @@
             <input ng-model="postalCode" required placeholder="12345"
                    ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
         </md-input-container>
-        <md-button class="md-accent md-raised portal_button" type="submit">Sign Up</md-button>
+        <md-button ng-click="signup()" class="md-accent md-raised portal_button" type="submit">Sign Up</md-button>
     </form>
 </div>

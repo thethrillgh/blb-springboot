@@ -1,10 +1,11 @@
-var signUpController = function($scope, $state){
+var signUpController = function($scope, $state, apiService){
     $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA MA MD ME MI MN MO ' +
     'MS MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
     'WY').split(' ').map(function(state) {
         return {abbrev: state};
       });
     $scope.signup = function(form){
+        console.log("clicked!!!");
         if(form){
             var data = {
                 firstname: $scope.firstname,
@@ -14,7 +15,7 @@ var signUpController = function($scope, $state){
                 acctssn: $scope.ssn,
                 acctpass: $scope.password,
                 acctssn: $scope.acctssn,
-                ssnlastfour: $scope.acctssn.substr($scope.acctssn.length - 4),
+                ssnlastfour: String($scope.acctssn).substr(String($scope.acctssn).length - 4),
                 streetaddress: $scope.streetaddress,
                 city: $scope.city,
                 state: $scope.state,

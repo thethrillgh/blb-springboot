@@ -14,6 +14,9 @@ var apiService = function($http){
     var login = function(data){
         return $http.post("/login", data)
     }
+    var signup = function(data){
+        return $http.post("/signup", data)
+    }
     var user = function(id){
         return $http.get("/user?id="+id)
     }
