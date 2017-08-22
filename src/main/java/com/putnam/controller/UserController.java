@@ -15,22 +15,22 @@ import com.putnam.response.Failed;
 import com.putnam.response.Response;
 
 @RestController
-public class UserController {	
-	
+public class UserController {
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	public static final String userSessionKey = "user_id";
-	
+
 	protected User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         return userId == null ? null : userRepo.findByUserid(userId);
     }
-	
+
 	protected void setUserInSession(HttpSession session, User user) {
     	session.setAttribute(userSessionKey, user.getUserid());
     }
-	
+
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public Response login(@RequestBody User user, HttpSession session) {
 		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
@@ -40,16 +40,16 @@ public class UserController {
 		}
 		else {
 			return new Response("Failed", user);
-		}		
+		}
 	}
-	
+
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
 	public Response signup(@RequestBody User user) {
 		User prev = userRepo.findByAcctemail(user.getAcctemail());
 		if(prev != null) {
 			if(userRepo.exists(prev.getUserid())) {
 				return new Response("Fail", new Failed("Email account already exists"));
-				
+
 			}
 		}
 		User newUser = new User(user);
@@ -57,15 +57,15 @@ public class UserController {
 		userRepo.save(newUser);
 		return new Response("Done", newUser);
 	}
-	
-	
+
+
 	@RequestMapping(value="/user/findall", method = RequestMethod.GET)
 	public Response findall() {
 		Iterable<User> result = userRepo.findAll();
 		return new Response("Done", result);
-		
+
 	}
-	
+
 	@RequestMapping(value="/hash", method = RequestMethod.GET)
 	public String pass() {
 		User result = userRepo.findByUserid(1);
@@ -73,7 +73,7 @@ public class UserController {
 		userRepo.save(result);
 		return "Done";
 	}
-	
+
 
 	@RequestMapping(value="/user", method = RequestMethod.GET)
 	public Response user(HttpServletRequest request, @RequestParam("id") long id) {
@@ -87,7 +87,7 @@ public class UserController {
 			}
 			return new Response("Done", user);
 	}
-	
+
 	@RequestMapping(value="/userbonds", method = RequestMethod.GET)
 	public Response userBonds(HttpServletRequest request) {
 			User user = userRepo.findByUserid((long) request.getSession().getAttribute(userSessionKey));
@@ -96,12 +96,12 @@ public class UserController {
 			}
 			return new Response("Done", user.getOrders().get(0));
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request){
         request.getSession().invalidate();
 	}
-	
+
 	@RequestMapping(value = "/session", method = RequestMethod.GET)
 	public Object session(HttpServletRequest request){
 		return request.getSession().getAttribute(userSessionKey);

@@ -23,7 +23,7 @@ var apiService = function($http){
     var logout = function(){
         return $http.get("/logout")
     }
-    
+
     return {
         getBonds: getBonds,
         accounts: accounts,
@@ -31,6 +31,7 @@ var apiService = function($http){
         mybonds: mybonds,
         signup: signup,
         login: login,
+        signup: signup,
         user: user,
         logout: logout
     };
