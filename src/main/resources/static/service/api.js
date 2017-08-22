@@ -14,8 +14,8 @@ var apiService = function($http){
     var login = function(data){
         return $http.post("/login", data)
     }
-    var user = function(){
-        return $http.get("/user")
+    var user = function(id){
+        return $http.get("/user?id="+id)
     }
     var logout = function(){
         return $http.get("/logout")

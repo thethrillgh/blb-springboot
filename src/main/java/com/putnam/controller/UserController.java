@@ -46,9 +46,11 @@ public class UserController {
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
 	public Response signup(@RequestBody User user) {
 		User prev = userRepo.findByAcctemail(user.getAcctemail());
-		if(userRepo.exists(prev.getUserid())) {
-			return new Response("Fail", new Failed("Email account already exists"));
-			
+		if(prev != null) {
+			if(userRepo.exists(prev.getUserid())) {
+				return new Response("Fail", new Failed("Email account already exists"));
+				
+			}
 		}
 		User newUser = new User(user);
 		newUser.setPasssalt(newUser.getAcctpass());
@@ -74,10 +76,14 @@ public class UserController {
 	
 
 	@RequestMapping(value="/user", method = RequestMethod.GET)
-	public Response user(HttpServletRequest request) {
-			User user = userRepo.findByUserid((long) request.getSession().getAttribute(userSessionKey));
-			if(user == null) {
-				return new Response("Failed",  new Failed("Unable to find user"));
+	public Response user(HttpServletRequest request, @RequestParam("id") long id) {
+//			Object sid = request.getSession().getAttribute(userSessionKey);
+			User user = null;
+			if(id != 0) {
+				user = userRepo.findByUserid(id);
+			}
+			else {
+				return new Response("Failed",  new Failed("Not logged in"));
 			}
 			return new Response("Done", user);
 	}
