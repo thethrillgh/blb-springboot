@@ -33,11 +33,20 @@
                 templateUrl: 'components/dashboard/dashboard.html',
                 controller: 'dashboardController',
                 resolve: {
+                    security: ['$q', function($q){
+                       if(localStorage.getItem("id") == 0){
+                          return $q.reject("Not Authorized");
+                       }
+                    }],
                     bonds: function(apiService){
                         return apiService.getBonds();
                     },
                     user: function(apiService){
-                        return apiService.user();
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+                            
+                        }
+                        return apiService.user(localStorage.getItem("id"));
                     }
                 }
             })
@@ -45,8 +54,17 @@
                 url: '/profile',
                 templateUrl: 'components/account/profile.html',
                 resolve: {
+                    security: ['$q', function($q){
+                       if(localStorage.getItem("id") == 0){
+                          return $q.reject("Not Authorized");
+                       }
+                    }],
                     user: function(apiService){
-                        return apiService.user();
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+                            
+                        }
+                        return apiService.user(localStorage.getItem("id"));
                     }
                 },
                 controller: 'profileController'
