@@ -7,8 +7,12 @@
     <p class="sub_header">Already have a BLB account? <span class="sign_up" ui-sref="login">Log In</span></p>
     <form name="signupForm" layout="column">
         <md-input-container class="md-accent login_input">
-            <label class="login_label">Username</label>
-            <input ng-model="username" required type="text" md-select-on-focus>
+            <label class="login_label">First name</label>
+            <input ng-model="firstname" required type="text" md-select-on-focus>
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Last name</label>
+            <input ng-model="lastname" required type="text" md-select-on-focus>
         </md-input-container>
         <md-input-container class="md-accent login_input">
             <label class="login_label">Email</label>
@@ -25,6 +29,32 @@
         <md-input-container class="md-accent login_input">
             <label class="login_label">Confirm Password</label>
             <input ng-model="password_confirm" ng-pattern="{{password}}" required type="password">
+        </md-input-container>
+        
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Address</label>
+            <input ng-model="address" required type="text" md-select-on-focus>
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">Address 2</label>
+            <input ng-model="address2" type="text" md-select-on-focus>
+        </md-input-container>
+        <md-input-container class="md-accent login_input">
+            <label class="login_label">City</label>
+            <input ng-model="city" required type="text" md-select-on-focus>
+        </md-input-container>
+        <md-input-container class="md-accent login_input_state">
+            <label class="login_label">State</label>
+            <md-select ng-model="state" required>
+              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+        </md-input-container>
+         <md-input-container class="md-accent login_input">
+            <label class="login_label">Postal Code</label>
+            <input ng-model="postalCode" required placeholder="12345"
+                   ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
         </md-input-container>
         <md-button class="md-accent md-raised portal_button" type="submit">Sign Up</md-button>
     </form>

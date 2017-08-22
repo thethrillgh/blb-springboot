@@ -14,6 +14,9 @@ var apiService = function($http){
     var login = function(data){
         return $http.post("/login", data)
     }
+    var signup = function(data){
+        return $http.post("/signup", data)
+    }
     var user = function(){
         return $http.get("/user")
     }
@@ -27,6 +30,7 @@ var apiService = function($http){
         yieldData: yieldData,
         mybonds: mybonds,
         login: login,
+        signup: signup,
         user: user,
         logout: logout
     };

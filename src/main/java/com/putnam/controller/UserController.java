@@ -31,7 +31,19 @@ public class UserController {
     	session.setAttribute(userSessionKey, user.getUserid());
     }
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
+	@RequestMapping(value="/signup", method = RequestMethod.POST)
+	public Response signup(@RequestBody User user, HttpSession session) {
+		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
+		if(User.isMatchingPassword(user.getAcctpass(), result.getPasssalt())) {
+			setUserInSession(session, result);
+			return new Response("Done", result);
+		}
+		else {
+			return new Response("Failed", user);
+		}		
+	}
+    
+    @RequestMapping(value="/login", method = RequestMethod.POST)
 	public Response login(@RequestBody User user, HttpSession session) {
 		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
 		if(User.isMatchingPassword(user.getAcctpass(), result.getPasssalt())) {
