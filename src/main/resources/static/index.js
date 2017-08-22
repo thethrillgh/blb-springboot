@@ -8,7 +8,9 @@ angular.module('blb')
     .controller('mainController', mainController)
     .run(['$rootScope', '$state', 'apiService', function($rootScope, $state, apiService) {
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-            $state.go("login")
+            if(error === "Not Authorized"){
+                $state.go("login");
+            }
         });
     }]);
     

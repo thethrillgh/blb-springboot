@@ -3,6 +3,7 @@ var profileController = function($scope, $state, user, apiService){
     $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
+                localStorage.setItem("id", 0);
                 $state.go('landing');
             }
         });
