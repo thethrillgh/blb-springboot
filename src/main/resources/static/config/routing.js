@@ -18,8 +18,15 @@
                 templateUrl: 'components/bond/bond.html',
                 controller: 'bondController',
                 resolve: {
+                    user: function(apiService){
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+                            
+                        }
+                        return apiService.user(localStorage.getItem("id"));
+                    },
                     bonds: function(apiService){
-                        return apiService.yieldData();
+                        return apiService.getBonds();
                     }
                 }
             })
@@ -38,9 +45,6 @@
                           return $q.reject("Not Authorized");
                        }
                     }],
-                    bonds: function(apiService){
-                        return apiService.getBonds();
-                    },
                     user: function(apiService){
                         if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
                             localStorage.setItem("id", 0);
