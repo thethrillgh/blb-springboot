@@ -22,17 +22,17 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "useraccount")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
 public class User implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference
+	@JsonManagedReference(value="banks")
 	private List<Bank> banks;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@JsonManagedReference(value="orders")
+	@JsonManagedReference(value="userorders")
 	private List<BondOrder> orders;
 
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -95,6 +95,7 @@ public class User implements Serializable {
 	protected User() {
 		
 	}
+
 
 	public List<Bank> getBanks() {
 		return banks;
@@ -188,25 +189,6 @@ public class User implements Serializable {
 		return streetaddress;
 	}
 
-	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
-			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
-			Double acctbalance) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.phonenum = phonenum;
-		this.acctemail = acctemail;
-		this.acctpass = acctpass;
-		this.acctssn = acctssn;
-		this.ssnlastfour = ssnlastfour;
-		this.passsalt = passsalt;
-		this.streetaddress = streetaddress;
-		this.city = city;
-		this.state = state;
-		this.postalcode = postalcode;
-		this.acctbalance = acctbalance;
-	}
-
 	public void setStreetaddress(String streetaddress) {
 		this.streetaddress = streetaddress;
 	}
@@ -242,7 +224,41 @@ public class User implements Serializable {
 	public void setAcctbalance(Double acctbalance) {
 		this.acctbalance = acctbalance;
 	}
+
+	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
+			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
+			Double acctbalance) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenum = phonenum;
+		this.acctemail = acctemail;
+		this.acctpass = acctpass;
+		this.acctssn = acctssn;
+		this.ssnlastfour = ssnlastfour;
+		this.passsalt = passsalt;
+		this.streetaddress = streetaddress;
+		this.city = city;
+		this.state = state;
+		this.postalcode = postalcode;
+		this.acctbalance = acctbalance;
+	}
 	
-	
+	public User(User obj) {
+		super();
+		this.firstname = obj.getFirstname();
+		this.lastname = obj.getLastname();
+		this.phonenum = obj.getPhonenum();
+		this.acctemail = obj.getAcctemail();
+		this.acctpass = obj.getAcctpass();
+		this.acctssn = obj.getAcctssn();
+		this.ssnlastfour = obj.getSsnlastfour();
+		this.passsalt = obj.getPasssalt();
+		this.streetaddress = obj.getStreetaddress();
+		this.city = obj.getCity();
+		this.state = obj.getState();
+		this.postalcode = obj.getPostalcode();
+		this.acctbalance = obj.getAcctbalance();
+	}
 	
 }

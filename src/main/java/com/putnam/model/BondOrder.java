@@ -22,19 +22,22 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "bondorder")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BondOrder implements Serializable {
+
+	public static final String BUY = "BUY";
+	public static final String SELL = "SELL";
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bondid", nullable=false)
-//    @JsonBackReference
+    @JsonBackReference(value="bondorders")
 	private Bond bond;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid", nullable=false)
-//    @JsonBackReference(value="orders")
+    @JsonBackReference(value="userorders")
 	private User user;
-	
+
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,8 +55,9 @@ public class BondOrder implements Serializable {
 
 	@Column(name = "principal")
 	private double principal;
-	
+
 	@Column(name = "accruedinterest")
+
 	private double accruedinterest;
 
 	@Column(name = "total")
@@ -61,13 +65,16 @@ public class BondOrder implements Serializable {
 	
 	@Column(name = "numbondspurchased")
 	private int numbondspurchased;
+
+	@Column(name = "transactiontype")
+	private String transactiontype;
 	
 	protected BondOrder() {
 		super();
 	}
 
 	public BondOrder(Date ordertimestamp, Date tradedate, Date settlementdate,
-					 double principal, double accruedinterest, double total, int numbondspurchased, Bond bond, User user) {
+					 double principal, double accruedinterest, double total, int numbondspurchased, String transactiontype, Bond bond, User user) {
 		this();
 		this.bond = bond;
 		this.user = user;
@@ -78,6 +85,7 @@ public class BondOrder implements Serializable {
 		this.accruedinterest = accruedinterest;
 		this.total=total;
 		this.numbondspurchased = numbondspurchased;
+		this.transactiontype = transactiontype;
 	}
 
 	public Bond getBond() {
@@ -152,6 +160,22 @@ public class BondOrder implements Serializable {
 		this.numbondspurchased = numbondspurchased;
 	}
 
-	
+	public double getAccruedinterest() {
+		return accruedinterest;
+	}
+
+	public void setAccruedinterest(double accruedinterest) {
+		this.accruedinterest = accruedinterest;
+	}
+
+	public String getTransactiontype() {
+		return transactiontype;
+	}
+
+	public void setTransactiontype(String transactiontype) {
+		if(transactiontype.equalsIgnoreCase(BondOrder.BUY) || transactiontype.equalsIgnoreCase(BondOrder.SELL)){
+			this.transactiontype = transactiontype.toUpperCase();
+		}
+	}
 	
 }

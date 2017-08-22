@@ -14,19 +14,23 @@ var apiService = function($http){
     var login = function(data){
         return $http.post("/login", data)
     }
-    var user = function(){
-        return $http.get("/user")
+    var signup = function(data){
+        return $http.post("/signup", data)
+    }
+    var user = function(id){
+        return $http.get("/user?id="+id)
     }
     var logout = function(){
         return $http.get("/logout")
     }
-    
+
     return {
         getBonds: getBonds,
         accounts: accounts,
         yieldData: yieldData,
         mybonds: mybonds,
         login: login,
+        signup: signup,
         user: user,
         logout: logout
     };

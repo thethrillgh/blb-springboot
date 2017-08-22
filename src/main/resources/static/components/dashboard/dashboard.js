@@ -1,8 +1,10 @@
 var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user, apiService){
+  console.log(localStorage.getItem("id"), user)
   $scope.user = user.data.data;
   $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
+                localStorage.setItem("id", 0);
                 $state.go('landing');
             }
         });
