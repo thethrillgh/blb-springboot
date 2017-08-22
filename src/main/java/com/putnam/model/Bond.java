@@ -24,67 +24,67 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "bond")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bondid")
 public class Bond implements Serializable {
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference(value="bondorders")
-	private List<BondOrder> orders; 
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="bond", fetch = FetchType.EAGER)
+	@JsonManagedReference(value = "bondorders")
+	private List<BondOrder> orders;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bond", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference(value="bondhistory")
-	private List<BondHistory> history; 
- 
+	@JsonManagedReference(value = "bondhistory")
+	private List<BondHistory> history;
+
 	private static final long serialVersionUID = -3009157732242241606L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long bondid;
- 
-	@Column(name = "cusip", unique=true)
+
+	@Column(name = "cusip", unique = true)
 	private String cusip;
- 
+
 	@Column(name = "issuer")
 	private String issuer;
-	
+
 	@Column(name = "issuedate")
 	private Date issuedate;
-	
+
 	@Column(name = "type")
 	private String type;
-	
+
 	@Column(name = "interestrate")
 	private double interestrate;
-	
+
 	@Column(name = "maturitydate")
 	private Date maturitydate;
-	
+
 	@Column(name = "quantity")
 	private int quantity;
-	
+
 	@Column(name = "creditrating")
 	private String creditrating;
-	
+
 	@Column(name = "callable")
 	private String callable;
-	
+
 	@Column(name = "coupontype")
 	private String coupontype;
-	
+
 	@Column(name = "bid")
 	private double bid;
-	
+
 	@Column(name = "ask")
 	private double ask;
-	
+
 	@Column(name = "yieldbid")
 	private double yieldbid;
-	
+
 	@Column(name = "yieldask")
 	private double yieldask;
-	
+
 	@Column(name = "marketprice")
 	private double marketprice;
-	
+
 	@Column(name = "marketyield")
 	private double marketyield;
 
@@ -298,8 +298,8 @@ public class Bond implements Serializable {
 
 
 	public Bond(String cusip, String issuer, Date issuedate, String type, double interestrate, Date maturitydate,
-			int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
-			double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
+				int quantity, String creditrating, String callable, String coupontype, double bid, double ask,
+				double yieldbid, double yieldask, double marketprice, double marketyield, double facevalue) {
 		super();
 		this.cusip = cusip;
 		this.issuer = issuer;
@@ -319,6 +319,5 @@ public class Bond implements Serializable {
 		this.marketyield = marketyield;
 		this.facevalue = facevalue;
 	}
-
 	
 }

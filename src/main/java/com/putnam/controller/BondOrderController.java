@@ -26,8 +26,6 @@ public class BondOrderController {
 	
 	@Autowired
 	UserRepository userRepo;
-
-	UserController userCont;
 	
 	@Autowired
 	BondRepository bondRepo;
