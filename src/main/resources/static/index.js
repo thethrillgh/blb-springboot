@@ -20,9 +20,21 @@ var timeFilter = function(){
     }
 }
 
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+});
+
 var roundNum = function(){
     return function(x){
         return x.toFixed(2);
+    }
+}
+
+var currency = function(){
+    return function(x){
+        return formatter.format(x);
     }
 }
 
@@ -40,6 +52,7 @@ angular.module('blb')
     .filter("mytime", timeFilter)
     .filter("roundNum", roundNum)
     .filter("semiyearly", semiyearly)
+    .filter("currency", currency)
     .run(['$rootScope', '$state', 'apiService', function($rootScope, $state, apiService) {
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
             if(error === "Not Authorized"){
@@ -51,6 +64,7 @@ angular.module('blb')
             if(toState.url=="/bond"){
                 if(toParams.obj == null){
                     e.preventDefault();
+                    $state.go("dashboard")
                 }
             }
         });
