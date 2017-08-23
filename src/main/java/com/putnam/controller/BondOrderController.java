@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.putnam.response.Response;
+import com.putnam.response.Failed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import com.putnam.repository.BondOrderRepository;
 import com.putnam.repository.BondRepository;
 import com.putnam.repository.UserRepository;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
@@ -37,16 +39,17 @@ public class BondOrderController {
 	public void save() {
 		Bond bond = bondRepo.findByCusip("912828X88");
 		User user = userRepo.findByUserid(1);
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),5000.0,85.090,85.090,50, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),1000000.0,2300.390,1002300.390,1000, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),10000.0,150.430,10150.430,100, BondOrder.SELL, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),500000.0,0.000,500000.000,500, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,1020.220,101020.220,100, BondOrder.SELL, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),10000000.0,0.000,10000000.000,1000, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),50000.0,45.040,50045.040,50, BondOrder.SELL, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,305.780,100305.780,1000, BondOrder.BUY, bond, user));
-		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, BondOrder.SELL, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),5000.0,85.090,85.090,50, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),1000000.0,2300.390,1002300.390,1000, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),10000.0,150.430,10150.430,100, BondOrder.SELL, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),500000.0,0.000,500000.000,500, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,1020.220,101020.220,100, BondOrder.SELL, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),10000000.0,0.000,10000000.000,1000, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),50000.0,45.040,50045.040,50, BondOrder.SELL, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,305.780,100305.780,1000, BondOrder.BUY, bond, user));
+//		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, BondOrder.SELL, bond, user));
+		//buyBond(bond.getBondid(), 100, HttpServletRequest());
 	}
 	
 	@RequestMapping(value="/order/all", method = RequestMethod.GET)
@@ -127,8 +130,9 @@ public class BondOrderController {
 				}
 
 			}
+			return new Response("Fail", new Failed("Insufficient funds or quantitiy"));
 		}
-		return new Response("Fail", bondToBuy);
+		return new Response("Fail", new Failed("Cannot find bond or user"));
 	}
 
 	@RequestMapping(value = "/order/sell", method = RequestMethod.GET)
@@ -192,9 +196,11 @@ public class BondOrderController {
 					return new Response("Success", newOrder);
 
 				}
+				return new Response("Fail", new Failed("Cannot sell more than you own"));
 			}
+			return new Response("Fail", new Failed("Cannot find an order with specified user and bond"));
 		}
-		return new Response("Fail", bondToSell);
+		return new Response("Fail", new Failed("Cannot located user or bond"));
 	}
 
 	public int daysBetween(Date d1, Date d2){
