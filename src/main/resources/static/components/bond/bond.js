@@ -78,9 +78,17 @@ if (!Array.from) {
 }
 
 var bondController = function($scope, $state, $stateParams, apiService, user, bonds){
+    $scope.logout = function(){
+        apiService.logout().then(function(data){
+            if(data.status==200){
+                localStorage.setItem("id", 0);
+                $state.go('landing');
+            }
+        });
+    };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj; //now id of bond clicked
-    console.log($scope.detail);
+//    console.log($scope.detail);
     $scope.data = bonds.data.data; //bond history for chart
     var yieldPercent = Array.from($scope.data, function(data){
         return data.value
