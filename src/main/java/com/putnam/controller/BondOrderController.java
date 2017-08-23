@@ -136,7 +136,7 @@ public class BondOrderController {
 	}
 
 	@RequestMapping(value = "/order/sell", method = RequestMethod.GET)
-	public Response sellBond(@RequestParam("bid") long bondid, @RequestParam("oid") long orderid, @RequestParam("quantity") int quant, HttpServletRequest req){
+	public Response sellBond(@RequestParam("bid") long bondid, @RequestParam("quantity") int quant, HttpServletRequest req){
 
 		//ID in param is the bondID
 		Bond bondToSell = bondRepo.findByBondid(bondid);
