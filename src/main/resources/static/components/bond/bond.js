@@ -89,17 +89,61 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj; //now id of bond clicked
     $scope.data = bonds.data.data; //bond history for chart
-    var yieldPercent = Array.from($scope.data, function(data){
-        return data.yield;
-    });
-    var bond;
     apiService.bond($scope.detail.assocBond.bondid).then(function(data){
-        
+        var bond = data.data.history;
+        console.log(bond)
+        var yieldPercent = Array.from(bond, function(data){
+            return data.yieldask;
+        });
+        var tradeTime = Array.from(bond, function(data){
+            var x = data.time;
+            return new Date(x);
+        });
+        setTimeout(function(){
+            var chart = c3.generate({
+                padding: {
+                    bottom: 20  
+                },
+                data: {
+                    columns: [
+                        ['data1', 30, 200, 100, 400, 150, 250]
+                    ],
+                    type: 'area-spline'
+                },
+                axis: {
+                    x: {
+                        label: {
+                            text: 'Trade Date',
+                            position: 'outer-right'
+                        }
+                    },
+                    y: {
+                        label: {
+                            text: 'Yield %',
+                            position: 'outer-right'
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                }
+            });
+            setTimeout(function () {
+                chart.load({
+                    columns: [
+                        ['data1', 100, 250, 150, 200, 100, 350]
+                    ]
+                });
+            }, 2000);
+            d3.select("svg").append("text")
+            .attr("x", 300 )
+            .attr("y", 10)
+            .style("text-anchor", "middle")
+            .style('font-size', '2em')
+            .style("dominant-baseline", "central")
+            .text("Yield");
+        }, 200)
     })
-//    var tradeTime = Array.from($scope.data, function(data){
-//        var x = data.tradeDate.split(" ")[0];
-//        return new Date(x);
-//    });
 //    var tick = Array.from(['03-01-2010', '03-01-2011', '03-01-2012', '03-01-2013', '03-01-2014', '03-01-2015', '03-01-2016'], function(data){
 //        return new Date(data);
 //    })
@@ -153,50 +197,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
 //            }
 //        });
 //    }, 200);
-    setTimeout(function(){
-            var chart = c3.generate({
-                padding: {
-                    bottom: 20  
-                },
-                data: {
-                    columns: [
-                        ['data1', 30, 200, 100, 400, 150, 250]
-                    ],
-                    type: 'area-spline'
-                },
-                axis: {
-                    x: {
-                        label: {
-                            text: 'Trade Date',
-                            position: 'outer-right'
-                        }
-                    },
-                    y: {
-                        label: {
-                            text: 'Yield %',
-                            position: 'outer-right'
-                        }
-                    }
-                },
-                legend: {
-                    show: false
-                }
-            });
-            setTimeout(function () {
-                chart.load({
-                    columns: [
-                        ['data1', 100, 250, 150, 200, 100, 350]
-                    ]
-                });
-            }, 2000);
-            d3.select("svg").append("text")
-            .attr("x", 300 )
-            .attr("y", 10)
-            .style("text-anchor", "middle")
-            .style('font-size', '2em')
-            .style("dominant-baseline", "central")
-            .text("Yield");
-    }, 200)
 }
 
 angular.module('blb')
