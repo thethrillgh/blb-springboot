@@ -25,15 +25,6 @@ public class PortfolioController {
     @Autowired
     UserRepository userRepo;
 
-    @Autowired
-    BondRepository bondRepo;
-
-    @Autowired
-    BondOrderRepository bondOrderRepo;
-
-    @Autowired
-    BondHistoryRepository bondHistoryRepo;
-
     @RequestMapping(value = "/portfolio", method = RequestMethod.GET)
     public Response returnPortfolio(HttpServletRequest req){
 /**

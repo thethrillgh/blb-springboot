@@ -73,8 +73,16 @@ public class BondOrder implements Serializable {
 		super();
 	}
 
-	public BondOrder(Date ordertimestamp, Date tradedate, Date settlementdate,
-					 double principal, double accruedinterest, double total, int numbondspurchased, String transactiontype, Bond bond, User user) {
+	public BondOrder(Date ordertimestamp,
+					 Date tradedate,
+					 Date settlementdate,
+					 double principal,
+					 double accruedinterest,
+					 double total,
+					 int numbondspurchased,
+					 String transactiontype,
+					 Bond bond,
+					 User user) {
 		this();
 		this.bond = bond;
 		this.user = user;

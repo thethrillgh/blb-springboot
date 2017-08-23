@@ -66,6 +66,15 @@ public class BondOrderController {
 
 		if(bondToBuy != null && buyer != null){
 
+			//avoid null pointer if user has never purchased this bond
+			boolean newOrderFlag = false;
+
+			BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToBuy, buyer);
+
+			if (Uorder == null){
+				newOrderFlag = true;
+			}
+
 			Date td = new Date();
 			Date sd = new Date();
 			Calendar c = Calendar.getInstance();
@@ -88,15 +97,35 @@ public class BondOrderController {
 
 			double newBalance = buyer.getAcctbalance() - orderTotal;
 
-			if(newBalance >= 0.00) {
+			if(newBalance >= 0.00 && bondToBuy.getQuantity() >= quant) {
 
 				buyer.setAcctbalance(newBalance);
+				bondToBuy.setQuantity(bondToBuy.getQuantity() - quant);
 
-				BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
+				if(newOrderFlag){
+					BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
+					bondOrderRepo.save(order);
 
-				bondOrderRepo.save(order);
+					userRepo.save(buyer);
+					bondRepo.save(bondToBuy);
+					bondRepo.save(bondToBuy);
 
-				return new Response("Success", order);
+					return new Response("Success", order);
+				}
+				else{
+					BondOrder newOrder = new BondOrder(td, td, sd,totalPrincipal+Uorder.getPrincipal(),interestOnPurchase+Uorder.getAccruedinterest(), orderTotal+Uorder.getTotal(),quant+Uorder.getNumbondspurchased(), BondOrder.BUY, bondToBuy, buyer);
+					newOrder.setId(Uorder.getId());
+
+					int idx = buyer.getOrders().indexOf(Uorder);
+					buyer.getOrders().remove(idx); //maintain uniqueness
+					bondOrderRepo.delete(Uorder);
+					userRepo.save(buyer);
+					bondOrderRepo.save(newOrder);
+					bondRepo.save(bondToBuy);
+
+					return new Response("Success", newOrder);
+				}
+
 			}
 		}
 		return new Response("Fail", bondToBuy);
@@ -104,9 +133,7 @@ public class BondOrderController {
 
 	@RequestMapping(value = "/order/sell", method = RequestMethod.GET)
 	public Response sellBond(@RequestParam("bid") long bondid, @RequestParam("oid") long orderid, @RequestParam("quantity") int quant, HttpServletRequest req){
-		/**
-		 * Assumes sell functionality only exists on bonds in the user's portfolio with quantities
-		 */
+
 		//ID in param is the bondID
 		Bond bondToSell = bondRepo.findByBondid(bondid);
 
@@ -116,14 +143,14 @@ public class BondOrderController {
 
 		if(bondToSell != null && seller != null){
 
-			//ArrayList<BondOrder> orders = bondOrderRepo.findByBondAndUser(bondToSell, seller);
-			BondOrder assocOrder = bondOrderRepo.findById(orderid);
+			BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToSell, seller);
 
-			if(assocOrder != null){
+			if(Uorder != null){
 
-				int numOwned = assocOrder.getNumbondspurchased();
+				//int numOwned = assocOrder.getNumbondspurchased();
+				int numOwned = Uorder.getNumbondspurchased();
 
-				if( numOwned >= quant) {
+				if(numOwned >= quant) { //double check you can't sell more than you own
 
 					Date td = new Date();
 					Date sd = new Date();
@@ -147,17 +174,23 @@ public class BondOrderController {
 
 					double newBalance = seller.getAcctbalance() + orderTotal;
 
-					BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
-
-					assocOrder.setNumbondspurchased((numOwned - quant));
-
-					bondOrderRepo.save(assocOrder);
-
-					bondOrderRepo.save(order);
+					//BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
+					//quick fix to maintain one order with state
+					BondOrder newOrder = new BondOrder(td, td, sd,Uorder.getPrincipal()-totalPrincipal,Uorder.getAccruedinterest()-interestOnPurchase, Uorder.getTotal()-orderTotal,Uorder.getNumbondspurchased()-quant, BondOrder.BUY, bondToSell, seller);
+					newOrder.setId(Uorder.getId());
 
 					seller.setAcctbalance(newBalance);
+					bondToSell.setQuantity(bondToSell.getQuantity()+quant);
 
-					return new Response("Success", order);
+					int idx = seller.getOrders().indexOf(Uorder);
+					seller.getOrders().remove(idx); //maintain uniqueness
+					bondOrderRepo.delete(Uorder);
+					userRepo.save(seller);
+					bondOrderRepo.save(newOrder);
+					bondRepo.save(bondToSell);
+
+					return new Response("Success", newOrder);
+
 				}
 			}
 		}
@@ -170,11 +203,6 @@ public class BondOrderController {
 
 	/**
 	 *  d1 should be issue date and d2 should be the settlement date NOT buy date
-	 * @param fvalue
-	 * @param coupon
-	 * @param d1
-	 * @param d2
-	 * @return
 	 */
 	public double computeInterest(double fvalue, double coupon, Date d1, Date d2){
 
