@@ -82,28 +82,24 @@
               <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                 <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
                   <tr class="headerRow" md-row>
-<!--                    <th md-column md-order-by="symbol"><span>Symbol</span></th>-->
                     <th md-column md-order-by="cusip"><span>CUSIP</span></th>
-                    <th md-column md-order-by="subproductType" md-desc><span>Type</span></th>
-                    <th md-column md-order-by="descriptionOfIssuer"><span>Issuer Name</span></th>
-                    <th md-column md-order-by="couponRate"><span>Coupon Rate</span></th>
-                    <th md-column md-order-by="maturityDate"><span>Maturity</span></th>
-                    <th md-column md-order-by="moodyRating.ratingText"><span>Moody's Rating</span></th>
-                    <th md-column md-order-by="price"><span>Price</span></th>
-                    <th md-column md-order-by="yield"><span>Yield</span></th>
+                    <th md-column md-order-by="issuer" md-desc><span>Issuer</span></th>
+                    <th md-column md-order-by="type"><span>Type</span></th>
+                    <th md-column md-order-by="interestrate"><span>Interest Rate</span></th>
+                    <th md-column md-order-by="maturitydate"><span>Maturity Date</span></th>
+                    <th md-column md-order-by="quantity"><span>Quantity</span></th>
+                    <th md-column md-order-by="facevalue"><span>Face Value</span></th>
                   </tr>
                 </thead>
                 <tbody md-body>
-                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-<!--                    <td md-cell>{{bonds.symbol}}</td>-->
-                    <td md-cell ng-click="go(bonds)">{{bonds.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.debtOrAssetClass}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.descriptionOfIssuer}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.couponRate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.maturityDate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.moodyRating.ratingText}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.price}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.yield}}</td>
+                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.cusip}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.issuer}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.type}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.maturitydate | mydate}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.quantity}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.facevalue}}</td>                    
                   </tr>
                 </tbody>
               </table>

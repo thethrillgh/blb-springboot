@@ -1,5 +1,6 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, bonds, user, apiService, portfolio){
-  console.log(portfolio)
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio){
+  $scope.bonds = portfolio.data.data.holdings;
+  $scope.bondRows = $scope.bonds.length;
   $scope.user = user.data.data;
   $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -13,8 +14,6 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   //id of bond clicked
         $state.go('bond', {obj: id})
     }
-  $scope.bonds = bonds.data;
-  $scope.bondRows  = bonds.data.Rows         
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
   

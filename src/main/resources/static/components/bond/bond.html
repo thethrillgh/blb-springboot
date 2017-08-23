@@ -11,7 +11,7 @@
             <i class="material-icons md-36 menu profile_icon">search</i>
         </div>
         <div layout="row" layout-align="center center">
-            <p class="username">Dirk McMaster</p>
+            <p class="username">{{user.firstname}} {{user.lastname}}</p>
             <md-menu>
                 <i class="material-icons md-36 menu profile_icon" ng-click="$mdMenu.open()">account_circle</i>
                 <md-menu-content width="4">
@@ -39,7 +39,7 @@
             <p class="box1header">CUSIP
                 <md-tooltip class="tooltip-mulitline">Identifier of the bond</md-tooltip>
             </p>
-            <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.cusip}}</p>
+            <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.assocBond.cusip}}</p>
         </div>
         <div>
             <p class="box1header">Type
@@ -48,21 +48,21 @@
                     The interest is paid off semi-anually.
                 </md-tooltip>
             </p>
-            <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.couponType}}</p>
+            <p class="box1header" style="margin-bottom: 0 !important; color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder">{{detail.assocBond.type}}</p>
         </div>
         <div>
-            <p class="box1header">Issuer: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.issueIdentifier}}</span>
+            <p class="box1header">Issuer: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocBond.issuer}}</span>
                 <md-tooltip class="tooltip-multiline">The entity issuing the bond.</md-tooltip>
             </p>
-            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.tradeDate}}</span>
+            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocOrder.tradedate | mydate}}</span>
                 <md-tooltip class="tooltip-multiline">The date in which the bonds were issued.</md-tooltip>
             </p>
         </div>
         <div>
-            <p class="box1header">Available Quantity:  <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">10000</span>
+            <p class="box1header">Available Quantity:  <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocBond.quantity}}</span>
                 <md-tooltip class="tooltip-multiline">The number of remaining bonds that have not been purchased.</md-tooltip>
             </p>
-            <p class="box1header" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">100</span>
+            <p class="box1header" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocOrder.numbondspurchased}}</span>
                 <md-tooltip class="tooltip-multiline">The number of bonds under this CUSIP that you own.</md-tooltip>
             </p>
         </div>
@@ -79,18 +79,18 @@
                     This is the amount that will be paid back on the maturity date.
                 </md-tooltip>
             </p>
-            <p class="cHeader3">1000</p>
+            <p class="cHeader3">{{detail.assocBond.facevalue}}</p>
             <p class="cHeader4">USD</p>
             <p class="cHeader2">Purchased</p>
-            <p class="cHeader4 box0">$1050 | Nov 07 2016 | 8:00 PM</p>
+            <p class="cHeader4 box0">{{detail.assocOrder.numbondspurchased}} | {{detail.assocOrder.tradedate | mydate}} | {{detail.assocOrder.tradedate | mytime}}</p>
        </md-card>
         <md-card class="card">
             <p class="cHeader1">Earnings</p>
             <p class="cHeader2">Interest Rate</p>
-            <p class="cHeader3">1.4%</p>
+            <p class="cHeader3">{{detail.assocBond.interestrate}}%</p>
             <p class="cHeader4">semi-anually</p>
             <p class="cHeader2 box2">
-                Current Yield: <span class="cHeader3 yield">2.986</span>
+                Current Yield: <span class="cHeader3 yield">{{detail.assocBond.marketyield | roundNum}}%</span>
             </p>
        </md-card>
         <md-card class="card">
@@ -100,11 +100,11 @@
             <p class="cHeader2">Maturity Date
                 <md-tooltip class="tooltip-multiline">The date in which the bond will be fully matured.</md-tooltip>
             </p>
-            <p class="cHeader3">Dec 15, 2020</p>
+            <p class="cHeader3">{{detail.assocOrder.tradedate | semiyearly}}</p>
             <p class="cHeader4">Next Coupon Date
                 <md-tooltip class="tooltip-multiline">The date of the next interest payment from the </br>issuer to the owner of the bond.</md-tooltip>
             </p>
-            <p class="cHeader2 box3">Nov 07, 2017</p>
+            <p class="cHeader2 box3">{{detail.assocBond.maturitydate | mydate}}</p>
        </md-card>
         <md-card class="card">
             <p class="cHeader1">Bond Rating
@@ -114,10 +114,10 @@
                 </md-tooltip>
             </p>
             <p class="cHeader2">S&amp;P</p>
-            <p class="cHeader3">AAA</p>
+            <p class="cHeader3">{{detail.assocBond.creditrating}}</p>
             <p class="cHeader4">Issuer
             </p>
-            <p class="cHeader2 box3">America Bank</p>
+            <p class="cHeader2 box3">{{detail.assocBond.issuer}}</p>
        </md-card>
     </div>
     <div layout="row" layout-align="space-between start" class="box1 padding nocolor">
