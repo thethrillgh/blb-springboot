@@ -4,10 +4,8 @@ import com.putnam.model.BondOrder;
 import com.putnam.model.Portfolio;
 import com.putnam.model.PortfolioEntry;
 import com.putnam.model.User;
-import com.putnam.repository.BondHistoryRepository;
-import com.putnam.repository.BondOrderRepository;
-import com.putnam.repository.BondRepository;
 import com.putnam.repository.UserRepository;
+import com.putnam.response.Failed;
 import com.putnam.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -45,7 +42,7 @@ public class PortfolioController {
             return new Response("Success", new Portfolio(holdings));
         }
 
-        return new Response("Fail", new Portfolio(holdings));
+        return new Response("Fail", new Failed("Unable to find user"));
     }
 
     public List<PortfolioEntry> filterOrdersForPortfolio(List<BondOrder> orders){
