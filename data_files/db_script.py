@@ -10,8 +10,8 @@ def usage():
 def main(tname, dfile, num):
 
     ctr = 1
-    fname = 'new_history_files/%s_table_data.sql' % (tname, int(num))
-    write_to = open(fname, 'w')
+    fname = 'new_history_files/%s_table_data.sql' % (tname)#, int(num))
+    write_to = open(fname, 'w+')
 
     read_from = open(dfile, 'r')
 
