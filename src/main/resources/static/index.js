@@ -45,6 +45,14 @@ angular.module('blb')
             if(error === "Not Authorized"){
                 $state.go("login");
             }
+            $state.go("login");
+        });
+        $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams, error) {
+            if(toState.url=="/bond"){
+                if(toParams.obj == null){
+                    e.preventDefault();
+                }
+            }
         });
     }]);
     
