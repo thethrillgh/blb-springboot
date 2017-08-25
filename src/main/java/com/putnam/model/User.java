@@ -79,6 +79,12 @@ public class User implements Serializable {
 	
 	@Column(name = "acctbalance")
 	private Double acctbalance;
+
+	@Column(name = "totalinvested")
+	private Double totalinvested;
+
+	@Column(name = "totalprofits")
+	private Double totalprofits;
 	
 	private static String hashPassword(String password) {		
 		return encoder.encode(password);
@@ -225,9 +231,25 @@ public class User implements Serializable {
 		this.acctbalance = acctbalance;
 	}
 
+	public Double getTotalinvested() {
+		return totalinvested;
+	}
+
+	public void setTotalinvested(Double totalinvested) {
+		this.totalinvested = totalinvested;
+	}
+
+	public Double getTotalprofits() {
+		return totalprofits;
+	}
+
+	public void setTotalprofits(Double totalprofits) {
+		this.totalprofits = totalprofits;
+	}
+
 	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
 			String ssnlastfour, String passsalt, String streetaddress, String city, String state, String postalcode,
-			Double acctbalance) {
+			Double acctbalance, Double totalinvested) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -242,6 +264,8 @@ public class User implements Serializable {
 		this.state = state;
 		this.postalcode = postalcode;
 		this.acctbalance = acctbalance;
+		this.totalinvested = totalinvested;
+		this.totalprofits = acctbalance - totalinvested;
 	}
 	
 	public User(User obj) {
@@ -259,6 +283,8 @@ public class User implements Serializable {
 		this.state = obj.getState();
 		this.postalcode = obj.getPostalcode();
 		this.acctbalance = obj.getAcctbalance();
+		this.totalinvested = obj.getTotalinvested();
+		this.totalprofits = obj.getTotalprofits();
 	}
 	
 }
