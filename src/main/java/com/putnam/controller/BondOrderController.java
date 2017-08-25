@@ -130,7 +130,7 @@ public class BondOrderController {
 					}
 
 				}
-				return new Response("Fail", new Failed("Insufficient funds or quantitiy, User has $"+buyer.getAcctbalance()+", and there are "+bondToBuy.getQuantity()+" left valued at $"+(bondToBuy.getQuantity()*bondToBuy.getMarketprice())));
+				return new Response("Fail", new Failed("Insufficient funds or quantitiy, User has $"+buyer.getAcctbalance()+", and you tried to purchase "+quant+" bonds valued at $"+ (bondToBuy.getMarketprice()*quant));
 			}
 		}
 		return new Response("Fail", new Failed("Cannot find bond or user"));
