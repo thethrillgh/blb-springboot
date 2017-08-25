@@ -19,7 +19,7 @@ public class TestBankAccounts {
     public static void beforeTests(){
         //Eventually add logging into tests
         System.out.print("\n\n<<<<<<<<<< START Bank Account Entity Object Test Suite >>>>>>>>>>\n\n");
-        tuser = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
+        tuser = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0, 90.0);
 
     }
 
@@ -77,8 +77,8 @@ public class TestBankAccounts {
     public void testUser() {
         Bank bank = new Bank("1234567890", "111222333", "Checking", tuser);
 
-        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0);
-        User user2 = new User("Nancy", "Drew", "5082223409", "nancydrew@gmail.com", "password2", "022657788", "7766", "AAAAAAAAAAAAAAAA", "6 Main Street", "Boston", "MA", "02129", 200.0);
+        User user = new User("John", "Doe", "5089993453", "johndoe@gmail.com", "password1", "022657766", "7766", "AAAAAAAAAAAAAAAA", "4 Main Street", "Boston", "MA", "02129", 100.0, 95.0);
+        User user2 = new User("Nancy", "Drew", "5082223409", "nancydrew@gmail.com", "password2", "022657788", "7766", "AAAAAAAAAAAAAAAA", "6 Main Street", "Boston", "MA", "02129", 200.0, 150.0);
 
         bank.setUser(user);
 

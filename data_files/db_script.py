@@ -10,19 +10,19 @@ def usage():
 def main(tname, dfile, num):
 
     ctr = 1
-    fname = 'new_history_files/%s_table_data.sql' % (tname)#, int(num))
+    fname = 'new_history_files/%s_table_data_%d.sql' % (tname, int(num))
     write_to = open(fname, 'w+')
 
     read_from = open(dfile, 'r')
 
     flag = True
     for line in read_from:
-        if flag:
-            write_to.write('INSERT INTO %s('% tname+line.strip()+')\nVALUES\n')
-            flag = False
-        else:
-            write_to.write('('+line.strip() + '),\n')
-            ctr+=1
+            if flag:
+                write_to.write('INSERT INTO %s(time,'% tname+line.strip()+')\nVALUES\n')
+                flag = False
+            else:
+                write_to.write('(\''+str(datetime.date(2016, 6, 1)+datetime.timedelta(days=ctr))+'\','+line.strip() + '),\n')
+                ctr+=3
 
     read_from.close()
     write_to.close()

@@ -41,8 +41,17 @@ var currency = function(){
 var semiyearly = function(){
     return function(x){
         var date = new Date(x);
-        var newDate = moment(newDate).add(6, 'months');
+        var newDate = moment(date).add(6, 'months');
         return moment(newDate).format("MMM Do YYYY");
+    }
+}
+
+var accrued = function(){
+    return function(x){
+        var date = new Date(x);
+        var today = new Date();
+        var newDate = moment(date).diff(today, 'days');
+        return newDate;
     }
 }
 
@@ -53,6 +62,7 @@ angular.module('blb')
     .filter("roundNum", roundNum)
     .filter("semiyearly", semiyearly)
     .filter("currency", currency)
+    .filter("accrued", accrued)
     .run(['$rootScope', '$state', 'apiService', function($rootScope, $state, apiService) {
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
             if(error === "Not Authorized"){

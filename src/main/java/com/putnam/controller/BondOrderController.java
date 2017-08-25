@@ -64,73 +64,74 @@ public class BondOrderController {
 		//ID in param is the bondID
 		Bond bondToBuy = bondRepo.findByBondid(id);
 
-		long userid = (long) req.getSession().getAttribute("user_id");
-		User buyer = userRepo.findByUserid(userid);
+		Long userid = (Long) req.getSession().getAttribute("user_id");
 
-		if(bondToBuy != null && buyer != null){
+		if(userid != null){
+			User buyer = userRepo.findByUserid((long)userid);
 
-			//avoid null pointer if user has never purchased this bond
-			boolean newOrderFlag = false;
+			if(bondToBuy != null && buyer != null) {
 
-			BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToBuy, buyer);
+				//avoid null pointer if user has never purchased this bond
+				boolean newOrderFlag = false;
 
-			if (Uorder == null){
-				newOrderFlag = true;
-			}
+				BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToBuy, buyer);
 
-			Date td = new Date();
-			Date sd = new Date();
-			Calendar c = Calendar.getInstance();
-			c.setTime(sd);
-			if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
-				c.add(Calendar.DATE, 3);
-			}
-			else{
-				c.add(Calendar.DATE, 1); //US Treasury Bonds have a settlement date of +1 Business day
-			}
-			sd = c.getTime();
-
-			double princ = bondToBuy.getMarketprice();
-
-			double totalPrincipal = princ * quant;
-
-			double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), sd);
-
-			double orderTotal = totalPrincipal + interestOnPurchase;
-
-			double newBalance = buyer.getAcctbalance() - orderTotal;
-
-			if(newBalance >= 0.00 && bondToBuy.getQuantity() >= quant) {
-
-				buyer.setAcctbalance(newBalance);
-				bondToBuy.setQuantity(bondToBuy.getQuantity() - quant);
-
-				if(newOrderFlag){
-					BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
-					bondOrderRepo.save(order);
-
-					userRepo.save(buyer);
-					bondRepo.save(bondToBuy);
-					bondRepo.save(bondToBuy);
-
-					return new Response("Success", order);
-				}
-				else{
-					BondOrder newOrder = new BondOrder(td, td, sd,totalPrincipal+Uorder.getPrincipal(),interestOnPurchase+Uorder.getAccruedinterest(), orderTotal+Uorder.getTotal(),quant+Uorder.getNumbondspurchased(), BondOrder.BUY, bondToBuy, buyer);
-					newOrder.setId(Uorder.getId());
-
-					int idx = buyer.getOrders().indexOf(Uorder);
-					buyer.getOrders().remove(idx); //maintain uniqueness
-					bondOrderRepo.delete(Uorder);
-					userRepo.save(buyer);
-					bondOrderRepo.save(newOrder);
-					bondRepo.save(bondToBuy);
-
-					return new Response("Success", newOrder);
+				if (Uorder == null) {
+					newOrderFlag = true;
 				}
 
+				Date td = new Date();
+				Date sd = new Date();
+				Calendar c = Calendar.getInstance();
+				c.setTime(sd);
+				if (c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+					c.add(Calendar.DATE, 3);
+				} else {
+					c.add(Calendar.DATE, 1); //US Treasury Bonds have a settlement date of +1 Business day
+				}
+				sd = c.getTime();
+
+				double princ = bondToBuy.getMarketprice();
+
+				double totalPrincipal = princ * quant;
+
+				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate(), quant);
+
+				double orderTotal = totalPrincipal + interestOnPurchase;
+
+				double newBalance = buyer.getAcctbalance() - orderTotal;
+
+				if (newBalance >= 0.00 && bondToBuy.getQuantity() >= quant) {
+
+					buyer.setAcctbalance(newBalance);
+					bondToBuy.setQuantity(bondToBuy.getQuantity() - quant);
+
+					if (newOrderFlag) {
+						BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
+						bondOrderRepo.save(order);
+
+						userRepo.save(buyer);
+						bondRepo.save(bondToBuy);
+						bondRepo.save(bondToBuy);
+
+						return new Response("Success", order);
+					} else {
+						BondOrder newOrder = new BondOrder(td, td, sd, totalPrincipal + Uorder.getPrincipal(), interestOnPurchase + Uorder.getAccruedinterest(), orderTotal + Uorder.getTotal(), quant + Uorder.getNumbondspurchased(), BondOrder.BUY, bondToBuy, buyer);
+						newOrder.setId(Uorder.getId());
+
+						int idx = buyer.getOrders().indexOf(Uorder);
+						buyer.getOrders().remove(idx); //maintain uniqueness
+						bondOrderRepo.delete(Uorder);
+						userRepo.save(buyer);
+						bondOrderRepo.save(newOrder);
+						bondRepo.save(bondToBuy);
+
+						return new Response("Success", newOrder);
+					}
+
+				}
+				return new Response("Fail", new Failed("Insufficient funds or quantitiy, User has $"+buyer.getAcctbalance()+", and there are "+bondToBuy.getQuantity()+" left valued at $"+(bondToBuy.getQuantity()*bondToBuy.getMarketprice())));
 			}
-			return new Response("Fail", new Failed("Insufficient funds or quantitiy"));
 		}
 		return new Response("Fail", new Failed("Cannot find bond or user"));
 	}
@@ -141,64 +142,66 @@ public class BondOrderController {
 		//ID in param is the bondID
 		Bond bondToSell = bondRepo.findByBondid(bondid);
 
-		long userid = (long) req.getSession().getAttribute("user_id");
+		Long userid = (Long) req.getSession().getAttribute("user_id");
 
-		User seller = userRepo.findByUserid(userid);
+		if(userid != null) {
 
-		if(bondToSell != null && seller != null){
+			User seller = userRepo.findByUserid(userid);
 
-			BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToSell, seller);
+			if (bondToSell != null && seller != null) {
 
-			if(Uorder != null){
+				BondOrder Uorder = bondOrderRepo.findByBondAndUser(bondToSell, seller);
 
-				//int numOwned = assocOrder.getNumbondspurchased();
-				int numOwned = Uorder.getNumbondspurchased();
+				if (Uorder != null) {
 
-				if(numOwned >= quant) { //double check you can't sell more than you own
+					//int numOwned = assocOrder.getNumbondspurchased();
+					int numOwned = Uorder.getNumbondspurchased();
 
-					Date td = new Date();
-					Date sd = new Date();
-					Calendar c = Calendar.getInstance();
-					c.setTime(sd);
-					if(c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
-						c.add(Calendar.DATE, 3);
+					if (numOwned >= quant) { //double check you can't sell more than you own
+
+						Date td = new Date();
+						Date sd = new Date();
+						Calendar c = Calendar.getInstance();
+						c.setTime(sd);
+						if (c.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+							c.add(Calendar.DATE, 3);
+						} else {
+							c.add(Calendar.DATE, 1); //US Treasury Bonds have a settlement date of +1 << Business >> day
+						}
+						sd = c.getTime();
+
+						double princ = bondToSell.getMarketprice();
+
+						double totalPrincipal = princ * quant;
+
+						double interestOnPurchase = computeInterest(bondToSell.getFacevalue(), bondToSell.getInterestrate(), bondToSell.getIssuedate(), sd, quant);
+
+						double orderTotal = totalPrincipal + interestOnPurchase;
+
+						double newBalance = seller.getAcctbalance() + orderTotal;
+
+						//BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
+						//quick fix to maintain one order with state...BUY is a backdoor for compatibiliity with portfolio
+						BondOrder newOrder = new BondOrder(td, td, sd, Uorder.getPrincipal() - totalPrincipal, Uorder.getAccruedinterest() - interestOnPurchase, Uorder.getTotal() - orderTotal, Uorder.getNumbondspurchased() - quant, BondOrder.BUY, bondToSell, seller);
+						newOrder.setId(Uorder.getId());
+
+						seller.setAcctbalance(newBalance);
+						bondToSell.setQuantity(bondToSell.getQuantity() + quant);
+
+						int idx = seller.getOrders().indexOf(Uorder);
+						seller.getOrders().remove(idx); //maintain uniqueness
+						bondOrderRepo.delete(Uorder);
+						userRepo.save(seller);
+						bondOrderRepo.save(newOrder);
+						bondRepo.save(bondToSell);
+
+						return new Response("Success", newOrder);
+
 					}
-					else{
-						c.add(Calendar.DATE, 1); //US Treasury Bonds have a settlement date of +1 << Business >> day
-					}
-					sd = c.getTime();
-
-					double princ = bondToSell.getMarketprice();
-
-					double totalPrincipal = princ * quant;
-
-					double interestOnPurchase = computeInterest(bondToSell.getFacevalue(), bondToSell.getInterestrate(), bondToSell.getIssuedate(), sd);
-
-					double orderTotal = totalPrincipal + interestOnPurchase;
-
-					double newBalance = seller.getAcctbalance() + orderTotal;
-
-					//BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
-					//quick fix to maintain one order with state
-					BondOrder newOrder = new BondOrder(td, td, sd,Uorder.getPrincipal()-totalPrincipal,Uorder.getAccruedinterest()-interestOnPurchase, Uorder.getTotal()-orderTotal,Uorder.getNumbondspurchased()-quant, BondOrder.BUY, bondToSell, seller);
-					newOrder.setId(Uorder.getId());
-
-					seller.setAcctbalance(newBalance);
-					bondToSell.setQuantity(bondToSell.getQuantity()+quant);
-
-					int idx = seller.getOrders().indexOf(Uorder);
-					seller.getOrders().remove(idx); //maintain uniqueness
-					bondOrderRepo.delete(Uorder);
-					userRepo.save(seller);
-					bondOrderRepo.save(newOrder);
-					bondRepo.save(bondToSell);
-
-					return new Response("Success", newOrder);
-
+					return new Response("Fail", new Failed("Cannot sell more than you own"));
 				}
-				return new Response("Fail", new Failed("Cannot sell more than you own"));
+				return new Response("Fail", new Failed("Cannot find an order with specified user and bond"));
 			}
-			return new Response("Fail", new Failed("Cannot find an order with specified user and bond"));
 		}
 		return new Response("Fail", new Failed("Cannot located user or bond"));
 	}
@@ -210,7 +213,7 @@ public class BondOrderController {
 	/**
 	 *  d1 should be issue date and d2 should be the settlement date NOT buy date
 	 */
-	public double computeInterest(double fvalue, double coupon, Date d1, Date d2){
+	public double computeInterest(double fvalue, double coupon, Date d1, Date d2, int quant){
 
 		int numDays = daysBetween(d1, d2);
 
