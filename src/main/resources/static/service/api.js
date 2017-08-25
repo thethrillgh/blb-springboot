@@ -1,12 +1,6 @@
 var apiService = function($http){
-    var getBonds = function(){
-        return $http.get("bond.json")
-    }
     var accounts = function(){
         return $http.get("data.json")
-    }
-    var yieldData = function(){
-        return $http.get("test.json")
     }
     var mybonds = function(){
         return $http.get("/findall")
@@ -29,11 +23,15 @@ var apiService = function($http){
     var portfolio = function(){
         return $http.get("/portfolio")
     }
+    var sell = function(id, num){
+        return $http.get("/order/sell?id="id+"&quantity="+num);
+    }
+    var buy = function(id, num){
+        return $http.get("/order/buy?id="id+"&quantity="+num);
+    }
 
     return {
-        getBonds: getBonds,
         accounts: accounts,
-        yieldData: yieldData,
         mybonds: mybonds,
         signup: signup,
         login: login,
@@ -41,7 +39,9 @@ var apiService = function($http){
         bond: bond,
         user: user,
         logout: logout,
-        portfolio: portfolio
+        portfolio: portfolio,
+        sell: sell,
+        buy: buy
     };
 };
 

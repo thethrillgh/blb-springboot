@@ -1,4 +1,4 @@
-angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table']);
+angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table', 'angular-loading-bar']);
 
 var mainController = function($scope, $state){
     
@@ -47,9 +47,9 @@ var semiyearly = function(){
 }
 
 var accrued = function(){
-    return function(x){
+    return function(x, issuedate){
         var date = new Date(x);
-        var today = new Date();
+        var today = new Date(issuedate);
         var newDate = moment(date).diff(today, 'days');
         return newDate;
     }

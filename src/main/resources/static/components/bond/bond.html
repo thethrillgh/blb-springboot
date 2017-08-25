@@ -54,7 +54,7 @@
             <p class="box1header">Issuer: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocBond.issuer}}</span>
                 <md-tooltip class="tooltip-multiline">The entity issuing the bond.</md-tooltip>
             </p>
-            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocOrder.tradedate | mydate}}</span>
+            <p class="box1header" style="margin-bottom: 0 !important">Issue Date: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.assocBond.issuedate | mydate}}</span>
                 <md-tooltip class="tooltip-multiline">The date in which the bonds were issued.</md-tooltip>
             </p>
         </div>
@@ -145,7 +145,7 @@
                     <p class="cHeader3 nocenter">{{detail.assocOrder.settlementdate | mydate}}</p>
                     <md-button class="md-accent md-raised sell" ng-click="sell($event)">SELL</md-button>
                     <p class="cHeader3 nocenter top">{{detail.assocOrder.principal | roundNum}}</p>
-                    <p class="cHeader3 nocenter">{{detail.assocOrder.accruedinterest | roundNum}} USD ({{detail.assocOrder.settlementdate | accrued}} Days)</p>
+                    <p class="cHeader3 nocenter">{{detail.assocOrder.accruedinterest | roundNum}} USD ({{detail.assocOrder.settlementdate | accrued:detail.assocBond.issuedate }} Days)</p>
                     <p class="cHeader3 nocenter">{{detail.assocOrder.total | roundNum}}</p>
                 </div> 
             </div>

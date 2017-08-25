@@ -24,9 +24,6 @@
                             
                         }
                         return apiService.user(localStorage.getItem("id"));
-                    },
-                    bonds: function(apiService){
-                        return apiService.getBonds();
                     }
                 }
             })

@@ -77,7 +77,7 @@ if (!Array.from) {
   }());
 }
 
-var bondController = function($scope, $state, $stateParams, apiService, user, bonds, $mdDialog, $mdToast){
+var bondController = function($scope, $state, $stateParams, apiService, user, $mdDialog, $mdToast){
     $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
@@ -87,9 +87,8 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
         });
     };
     $scope.user = user.data.data;
-    $scope.detail = $stateParams.obj; //now id of bond clicked
-    console.log($scope.detail);
-    $scope.data = bonds.data.data; //bond history for chart
+    $scope.detail = $stateParams.obj;
+    console.log($scope.detail)
     $scope.sell = function(ev) {
         var confirm = $mdDialog.prompt()
           .title('Sell Bond')
@@ -119,12 +118,13 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
     apiService.bond($scope.detail.assocBond.bondid).then(function(data){
         var bond = data.data.history;
         var yieldPercent = Array.from(bond, function(data){
-            return data.yieldask;
+            return data.yieldask.toFixed(2);
         });
         var tradeTime = Array.from(bond, function(data){
             var x = data.time;
             return new Date(x);
         });
+        yieldPercent.unshift("Yield");
         setTimeout(function(){
             var chart = c3.generate({
                 padding: {
@@ -132,9 +132,11 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
                 },
                 data: {
                     columns: [
-                        ['data1', 30, 200, 100, 400, 150, 250]
-                    ],
-                    type: 'area-spline'
+                        yieldPercent
+                    ]
+                },
+                legend: {
+                    show: false
                 },
                 axis: {
                     x: {
@@ -149,18 +151,10 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
                             position: 'outer-right'
                         }
                     }
-                },
-                legend: {
-                    show: false
                 }
             });
-            setTimeout(function () {
-                chart.load({
-                    columns: [
-                        ['data1', 100, 250, 150, 200, 100, 350]
-                    ]
-                });
-            }, 2000);
+                    console.log(yieldPercent)
+
             d3.select("svg").append("text")
             .attr("x", 300 )
             .attr("y", 10)
