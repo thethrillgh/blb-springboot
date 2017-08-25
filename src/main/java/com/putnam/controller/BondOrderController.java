@@ -95,7 +95,7 @@ public class BondOrderController {
 
 				double totalPrincipal = princ * quant;
 
-				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate(), quant);
+				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), sd, quant);
 
 				double orderTotal = totalPrincipal + interestOnPurchase;
 
@@ -221,7 +221,7 @@ public class BondOrderController {
 
 		double dailyInt = fvalue * rate;
 
-		return dailyInt*numDays*quant;
+		return Math.abs(dailyInt*numDays*quant);
 	}
 
 	public int computeQuantityOwned(ArrayList<BondOrder> orders){
