@@ -221,7 +221,7 @@ public class BondOrderController {
 
 		double dailyInt = fvalue * rate;
 
-		return dailyInt*numDays*quant;
+		return dailyInt*numDays;
 	}
 
 	public int computeQuantityOwned(ArrayList<BondOrder> orders){
