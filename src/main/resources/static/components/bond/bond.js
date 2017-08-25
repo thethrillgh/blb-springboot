@@ -94,18 +94,52 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
           .title('Sell Bond')
           .textContent('How many bonds would you like to sell')
           .placeholder('Quantity')
-          .initialValue(1000)
+          .initialValue(10)
           .targetEvent(ev)
           .ok('SELL')
           .cancel('Cancel transaction');
 
         $mdDialog.show(confirm).then(function(result) {
-            apiService.sell($scope.detail.assocBond.bondid, result).then(function(data){
+            apiService.sell($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
                 if(data.data.status=="Success"){
-                    $scope.user = apiService.user();
+                    $scope.detail.assocBond.quantity -= parseInt(result);
+                    $scope.detail.assocOrder.numbondspurchased -= parseInt(result);
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You sold ' + result + ' bonds.')
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
+            })
+
+        }, function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Transaction cancelled.')
+                .position("top right")
+                .hideDelay(4000)
+            );
+        });
+    };
+    $scope.buy = function(ev) {
+        var confirm = $mdDialog.prompt()
+          .title('Buy Bond')
+          .textContent('How many bonds would you like to buy')
+          .placeholder('Quantity')
+          .initialValue(10)
+          .targetEvent(ev)
+          .ok('BUY')
+          .cancel('Cancel transaction');
+
+        $mdDialog.show(confirm).then(function(result) {
+            apiService.buy($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
+                if(data.data.status=="Success"){
+                    $scope.detail.assocBond.quantity += parseInt(result);
+                    $scope.detail.assocOrder.numbondspurchased += parseInt(result);
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent('You bought ' + result + ' bonds.')
                         .position("top right")
                         .hideDelay(4000)
                     );
@@ -130,15 +164,21 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
             var x = data.time;
             return new Date(x);
         });
+        console.log(tradeTime)
         yieldPercent.unshift("Yield");
+        tradeTime.unshift('Date');
         setTimeout(function(){
             var chart = c3.generate({
                 padding: {
                     bottom: 20  
                 },
                 data: {
+                    xFormat: '%m%d%y',
+                    xs: {
+                        'Yield': 'Date',
+                    },
                     columns: [
-                        yieldPercent
+                        tradeTime, yieldPercent
                     ]
                 },
                 legend: {
@@ -146,11 +186,16 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                 },
                 axis: {
                     x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: "%m-%d-%y",
+                            values: tradeTime
+                        },
                         label: {
                             text: 'Trade Date',
                             position: 'outer-right'
                         }
-                    },
+                    }
 //                    y: {
 //                        label: {
 //                            text: 'Yield %',

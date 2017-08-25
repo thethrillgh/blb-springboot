@@ -143,7 +143,10 @@
                         <md-tooltip class="tooltip-multiline">The date in which the bond purchase will be complete</md-tooltip>
                     </p>
                     <p class="cHeader3 nocenter">{{detail.assocOrder.settlementdate | mydate}}</p>
-                    <md-button class="md-accent md-raised sell" ng-click="sell($event)">SELL</md-button>
+                    <div layout="row">
+                        <md-button class="md-accent md-raised sell" ng-click="buy($event)">BUY</md-button>
+                        <md-button class="md-primary md-raised sell" ng-click="sell($event)">SELL</md-button>
+                    </div>
                     <p class="cHeader3 nocenter top">{{detail.assocOrder.principal | roundNum}}</p>
                     <p class="cHeader3 nocenter">{{detail.assocOrder.accruedinterest | roundNum}} USD ({{detail.assocOrder.settlementdate | accrued:detail.assocBond.issuedate }} Days)</p>
                     <p class="cHeader3 nocenter">{{detail.assocOrder.total | roundNum}}</p>
