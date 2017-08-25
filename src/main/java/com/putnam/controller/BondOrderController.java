@@ -95,7 +95,7 @@ public class BondOrderController {
 
 				double totalPrincipal = princ * quant;
 
-				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate(), quant);
+				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), sd, quant);
 
 				double orderTotal = totalPrincipal + interestOnPurchase;
 
@@ -130,7 +130,7 @@ public class BondOrderController {
 					}
 
 				}
-				return new Response("Fail", new Failed("Insufficient funds or quantitiy, User has $"+buyer.getAcctbalance()+", and there are "+bondToBuy.getQuantity()+" left valued at $"+(bondToBuy.getQuantity()*bondToBuy.getMarketprice())));
+				return new Response("Fail", new Failed("Insufficient funds or quantitiy, User has $"+buyer.getAcctbalance()+", and you tried to purchase "+quant+" bonds valued at $"+ (bondToBuy.getMarketprice()*quant)));
 			}
 		}
 		return new Response("Fail", new Failed("Cannot find bond or user"));
@@ -146,7 +146,7 @@ public class BondOrderController {
 
 		if(userid != null) {
 
-			User seller = userRepo.findByUserid(userid);
+			User seller = userRepo.findByUserid((long)userid);
 
 			if (bondToSell != null && seller != null) {
 
@@ -221,7 +221,7 @@ public class BondOrderController {
 
 		double dailyInt = fvalue * rate;
 
-		return dailyInt*numDays;
+		return Math.abs(dailyInt*numDays*quant);
 	}
 
 	public int computeQuantityOwned(ArrayList<BondOrder> orders){
