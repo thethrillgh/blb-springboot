@@ -44,7 +44,9 @@ CREATE TABLE "useraccount"(
   "city" VARCHAR,
   "state" VARCHAR,
   "postalcode" VARCHAR,
-  "acctbalance" DOUBLE PRECISION
+  "acctbalance" DOUBLE PRECISION,
+  "totalinvested" DOUBLE PRECISION,
+  "totalprofits" DOUBLE PRECISION
 );
 
 DROP TABLE IF EXISTS "bondhistory" CASCADE;
@@ -102,16 +104,16 @@ VALUES
 ('912837TZ9','US TREASURY','2017-06-21','20YR',5.01,'2027-06-21',1500,'AA+','NO','FIXED',98.31155121,99.54022118,10.07002725,9.945728352,98.9258862,10.0078778,1000),
 ('912834F90','US TREASURY','2017-06-22','30YR',5.49,'2027-06-22',1500,'AA+','NO','FIXED',100.4391155,102.2220618,9.358903606,9.195666605,101.3305886,9.277285106,1000);
 
-INSERT INTO useraccount(firstname,lastname,phonenum,acctemail,acctpass,acctssn,ssnlastfour,passsalt,streetaddress,city,state,postalcode,acctbalance)
+INSERT INTO useraccount(firstname,lastname,phonenum,acctemail,acctpass,acctssn,ssnlastfour,passsalt,streetaddress,city,state,postalcode,acctbalance, totalinvested, totalprofits)
 VALUES
-('Arthur','Doons','12024561111','morty@rick.com','camaro33','123456789','6789',NULL,'1 Main Street','New York','NY','10022',100000.00),
-('Dirk','Sweetprince','18002453875','dirk@yahoo.com','securepassword','928648372','8372',NULL,'2 Dinkleburg Cir','Boston','MA','01002',75.09),
-('Doug','Dimmadome','19982976649','dimsdale@gmail.com','TimmyTurner23','938777475','7475',NULL,'1 Dimmadome Rd','Dimsdale','ME','74837',10000000.45),
-('Matt','Puck','15087749933','life@aol.com','Dwightshrute','837374938','4938',NULL,'14 Fizzy Ln','Currency','TX','19288',20),
-('Ana','Vara Berra','18273648594','venezuela@bing.com','Salsadancing','111648342','8342',NULL,'2133 Jammin Dr','Hoboken','NJ','07030',47563.22),
-('Dani','Cats','18004737737','dartmouth@gmail.com','dannypass','398573874','3874',NULL,'1 Webster Ave','Hanover','NH','83838',101010.4),
-('Sammy','Groot','18009999999','groot@umass.com','Password1234','111223333','3333',NULL,'1 Friendship Ln','Amherst','MA','12345',0),
-('Yusiff','Hamis','38484848848','something@gmail.com','password5','234534533','4533',NULL,'18 Main St','Danville','KY','28282',7.77);
+('Arthur','Doons','12024561111','morty@rick.com','camaro33','123456789','6789',NULL,'1 Main Street','New York','NY','10022',100000.00, 50000.0, 50000.0),
+('Dirk','Sweetprince','18002453875','dirk@yahoo.com','securepassword','928648372','8372',NULL,'2 Dinkleburg Cir','Boston','MA','01002',75.09, 50.0, 25.09),
+('Doug','Dimmadome','19982976649','dimsdale@gmail.com','TimmyTurner23','938777475','7475',NULL,'1 Dimmadome Rd','Dimsdale','ME','74837',10000000.45, 9000000, 1000000.45),
+('Matt','Puck','15087749933','life@aol.com','Dwightshrute','837374938','4938',NULL,'14 Fizzy Ln','Currency','TX','19288',20.0, 20.0, 0.0),
+('Ana','Vara Berra','18273648594','venezuela@bing.com','Salsadancing','111648342','8342',NULL,'2133 Jammin Dr','Hoboken','NJ','07030',47563.22, 45000.0, 2563.22),
+('Dani','Cats','18004737737','dartmouth@gmail.com','dannypass','398573874','3874',NULL,'1 Webster Ave','Hanover','NH','83838',101010.4, 101010.0, 0.4),
+('Sammy','Groot','18009999999','groot@umass.com','Password1234','111223333','3333',NULL,'1 Friendship Ln','Amherst','MA','12345',0, 0,0),
+('Yusiff','Hamis','38484848848','something@gmail.com','password5','234534533','4533',NULL,'18 Main St','Danville','KY','28282',7.77, 7.0, 0.77);
 
 INSERT INTO bankaccount(acctnum,routingnum,accttype)
 VALUES
