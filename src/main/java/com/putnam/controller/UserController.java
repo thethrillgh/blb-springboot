@@ -34,13 +34,16 @@ public class UserController {
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public Response login(@RequestBody User user, HttpSession session) {
 		User result = userRepo.findByAcctemailAndSsnlastfour(user.getAcctemail(), user.getSsnlastfour());
-		if(User.isMatchingPassword(user.getAcctpass(), result.getPasssalt())) {
-			setUserInSession(session, result);
-			return new Response("Done", result);
+		if(result != null) {
+			if(User.isMatchingPassword(user.getAcctpass(), result.getPasssalt())) {
+				setUserInSession(session, result);
+				return new Response("Done", result);
+			}
+			else {
+				return new Response("Failed", new Failed("Wrong Password"));
+			}
 		}
-		else {
-			return new Response("Failed", user);
-		}
+		return new Response("Failed", new Failed("Entered wrong email or SSN"));
 	}
 
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
@@ -77,7 +80,6 @@ public class UserController {
 
 	@RequestMapping(value="/user", method = RequestMethod.GET)
 	public Response user(HttpServletRequest request, @RequestParam("id") long id) {
-//			Object sid = request.getSession().getAttribute(userSessionKey);
 			User user = null;
 			if(id != 0) {
 				user = userRepo.findByUserid(id);

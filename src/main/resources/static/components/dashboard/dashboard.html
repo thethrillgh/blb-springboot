@@ -47,7 +47,7 @@
             <div layout="row" class="boxHeight">
                 <div layout="column" class="box1" layout-align="start start">
                     <p class="boxHeader">Account Balance</p>
-                    <p class="value">{{user.acctbalance}} USD</p>
+                    <p class="value">{{user.acctbalance | currency}} USD</p>
                     <p class="add_funds">Add Funds</p>
                 </div>
                 <div layout="column" class="box2" layout-align="start start">
@@ -82,13 +82,13 @@
               <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                 <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
                   <tr class="headerRow" md-row>
-                    <th md-column md-order-by="cusip"><span>CUSIP</span></th>
-                    <th md-column md-order-by="issuer" md-desc><span>Issuer</span></th>
-                    <th md-column md-order-by="type"><span>Type</span></th>
-                    <th md-column md-order-by="interestrate"><span>Interest Rate</span></th>
-                    <th md-column md-order-by="maturitydate"><span>Maturity Date</span></th>
-                    <th md-column md-order-by="quantity"><span>Quantity</span></th>
-                    <th md-column md-order-by="facevalue"><span>Face Value</span></th>
+                    <th md-column md-order-by="assocBond.cusip"><span>CUSIP</span></th>
+                    <th md-column md-order-by="assocBond.issuer" md-desc><span>Issuer</span></th>
+                    <th md-column md-order-by="assocBond.type"><span>Type</span></th>
+                    <th md-column md-order-by="assocBond.interestrate"><span>Interest Rate</span></th>
+                    <th md-column md-order-by="assocBond.maturitydate"><span>Maturity Date</span></th>
+                    <th md-column md-order-by="assocBond.quantity"><span>Quantity</span></th>
+                    <th md-column md-order-by="assocBond.facevalue"><span>Face Value</span></th>
                   </tr>
                 </thead>
                 <tbody md-body>
@@ -96,7 +96,7 @@
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.cusip}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.issuer}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.type}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}%</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.maturitydate | mydate}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.quantity}}</td>
                     <td md-cell ng-click="go(bonds)">{{bonds.assocBond.facevalue}}</td>                    

@@ -11,6 +11,9 @@ var apiService = function($http){
     var mybonds = function(){
         return $http.get("/findall")
     }
+    var bond = function(id){
+        return $http.get("/findbyid?id="+id)
+    }
     var login = function(data){
         return $http.post("/login", data)
     }
@@ -35,6 +38,7 @@ var apiService = function($http){
         signup: signup,
         login: login,
         signup: signup,
+        bond: bond,
         user: user,
         logout: logout,
         portfolio: portfolio
