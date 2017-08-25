@@ -77,7 +77,7 @@ if (!Array.from) {
   }());
 }
 
-var bondController = function($scope, $state, $stateParams, apiService, user, bonds){
+var bondController = function($scope, $state, $stateParams, apiService, user, bonds, $mdDialog, $mdToast){
     $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
@@ -88,10 +88,36 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
     };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj; //now id of bond clicked
+    console.log($scope.detail);
     $scope.data = bonds.data.data; //bond history for chart
+    $scope.sell = function(ev) {
+        var confirm = $mdDialog.prompt()
+          .title('Sell Bond')
+          .textContent('How many bonds would you like to sell')
+          .placeholder('Quantity')
+          .initialValue(1000)
+          .targetEvent(ev)
+          .ok('SELL')
+          .cancel('Cancel transaction');
+
+        $mdDialog.show(confirm).then(function(result) {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('You sold ' + result + ' bonds.')
+                .position("top right")
+                .hideDelay(4000)
+            );
+        }, function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Transaction cancelled.')
+                .position("top right")
+                .hideDelay(4000)
+            );
+        });
+    };
     apiService.bond($scope.detail.assocBond.bondid).then(function(data){
         var bond = data.data.history;
-        console.log(bond)
         var yieldPercent = Array.from(bond, function(data){
             return data.yieldask;
         });
@@ -144,59 +170,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, bo
             .text("Yield");
         }, 200)
     })
-//    var tick = Array.from(['03-01-2010', '03-01-2011', '03-01-2012', '03-01-2013', '03-01-2014', '03-01-2015', '03-01-2016'], function(data){
-//        return new Date(data);
-//    })
-//    yieldPercent.unshift('yield');
-//    tradeTime.unshift('date');
-//    setTimeout(function(){
-//        var chart = c3.generate({
-//            title: {
-//                text: 'My Line Chart',
-//                y: 100
-//              },
-//            padding: {
-//              bottom: 20  
-//            },
-//            bindto: '#chart',
-//            data: {
-//                xFormat: '%m%d%y',
-//                xs: {
-//                    'yield': 'date',
-//                },
-//                columns: [
-//                    tradeTime,
-//                    yieldPercent
-//                ],
-//                type: 'area-spline'
-//            },
-//            axis: {
-//                x: {
-//                    type: 'timeseries',
-//                    tick: {
-//                        format: "%m-%d-%y",
-//                        values: tick
-//                    },
-//                    label: {
-//                        text: 'Trade Date',
-//                        position: 'outer-right'
-//                    }
-//                },
-//                y: {
-//                    label: {
-//                        text: 'Yield %',
-//                        position: 'outer-right'
-//                    }
-//                }
-//            },
-//            legend: {
-//                show: false
-//            },
-//            title: {
-//                text: "Yield"
-//            }
-//        });
-//    }, 200);
 }
 
 angular.module('blb')
