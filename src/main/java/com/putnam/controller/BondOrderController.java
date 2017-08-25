@@ -95,7 +95,7 @@ public class BondOrderController {
 
 				double totalPrincipal = princ * quant;
 
-				double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate());
+				double interestOnPurchase = computeInterest(bondToBuy.getMarketprice(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate(), quant);
 
 				double orderTotal = totalPrincipal + interestOnPurchase;
 
@@ -174,14 +174,14 @@ public class BondOrderController {
 
 						double totalPrincipal = princ * quant;
 
-						double interestOnPurchase = computeInterest(bondToSell.getFacevalue(), bondToSell.getInterestrate(), bondToSell.getIssuedate(), sd);
+						double interestOnPurchase = computeInterest(bondToSell.getFacevalue(), bondToSell.getInterestrate(), bondToSell.getIssuedate(), sd, quant);
 
 						double orderTotal = totalPrincipal + interestOnPurchase;
 
 						double newBalance = seller.getAcctbalance() + orderTotal;
 
 						//BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.SELL, bondToSell, seller);
-						//quick fix to maintain one order with state
+						//quick fix to maintain one order with state...BUY is a backdoor for compatibiliity with portfolio
 						BondOrder newOrder = new BondOrder(td, td, sd, Uorder.getPrincipal() - totalPrincipal, Uorder.getAccruedinterest() - interestOnPurchase, Uorder.getTotal() - orderTotal, Uorder.getNumbondspurchased() - quant, BondOrder.BUY, bondToSell, seller);
 						newOrder.setId(Uorder.getId());
 
@@ -213,7 +213,7 @@ public class BondOrderController {
 	/**
 	 *  d1 should be issue date and d2 should be the settlement date NOT buy date
 	 */
-	public double computeInterest(double fvalue, double coupon, Date d1, Date d2){
+	public double computeInterest(double fvalue, double coupon, Date d1, Date d2, int quant){
 
 		int numDays = daysBetween(d1, d2);
 
@@ -221,7 +221,7 @@ public class BondOrderController {
 
 		double dailyInt = fvalue * rate;
 
-		return dailyInt*numDays;
+		return dailyInt*numDays*quant;
 	}
 
 	public int computeQuantityOwned(ArrayList<BondOrder> orders){
