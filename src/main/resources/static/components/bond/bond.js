@@ -100,12 +100,18 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
           .cancel('Cancel transaction');
 
         $mdDialog.show(confirm).then(function(result) {
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent('You sold ' + result + ' bonds.')
-                .position("top right")
-                .hideDelay(4000)
-            );
+            apiService.sell($scope.detail.assocBond.bondid, result).then(function(data){
+                if(data.data.status=="Success"){
+                    $scope.user = apiService.user();
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent('You sold ' + result + ' bonds.')
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
+            })
+
         }, function() {
             $mdToast.show(
               $mdToast.simple()
@@ -145,16 +151,14 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                             position: 'outer-right'
                         }
                     },
-                    y: {
-                        label: {
-                            text: 'Yield %',
-                            position: 'outer-right'
-                        }
-                    }
+//                    y: {
+//                        label: {
+//                            text: 'Yield %',
+//                            position: 'outer-right'
+//                        }
+//                    }
                 }
             });
-                    console.log(yieldPercent)
-
             d3.select("svg").append("text")
             .attr("x", 300 )
             .attr("y", 10)

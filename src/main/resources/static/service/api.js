@@ -24,10 +24,7 @@ var apiService = function($http){
         return $http.get("/portfolio")
     }
     var sell = function(id, num){
-        return $http.get("/order/sell?id="id+"&quantity="+num);
-    }
-    var buy = function(id, num){
-        return $http.get("/order/buy?id="id+"&quantity="+num);
+        return $http.get("/order/sell?id="+id+"&quantity="+num)
     }
 
     return {
@@ -40,8 +37,7 @@ var apiService = function($http){
         user: user,
         logout: logout,
         portfolio: portfolio,
-        sell: sell,
-        buy: buy
+        sell: sell
     };
 };
 
