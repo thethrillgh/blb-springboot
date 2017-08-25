@@ -29,7 +29,6 @@ var apiService = function($http){
     var portfolio = function(){
         return $http.get("/portfolio")
     }
-
     return {
         getBonds: getBonds,
         accounts: accounts,

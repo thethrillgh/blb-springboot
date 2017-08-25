@@ -96,6 +96,28 @@
                 templateUrl: 'components/account/wallet.html',
                 controller: 'profileController'
             })
+            .state('explore', {
+                url: '/explore',
+                templateUrl: 'components/explore/explore.html',
+                controller: 'exploreController',
+                resolve: {
+                    security: ['$q', function($q){
+                       if(localStorage.getItem("id") == 0){
+                          return $q.reject("Not Authorized");
+                       }
+                    }],
+                    user: function(apiService){
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+                            
+                        }
+                        return apiService.user(localStorage.getItem("id"));
+                    },
+                    portfolio: function(apiService){
+                        return apiService.portfolio();
+                    }
+                }
+            })
         $urlRouterProvider.otherwise('/');
     };
 
