@@ -227,7 +227,13 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                 regions: [
 //                    {start: '2016-11-04'}
                     {start: regionChart}
-                ]
+                ],
+                zoom: {
+                    enabled: true
+                },
+                point: {
+                    show: true
+                }
             });
             d3.select("svg").append("text")
             .attr("x", 300 )
