@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="components/dashboard/dashboard.css">
+<link rel="stylesheet" href="components/explore/explore.css">
 <md-toolbar layout layout-align="space-between center" class="md-primary md-hue-1" id="toolbar">
     <img ui-sref="dashboard" class="logo_img" src="assets/logos.png">
     <div layout="row" layout-align="center center">
@@ -8,7 +8,7 @@
         </div>
         <div layout="row" layout-align="center center">
             <p class="username">Explore</p>
-            <i ui-sref="explore" class="material-icons md-36 menu profile_icon">search</i>
+            <i class="material-icons md-36 menu profile_icon">search</i>
         </div>
         <div layout="row" layout-align="center center">
             <p class="username">{{user.firstname}} {{user.lastname}}</p>
@@ -35,36 +35,10 @@
 </md-toolbar>
 <md-content class="dashboard_padding" flex>
     <div layout="column" flex>
-        <h3 class="header">Welcome Back!</h3>
-        <div layout="row" layout-align="space-between start" style="margin-bottom: 15px;">
-            <div layout="column" class="padding">
-                <p class="qheader">Quick Links:</p>
-                <p class="links link0">Account Statements</p>
-                <p class="links">My profile</p>
-                <p class="links">Help</p>
-                <p class="links">About BLB</p>
-            </div>
-            <div layout="row" class="boxHeight">
-                <div layout="column" class="box1" layout-align="start start">
-                    <p class="boxHeader">Account Balance</p>
-                    <p class="value">{{user.acctbalance | currency}} USD</p>
-                    <p class="add_funds">Add Funds</p>
-                </div>
-                <div layout="column" class="box2" layout-align="start start">
-                    <p class="boxHeader">Top Performing Bond Today</p>
-                    <div layout="row">
-                        <p class="marginO value">US T 5/8 10yr</p>
-                        <p class="marginO value1">5.76 <span class="value2">+0.9 (4%)</span></p>
-                        <i class="material-icons md-24 info">info</i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-          <md-card class="table">
+        <md-card class="table">
             <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
               <div class="md-toolbar-tools">
-                <span class="tableHeader">My Portfolio</span>
+                <span class="tableHeader">Bonds</span>
                 <div flex></div>
                 <md-button class="md-icon-button" ng-click="loadStuff()">
                   <md-icon>refresh</md-icon>
@@ -82,24 +56,24 @@
               <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                 <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
                   <tr class="headerRow" md-row>
-                    <th md-column md-order-by="assocBond.cusip"><span>CUSIP</span></th>
-                    <th md-column md-order-by="assocBond.issuer" md-desc><span>Issuer</span></th>
-                    <th md-column md-order-by="assocBond.type"><span>Type</span></th>
-                    <th md-column md-order-by="assocBond.interestrate"><span>Interest Rate</span></th>
-                    <th md-column md-order-by="assocBond.maturitydate"><span>Maturity Date</span></th>
-                    <th md-column md-order-by="assocBond.quantity"><span>Quantity</span></th>
-                    <th md-column md-order-by="assocBond.facevalue"><span>Face Value</span></th>
+                    <th md-column md-order-by="cusip"><span>CUSIP</span></th>
+                    <th md-column md-order-by="issuer" md-desc><span>Issuer</span></th>
+                    <th md-column md-order-by="type"><span>Type</span></th>
+                    <th md-column md-order-by="interestrate"><span>Interest Rate</span></th>
+                    <th md-column md-order-by="maturitydate"><span>Maturity Date</span></th>
+                    <th md-column md-order-by="quantity"><span>Quantity</span></th>
+                    <th md-column md-order-by="facevalue"><span>Face Value</span></th>
                   </tr>
                 </thead>
                 <tbody md-body>
-                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.issuer}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.type}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}%</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.maturitydate | mydate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.quantity}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.facevalue}}</td>                    
+                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in mybonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell ng-click="go(bonds)">{{mybonds.cusip}}</td>
+                    <td md-cell ng-click="go(bonds)">{{mybonds.issuer}}</td>
+                    <td md-cell ng-click="go(bonds)">{{mybonds.type}}</td>
+                    <td md-cell ng-click="go(bonds)">{{bonds.interestrate}}%</td>
+                    <td md-cell ng-click="go(bonds)">{{mybonds.maturitydate | mydate}}</td>
+                    <td md-cell ng-click="go(bonds)">{{mybonds.quantity}}</td>
+                    <td md-cell ng-click="go(bonds)">{{mybonds.facevalue}}</td>                    
                   </tr>
                 </tbody>
               </table>
