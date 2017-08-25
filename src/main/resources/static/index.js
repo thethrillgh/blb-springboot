@@ -50,7 +50,7 @@ var accrued = function(){
     return function(x){
         var date = new Date(x);
         var today = new Date();
-        var newDate = moment(today).diff(date, 'days');
+        var newDate = moment(date).diff(today, 'days');
         return newDate;
     }
 }

@@ -145,7 +145,7 @@
                     <p class="cHeader3 nocenter">{{detail.assocOrder.settlementdate | mydate}}</p>
                     <md-button class="md-accent md-raised sell" ng-click="sell($event)">SELL</md-button>
                     <p class="cHeader3 nocenter top">{{detail.assocOrder.principal | roundNum}}</p>
-                    <p class="cHeader3 nocenter">{{detail.assocOrder.accruedinterest | roundNum}} USD ({{detail.assocBond.maturitydate | accrued}} Days)</p>
+                    <p class="cHeader3 nocenter">{{detail.assocOrder.accruedinterest | roundNum}} USD ({{detail.assocOrder.settlementdate | accrued}} Days)</p>
                     <p class="cHeader3 nocenter">{{detail.assocOrder.total | roundNum}}</p>
                 </div> 
             </div>

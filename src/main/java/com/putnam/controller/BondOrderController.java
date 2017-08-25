@@ -95,7 +95,7 @@ public class BondOrderController {
 
 				double totalPrincipal = princ * quant;
 
-				double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), bondToBuy.getIssuedate(), sd);
+				double interestOnPurchase = computeInterest(bondToBuy.getFacevalue(), bondToBuy.getInterestrate(), sd, bondToBuy.getIssuedate());
 
 				double orderTotal = totalPrincipal + interestOnPurchase;
 
