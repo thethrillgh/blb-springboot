@@ -113,8 +113,8 @@
                         }
                         return apiService.user(localStorage.getItem("id"));
                     },
-                    portfolio: function(apiService){
-                        return apiService.portfolio();
+                    mybonds: function(apiService){
+                        return apiService.mybonds();
                     }
                 }
             })

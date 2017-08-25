@@ -1,13 +1,15 @@
-var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio){
-  $scope.bonds = portfolio.data.data.holdings;
-  $scope.bondRows = $scope.bonds.length;
+var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, mybonds){
+  $scope.mybonds = mybonds.data.data;
+  console.log($scope.mybonds);
+  $scope.bondRows = $scope.mybonds.length;
   $scope.user = user.data.data;
+//  console.log($scope.user);
   $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
                 localStorage.setItem("id", 0);
                 $state.go('landing');
-            }
+            } 
         });
     };
   $scope.go = function(id){
@@ -28,8 +30,8 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
   };
   
   $scope.query = {
-    order: 'assocBond.cusip',
-    limit: 10,
+    order: 'cusip',
+    limit: 10 ,
     page: 1
   };
   
@@ -41,7 +43,7 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
     $scope.promise = $timeout(function () {
       // loading
         $scope.query = {
-            order: 'assocBond.cusip',
+            order: 'cusip',
             limit: 5,
             page: 1
         };
