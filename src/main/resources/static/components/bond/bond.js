@@ -111,6 +111,14 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         .hideDelay(4000)
                     );
                 }
+                else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent(data.data.data.message)
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
             })
 
         }, function() {
@@ -140,6 +148,14 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You bought ' + result + ' bonds.')
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
+                else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent(data.data.data.message)
                         .position("top right")
                         .hideDelay(4000)
                     );
