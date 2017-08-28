@@ -59,7 +59,10 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     limitSelect: true,
     pageSelect: true
   };
-  
+  $scope.removeFilter = function(){
+      $scope.filter.search = "";
+      $scope.filter.show = false;
+  }
   $scope.query = {
     order: 'assocBond.cusip',
     limit: 5,
