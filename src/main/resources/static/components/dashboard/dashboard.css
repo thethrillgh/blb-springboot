@@ -136,15 +136,8 @@
 .tableButton {
     margin-top: 15px !important;
     margin-bottom: 50px !important;
-    color: rgba(255,255,255,0.87) !important;
-    background-color: rgb(16,108,200);
     padding-left: 20px;
     padding-right: 20px;
-    font-weight: bold;
-}
-
-.tableButton:hover {
-    background-color: rgb(68,138,255) !important;
 }
 
 .table{

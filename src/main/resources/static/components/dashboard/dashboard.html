@@ -45,7 +45,7 @@
                 <p class="links">About BLB</p>
             </div>
             <div layout="row" class="boxHeight">
-                <div layout="column" class="nocolor" layout-align="start start">
+                <div layout="column" class="nocolor" layout-align="start start" ng-show="showTable">
                     <div id="chart" flex></div>
                 </div>
                 <div layout="column" class="box1" layout-align="start start">
@@ -65,17 +65,17 @@
         </div>
     </div>
     <div layout="row">
-        <md-card class="table" flex="50">
-
-            <div ng-hide="showTable">
+        <md-card class="table" flex ng-hide="showTable">
+            <div>
                 <div class="md-toolbar-tools tableMessage" layout="column">
                     <p class="tableMiniHeader">You have no bonds to show.</p>
                     <p class="tableText">Visit the Explore page and select a bond to buy it.<br></p>
-                    <md-button class="tableButton"  ui-sref="explore">Buy Bonds</md-button>
+                    <md-button class="md-raised md-accent tableButton"  ui-sref="explore">Buy Bonds</md-button>
                 </div>
             </div>
-
-            <div ng-show="showTable">
+        </md-card>
+        <md-card class="table" flex="50" ng-show="showTable">
+            <div>
                 <md-toolbar class="md-table-toolbar md-default" ng-hide="filter.show">
                   <div class="md-toolbar-tools">
                     <span class="tableHeader">My Portfolio</span>
