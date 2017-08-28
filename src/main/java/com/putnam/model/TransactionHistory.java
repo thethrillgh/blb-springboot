@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 @Entity
@@ -37,10 +38,10 @@ public class TransactionHistory implements Serializable{
         super();
     }
 
-    public TransactionHistory(Date timestamp, String transactiontype, User assocUser, BondOrder assocOrder){
+    public TransactionHistory(Date timestamp, String transactiontype, int quant, double orderTotal, User assocUser, BondOrder assocOrder){
         this();
         this.timestamp = timestamp;
-        this.transactiondesc = getMessage(assocOrder, transactiontype);
+        this.transactiondesc = getMessage(assocOrder, transactiontype, quant, orderTotal);
         this.user = assocUser;
         this.bondorder = assocOrder;
     }
@@ -85,8 +86,11 @@ public class TransactionHistory implements Serializable{
         this.user = user;
     }
 
-    public String getMessage(BondOrder order, String type){
-        return "You "+type+" "+order.getNumbondspurchased()+" bonds for a total of $"+order.getTotal();
+    public String getMessage(BondOrder order, String type, int quant, double orderTotal){
+
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        return "You "+type.toLowerCase()+" "+quant+" bonds for a total of $"+Double.valueOf(df.format(orderTotal));
 
     }
 }

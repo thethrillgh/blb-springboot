@@ -27,6 +27,9 @@ public class BondOrder implements Serializable {
 
 	public static final String BUY = "BUY";
 	public static final String SELL = "SELL";
+	public static final String BOUGHT = "BOUGHT";
+	public static final String SOLD = "SOLD";
+
 
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bondid", nullable=false)
@@ -57,7 +60,6 @@ public class BondOrder implements Serializable {
 	private double principal;
 
 	@Column(name = "accruedinterest")
-
 	private double accruedinterest;
 
 	@Column(name = "total")
