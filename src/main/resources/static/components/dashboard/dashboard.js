@@ -67,7 +67,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   };
     
   $scope.query2 = {
-    order: 'timestamp',
+    order: '-timestamp',
     limit: 5,
     page: 1
   };
@@ -90,7 +90,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     $scope.promise = $timeout(function () {
       // loading
         $scope.query2 = {
-            order: 'timestamp',
+            order: '-timestamp',
             limit: 5,
             page: 1
         };
