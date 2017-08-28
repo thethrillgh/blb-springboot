@@ -57,7 +57,6 @@ public class BondOrder implements Serializable {
 	private double principal;
 
 	@Column(name = "accruedinterest")
-
 	private double accruedinterest;
 
 	@Column(name = "total")

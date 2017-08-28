@@ -117,11 +117,11 @@ public class BondOrderController {
 
 						TransactionHistory th = new TransactionHistory(td, BondOrder.BUY, buyer, order);
 
-						thRepo.save(th);
 						bondOrderRepo.save(order);
 						userRepo.save(buyer);
 						bondRepo.save(bondToBuy);
 						bondRepo.save(bondToBuy);
+						thRepo.save(th);
 
 						return new Response("Success", order);
 					} else {
