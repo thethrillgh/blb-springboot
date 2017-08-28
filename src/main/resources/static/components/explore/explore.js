@@ -1,6 +1,5 @@
 var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, mybonds){
   $scope.mybonds = mybonds.data.data;
-  console.log($scope.mybonds);
   $scope.bondRows = $scope.mybonds.length;
   $scope.user = user.data.data;
   $scope.logout = function(){
@@ -12,7 +11,7 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
         });
     };
   $scope.go = function(id){
-        $state.go('bond', {obj: id})
+        $state.go('explorebond', {obj: id})
     }
   $scope.removeFilter = function(){
       $scope.filter.search = "";

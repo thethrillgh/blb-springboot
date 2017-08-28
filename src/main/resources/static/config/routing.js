@@ -27,6 +27,23 @@
                     }
                 }
             })
+            .state('explorebond', {
+                url: '/explorebond',
+                params: {
+                  obj: null
+                },
+                templateUrl: 'components/bond/explorebond.html',
+                controller: 'explorebondController',
+                resolve: {
+                    user: function(apiService){
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+                            
+                        }
+                        return apiService.user(localStorage.getItem("id"));
+                    }
+                }
+            })
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'components/signup/signup.html',

@@ -76,13 +76,13 @@
                 </thead>
                 <tbody md-body>
                   <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="mybonds in mybonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell ng-click="go(bonds)">{{mybonds.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.issuer}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.type}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.interestrate}}%</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.maturitydate | mydate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.quantity}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.facevalue}}</td>                    
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.cusip}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.issuer}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.type}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.interestrate}}%</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.maturitydate | mydate}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.quantity}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.facevalue}}</td>                    
                   </tr>
                 </tbody>
               </table>

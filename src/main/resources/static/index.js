@@ -77,6 +77,12 @@ angular.module('blb')
                     $state.go("dashboard")
                 }
             }
+            else if(toState.url=="/explorebond"){
+                if(toParams.obj == null){
+                    e.preventDefault();
+                    $state.go("explore")
+                }
+            }
         });
     }]);
     
