@@ -108,4 +108,29 @@ public class UserController {
 	public Object session(HttpServletRequest request){
 		return request.getSession().getAttribute(userSessionKey);
 	}
+
+	@RequestMapping(value = "/resetpass", method = RequestMethod.GET)
+	public Response resetUserPassword(@RequestParam("old") String oldPass, @RequestParam("new") String newPass, HttpServletRequest req){
+
+		Long userid = (Long) req.getSession().getAttribute("user_id");
+
+		if(userid != null){
+
+			User user = userRepo.findByUserid(userid);
+
+			if(user != null){
+
+				if(User.isMatchingPassword(oldPass, user.getPasssalt())){
+					String hashNew = User.testHash(newPass);
+
+					user.setAcctpass(hashNew);
+
+					return new Response("Success", "Password Reset Successful");
+				}
+				return new Response("Fail", new Failed("Wrong credentials, reset failed"));
+			}
+		}
+		return new Response("Fail", new Failed("Cannot locate user"));
+	}
+	
 }

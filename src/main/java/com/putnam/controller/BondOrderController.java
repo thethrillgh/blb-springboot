@@ -214,6 +214,7 @@ public class BondOrderController {
 							userRepo.save(seller);
 							//update and re-save
 							thRepo.save(th);
+							bondOrderRepo.delete(newOrder);
 
 							return new Response("Success", "All quantity of this bond sold");
 
