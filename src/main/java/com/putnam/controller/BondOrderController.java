@@ -115,7 +115,7 @@ public class BondOrderController {
 					if (newOrderFlag) {
 						BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
 
-						TransactionHistory th = new TransactionHistory(td, BondOrder.BOUGHT, buyer, order);
+						TransactionHistory th = new TransactionHistory(td, BondOrder.BOUGHT, quant, orderTotal, buyer, order);
 
 						bondOrderRepo.save(order);
 						userRepo.save(buyer);
@@ -128,7 +128,7 @@ public class BondOrderController {
 						BondOrder newOrder = new BondOrder(td, td, sd, totalPrincipal + Uorder.getPrincipal(), interestOnPurchase + Uorder.getAccruedinterest(), orderTotal + Uorder.getTotal(), quant + Uorder.getNumbondspurchased(), BondOrder.BUY, bondToBuy, buyer);
 						newOrder.setId(Uorder.getId());
 
-						TransactionHistory th = new TransactionHistory(td, BondOrder.BOUGHT, buyer, newOrder);
+						TransactionHistory th = new TransactionHistory(td, BondOrder.BOUGHT, quant, orderTotal, buyer, newOrder);
 
 						int idx = buyer.getOrders().indexOf(Uorder);
 						buyer.getOrders().remove(idx); //maintain uniqueness
@@ -197,7 +197,7 @@ public class BondOrderController {
 						BondOrder newOrder = new BondOrder(td, td, sd, Uorder.getPrincipal() - totalPrincipal, Uorder.getAccruedinterest() - interestOnPurchase, Uorder.getTotal() - orderTotal, Uorder.getNumbondspurchased() - quant, BondOrder.BUY, bondToSell, seller);
 						newOrder.setId(Uorder.getId());
 
-						TransactionHistory th = new TransactionHistory(td, BondOrder.SOLD, seller, newOrder);
+						TransactionHistory th = new TransactionHistory(td, BondOrder.SOLD, quant, orderTotal, seller, newOrder);
 
 						seller.setAcctbalance(newBalance);
 						bondToSell.setQuantity(bondToSell.getQuantity() + quant);
