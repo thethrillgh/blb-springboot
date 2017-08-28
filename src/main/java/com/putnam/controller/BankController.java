@@ -3,10 +3,7 @@ package com.putnam.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.putnam.model.Bank;
 import com.putnam.model.User;
@@ -38,4 +35,51 @@ public class BankController {
 	public Iterable<Bank> findall() {
 		return bankRepo.findAll();
 	}
+
+	@RequestMapping(value = "/bank/deposit", method = RequestMethod.GET)
+	public Response addFundsToAccount(@RequestParam("amt") double amount, HttpServletRequest req){
+
+		Long userid = (Long) req.getSession().getAttribute("user_id");
+
+		if(userid != null){
+
+			User user = userRepo.findByUserid(userid);
+
+			if(user != null){
+				double oldBal = user.getAcctbalance();
+
+				user.setAcctbalance(oldBal+amount);
+
+				userRepo.save(user);
+
+				return new Response("Success", "Account balance updated");
+			}
+		}
+		return new Response("Fail", new Failed("Cannot locate user"));
+	}
+
+	@RequestMapping(value = "/bank/withdraw", method = RequestMethod.GET)
+	public Response removeFundsFromAccount(@RequestParam("amt") double amount, HttpServletRequest req){
+		Long userid = (Long) req.getSession().getAttribute("user_id");
+
+		if(userid != null){
+
+			User user = userRepo.findByUserid(userid);
+
+			if(user != null){
+				double oldBal = user.getAcctbalance();
+
+				if(amount <= oldBal) {
+					user.setAcctbalance(oldBal - amount);
+
+					userRepo.save(user);
+
+					return new Response("Success", "Account balance updated");
+				}
+				return new Response("Fail", "Cannot withdraw more funds than you have");
+			}
+		}
+		return new Response("Fail", new Failed("Cannot locate user"));
+	}
+
 }
