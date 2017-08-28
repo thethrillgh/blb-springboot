@@ -66,7 +66,7 @@
                   </tr>
                 </thead>
                 <tbody md-body>
-                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in mybonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="mybonds in mybonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell ng-click="go(bonds)">{{mybonds.cusip}}</td>
                     <td md-cell ng-click="go(bonds)">{{mybonds.issuer}}</td>
                     <td md-cell ng-click="go(bonds)">{{mybonds.type}}</td>
