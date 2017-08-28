@@ -88,7 +88,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
     };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj;
-    console.log($scope.detail)
+    console.log($scope.detail);
     $scope.sell = function(ev) {
         var confirm = $mdDialog.prompt()
           .title('Sell Bond')
@@ -249,15 +249,11 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                 },
                 point: {
                     show: true
+                },
+                size: {
+                    height: 310
                 }
             });
-            d3.select("svg").append("text")
-            .attr("x", 300 )
-            .attr("y", 10)
-            .style("text-anchor", "middle")
-            .style('font-size', '2em')
-            .style("dominant-baseline", "central")
-            .text("Yield");
         }, 200)
     })
 }

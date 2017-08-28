@@ -2,6 +2,16 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   $scope.bonds = portfolio.data.data.holdings;
   $scope.bondRows = $scope.bonds.length;
   $scope.user = user.data.data;
+  var chart0 = c3.generate({
+        data: {
+            columns: [
+                ['bulls', 30],
+                ['lakers', 50],
+            ],
+            type : 'donut',
+        },
+        donut: { width: 10 }
+  });
   $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
