@@ -2,6 +2,32 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   $scope.bonds = portfolio.data.data.holdings;
   $scope.bondRows = $scope.bonds.length;
   $scope.user = user.data.data;
+  console.log($scope.user)
+  setTimeout(function(){
+      var chart = c3.generate({
+        data: {
+            columns: [
+                ['Total Invested', $scope.user.totalinvested],
+                ['Total Profits', $scope.user.totalprofits]
+            ],
+            type : 'donut'
+        },
+        legend: { show: true },
+        donut: { 
+            width: 7,
+            title: 'Total Balance',
+            label: {
+                show: false
+            }
+        },
+        size: {
+            height: 130
+        },
+        color: {
+            pattern: ['#2196F3', '#FFC107']
+        }
+      });
+  }, 200);
   $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){

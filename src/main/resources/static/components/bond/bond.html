@@ -8,7 +8,7 @@
         </div>
         <div layout="row" layout-align="center center">
             <p class="username">Explore</p>
-            <i class="material-icons md-36 menu profile_icon">search</i>
+            <i ui-sref="explore" class="material-icons md-36 menu profile_icon">search</i>
         </div>
         <div layout="row" layout-align="center center">
             <p class="username">{{user.firstname}} {{user.lastname}}</p>
@@ -43,7 +43,7 @@
         </div>
         <div>
             <p class="box1header">Type
-                <md-tooltip class="tooltip-mulitline">A Treasury Bond is one of four types of debt issued by the US Treasury.</br>
+                <md-tooltip class="tooltip-multiline">A Treasury Bond is one of four types of debt issued by the US Treasury.</br>
                     It is a fixed interest US Government security with a maturity of more than 10 years.</br>
                     The interest is paid off semi-anually.
                 </md-tooltip>
@@ -120,12 +120,12 @@
             <p class="cHeader2 box3">{{detail.assocBond.issuer}}</p>
        </md-card>
     </div>
-    <div layout="row" layout-align="space-between start" class="box1 padding nocolor">
+    <div layout="row" layout-align="space-between start" class="box1 padding nocolor" flex>
         <div flex="50" layout="column">
             <p class="cHeader1 market">Market</p>
-            <div id="chart"></div>
+            <div id="chart" flex></div>
         </div>
-        <div flex="50">
+        <div flex="50" flex>
             <div layout="row" class="card2">
                 <div layout="column" flex>
                     <p class="cHeader1 card3">Quantity</p>
