@@ -15,5 +15,5 @@ import java.util.ArrayList;
 public interface BondOrderRepository extends CrudRepository<BondOrder, Long>{
     public BondOrder findById(long id);
 
-    BondOrder findByBondAndUser(Bond bond, User user);
+    public BondOrder findByBondAndUser(Bond bond, User user);
 }

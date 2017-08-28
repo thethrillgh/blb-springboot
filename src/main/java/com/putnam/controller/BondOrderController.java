@@ -5,8 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.putnam.model.TransactionHistory;
+import com.putnam.repository.TransactionHistoryRepository;
 import com.putnam.response.Response;
 import com.putnam.response.Failed;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +37,9 @@ public class BondOrderController {
 	
 	@Autowired
 	BondOrderRepository bondOrderRepo;
+
+	@Autowired
+	TransactionHistoryRepository thRepo;
 	
 	@RequestMapping(value="/order/save", method = RequestMethod.GET)
 	public void save() {
@@ -108,8 +114,11 @@ public class BondOrderController {
 
 					if (newOrderFlag) {
 						BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
-						bondOrderRepo.save(order);
 
+						TransactionHistory th = new TransactionHistory(td, BondOrder.BUY, buyer, order);
+
+						thRepo.save(th);
+						bondOrderRepo.save(order);
 						userRepo.save(buyer);
 						bondRepo.save(bondToBuy);
 						bondRepo.save(bondToBuy);
@@ -119,12 +128,15 @@ public class BondOrderController {
 						BondOrder newOrder = new BondOrder(td, td, sd, totalPrincipal + Uorder.getPrincipal(), interestOnPurchase + Uorder.getAccruedinterest(), orderTotal + Uorder.getTotal(), quant + Uorder.getNumbondspurchased(), BondOrder.BUY, bondToBuy, buyer);
 						newOrder.setId(Uorder.getId());
 
+						TransactionHistory th = new TransactionHistory(td, BondOrder.BUY, buyer, newOrder);
+
 						int idx = buyer.getOrders().indexOf(Uorder);
 						buyer.getOrders().remove(idx); //maintain uniqueness
 						bondOrderRepo.delete(Uorder);
 						userRepo.save(buyer);
 						bondOrderRepo.save(newOrder);
 						bondRepo.save(bondToBuy);
+						thRepo.save(th);
 
 						return new Response("Success", newOrder);
 					}
@@ -185,6 +197,8 @@ public class BondOrderController {
 						BondOrder newOrder = new BondOrder(td, td, sd, Uorder.getPrincipal() - totalPrincipal, Uorder.getAccruedinterest() - interestOnPurchase, Uorder.getTotal() - orderTotal, Uorder.getNumbondspurchased() - quant, BondOrder.BUY, bondToSell, seller);
 						newOrder.setId(Uorder.getId());
 
+						TransactionHistory th = new TransactionHistory(td, BondOrder.SELL, seller, newOrder);
+
 						seller.setAcctbalance(newBalance);
 						bondToSell.setQuantity(bondToSell.getQuantity() + quant);
 
@@ -194,6 +208,7 @@ public class BondOrderController {
 						userRepo.save(seller);
 						bondOrderRepo.save(newOrder);
 						bondRepo.save(bondToSell);
+						thRepo.save(th);
 
 						return new Response("Success", newOrder);
 
