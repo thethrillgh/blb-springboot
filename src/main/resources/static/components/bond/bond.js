@@ -111,6 +111,14 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         .hideDelay(4000)
                     );
                 }
+                else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent(data.data.data.message)
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
             })
 
         }, function() {
@@ -144,6 +152,14 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         .hideDelay(4000)
                     );
                 }
+                else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent(data.data.data.message)
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
             })
 
         }, function() {
@@ -155,16 +171,29 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
             );
         });
     };
+    function closest(num, arr){
+       var curr = arr[0]
+       arr.forEach(function(val){
+         if(Math.abs(num - val) < Math.abs(num - curr)){
+           curr = val;
+         }
+       })
+       return curr
+    }
     apiService.bond($scope.detail.assocBond.bondid).then(function(data){
         var bond = data.data.history;
         var yieldPercent = Array.from(bond, function(data){
             return data.yieldask.toFixed(2);
         });
+        var dates = [];
         var tradeTime = Array.from(bond, function(data){
-            var x = data.time;
-            return new Date(x);
+            var momentjsobject = moment(data.time);
+            dates.push(data.time)
+            var dateObject = new Date(momentjsobject.format('YYYY-MM-DD'));
+            return dateObject;
         });
-        console.log(tradeTime)
+        var regionChart = closest(1479618000000, dates);
+        console.log($scope.detail.assocBond.issuedate, regionChart, dates)
         yieldPercent.unshift("Yield");
         tradeTime.unshift('Date');
         setTimeout(function(){
@@ -173,10 +202,8 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                     bottom: 20  
                 },
                 data: {
-                    xFormat: '%m%d%y',
-                    xs: {
-                        'Yield': 'Date',
-                    },
+                    x:"Date",
+                    xFormat: '%Y-%m-%d',
                     columns: [
                         tradeTime, yieldPercent
                     ]
@@ -188,20 +215,40 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                     x: {
                         type: 'timeseries',
                         tick: {
-                            format: "%m-%d-%y",
-                            values: tradeTime
+                                format: '%Y-%m-%d' // how the date is displayed
                         },
                         label: {
                             text: 'Trade Date',
                             position: 'outer-right'
                         }
+                    },
+                    y: {
+                        label: {
+                            text: 'Yield %',
+                            position: 'outer-right'
+                        },
+                        tick: {
+                            format: d3.format('.2f')
+                        }
                     }
-//                    y: {
-//                        label: {
-//                            text: 'Yield %',
-//                            position: 'outer-right'
-//                        }
-//                    }
+                },
+                grid: {
+                    x: {
+                        show: true
+                    },
+                    y: {
+                        show: true
+                    }
+                },
+                regions: [
+//                    {start: '2016-11-04'}
+                    {start: regionChart}
+                ],
+                zoom: {
+                    enabled: true
+                },
+                point: {
+                    show: true
                 }
             });
             d3.select("svg").append("text")
