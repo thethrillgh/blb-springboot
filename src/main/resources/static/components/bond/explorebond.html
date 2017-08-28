@@ -62,7 +62,7 @@
             <p class="box1header cursor">Available Quantity:  <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.quantity}}</span>
                 <md-tooltip class="tooltip-multiline">The number of remaining bonds that have not been purchased.</md-tooltip>
             </p>
-            <p class="box1header cursor" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.orders[0].numbondspurchased}}</span>
+            <p class="box1header cursor" style="margin-bottom: 0 !important">Quantity Owned: <span style="color: black; font-weight: bolder; font-weight: bolder; font-weight: bolder;">{{detail.orders[0].numbondspurchased || 0}}</span>
                 <md-tooltip class="tooltip-multiline">The number of bonds under this CUSIP that you own.</md-tooltip>
             </p>
         </div>
