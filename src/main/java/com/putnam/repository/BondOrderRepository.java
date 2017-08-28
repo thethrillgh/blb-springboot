@@ -16,6 +16,4 @@ public interface BondOrderRepository extends CrudRepository<BondOrder, Long>{
     public BondOrder findById(long id);
 
     public BondOrder findByBondAndUser(Bond bond, User user);
-
-    public ArrayList<BondOrder> findByUser(User user);
 }

@@ -12,7 +12,7 @@ import java.util.Date;
 public class TransactionHistory implements Serializable{
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name="orderid", nullable=false)
     @JsonBackReference(value="bondtransactions")
     private BondOrder bondorder;
 
@@ -25,7 +25,7 @@ public class TransactionHistory implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "ordertimestamp", columnDefinition="DATETIME")
+    @Column(name = "timestamp", columnDefinition="DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
