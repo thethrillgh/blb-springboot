@@ -121,9 +121,10 @@ public class UserController {
 			if(user != null){
 
 				if(User.isMatchingPassword(oldPass, user.getPasssalt())){
-					String hashNew = User.testHash(newPass);
 
-					user.setAcctpass(hashNew);
+					user.setPasssalt(newPass);
+
+					userRepo.save(user);
 
 					return new Response("Success", "Password Reset Successful");
 				}
