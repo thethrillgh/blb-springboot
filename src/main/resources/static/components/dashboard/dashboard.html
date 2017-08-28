@@ -63,54 +63,85 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div layout="row">
+        <md-card class="table" flex="50">
 
-          <md-card class="table">
-            <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
-              <div class="md-toolbar-tools">
-                <span class="tableHeader">My Portfolio</span>
-                <div flex></div>
-                <md-button class="md-icon-button" ng-click="loadStuff()">
-                  <md-icon>refresh</md-icon>
-                </md-button>
-              </div>
-            </md-toolbar>
+            <div ng-hide="showTable">
+                <div class="md-toolbar-tools tableMessage" layout="column">
+                    <p class="tableMiniHeader">You have no bonds to show.</p>
+                    <p class="tableText">Visit the Explore page and select a bond to buy it.<br></p>
+                    <md-button class="tableButton"  ui-sref="explore">Buy Bonds
+                    </md-button>
+                </div>
+            </div>
 
-            <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
-              <div class="md-toolbar-tools">
-                <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
-              </div>
-            </md-toolbar>
+            <div ng-show="showTable">
+                <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+                  <div class="md-toolbar-tools">
+                    <span class="tableHeader">My Portfolio</span>
+                    <div flex></div>
+                    <md-button class="md-icon-button" ng-click="loadStuff()">
+                      <md-icon>refresh</md-icon>
+                    </md-button>
+                  </div>
+                </md-toolbar>
+                <md-table-container>
+                  <table md-table md-progress="promise">
+                    <thead ng-if="!options.decapitate" md-head md-order="query.order">
+                      <tr class="headerRow" md-row>
+                        <th md-column md-order-by="assocBond.cusip"><span>CUSIP</span></th>
+                        <th md-column md-order-by="assocBond.issuer" md-desc><span>Issuer</span></th>
+                        <th md-column md-order-by="assocBond.type"><span>Type</span></th>
+                        <th md-column md-order-by="assocBond.interestrate"><span>Interest Rate</span></th>
+                        <th md-column md-order-by="assocBond.maturitydate"><span>Maturity Date</span></th>
+                      </tr>
+                    </thead>
+                    <tbody md-body>
+                      <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                        <td md-cell ng-click="go(bonds)">{{bonds.assocBond.cusip}}</td>
+                        <td md-cell ng-click="go(bonds)">{{bonds.assocBond.issuer}}</td>
+                        <td md-cell ng-click="go(bonds)">{{bonds.assocBond.type}}</td>
+                        <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}%</td>
+                        <td md-cell ng-click="go(bonds)">{{bonds.assocBond.maturitydate | mydate}}</td>                 
+                      </tr>
+                    </tbody>
+                  </table>
+                </md-table-container>
 
-            <md-table-container>
-              <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
-                <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
-                  <tr class="headerRow" md-row>
-                    <th md-column md-order-by="assocBond.cusip"><span>CUSIP</span></th>
-                    <th md-column md-order-by="assocBond.issuer" md-desc><span>Issuer</span></th>
-                    <th md-column md-order-by="assocBond.type"><span>Type</span></th>
-                    <th md-column md-order-by="assocBond.interestrate"><span>Interest Rate</span></th>
-                    <th md-column md-order-by="assocBond.maturitydate"><span>Maturity Date</span></th>
-                    <th md-column md-order-by="assocBond.quantity"><span>Quantity</span></th>
-                    <th md-column md-order-by="assocBond.facevalue"><span>Face Value</span></th>
-                  </tr>
-                </thead>
-                <tbody md-body>
-                  <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bonds in bonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.issuer}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.type}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.interestrate}}%</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.maturitydate | mydate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.quantity}}</td>
-                    <td md-cell ng-click="go(bonds)">{{bonds.assocBond.facevalue}}</td>                    
-                  </tr>
-                </tbody>
-              </table>
-            </md-table-container>
+                <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{bondRows}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination> 
+            </div>
+        </md-card>
+        <md-card class="table" flex="50" ng-show="showTable">
+            <div>
+                <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+                  <div class="md-toolbar-tools">
+                    <span class="tableHeader">My Portfolio</span>
+                    <div flex></div>
+                    <md-button class="md-icon-button" ng-click="loadStuff2()">
+                      <md-icon>refresh</md-icon>
+                    </md-button>
+                  </div>
+                </md-toolbar>
+                <md-table-container>
+                  <table md-table md-progress="promise">
+                    <thead ng-if="!options.decapitate" md-head md-order="query2.order">
+                      <tr class="headerRow" md-row>
+                        <th md-column md-order-by="timestamp"><span>Date</span></th>
+                        <th md-column md-order-by="transactiondesc"><span>Transaction Description</span></th>
+                      </tr>
+                    </thead>
+                    <tbody md-body>
+                      <tr md-row ng-repeat="transactions in transactions | orderBy: query2.order | limitTo: query2.limit : (query2.page -1) * query2.limit">
+                        <td md-cell>{{transactions.timestamp | mydate}}</td>
+                        <td md-cell>{{transactions.transactiondesc}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </md-table-container>
 
-            <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{bondRows}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
-          
-            
-          </md-card>
+                <md-table-pagination md-limit="query2.limit" md-limit-options="limitOptions" md-page="query2.page" md-total="{{transactionsRows}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></md-table-pagination> 
+            </div>
+        </md-card>
     </div>
 </md-content>
