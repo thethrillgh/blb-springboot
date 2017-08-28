@@ -28,18 +28,22 @@ public class PortfolioController {
  * dont need history or orders just bond info and order for that bond
  */
         //Get the User Object
-        long userid = (long) req.getSession().getAttribute("user_id");
-        User user = userRepo.findByUserid(userid);
+        Long userid = (Long) req.getSession().getAttribute("user_id");
 
-        List<PortfolioEntry> holdings = new ArrayList<PortfolioEntry>();
+        if(userid != null) {
 
-        if(user != null){
+            User user = userRepo.findByUserid(userid);
 
-            holdings = filterOrdersForPortfolio(user.getOrders());
+            if (user != null) {
 
-            Portfolio userPortfolio = new Portfolio(holdings);
+                List<PortfolioEntry> holdings = new ArrayList<PortfolioEntry>();
 
-            return new Response("Success", new Portfolio(holdings));
+                holdings = filterOrdersForPortfolio(user.getOrders());
+
+                Portfolio userPortfolio = new Portfolio(holdings);
+
+                return new Response("Success", new Portfolio(holdings));
+            }
         }
 
         return new Response("Fail", new Failed("Unable to find user"));

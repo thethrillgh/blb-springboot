@@ -90,6 +90,17 @@ CREATE TABLE "bondorder" (
   FOREIGN KEY ("bondid") REFERENCES bond("bondid")
 );
 
+DROP TABLE IF EXISTS "transactionhistory" CASCADE;
+CREATE TABLE "transactionhistory"(
+    "id" BIGSERIAL PRIMARY KEY,
+    "timestamp" TIMESTAMP,
+    "transactiondesc" VARCHAR,
+    "userid" BIGSERIAL,
+    "orderid" BIGSERIAL,
+    FOREIGN KEY ("userid") REFERENCES useraccount("userid"),
+    FOREIGN KEY ("orderid") REFERENCES bondorder("id")
+);
+
 
 INSERT INTO bond(cusip,issuer,issuedate,type,interestrate,maturitydate,quantity,creditrating,callable,coupontype,bid,ask,yieldbid,yieldask,marketprice,marketyield,facevalue)
 VALUES
