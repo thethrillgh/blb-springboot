@@ -38,6 +38,7 @@ public class TransactionHistoryController {
                 if(transactions != null && !transactions.isEmpty()){
                     return new Response("Success", transactions);
                 }
+                return new Response("Success", new Failed("Good Request, User does not have any transactions to report"));
             }
             return new Response("Fail", new Failed("Could not find user"));
         }
