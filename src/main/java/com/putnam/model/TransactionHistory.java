@@ -90,7 +90,7 @@ public class TransactionHistory implements Serializable{
 
         DecimalFormat df = new DecimalFormat("#.##");
 
-        return "You "+type+" "+order.getNumbondspurchased()+" bonds for a total of $"+Double.valueOf(df.format(order.getTotal()));
+        return "You "+type.toLowerCase()+" "+order.getNumbondspurchased()+" bonds for a total of $"+Double.valueOf(df.format(order.getTotal()));
 
     }
 }
