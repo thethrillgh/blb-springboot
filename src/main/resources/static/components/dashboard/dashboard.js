@@ -1,6 +1,5 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio){
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio, transactions){
   $scope.bonds = portfolio.data.data.holdings;
-  console.log(portfolio.data);
   $scope.bondRows = $scope.bonds.length;
   if ($scope.bondRows > 0) {
       $scope.showTable = true;
@@ -8,9 +7,9 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   else {
       $scope.showTable = false;
   }
-  console.log($scope.showTable);
+  $scope.transactions = transactions.data.data;
+  $scope.transactionsRows = $scope.transactions.length;
   $scope.user = user.data.data;
-  console.log($scope.user)
   setTimeout(function(){
       var chart = c3.generate({
         data: {
@@ -66,6 +65,12 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     limit: 5,
     page: 1
   };
+    
+  $scope.query2 = {
+    order: 'timestamp',
+    limit: 5,
+    page: 1
+  };
   
   $scope.toggleLimitOptions = function () {
     $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
@@ -76,6 +81,16 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
       // loading
         $scope.query = {
             order: 'assocBond.cusip',
+            limit: 5,
+            page: 1
+        };
+    }, 2000);
+  }
+  $scope.loadStuff2 = function () {
+    $scope.promise = $timeout(function () {
+      // loading
+        $scope.query2 = {
+            order: 'timestamp',
             limit: 5,
             page: 1
         };

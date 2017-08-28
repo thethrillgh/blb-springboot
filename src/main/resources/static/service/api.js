@@ -20,6 +20,9 @@ var apiService = function($http){
     var logout = function(){
         return $http.get("/logout")
     }
+    var transactions = function(){
+        return $http.get("/transactions")
+    }
     var portfolio = function(){
         return $http.get("/portfolio")
     }
@@ -41,7 +44,8 @@ var apiService = function($http){
         logout: logout,
         portfolio: portfolio,
         sell: sell,
-        buy: buy
+        buy: buy,
+        transactions: transactions
     };
 };
 

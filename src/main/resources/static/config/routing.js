@@ -51,6 +51,9 @@
                     },
                     portfolio: function(apiService){
                         return apiService.portfolio();
+                    },
+                    transactions: function(apiService){
+                        return apiService.transactions();
                     }
                 }
             })
