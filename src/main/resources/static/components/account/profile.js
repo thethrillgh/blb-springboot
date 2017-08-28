@@ -1,4 +1,4 @@
-var profileController = function($scope, $state, user, apiService){
+var profileController = function($scope, $state, user, apiService, $mdToast){
     $scope.user = user.data.data;
     $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -14,6 +14,23 @@ var profileController = function($scope, $state, user, apiService){
     'WY').split(' ').map(function(state) {
         return {abbrev: state};
       });
+    $scope.reset = function(form){
+        if(form){
+            apiService.resetPass($scope.password, $scope.password_new).then(function(data){
+                if(data.data.data.status="Success"){
+                    $scope.password = "";
+                    $scope.password_new = "";
+                    $scope.password_new_confirm = "";
+                    $mdToast.show(
+                      $mdToast.simple()
+                        .textContent(data.data.data)
+                        .position("top right")
+                        .hideDelay(2500)
+                    );
+                }
+            })
+        }
+    }
 }
 
 angular.module('blb').controller('profileController', profileController);

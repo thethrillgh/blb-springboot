@@ -116,7 +116,7 @@
             <div>
                 <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
                   <div class="md-toolbar-tools">
-                    <span class="tableHeader">My Portfolio</span>
+                    <span class="tableHeader">Recent Transactions</span>
                     <div flex></div>
                     <md-button class="md-icon-button" ng-click="loadStuff2()">
                       <md-icon>refresh</md-icon>
@@ -127,7 +127,7 @@
                   <table md-table md-progress="promise">
                     <thead ng-if="!options.decapitate" md-head md-order="query2.order">
                       <tr class="headerRow" md-row>
-                        <th md-column md-order-by="timestamp"><span>Date</span></th>
+                        <th md-column md-order-by="timestamp" md-desc><span>Date</span></th>
                         <th md-column md-order-by="transactiondesc"><span>Transaction Description</span></th>
                       </tr>
                     </thead>

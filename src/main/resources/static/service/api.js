@@ -32,6 +32,9 @@ var apiService = function($http){
     var buy = function(id, num){
         return $http.get("/order/buy?id="+id+"&quantity="+num)
     }
+    var resetPass = function(oldPass, newPass){
+        return $http.get("resetpass?old="+oldPass+"&new="+newPass)
+    }
 
     return {
         accounts: accounts,
@@ -45,7 +48,8 @@ var apiService = function($http){
         portfolio: portfolio,
         sell: sell,
         buy: buy,
-        transactions: transactions
+        transactions: transactions,
+        resetPass: resetPass
     };
 };
 
