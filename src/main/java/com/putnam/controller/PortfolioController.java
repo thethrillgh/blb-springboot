@@ -4,6 +4,7 @@ import com.putnam.model.BondOrder;
 import com.putnam.model.Portfolio;
 import com.putnam.model.PortfolioEntry;
 import com.putnam.model.User;
+import com.putnam.repository.BondOrderRepository;
 import com.putnam.repository.UserRepository;
 import com.putnam.response.Failed;
 import com.putnam.response.Response;
@@ -22,6 +23,9 @@ public class PortfolioController {
     @Autowired
     UserRepository userRepo;
 
+    @Autowired
+    BondOrderRepository orderRepo;
+
     @RequestMapping(value = "/portfolio", method = RequestMethod.GET)
     public Response returnPortfolio(HttpServletRequest req){
 /**
@@ -38,7 +42,7 @@ public class PortfolioController {
 
                 List<PortfolioEntry> holdings = new ArrayList<PortfolioEntry>();
 
-                holdings = filterOrdersForPortfolio(user.getOrders());
+                holdings = filterOrdersForPortfolio(user, user.getOrders());
 
                 Portfolio userPortfolio = new Portfolio(holdings);
 
@@ -49,12 +53,19 @@ public class PortfolioController {
         return new Response("Fail", new Failed("Unable to find user"));
     }
 
-    public List<PortfolioEntry> filterOrdersForPortfolio(List<BondOrder> orders){
+    public List<PortfolioEntry> filterOrdersForPortfolio(User user, List<BondOrder> orders){
 
         List<PortfolioEntry> buyOrders = new ArrayList<PortfolioEntry>();
 
-        for(BondOrder order : orders){
-            if(order.getTransactiontype().equalsIgnoreCase(BondOrder.BUY)){
+        for(int idx = 0; idx < orders.size(); idx++){
+//            if(order.getTransactiontype().equalsIgnoreCase(BondOrder.BUY)){
+//                buyOrders.add(new PortfolioEntry(order.getBond(), order));
+//            }
+            BondOrder order = orders.get(idx);
+            if(order.getNumbondspurchased() == 0){
+                orderRepo.delete(order);
+            }
+            else{
                 buyOrders.add(new PortfolioEntry(order.getBond(), order));
             }
         }
