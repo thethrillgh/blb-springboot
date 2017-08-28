@@ -3,7 +3,6 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
   console.log($scope.mybonds);
   $scope.bondRows = $scope.mybonds.length;
   $scope.user = user.data.data;
-//  console.log($scope.user);
   $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
@@ -15,6 +14,10 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
   $scope.go = function(id){
         $state.go('bond', {obj: id})
     }
+  $scope.removeFilter = function(){
+      $scope.filter.search = "";
+      $scope.filter.show = false;
+  }
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
   
@@ -44,7 +47,7 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
       // loading
         $scope.query = {
             order: 'cusip',
-            limit: 5,
+            limit: 10,
             page: 1
         };
     }, 2000);
