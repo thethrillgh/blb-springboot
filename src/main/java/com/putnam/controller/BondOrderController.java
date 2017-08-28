@@ -204,14 +204,30 @@ public class BondOrderController {
 
 						int idx = seller.getOrders().indexOf(Uorder);
 						seller.getOrders().remove(idx); //maintain uniqueness
-						bondOrderRepo.delete(Uorder);
-						userRepo.save(seller);
-						bondOrderRepo.save(newOrder);
-						bondRepo.save(bondToSell);
-						thRepo.save(th);
 
-						return new Response("Success", newOrder);
+						if((numOwned - quant) == 0){
+							bondOrderRepo.delete(Uorder);
+							bondOrderRepo.save(newOrder);
+							//userRepo.save(seller);
+							//bondOrderRepo.delete(newOrder);
+							bondRepo.save(bondToSell);
+							userRepo.save(seller);
+							//update and re-save
+							thRepo.save(th);
 
+							return new Response("Success", "All quantity of this bond sold");
+
+						}
+						else{
+							bondOrderRepo.delete(Uorder);
+							bondOrderRepo.save(newOrder);
+							bondRepo.save(bondToSell);
+							userRepo.save(seller);
+							thRepo.save(th);
+
+							return new Response("Success", newOrder);
+
+						}
 					}
 					return new Response("Fail", new Failed("Cannot sell more than you own"));
 				}
