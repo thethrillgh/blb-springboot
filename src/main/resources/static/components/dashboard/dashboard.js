@@ -1,6 +1,14 @@
 var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio){
   $scope.bonds = portfolio.data.data.holdings;
+  console.log(portfolio.data);
   $scope.bondRows = $scope.bonds.length;
+  if ($scope.bondRows > 0) {
+      $scope.showTable = true;
+  }
+  else {
+      $scope.showTable = false;
+  }
+  console.log($scope.showTable);
   $scope.user = user.data.data;
   var chart0 = c3.generate({
         data: {
