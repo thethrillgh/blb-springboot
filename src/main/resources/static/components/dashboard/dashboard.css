@@ -171,3 +171,13 @@ md-toolbar.md-table-toolbar.md-default-theme:not(.md-menu-toolbar).md-default, m
 .headerRow:hover{
     background-color: white;
 }
+
+.nocolor{
+    width: 200px;
+    margin-right: 40px;
+    background-color: none !important;
+}
+
+.nocolor > p{
+    margin: 0;
+}
