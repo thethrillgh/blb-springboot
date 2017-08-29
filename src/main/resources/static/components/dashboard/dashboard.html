@@ -35,7 +35,7 @@
 </md-toolbar>
 <md-content class="dashboard_padding" flex>
     <div layout="column" flex>
-        <h3 class="header">Welcome Back!</h3>
+        <h3 class="header">Welcome Back, {{user.firstname}}!</h3>
         <div layout="row" layout-align="space-between start" style="margin-bottom: 15px;">
             <div layout="column" class="padding">
                 <p class="qheader">Quick Links:</p>
@@ -54,11 +54,14 @@
                     <p class="add_funds" ui-sref="profile.wallet">Add Funds</p>
                 </div>
                 <div layout="column" class="box2" layout-align="start start">
-                    <p class="boxHeader">Recommended Bond To Look At Today</p>
+                    <p class="boxHeader">Recommended Bond To Look At Today!</p>
                     <div layout="row">
                         <p class="marginO value">US T 5/8 10yr</p>
                         <p class="marginO value1">5.76 <span class="value2">+0.9 (4%)</span></p>
-                        <i class="material-icons md-24 info">info</i>
+                        <i class="material-icons md-24 info">
+                            <a style="text-decoration: none" href="http://www.investopedia.com/university/bonds/" target="_blank"/>
+                            info
+                        </i>
                     </div>
                 </div>
             </div>
