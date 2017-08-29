@@ -134,5 +134,24 @@ public class UserController {
 		}
 		return new Response("Fail", new Failed("Cannot locate user"));
 	}
+
+	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	public Response updateUserInfo(@RequestBody User user, HttpServletRequest req){
+
+//		Long userid = (Long) req.getSession().getAttribute("user_id");
+//
+//		if(userid != null){
+//
+//			User user = userRepo.findByUserid(userid);
+//
+//			if(user != null){
+//
+//
+//				}
+//				return new Response("Fail", new Failed("Could not find user in database"));
+//			}
+
+		return new Response("Fail", user);
+	}
 	
 }
