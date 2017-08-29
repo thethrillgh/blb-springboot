@@ -3,6 +3,7 @@ package com.putnam.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,20 +139,42 @@ public class UserController {
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public Response updateUserInfo(@RequestBody User user, HttpServletRequest req){
 
-//		Long userid = (Long) req.getSession().getAttribute("user_id");
-//
-//		if(userid != null){
-//
-//			User user = userRepo.findByUserid(userid);
-//
-//			if(user != null){
-//
-//
-//				}
-//				return new Response("Fail", new Failed("Could not find user in database"));
-//			}
+		Long userid = (Long) req.getSession().getAttribute("user_id");
 
-		return new Response("Fail", user);
+		if(userid != null){
+
+			User toUpdate = userRepo.findByUserid(userid);
+
+			if(toUpdate != null){
+
+					String fn = user.getFirstname();
+					String ln = user.getLastname();
+					String sa = user.getStreetaddress();
+					String c = user.getCity();
+					String st = user.getState();
+					String pc = user.getPostalcode();
+
+					if(!fn.isEmpty())
+						toUpdate.setFirstname(fn);
+					if(!ln.isEmpty())
+						toUpdate.setLastname(ln);
+					if(!sa.isEmpty())
+						toUpdate.setStreetaddress(sa);
+					if(!c.isEmpty())
+						toUpdate.setCity(c);
+					if(!st.isEmpty())
+						toUpdate.setState(st);
+					if(!pc.isEmpty())
+						toUpdate.setPostalcode(pc);
+
+					userRepo.save(toUpdate);
+
+					return new Response("Success", toUpdate);
+				}
+				return new Response("Fail", new Failed("Could not find user in database"));
+			}
+
+		return new Response("Fail", "Could not find user attempting to update");
 	}
 	
 }
