@@ -1,0 +1,156 @@
+.profile_icon{
+    color: #2196F3;   
+}
+
+.profile_icon:hover, .dashboard_action:hover{
+    color: black;
+}
+
+.username{
+    font-size: 14px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.dashboard_padding, body{
+    background-color: #e9edf2;
+    padding-bottom: 20px;
+}
+
+.box1{
+    height: 70px;
+    background-color: rgba(255,255,255,0.4);
+    margin: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.box1.padding{
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.box1.padding > div > p{
+    margin: 0;
+}
+
+.box1header{
+    color: #868686;
+    font-size: 16px;
+    margin-bottom: 10px !important;
+}
+
+.box1.padding.nocolor{
+    background-color: inherit;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card{
+    padding: 15px;
+    height: 140px;
+    width: 310px;
+}
+
+.card2{
+    padding: 15px;
+    height: 286px;
+    width: 500px;
+    background-color: rgba(255,255,255,0.4);
+    margin: auto;
+    margin-top: 10px;
+}
+
+.card > p, .card2 > div > p{
+    margin: 0;
+}
+
+.cHeader1{
+    color: black;
+    font-size: 18px;
+}
+
+.cHeader2{
+    color: #868686;
+    font-size: 13px;
+    margin-bottom: 5px !important;
+}
+
+.cHeader3{
+    font-weight: bolder;
+    font-size: 18px;
+    text-align: center;
+}
+
+.cHeader4{
+    font-size: 13px;
+    color: #2196F3;
+    text-align: center;
+}
+
+.cHeader2.box2{
+    margin-top: 15px; 
+}
+
+.cHeader2.box3{
+    margin-top: 15px; 
+    font-size: 16px;
+}
+.cHeader4.box0{
+    color: black !important;
+    font-weight: bolder;
+}
+
+.cHeader3.yield{
+    color: black;
+    font-weight: bolder;
+}
+
+.row2{
+    height: 150px;
+}
+
+.cHeader1.market{
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.cHeader3.nocenter{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #868686;
+    font-weight: normal;
+}
+
+.cHeader1.card3{
+    text-align: center;
+}
+
+.sell{
+    margin-bottom: 0; 
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.cHeader1.card3.bottom{
+    margin-bottom: 10px;
+}
+
+.cHeader1.card3.bottom.top{
+    margin-top: 30px;
+}
+
+.cHeader3.nocenter.top{
+    margin-top: 42px;
+}
+
+.tooltip-multiline {
+  height: auto;
+}
