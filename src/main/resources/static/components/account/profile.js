@@ -64,7 +64,14 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                 postalcode: $scope.user.postalcode
             }
             apiService.updateAddress(data).then(function(data){
-                console.log(data.data)
+                if(data.data.status=="Success"){
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent("Billing address updated")
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
             })
         }
     }
