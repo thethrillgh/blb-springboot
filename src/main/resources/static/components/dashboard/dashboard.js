@@ -50,10 +50,16 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     };
   $scope.go = function(id){
         $state.go('bond', {obj: id})
-    }
+  }
+
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
   $scope.bestBond = bestBond.data.data;
+
+  console.log($scope.bestBond);
+  $scope.goBestBond = function(){
+        $state.go('bond', {obj: $scope.bestBond})
+  };
   $scope.options = {
     rowSelection: false,
     multiSelect: false,
