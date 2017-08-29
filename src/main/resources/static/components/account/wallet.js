@@ -1,4 +1,4 @@
-var profileController = function($scope, $state, user, apiService, $mdToast){
+var walletController = function($scope, $state, user, apiService, $mdToast){
     $scope.user = user.data.data;
     $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -12,4 +12,4 @@ var profileController = function($scope, $state, user, apiService, $mdToast){
     console.log($scope.user.banks[0]);
 }
 
-angular.module('blb').controller('profileController', profileController);
+angular.module('blb').controller('walletController', walletController);
