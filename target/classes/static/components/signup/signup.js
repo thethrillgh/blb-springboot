@@ -27,7 +27,6 @@ var signUpController = function($scope, $state, apiService){
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     } 
     $scope.signup = function(form){
-        console.log("clicked!!!");
         if(form){
             var ssnlastfour = String($scope.ssn).substring(5,9);
             var data = {
