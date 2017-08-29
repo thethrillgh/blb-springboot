@@ -88,7 +88,9 @@ var explorebondController = function($scope, $state, $stateParams, apiService, u
     };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj;
-    console.log($scope.detail);
+    apiService.bond($scope.detail.bondid).then(function(data){
+        $scope.detail = data.data;
+    });
     $scope.buy = function(ev) {
         var confirm = $mdDialog.prompt()
           .title('Buy Bond')
@@ -102,14 +104,15 @@ var explorebondController = function($scope, $state, $stateParams, apiService, u
         $mdDialog.show(confirm).then(function(result) {
             apiService.buy($scope.detail.bondid, parseInt(result)).then(function(data){
                 if(data.data.status=="Success"){
-                    $scope.detail.quantity += parseInt(result);
-                    $scope.detail.numbondspurchased += parseInt(result);
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You bought ' + result + ' bonds.')
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
+                    setTimeout(function(){
+                        $state.reload();
+                    }, 2000)
                 }
                 else{
                     $mdToast.show(

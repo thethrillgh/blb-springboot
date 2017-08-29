@@ -88,7 +88,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
     };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj;
-    console.log($scope.detail);
     $scope.sell = function(ev) {
         var confirm = $mdDialog.prompt()
           .title('Sell Bond')
@@ -193,7 +192,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
             return dateObject;
         });
         var regionChart = closest(1479618000000, dates);
-        console.log($scope.detail.assocBond.issuedate, regionChart, dates)
         yieldPercent.unshift("Yield");
         tradeTime.unshift('Date');
         setTimeout(function(){
