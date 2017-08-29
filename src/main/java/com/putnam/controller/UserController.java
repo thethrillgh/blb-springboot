@@ -56,7 +56,8 @@ public class UserController {
 			}
 		}
 		User newUser = new User(user);
-		newUser.setPasssalt(newUser.getAcctpass());
+		newUser.setAcctpass(null);
+		newUser.setPasssalt(user.getAcctpass());
 		userRepo.save(newUser);
 		return new Response("Done", newUser);
 	}

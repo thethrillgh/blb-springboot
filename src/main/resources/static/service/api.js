@@ -26,6 +26,9 @@ var apiService = function($http){
     var portfolio = function(){
         return $http.get("/portfolio")
     }
+    var findBestBond = function(){
+        return $http.get("/findbest")
+    }
     var sell = function(id, num){
         return $http.get("/order/sell?id="+id+"&quantity="+num)
     }
@@ -49,7 +52,8 @@ var apiService = function($http){
         sell: sell,
         buy: buy,
         transactions: transactions,
-        resetPass: resetPass
+        resetPass: resetPass,
+        findBestBond: findBestBond
     };
 };
 

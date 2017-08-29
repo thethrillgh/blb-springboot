@@ -35,7 +35,7 @@
 </md-toolbar>
 <md-content class="dashboard_padding" flex>
     <div layout="column" flex>
-        <h3 class="header">Welcome Back!</h3>
+        <h3 class="header">Welcome Back, {{user.firstname}}!</h3>
         <div layout="row" layout-align="space-between start" style="margin-bottom: 15px;">
             <div layout="column" class="padding">
                 <p class="qheader">Quick Links:</p>
@@ -45,7 +45,7 @@
                 <p class="links">About BLB</p>
             </div>
             <div layout="row" class="boxHeight">
-                <div layout="column" class="nocolor" layout-align="start start">
+                <div layout="column" class="nocolor" layout-align="start start" ng-show="showTable">
                     <div id="chart" flex></div>
                 </div>
                 <div layout="column" class="box1" layout-align="start start">
@@ -54,35 +54,51 @@
                     <p class="add_funds" ui-sref="profile.wallet">Add Funds</p>
                 </div>
                 <div layout="column" class="box2" layout-align="start start">
-                    <p class="boxHeader">Top Performing Bond Today</p>
+                    <p class="boxHeader">Recommended Bond To Look At Today!</p>
                     <div layout="row">
                         <p class="marginO value">US T 5/8 10yr</p>
                         <p class="marginO value1">5.76 <span class="value2">+0.9 (4%)</span></p>
-                        <i class="material-icons md-24 info">info</i>
+                        <i class="material-icons md-24 info">
+                            <a onclick="event.stopPropagation()" style="text-decoration: none" href="http://www.investopedia.com/university/bonds/" target="_blank"/>
+                            info
+                        </i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div layout="row">
-        <md-card class="table" flex="50">
-
-            <div ng-hide="showTable">
+        <md-card class="table" flex ng-hide="showTable">
+            <div>
                 <div class="md-toolbar-tools tableMessage" layout="column">
                     <p class="tableMiniHeader">You have no bonds to show.</p>
                     <p class="tableText">Visit the Explore page and select a bond to buy it.<br></p>
-                    <md-button class="tableButton"  ui-sref="explore">Buy Bonds
-                    </md-button>
+                    <md-button class="md-raised md-accent tableButton"  ui-sref="explore">Buy Bonds</md-button>
                 </div>
             </div>
-
-            <div ng-show="showTable">
-                <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+        </md-card>
+        <md-card class="table" flex="50" ng-show="showTable">
+            <div>
+                <md-toolbar class="md-table-toolbar md-default" ng-hide="filter.show">
                   <div class="md-toolbar-tools">
                     <span class="tableHeader">My Portfolio</span>
                     <div flex></div>
+                     <md-button class="md-icon-button" ng-click="filter.show = true">
+                        <md-icon class="material-icons">filter_list</md-icon>
+                    </md-button>
                     <md-button class="md-icon-button" ng-click="loadStuff()">
                       <md-icon>refresh</md-icon>
+                    </md-button>
+                  </div>
+                </md-toolbar>
+                <md-toolbar class="md-table-toolbar md-default" ng-show="filter.show">
+                  <div class="md-toolbar-tools">
+                    <md-icon class="material-icons">search</md-icon>
+                    <form flex name="filter.form">
+                        <input type="text" ng-model="filter.search" placeholder="search">
+                    </form>
+                    <md-button class="md-icon-button" ng-click="removeFilter()">
+                      <md-icon class="material-icons">close</md-icon>
                     </md-button>
                   </div>
                 </md-toolbar>

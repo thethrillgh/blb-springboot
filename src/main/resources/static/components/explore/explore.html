@@ -34,7 +34,10 @@
     </div>
 </md-toolbar>
 <md-content class="dashboard_padding" flex>
-    <div layout="column" flex>
+    <div layout="column">
+        <div layout="column">
+            <div id="chart"></div>
+        </div>
         <md-card class="table">
             <md-toolbar class="md-table-toolbar md-default" ng-hide="filter.show">
               <div class="md-toolbar-tools">
@@ -76,13 +79,13 @@
                 </thead>
                 <tbody md-body>
                   <tr md-row md-select="bonds" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="mybonds in mybonds | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell ng-click="go(bonds)">{{mybonds.cusip}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.issuer}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.type}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.interestrate}}%</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.maturitydate | mydate}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.quantity}}</td>
-                    <td md-cell ng-click="go(bonds)">{{mybonds.facevalue}}</td>                    
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.cusip}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.issuer}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.type}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.interestrate}}%</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.maturitydate | mydate}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.quantity}}</td>
+                    <td md-cell ng-click="go(mybonds)">{{mybonds.facevalue}}</td>                    
                   </tr>
                 </tbody>
               </table>

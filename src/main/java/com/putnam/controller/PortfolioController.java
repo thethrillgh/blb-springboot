@@ -59,18 +59,18 @@ public class PortfolioController {
 
         for(int idx = 0; idx < orders.size(); idx++){
 
-            BondOrder order = orders.get(idx);
-
-            if(order.getTransactiontype().equalsIgnoreCase(BondOrder.BUY)){
-                buyOrders.add(new PortfolioEntry(order.getBond(), order));
-            }
 //            BondOrder order = orders.get(idx);
-//            if(order.getNumbondspurchased() == 0){
-//                orderRepo.delete(order);
-//            }
-//            else{
+//
+//            if(order.getTransactiontype().equalsIgnoreCase(BondOrder.BUY)){
 //                buyOrders.add(new PortfolioEntry(order.getBond(), order));
 //            }
+            BondOrder order = orders.get(idx);
+            if(order.getNumbondspurchased() == 0){
+                orderRepo.delete(order);
+            }
+            else{
+                buyOrders.add(new PortfolioEntry(order.getBond(), order));
+            }
         }
         return buyOrders;
     }

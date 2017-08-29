@@ -77,7 +77,7 @@ if (!Array.from) {
   }());
 }
 
-var bondController = function($scope, $state, $stateParams, apiService, user, $mdDialog, $mdToast){
+var explorebondController = function($scope, $state, $stateParams, apiService, user, $mdDialog, $mdToast){
     $scope.logout = function(){
         apiService.logout().then(function(data){
             if(data.status==200){
@@ -88,47 +88,9 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
     };
     $scope.user = user.data.data;
     $scope.detail = $stateParams.obj;
-    $scope.sell = function(ev) {
-        var confirm = $mdDialog.prompt()
-          .title('Sell Bond')
-          .textContent('How many bonds would you like to sell')
-          .placeholder('Quantity')
-          .initialValue(10)
-          .targetEvent(ev)
-          .ok('SELL')
-          .cancel('Cancel transaction');
-
-        $mdDialog.show(confirm).then(function(result) {
-            apiService.sell($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
-                if(data.data.status=="Success"){
-                    $scope.detail.assocBond.quantity -= parseInt(result);
-                    $scope.detail.assocOrder.numbondspurchased -= parseInt(result);
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .textContent('You sold ' + result + ' bonds.')
-                        .position("top right")
-                        .hideDelay(4000)
-                    );
-                }
-                else{
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .textContent(data.data.data.message)
-                        .position("top right")
-                        .hideDelay(4000)
-                    );
-                }
-            })
-
-        }, function() {
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent('Transaction cancelled.')
-                .position("top right")
-                .hideDelay(4000)
-            );
-        });
-    };
+    apiService.bond($scope.detail.bondid).then(function(data){
+        $scope.detail = data.data;
+    });
     $scope.buy = function(ev) {
         var confirm = $mdDialog.prompt()
           .title('Buy Bond')
@@ -140,16 +102,17 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
           .cancel('Cancel transaction');
 
         $mdDialog.show(confirm).then(function(result) {
-            apiService.buy($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
+            apiService.buy($scope.detail.bondid, parseInt(result)).then(function(data){
                 if(data.data.status=="Success"){
-                    $scope.detail.assocBond.quantity += parseInt(result);
-                    $scope.detail.assocOrder.numbondspurchased += parseInt(result);
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You bought ' + result + ' bonds.')
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
+                    setTimeout(function(){
+                        $state.reload();
+                    }, 2000)
                 }
                 else{
                     $mdToast.show(
@@ -170,16 +133,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
             );
         });
     };
-    function closest(num, arr){
-       var curr = arr[0]
-       arr.forEach(function(val){
-         if(Math.abs(num - val) < Math.abs(num - curr)){
-           curr = val;
-         }
-       })
-       return curr
-    }
-    apiService.bond($scope.detail.assocBond.bondid).then(function(data){
+    apiService.bond($scope.detail.bondid).then(function(data){
         var bond = data.data.history;
         var yieldPercent = Array.from(bond, function(data){
             return data.yieldask.toFixed(2);
@@ -191,7 +145,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
             var dateObject = new Date(momentjsobject.format('YYYY-MM-DD'));
             return dateObject;
         });
-        var regionChart = closest(1479618000000, dates);
         yieldPercent.unshift("Yield");
         tradeTime.unshift('Date');
         setTimeout(function(){
@@ -238,10 +191,6 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         show: true
                     }
                 },
-                regions: [
-//                    {start: '2016-11-04'}
-                    {start: regionChart}
-                ],
                 zoom: {
                     enabled: true
                 },
@@ -257,4 +206,4 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
 }
 
 angular.module('blb')
-    .controller('bondController', bondController)
+    .controller('explorebondController', explorebondController)

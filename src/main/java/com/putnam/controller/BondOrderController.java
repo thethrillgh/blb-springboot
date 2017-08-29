@@ -55,7 +55,6 @@ public class BondOrderController {
 //		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),50000.0,45.040,50045.040,50, BondOrder.SELL, bond, user));
 //		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,305.780,100305.780,1000, BondOrder.BUY, bond, user));
 //		bondOrderRepo.save(new BondOrder(new Date(),new Date(),new Date(),100000.0,120.050,100120.050,100, BondOrder.SELL, bond, user));
-		//buyBond(bond.getBondid(), 100, HttpServletRequest());
 	}
 	
 	@RequestMapping(value="/order/all", method = RequestMethod.GET)
@@ -205,14 +204,11 @@ public class BondOrderController {
 						int idx = seller.getOrders().indexOf(Uorder);
 						seller.getOrders().remove(idx); //maintain uniqueness
 
-						if((numOwned - quant) == 0){
-							bondOrderRepo.delete(Uorder);
+						if((numOwned - quant) == 0){ //not supported hack fix in portfolio
+							//bondOrderRepo.delete(Uorder);
 							bondOrderRepo.save(newOrder);
-							//userRepo.save(seller);
-							//bondOrderRepo.delete(newOrder);
 							bondRepo.save(bondToSell);
 							userRepo.save(seller);
-							//update and re-save
 							thRepo.save(th);
 							bondOrderRepo.delete(newOrder);
 
