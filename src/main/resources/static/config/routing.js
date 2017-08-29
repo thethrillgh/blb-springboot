@@ -138,6 +138,25 @@
                     }
                 }
             })
+            .state('about', {
+                url: '/about',
+                templateUrl: 'components/about/about.html',
+                controller: 'aboutController',
+                resolve: {
+                    security: ['$q', function($q){
+                       if(localStorage.getItem("id") == 0){
+                          return $q.reject("Not Authorized");
+                       }
+                    }],
+                    user: function(apiService){
+                        if(localStorage.getItem("id") == "" || localStorage.getItem("id") == null){
+                            localStorage.setItem("id", 0);
+
+                        }
+                        return apiService.user(localStorage.getItem("id"));
+                    }
+                }
+            })
         $urlRouterProvider.otherwise('/');
     };
 

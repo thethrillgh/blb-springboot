@@ -1,0 +1,13 @@
+.username{
+    font-size: 14px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.profile_icon{
+    color: #2196F3;
+}
+
+.profile_icon:hover, .dashboard_action:hover{
+    color: black;
+}
