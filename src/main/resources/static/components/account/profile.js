@@ -54,20 +54,20 @@ var profileController = function($scope, $state, user, apiService, $mdToast){
     };
  
     $scope.address = function(form){
-        console.log("updated address");
         if(form){
             var data = {
-                firstname: $scope.firstname,
-                lastname: $scope.lastname,
-                streetaddress: $scope.address,
-                city: $scope.city,
-                state: $scope.state,
-                postalcode: $scope.postalCode
+                firstname: $scope.user.firstname,
+                lastname: $scope.user.lastname,
+                streetaddress: $scope.user.streetaddress,
+                city: $scope.user.city,
+                state: $scope.user.state,
+                postalcode: $scope.user.postalcode
             }
             apiService.updateAddress(data).then(function(data){
-                if(data.data.status=="Done"){
-                    $state.reload();
-                }
+                console.log(data.data)
+//                if(data.data.status=="Done"){
+//                    $state.reload();
+//                }
             })
         }
     }
