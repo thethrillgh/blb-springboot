@@ -77,6 +77,15 @@
     letter-spacing: -1px;
 }
 
+.boxHeader2{
+    color: #0D47A1;
+    margin: 0;
+    font-size: 20px;
+    margin: 15px 0 15px 10px !important;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+
 .value{
     font-weight: 900;
     font-size: 18px;
