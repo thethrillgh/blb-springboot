@@ -65,7 +65,6 @@ var exploreController = function($scope, $state, $mdEditDialog, $q, $timeout, us
         data: {
             columns: graphData,
             onclick: function (d, i) { 
-                console.log(d.name);
                 $scope.mybonds.forEach(function(data){
                     if(data.cusip == d.name){
                         $state.go('explorebond', {obj: data})
