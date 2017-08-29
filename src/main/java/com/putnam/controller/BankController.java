@@ -21,12 +21,15 @@ public class BankController {
 	@Autowired
 	UserRepository userRepo;
 	
-	@RequestMapping(value="/bank/save", method = RequestMethod.GET)
+	@RequestMapping(value="/bank/save", method = RequestMethod.POST)
 	public Response save(HttpServletRequest request, @RequestBody Bank bank) {
-		User user = userRepo.findByUserid((long) request.getSession().getAttribute("user_id"));
-		if(user != null) {
-			bankRepo.save(new Bank(bank.getAcctnum(), bank.getRoutingnum(), bank.getAccttype(), user));
-			return new Response("Done", user);
+		Object userid = request.getSession().getAttribute("user_id");
+		if(userid != null) {
+			User user = userRepo.findByUserid((long) userid);
+			if(user != null) {
+				bankRepo.save(new Bank(bank.getAcctnum(), bank.getRoutingnum(), bank.getAccttype(), user));
+				return new Response("Done", user);
+			}
 		}
 		return new Response("Failed", new Failed("Not logged in"));
 	}

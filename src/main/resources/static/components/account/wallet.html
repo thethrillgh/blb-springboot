@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="components/account/wallet.css">
-<div class="boxHeight">
+<div class="boxHeight" ng-hide="nobank">
     <div class="box1">
         <p class="boxHeader">Wallet Balance</p>
         <p class="value">{{user.acctbalance | currency}} USD</p>
     </div>
 </div>
-<div ng-cloak >
+<div ng-cloak ng-hide="nobank">
   <md-content class="md-padding" layout-xs="column" layout="row">
     <div flex-xs flex-gt-xs="40" layout="column">
       <md-card>
@@ -43,7 +43,7 @@
     </div>
   </md-content>
 </div>
-<div ng-cloak >
+<div ng-cloak ng-show="nobank">
   <md-content class="md-padding" layout-xs="column" layout="row">
     <div flex-xs flex-gt-xs="40" layout="column">
       <md-card>
@@ -52,7 +52,7 @@
           </md-card-title-text>    
           <md-card-actions layout="row" layout-align="end center">
             <i class="material-icons">account_balance</i>
-            <md-button>
+            <md-button ng-click="showAdvanced($event)">
                 Add Bank Account 
             </md-button>
           </md-card-actions>
