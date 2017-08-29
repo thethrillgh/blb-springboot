@@ -23,14 +23,16 @@
                  <label>City</label>
                  <input ng-model="user.city">
             </md-input-container>
-            <md-input-container>
-            <label>State</label>
-            <md-select ng-model="user.state">
-              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                {{state.abbrev}}
-              </md-option>
-            </md-select>
-          </md-input-container>
+   
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>State</label>
+                <md-select ng-model="user.state">
+                  <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                    {{state.abbrev}}
+                  </md-option>
+                </md-select>
+            </md-input-container>
+            
         </div>
     </div>
     <md-button class="md-accent md-raised save" type="submit">Save billing address</md-button>

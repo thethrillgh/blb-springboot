@@ -14,6 +14,9 @@ var apiService = function($http){
     var signup = function(data){
         return $http.post("/signup", data)
     }
+    var updateAddress = function(data){
+        return $http.post("/user/update", data)
+    }
     var user = function(id){
         return $http.get("/user?id="+id)
     }
@@ -45,6 +48,7 @@ var apiService = function($http){
         signup: signup,
         login: login,
         signup: signup,
+        updateAddress: updateAddress,
         bond: bond,
         user: user,
         logout: logout,
