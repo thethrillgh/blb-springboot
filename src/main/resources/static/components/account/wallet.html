@@ -1,1 +1,62 @@
-Need a view for this
+<link rel="stylesheet" href="components/account/wallet.css">
+<div class="boxHeight">
+    <div class="box1">
+        <p class="boxHeader">Wallet Balance</p>
+        <p class="value">{{user.acctbalance | currency}} USD</p>
+    </div>
+</div>
+<div ng-cloak >
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="40" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline cardHeader">Bank Information</span>
+            <span class="md-subhead">
+                <p class="cardSubhead">Routing Number: </p>
+                <p class="cardText">{{bankInfo.routingnum}}</p>
+            </span>
+            <span class="md-subhead">
+                <p class="cardSubhead">Account Number: </p>
+                <p class="cardText">{{bankInfo.acctnum}}</p>
+            </span>
+            <span class="md-subhead">
+                <p class="cardSubhead">Account Type: </p>
+                <p class="cardText">{{bankInfo.accttype}}</p>
+             </span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Add Funds
+            <md-tooltip class="tooltip-multiline">Transfer Funds From your Bank to your BLB Account.
+            </md-tooltip>
+          </md-button>
+          <md-button>Withdraw Funds
+            <md-tooltip class="tooltip-multiline">Transfer Funds From your BLB Account to your Bank.
+            </md-tooltip>           
+          </md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+</div>
+<div ng-cloak >
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="40" layout="column">
+      <md-card>
+          <md-card-title-text style="padding-top: 24px;">
+            <span class="md-headline cardHeader2">Add Payment</span>
+          </md-card-title-text>    
+          <md-card-actions layout="row" layout-align="end center">
+            <i class="material-icons">account_balance</i>
+            <md-button>
+                Add Bank Account 
+            </md-button>
+          </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+</div>
