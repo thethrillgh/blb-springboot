@@ -1,4 +1,4 @@
-var profileController = function($scope, $state, user, apiService, $mdToast){
+var profileController = function($scope, $state, user, apiService, $mdToast, $mdDialog){
     $scope.user = user.data.data;
     $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -65,12 +65,140 @@ var profileController = function($scope, $state, user, apiService, $mdToast){
             }
             apiService.updateAddress(data).then(function(data){
                 console.log(data.data)
-//                if(data.data.status=="Done"){
-//                    $state.reload();
-//                }
             })
         }
     }
+    
+    $scope.addFund = function(ev) {
+        var confirm = $mdDialog.prompt()
+          .title('Add Funds')
+          .textContent('Transfer money from your bank account')
+          .placeholder('Amount')
+          .initialValue(10000)
+          .targetEvent(ev)
+          .ok('Transfer')
+          .cancel('Cancel transfer');
+
+        $mdDialog.show(confirm).then(function(result) {
+            apiService.addFunds(parseInt(result)).then(function(data){
+                if(data.data.status=="Success"){
+                    $scope.user.acctbalance += parseInt(result);
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent('You succesfully transferred ' + result + ' into your account.')
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
+                else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .textContent(data.data.data.message)
+                        .position("top right")
+                        .hideDelay(4000)
+                    );
+                }
+            })
+
+        }, function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Transaction cancelled.')
+                .position("top right")
+                .hideDelay(4000)
+            );
+        });
+    };    
+    
+    $scope.withdraw = function(ev) {
+        var confirm = $mdDialog.prompt()
+          .title('Withdraw Funds')
+          .textContent('Transfer money to your bank account')
+          .placeholder('Amount')
+          .initialValue(0)
+          .targetEvent(ev)
+          .ok('Withdraw')
+          .cancel('Cancel Withdraw');
+
+        $mdDialog.show(confirm).then(function(result) {
+            if(parseInt(result) < $scope.user.acctbalance || parseInt(result) == $scope.user.acctbalance){
+                apiService.withdraw(parseInt(result)).then(function(data){
+                    if(data.data.status=="Success"){
+                        $scope.user.acctbalance -= parseInt(result);
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent('You succesfully transferred ' + result + ' from your account.')
+                            .position("top right")
+                            .hideDelay(4000)
+                        );
+                    }
+                    else{
+                        $mdToast.show(
+                            $mdToast.simple()
+                            .textContent(data.data.data.message)
+                            .position("top right")
+                            .hideDelay(4000)
+                        );
+                    }
+                })
+            }
+            else{
+                $mdToast.show(
+                    $mdToast.simple()
+                    .textContent("Can't withdraw more than you have")
+                    .position("top right")
+                    .hideDelay(4000)
+                );
+            }
+        }, function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Transaction cancelled.')
+                .position("top right")
+                .hideDelay(4000)
+            );
+        });
+    };
 }
 
-angular.module('blb').controller('profileController', profileController);
+function DialogController($scope, $mdDialog, $rootScope, user, apiService, $mdToast, $state) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+    
+    $scope.addCard = function(form){
+        if(form){
+            var bank = {
+                acctnum: $scope.accountnumber,
+                routingnum: $scope.routingnumber,
+                accttype: $scope.cardtype
+            }
+            apiService.bankSave(bank).then(function(data){
+                if(data.data.status == "Done"){
+                    $mdDialog.hide();
+                    $mdToast.show(
+                      $mdToast.simple()
+                        .textContent("Succesfully added bank account!")
+                        .position("top right")
+                        .hideDelay(2500)
+                    );
+                    setTimeout(function(data){
+                        $state.reload();
+                    }, 2500)
+                }
+            })
+        }
+    }
+  }
+
+angular.module('blb')
+    .controller('profileController', profileController)
+    .controller('DialogController', DialogController);

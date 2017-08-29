@@ -52,9 +52,12 @@ public class BankController {
 				double oldBal = user.getAcctbalance();
 
 				user.setAcctbalance(oldBal+amount);
-
+				
+				if(user.getTotalinvested() == null) {
+					user.setTotalinvested(0.0);
+					user.setTotalinvested(user.getTotalinvested()+amount);
+				}
 				user.setTotalinvested(user.getTotalinvested()+amount);
-
 				userRepo.save(user);
 
 				return new Response("Success", "Account balance updated");

@@ -20,6 +20,12 @@ var apiService = function($http){
     var user = function(id){
         return $http.get("/user?id="+id)
     }
+    var addFunds = function(amt){
+        return $http.get("/bank/deposit?amt="+amt)
+    }
+    var withdraw = function(amt){
+        return $http.get("/bank/withdraw?amt="+amt)
+    }
     var bankSave = function(data){
         return $http.post("/bank/save", data)
     }
@@ -61,7 +67,9 @@ var apiService = function($http){
         transactions: transactions,
         resetPass: resetPass,
         findBestBond: findBestBond,
-        bankSave: bankSave
+        bankSave: bankSave,
+        addFunds: addFunds,
+        withdraw: withdraw
     };
 };
 
