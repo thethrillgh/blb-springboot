@@ -53,7 +53,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
     }
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
-  
+  $scope.bestBond = bestBond.data.data;
   $scope.options = {
     rowSelection: false,
     multiSelect: false,
