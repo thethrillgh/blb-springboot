@@ -32,25 +32,45 @@ var profileController = function($scope, $state, user, apiService, $mdToast){
             })
         }
     }
+    $scope.bankInfo = $scope.user.banks[0];
+    $scope.nobank = true;
+    if($scope.bankInfo != undefined){
+        $scope.nobank = false;
+    };
+    $scope.showAdvanced = function(ev) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'components/account/bankdialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          locals: {user: $scope.user}
+        })
+        .then(function(answer) {
+          $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
+ 
     $scope.address = function(form){
-        console.log("updated address");
         if(form){
             var data = {
-                firstname: $scope.firstname,
-                lastname: $scope.lastname,
-                streetaddress: $scope.address,
-                city: $scope.city,
-                state: $scope.state,
-                postalcode: $scope.postalCode
+                firstname: $scope.user.firstname,
+                lastname: $scope.user.lastname,
+                streetaddress: $scope.user.streetaddress,
+                city: $scope.user.city,
+                state: $scope.user.state,
+                postalcode: $scope.user.postalcode
             }
             apiService.updateAddress(data).then(function(data){
-                if(data.data.status=="Done"){
-                    $state.reload();
-                }
+                console.log(data.data)
+//                if(data.data.status=="Done"){
+//                    $state.reload();
+//                }
             })
         }
     }
-    
 }
 
 angular.module('blb').controller('profileController', profileController);
