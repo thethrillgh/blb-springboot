@@ -71,6 +71,9 @@
                     },
                     transactions: function(apiService){
                         return apiService.transactions();
+                    },
+                    bestBond: function(apiService){
+                        return apiService.findBestBond();
                     }
                 }
             })

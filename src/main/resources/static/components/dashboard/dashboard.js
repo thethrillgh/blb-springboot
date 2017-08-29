@@ -1,4 +1,4 @@
-var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio, transactions){
+var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, user, apiService, portfolio, transactions, bestBond){
   $scope.bonds = portfolio.data.data.holdings;
   $scope.bondRows = $scope.bonds.length;
   if ($scope.bondRows > 0) {
