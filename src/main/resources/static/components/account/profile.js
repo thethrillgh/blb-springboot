@@ -1,4 +1,4 @@
-var profileController = function($scope, $state, user, apiService, $mdToast){
+var profileController = function($scope, $state, user, apiService, $mdToast, $mdDialog, $rootScope){
     $scope.user = user.data.data;
     $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -31,6 +31,68 @@ var profileController = function($scope, $state, user, apiService, $mdToast){
             })
         }
     }
+    $scope.bankInfo = $scope.user.banks[0];
+    $scope.nobank = true;
+    if($scope.bankInfo != undefined){
+        $scope.nobank = false;
+    };
+    $scope.showAdvanced = function(ev) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'components/account/bankdialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          locals: {user: $scope.user}
+        })
+        .then(function(answer) {
+          $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
 }
 
-angular.module('blb').controller('profileController', profileController);
+function DialogController($scope, $mdDialog, $rootScope, user, apiService, $mdToast, $state) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+    
+    $scope.addCard = function(form){
+        if(form){
+            var bank = {
+                acctnum: $scope.accountnumber,
+                routingnum: $scope.routingnumber,
+                accttype: $scope.cardtype
+            }
+            apiService.bankSave(bank).then(function(data){
+                if(data.data.status == "Done"){
+                    $mdDialog.hide();
+                    $mdToast.show(
+                      $mdToast.simple()
+                        .textContent("Succesfully added bank account!")
+                        .position("top right")
+                        .hideDelay(2500)
+                    );
+                    setTimeout(function(data){
+                        $state.reload();
+                    }, 2500)
+                }
+            })
+        }
+    }
+  }
+
+angular.module('blb')
+    .controller('profileController', profileController)
+    .controller('DialogController', DialogController);
+
+

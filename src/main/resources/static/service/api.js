@@ -17,6 +17,9 @@ var apiService = function($http){
     var user = function(id){
         return $http.get("/user?id="+id)
     }
+    var bankSave = function(data){
+        return $http.post("/bank/save", data)
+    }
     var logout = function(){
         return $http.get("/logout")
     }
@@ -53,7 +56,8 @@ var apiService = function($http){
         buy: buy,
         transactions: transactions,
         resetPass: resetPass,
-        findBestBond: findBestBond
+        findBestBond: findBestBond,
+        bankSave: bankSave
     };
 };
 
