@@ -54,12 +54,11 @@
                     <p class="add_funds" ui-sref="profile.wallet">Add Funds</p>
                 </div>
                 <div layout="column" class="box2" layout-align="start start">
-                    <p class="boxHeader">Recommended Bond To Look At Today!</p>
+                    <p class="boxHeader" ng-click="goBestBond()">Recommended Bond To Look At Today!</p>
                     <div layout="row">
                         <p class="marginO value">US T 5/8 {{bestBond.type}}</p>
                         <p class="marginO value1">{{bestBond.yieldask | roundNum}} <span class="value2">+0.9 (4%)</span></p>
-                        
-                        <a href="http://www.investopedia.com/university/bonds/">
+                        <a href="http://www.investopedia.com/university/bonds/" target="_blank">
                             <i class="material-icons md-24 info">info</i>
                         </a>
                     </div>

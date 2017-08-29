@@ -1,4 +1,4 @@
-var profileController = function($scope, $state, user, apiService, $mdToast, $mdDialog, $rootScope){
+var profileController = function($scope, $state, user, apiService, $mdToast){
     $scope.user = user.data.data;
     $scope.logout = function(){
         apiService.logout().then(function(data){
@@ -9,11 +9,12 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
         });
     };
     $scope.currentNavItem = $state.current.name.split('.')[1];
-    $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+    $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA MA MD ME MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
     'WY').split(' ').map(function(state) {
         return {abbrev: state};
-      });
+    });
+    
     $scope.reset = function(form){
         if(form){
             apiService.resetPass($scope.password, $scope.password_new).then(function(data){
@@ -51,48 +52,25 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
             $scope.status = 'You cancelled the dialog.';
         });
     };
-}
-
-function DialogController($scope, $mdDialog, $rootScope, user, apiService, $mdToast, $state) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-    
-    $scope.addCard = function(form){
+ 
+    $scope.address = function(form){
+        console.log("updated address");
         if(form){
-            var bank = {
-                acctnum: $scope.accountnumber,
-                routingnum: $scope.routingnumber,
-                accttype: $scope.cardtype
+            var data = {
+                firstname: $scope.firstname,
+                lastname: $scope.lastname,
+                streetaddress: $scope.address,
+                city: $scope.city,
+                state: $scope.state,
+                postalcode: $scope.postalCode
             }
-            apiService.bankSave(bank).then(function(data){
-                if(data.data.status == "Done"){
-                    $mdDialog.hide();
-                    $mdToast.show(
-                      $mdToast.simple()
-                        .textContent("Succesfully added bank account!")
-                        .position("top right")
-                        .hideDelay(2500)
-                    );
-                    setTimeout(function(data){
-                        $state.reload();
-                    }, 2500)
+            apiService.updateAddress(data).then(function(data){
+                if(data.data.status=="Done"){
+                    $state.reload();
                 }
             })
         }
     }
-  }
+}
 
-angular.module('blb')
-    .controller('profileController', profileController)
-    .controller('DialogController', DialogController);
-
-
+angular.module('blb').controller('profileController', profileController);
