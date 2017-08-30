@@ -1,16 +1,15 @@
 package com.putnam.controller;
 
-import com.putnam.model.BondOrder;
-import com.putnam.model.Portfolio;
-import com.putnam.model.PortfolioEntry;
-import com.putnam.model.User;
+import com.putnam.model.*;
 import com.putnam.repository.BondOrderRepository;
+import com.putnam.repository.BondRepository;
 import com.putnam.repository.UserRepository;
 import com.putnam.response.Failed;
 import com.putnam.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +24,9 @@ public class PortfolioController {
 
     @Autowired
     BondOrderRepository orderRepo;
+
+    @Autowired
+    BondRepository bondRepo;
 
     @RequestMapping(value = "/portfolio", method = RequestMethod.GET)
     public Response returnPortfolio(HttpServletRequest req){
@@ -53,6 +55,33 @@ public class PortfolioController {
         return new Response("Fail", new Failed("Unable to find user"));
     }
 
+    @RequestMapping(value = "/refreshBond", method = RequestMethod.GET)
+    public Response returnBondBought(@RequestParam("id") long bondid, HttpServletRequest req){
+
+        Long userid = (Long) req.getSession().getAttribute("user_id");
+
+        if(userid != null) {
+
+            User user = userRepo.findByUserid(userid);
+
+            Bond bond = bondRepo.findByBondid(bondid);
+
+            if (user != null && bond != null) {
+
+                PortfolioEntry entry = findForRefresh(bond, user.getOrders());
+
+                if(entry != null){
+                    return new Response("Success", entry);
+                }
+                else{
+                    return new Response("Fail", new Failed("Could not find specified entry"));
+                }
+            }
+        }
+
+        return new Response("Fail", new Failed("Unable to find user or bond"));
+    }
+
     public List<PortfolioEntry> filterOrdersForPortfolio(User user, List<BondOrder> orders){
 
         List<PortfolioEntry> buyOrders = new ArrayList<PortfolioEntry>();
@@ -73,6 +102,23 @@ public class PortfolioController {
             }
         }
         return buyOrders;
+    }
+
+    public PortfolioEntry findForRefresh(Bond bond, List<BondOrder> orders){
+
+        PortfolioEntry entry = null;
+
+        for(int idx = 0; idx < orders.size(); idx++){
+
+            BondOrder order = orders.get(idx);
+
+            if(order.getBond().getBondid() == bond.getBondid()){
+                entry = new PortfolioEntry(bond, order);
+                break;
+            }
+        }
+
+        return entry;
     }
 
 }
