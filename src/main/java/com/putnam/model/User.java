@@ -99,7 +99,6 @@ public class User implements Serializable {
 	}
 	
 	protected User() {
-		
 	}
 
 
@@ -243,8 +242,8 @@ public class User implements Serializable {
 		return totalprofits;
 	}
 
-	public void setTotalprofits() {
-		this.totalprofits = this.acctbalance - this.totalprofits;
+	public void setTotalprofits(Double totalprofits) {
+		this.totalprofits = totalprofits;
 	}
 
 	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
@@ -264,8 +263,8 @@ public class User implements Serializable {
 		this.state = state;
 		this.postalcode = postalcode;
 		this.acctbalance = acctbalance;
-		this.totalinvested = totalinvested;
-		this.totalprofits = acctbalance - totalinvested;
+		this.totalinvested = 0.0;
+		this.totalprofits = 0.0;
 	}
 	
 	public User(User obj) {

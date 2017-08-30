@@ -111,6 +111,12 @@ public class BondOrderController {
 					buyer.setAcctbalance(newBalance);
 					bondToBuy.setQuantity(bondToBuy.getQuantity() - quant);
 
+					if(buyer.getTotalinvested() == null) {
+						buyer.setTotalinvested(0.0);
+						buyer.setTotalinvested(buyer.getTotalinvested()+orderTotal);
+					}
+					buyer.setTotalinvested(buyer.getTotalinvested()+orderTotal);
+
 					if (newOrderFlag) {
 						BondOrder order = new BondOrder(td, td, sd, totalPrincipal, interestOnPurchase, orderTotal, quant, BondOrder.BUY, bondToBuy, buyer);
 
@@ -198,6 +204,8 @@ public class BondOrderController {
 
 						TransactionHistory th = new TransactionHistory(td, BondOrder.SOLD, quant, orderTotal, seller, newOrder);
 
+						seller.setTotalprofits(seller.getAcctbalance()-seller.getTotalinvested());
+						seller.setTotalinvested(seller.getTotalinvested()-totalPrincipal);
 						seller.setAcctbalance(newBalance);
 						bondToSell.setQuantity(bondToSell.getQuantity() + quant);
 
