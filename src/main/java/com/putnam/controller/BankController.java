@@ -53,11 +53,11 @@ public class BankController {
 
 				user.setAcctbalance(oldBal+amount);
 				
-				if(user.getTotalinvested() == null) {
-					user.setTotalinvested(0.0);
-					user.setTotalinvested(user.getTotalinvested()+amount);
-				}
-				user.setTotalinvested(user.getTotalinvested()+amount);
+//				if(user.getTotalinvested() == null) {
+//					user.setTotalinvested(0.0);
+//					user.setTotalinvested(user.getTotalinvested()+amount);
+//				}
+//				user.setTotalinvested(user.getTotalinvested()+amount);
 				userRepo.save(user);
 
 				return new Response("Success", "Account balance updated");
@@ -80,7 +80,7 @@ public class BankController {
 				if(amount <= oldBal) {
 					user.setAcctbalance(oldBal - amount);
 
-					user.setTotalinvested(user.getTotalinvested() - amount);
+					//user.setTotalinvested(user.getTotalinvested() - amount);
 
 					userRepo.save(user);
 
