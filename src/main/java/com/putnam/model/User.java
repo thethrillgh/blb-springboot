@@ -244,6 +244,7 @@ public class User implements Serializable {
 	}
 
 	public void setTotalprofits() {
+		this.totalprofits = 0.0;
 		this.totalprofits = this.acctbalance - this.totalprofits;
 	}
 

@@ -70,12 +70,12 @@
                     This is expressed as a percentage of the face value.
                 </md-tooltip>
             </p>
-            <p class="cHeader2 cursor">Face Value
+            <p class="cHeader2 cursor">Market Price
                 <md-tooltip class="tooltip-multiline">The initial price of the bond.</br>
                     This is the amount that will be paid back on the maturity date.
                 </md-tooltip>
             </p>
-            <p class="cHeader3">{{detail.assocBond.facevalue}}</p>
+            <p class="cHeader3">{{detail.assocBond.marketprice | roundNum}}</p>
             <p class="cHeader4">USD</p>
             <p class="cHeader2">Purchased</p>
             <p class="cHeader4 box0">{{detail.assocOrder.numbondspurchased}} | {{detail.assocOrder.tradedate | mydate}} | {{detail.assocOrder.tradedate | mytime}}</p>

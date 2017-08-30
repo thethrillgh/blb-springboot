@@ -101,14 +101,19 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
         $mdDialog.show(confirm).then(function(result) {
             apiService.sell($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
                 if(data.data.status=="Success"){
-                    $scope.detail.assocBond.quantity -= parseInt(result);
-                    $scope.detail.assocOrder.numbondspurchased -= parseInt(result);
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You sold ' + result + ' bonds.')
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
+                    setTimeout(function(){
+                        apiService.refreshBond($scope.detail.assocBond.bondid).then(function(data){
+                            if(data.data.status=="Success"){
+                                $state.go($state.current, {obj: data.data.data}, {reload: true});
+                            }
+                        })
+                    }, 2010)
                 }
                 else{
                     $mdToast.show(
@@ -142,14 +147,19 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
         $mdDialog.show(confirm).then(function(result) {
             apiService.buy($scope.detail.assocBond.bondid, parseInt(result)).then(function(data){
                 if(data.data.status=="Success"){
-                    $scope.detail.assocBond.quantity += parseInt(result);
-                    $scope.detail.assocOrder.numbondspurchased += parseInt(result);
                     $mdToast.show(
                         $mdToast.simple()
                         .textContent('You bought ' + result + ' bonds.')
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
+                    setTimeout(function(){
+                        apiService.refreshBond($scope.detail.assocBond.bondid).then(function(data){
+                            if(data.data.status=="Success"){
+                                $state.go($state.current, {obj: data.data.data}, {reload: true});
+                            }
+                        })
+                    }, 2010)
                 }
                 else{
                     $mdToast.show(

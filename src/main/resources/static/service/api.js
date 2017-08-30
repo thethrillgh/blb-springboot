@@ -23,6 +23,9 @@ var apiService = function($http){
     var addFunds = function(amt){
         return $http.get("/bank/deposit?amt="+amt)
     }
+    var refreshBond = function(id){
+        return $http.get("/refreshBond?id="+id)
+    }
     var withdraw = function(amt){
         return $http.get("/bank/withdraw?amt="+amt)
     }
@@ -69,7 +72,8 @@ var apiService = function($http){
         findBestBond: findBestBond,
         bankSave: bankSave,
         addFunds: addFunds,
-        withdraw: withdraw
+        withdraw: withdraw,
+        refreshBond: refreshBond
     };
 };
 
