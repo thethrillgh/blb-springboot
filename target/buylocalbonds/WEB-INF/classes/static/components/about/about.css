@@ -37,3 +37,16 @@
     /*align-items: center;*/
     padding: 0px !important;
 }
+
+.member_img{
+    border-radius: 100%;
+    border: 2px solid;
+    border-color: #0D47A1;
+    margin: 5px;
+}
+
+.textUnderImage {
+    text-align: center;
+    color: #0D47A1;
+    font-weight: bold;
+}
