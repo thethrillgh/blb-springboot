@@ -119,7 +119,7 @@ var explorebondController = function($scope, $state, $stateParams, apiService, u
                         $mdToast.simple()
                         .textContent(data.data.data.message)
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -129,7 +129,7 @@ var explorebondController = function($scope, $state, $stateParams, apiService, u
               $mdToast.simple()
                 .textContent('Transaction cancelled.')
                 .position("top right")
-                .hideDelay(4000)
+                .hideDelay(2000)
             );
         });
     };

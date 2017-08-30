@@ -120,7 +120,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         $mdToast.simple()
                         .textContent(data.data.data.message)
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -130,7 +130,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
               $mdToast.simple()
                 .textContent('Transaction cancelled.')
                 .position("top right")
-                .hideDelay(4000)
+                .hideDelay(2000)
             );
         });
     };
@@ -166,7 +166,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
                         $mdToast.simple()
                         .textContent(data.data.data.message)
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -176,7 +176,7 @@ var bondController = function($scope, $state, $stateParams, apiService, user, $m
               $mdToast.simple()
                 .textContent('Transaction cancelled.')
                 .position("top right")
-                .hideDelay(4000)
+                .hideDelay(2000)
             );
         });
     };

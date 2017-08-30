@@ -26,7 +26,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                       $mdToast.simple()
                         .textContent(data.data.data)
                         .position("top right")
-                        .hideDelay(2500)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -69,7 +69,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                         $mdToast.simple()
                         .textContent("Billing address updated")
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -94,7 +94,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                         $mdToast.simple()
                         .textContent('You succesfully transferred ' + result + ' into your account.')
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
                 else{
@@ -102,7 +102,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                         $mdToast.simple()
                         .textContent(data.data.data.message)
                         .position("top right")
-                        .hideDelay(4000)
+                        .hideDelay(2000)
                     );
                 }
             })
@@ -112,7 +112,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
               $mdToast.simple()
                 .textContent('Transaction cancelled.')
                 .position("top right")
-                .hideDelay(4000)
+                .hideDelay(2000)
             );
         });
     };    
@@ -136,7 +136,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                             $mdToast.simple()
                             .textContent('You succesfully transferred ' + result + ' from your account.')
                             .position("top right")
-                            .hideDelay(4000)
+                            .hideDelay(2000)
                         );
                     }
                     else{
@@ -144,7 +144,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                             $mdToast.simple()
                             .textContent(data.data.data.message)
                             .position("top right")
-                            .hideDelay(4000)
+                            .hideDelay(2000)
                         );
                     }
                 })
@@ -154,7 +154,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
                     $mdToast.simple()
                     .textContent("Can't withdraw more than you have")
                     .position("top right")
-                    .hideDelay(4000)
+                    .hideDelay(2000)
                 );
             }
         }, function() {
@@ -162,7 +162,7 @@ var profileController = function($scope, $state, user, apiService, $mdToast, $md
               $mdToast.simple()
                 .textContent('Transaction cancelled.')
                 .position("top right")
-                .hideDelay(4000)
+                .hideDelay(2000)
             );
         });
     };

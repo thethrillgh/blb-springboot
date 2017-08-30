@@ -203,10 +203,10 @@ public class BondOrderController {
 						newOrder.setId(Uorder.getId());
 
 						TransactionHistory th = new TransactionHistory(td, BondOrder.SOLD, quant, orderTotal, seller, newOrder);
-
+						
+						seller.setAcctbalance(newBalance);
 						seller.setTotalprofits(seller.getAcctbalance()-seller.getTotalinvested());
 						seller.setTotalinvested(seller.getTotalinvested()-totalPrincipal);
-						seller.setAcctbalance(newBalance);
 						bondToSell.setQuantity(bondToSell.getQuantity() + quant);
 
 						int idx = seller.getOrders().indexOf(Uorder);

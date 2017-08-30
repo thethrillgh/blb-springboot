@@ -55,11 +55,7 @@ var dashboardController = function($scope, $state, $mdEditDialog, $q, $timeout, 
   $scope.selected = [];
   $scope.limitOptions = [5, 10, 15];
   $scope.bestBond = bestBond.data.data;
-
-//  console.log($scope.bestBond);
   $scope.goBestBond = function(){
-        console.log(`best bond:`);
-        console.log($scope.bestBond);
         $state.go('explorebond', {obj: $scope.bestBond});
   };
   $scope.options = {
