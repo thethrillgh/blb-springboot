@@ -58,6 +58,7 @@ public class UserController {
 		}
 		User newUser = new User(user);
 		newUser.setTotalinvested(newUser.getAcctbalance());
+		newUser.setTotalprofits();
 		newUser.setAcctpass(null);
 		newUser.setPasssalt(user.getAcctpass());
 		userRepo.save(newUser);

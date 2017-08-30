@@ -243,8 +243,8 @@ public class User implements Serializable {
 		return totalprofits;
 	}
 
-	public void setTotalprofits(Double totalprofits) {
-		this.totalprofits = totalprofits;
+	public void setTotalprofits() {
+		this.totalprofits = this.acctbalance - this.totalprofits;
 	}
 
 	public User(String firstname, String lastname, String phonenum, String acctemail, String acctpass, String acctssn,
