@@ -1,20 +1,7 @@
-angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table', 'jkAngularCarousel', 'angular-loading-bar']);
+angular.module('blb', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngMessages', 'md.data.table', 'angular-loading-bar']);
 
 var mainController = function($scope, $state){
-    $scope.dataArray = [
-      {
-        src: 'assets/bloom.png'
-      },
-      {
-        src: 'assets/zuck.png'
-      },
-      {
-        src: 'assets/bull.png'
-      },
-      {
-        src: 'assets/ellen.png'
-      }
-    ];
+    
 };
 
 var dateFilter = function(){

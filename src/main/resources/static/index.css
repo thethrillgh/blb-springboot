@@ -44,19 +44,6 @@ body, html {
     margin-top: 20px;
 }
 
-.landing_text3{
-    font-size: 17px;
-    letter-spacing: .06vmax;
-    font-weight: 100;
-    margin-top: 30px;
-}
-
-.reviews{
-    background-color: #ffffff;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .startButton{
     padding-left: 15px;
     padding-right: 15px;
